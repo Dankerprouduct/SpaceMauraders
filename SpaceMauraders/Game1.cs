@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace SpaceMauraders
 {
@@ -12,6 +13,9 @@ namespace SpaceMauraders
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        public static Random random = new Random(); 
+
+        World.World world; 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -28,7 +32,8 @@ namespace SpaceMauraders
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
+            world = new World.World(10, 10); 
+
         }
         
         protected override void UnloadContent()

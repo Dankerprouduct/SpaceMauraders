@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+
 
 namespace SpaceMauraders.World
 {
@@ -44,8 +46,9 @@ namespace SpaceMauraders.World
 
         public World(int width, int height)
         {
-            InitializeTileMap(width, height); 
+            InitializeTileMap(width, height);
 
+            GenerateSpaceStation(); 
             // make space station
         }
         
@@ -72,14 +75,46 @@ namespace SpaceMauraders.World
         {
             InitializeTileMap(5, 10);
 
-            int middle = modules.GetLength(0) / 2; 
+            int middle = (int)Math.Ceiling((double)(modules.GetLength(0) / 2));
 
-            // creates a row in the middle .. hopefully
-            for(int i = 0; i < modules.GetLength(1); i++)
+            int max = modules.GetLength(0) - middle;
+            Console.WriteLine(max); 
+
+            
+            for (int i = 0; i < modules.GetLength(1); i++)
             {
-                modules[middle, i].SetRoomID(1); 
+                // creates a row in the middle .. hopefully
+                modules[middle, i].SetRoomID(1);
+
+                // place random ammount of rooms adjacently 
+                int placeAmmount = Game1.random.Next(0, max);
+                Console.WriteLine("place ammount: " + placeAmmount);
+                if (Game1.random.Next(0, 2) % 2 == 0)
+                {
+                    for (int x = 0; x < placeAmmount + 1; x++)
+                    {
+                        modules[middle + x, i].SetRoomID(1);
+                    }
+                }
+                else
+                {
+                    for (int x = 0; x < placeAmmount + 1; x++)
+                    {
+                        modules[middle - x, i].SetRoomID(1);
+                    }
+                }
             }
 
+
+            for (int y = 0; y < modules.GetLength(1); y++)
+            {
+                
+                for( int x = 0; x < modules.GetLength(0 ); x++)
+                {
+                    Console.Write(modules[x, y].tileMap[0, 0] + " "); 
+                }
+                Console.WriteLine(); 
+            }
 
         }
 
