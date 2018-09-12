@@ -23,3 +23,5 @@ c:\users\david\source\repos\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMau
 c:\users\david\source\repos\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMauraders.csproj.CopyComplete
 c:\users\david\source\repos\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMauraders.exe
 c:\users\david\source\repos\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMauraders.pdb
+C:\Users\David\source\repos\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Tiles\tempFloor.xnb
+C:\Users\David\source\repos\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Tiles\tempWall.xnb

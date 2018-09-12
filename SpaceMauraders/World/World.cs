@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics; 
 
 
 namespace SpaceMauraders.World
@@ -42,14 +43,15 @@ namespace SpaceMauraders.World
 
         }
 
-        Module[,] modules; 
-
+        Module[,] modules;
+        SpaceStation spaceStation;
         public World(int width, int height)
         {
-            InitializeTileMap(width, height);
+            //InitializeTileMap(width, height);
 
-            GenerateSpaceStation(); 
+            // GenerateSpaceStation(); 
             // make space station
+            spaceStation = new SpaceStation(301); 
         }
         
        
@@ -69,6 +71,11 @@ namespace SpaceMauraders.World
 
                 }
             }
+        }
+
+        public void GenerateSpaceStation(int radius)
+        {
+
         }
                 
         public void GenerateSpaceStation()
@@ -122,8 +129,11 @@ namespace SpaceMauraders.World
         public void GenerateDerelict()
         {
             
+        }
 
-
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spaceStation.Draw(spriteBatch); 
         }
 
     }
