@@ -4,7 +4,7 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/David/source/repos/SpaceMauraders/SpaceMauraders/Content/Tiles/tempFloor.png</File>
-    <File>C:/Users/David/source/repos/SpaceMauraders/SpaceMauraders/Content/Tiles/tempWall.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Tiles/tempFloor.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Tiles/tempWall.png</File>
   </SourceFiles>
 </SourceFileCollection>
