@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework; 
 
 namespace SpaceMauraders.Entity
 {
@@ -17,7 +18,7 @@ namespace SpaceMauraders.Entity
             inputComponent = new Components.InputComponent(); 
         }
 
-        public override void Update()
+        public override void Update(GameTime gameTime)
         {
             inputComponent.Update(this); 
 

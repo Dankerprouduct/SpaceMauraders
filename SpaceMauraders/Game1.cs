@@ -15,11 +15,13 @@ namespace SpaceMauraders
 
         public static Random random = new Random();
 
-        Utilities.Camera camera; 
-        World.World world;
+        Utilities.Camera camera;
+        public static Utilities.Debug debug; 
 
-        static int width = 1920;
-        static int height = (width / 16) * 9; 
+        public static World.World world;
+
+        public static int width = 1080;
+        public static int height = (width / 16) * 9; 
 
         public Game1()
         {
@@ -32,7 +34,7 @@ namespace SpaceMauraders
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            camera = new Utilities.Camera(GraphicsDevice.Viewport);
+            
             IsMouseVisible = true; 
             base.Initialize();
         }
@@ -41,7 +43,12 @@ namespace SpaceMauraders
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             world = new World.World(10, 10);
-            Utilities.TextureManager.LoadContent(Content); 
+
+            debug = new Utilities.Debug();
+            Utilities.TextureManager.LoadContent(Content);
+
+            GUI.GUI.Init(); 
+            camera = new Utilities.Camera(GraphicsDevice.Viewport);
         }
         
         protected override void UnloadContent()
@@ -54,7 +61,7 @@ namespace SpaceMauraders
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-
+            debug.Update(); 
             Game1 game = this;
             camera.Update(ref game); 
             base.Update(gameTime);
@@ -62,13 +69,20 @@ namespace SpaceMauraders
         
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(new Color(10,10,10));
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.transform);
+            
+            world.Draw(spriteBatch);
+            spriteBatch.End();
+            
 
-            spriteBatch.Draw(Utilities.TextureManager.tiles[0], new Vector2(100, 100), Color.White); 
-            world.Draw(spriteBatch); 
+            spriteBatch.Begin(SpriteSortMode.Deferred,null, SamplerState.PointClamp);
+            GUI.GUI.Draw(spriteBatch);
+            GUI.GUI.DrawString("DEVELOPMENT BUILD", new Vector2(GUI.GUI.screenBounds.X + 20, GUI.GUI.screenBounds.Height - 20),1, 1, Color.Gray);
+
 
             spriteBatch.End();
+
 
             base.Draw(gameTime);
         }

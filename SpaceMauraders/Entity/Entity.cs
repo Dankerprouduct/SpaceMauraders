@@ -15,7 +15,11 @@ namespace SpaceMauraders.Entity
 
         public int id;
         public Vector2 position;
-        public Vector2 velocity; 
+        public Vector2 oldPosition; 
+        public Vector2 velocity;
+        public int cellX;
+        public int cellY;
+        public int cellIndex; // holds current cell 
 
         public Entity()
         {
@@ -24,14 +28,27 @@ namespace SpaceMauraders.Entity
 
         }
 
-        public virtual void Update()
+        public Vector2 GetEntityPosition()
+        {
+            return position; 
+        }
+
+        public void SetPartitionCell(int cellX, int cellY)
+        {
+            this.cellX = cellX;
+            this.cellY = cellY; 
+        }
+
+        public virtual void Update(GameTime gameTime)
         {
 
         }
 
+        
+
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-
+            
         }
 
     }
