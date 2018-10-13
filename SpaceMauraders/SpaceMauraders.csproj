@@ -50,6 +50,7 @@
     <Compile Include="SpaceStation.cs" />
     <Compile Include="Utilities\Camera.cs" />
     <Compile Include="Utilities\TextureManager.cs" />
+    <Compile Include="World\CellSpacePartition.cs" />
     <Compile Include="World\World.cs" />
   </ItemGroup>
   <ItemGroup>
