@@ -22,14 +22,14 @@ namespace SpaceMauraders.Utilities
         Viewport viewPort;
         public Vector2 center;
         public Vector2 lerpedCenter;
-        float scale = 1.2f;
+        float scale = .01f;
 
         bool camControl = true;
-        float speed = 30;
+        float speed = 60;
         public static Vector2 position;
         public Camera(Viewport vPort)
         {
-            position = new Vector2(0, 0);
+            position = Game1.world.spaceStation.center; 
             viewPort = vPort;
         }
 
@@ -40,11 +40,11 @@ namespace SpaceMauraders.Utilities
 
             if (mouseState.ScrollWheelValue > oldMouseState.ScrollWheelValue)
             {
-                scale += .01f;
+                scale += .05f;
             }
             if (mouseState.ScrollWheelValue < oldMouseState.ScrollWheelValue)
             {
-                scale -= .01f;
+                scale -= .05f;
             }
             // Tree tree = new Tree(Vector2.Zero, 0, 0);
 
