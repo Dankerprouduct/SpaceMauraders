@@ -24,6 +24,10 @@ namespace SpaceMauraders.World
             spaceStation = new SpaceStation(301); 
         }
         
+        public void Update(GameTime gameTime)
+        {
+            spaceStation.Update();
+        }
        
         public void GenerateSpaceStation(int radius)
         {

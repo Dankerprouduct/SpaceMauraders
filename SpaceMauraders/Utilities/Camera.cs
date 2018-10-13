@@ -22,7 +22,7 @@ namespace SpaceMauraders.Utilities
         Viewport viewPort;
         public Vector2 center;
         public Vector2 lerpedCenter;
-        float scale = 1.2f;
+        float scale = .01f;
 
         bool camControl = true;
         float speed = 60;

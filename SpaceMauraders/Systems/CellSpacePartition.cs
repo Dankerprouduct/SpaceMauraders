@@ -113,6 +113,11 @@ namespace SpaceMauraders.Systems
             return PositionToCell(entity).X * numCellsX + PositionToCell(entity).Y; 
         }
 
+        public int PositionToIndex(Vector2 posiiton)
+        {
+            return PositionToCell(posiiton).X * numCellsX + PositionToCell(posiiton).Y;
+        }
+
         // Changes cell property from one cell to another 
         public void ChangeCell(Entity.Entity entity)
         {
@@ -133,6 +138,13 @@ namespace SpaceMauraders.Systems
             int cellX = (int)(entity.GetEntityPosition().X / (partitionSize * ((partitionSize * partitionSize) * 8)) / partitionSize);
             int cellY = (int)(entity.GetEntityPosition().Y / (partitionSize * ((partitionSize * partitionSize) * 8)) / partitionSize);
             return new Point(cellX, cellY); 
+        }
+
+        Point PositionToCell(Vector2 position)
+        {
+            int cellX = (int)(position.X / (partitionSize * ((partitionSize * partitionSize) * 8)) / partitionSize);
+            int cellY = (int)(position.Y / (partitionSize * ((partitionSize * partitionSize) * 8)) / partitionSize);
+            return new Point(cellX, cellY);
         }
 
         // updates current cell

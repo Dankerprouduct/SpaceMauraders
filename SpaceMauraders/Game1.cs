@@ -21,7 +21,11 @@ namespace SpaceMauraders
         public static World.World world;
 
         public static int width = 1080;
-        public static int height = (width / 16) * 9; 
+        public static int height = (width / 16) * 9;
+
+        public static Vector2 worldPosition;
+
+        Vector2 mousePosition; 
 
         public Game1()
         {
@@ -60,6 +64,12 @@ namespace SpaceMauraders
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+            worldPosition = Vector2.Transform(mousePosition, Matrix.Invert(camera.transform)) ;
+
+
+            world.Update(gameTime); 
 
             debug.Update(); 
             Game1 game = this;

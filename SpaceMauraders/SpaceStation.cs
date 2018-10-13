@@ -13,9 +13,9 @@ namespace SpaceMauraders
         int diameter;
         int[,] tileMap;
         Systems.CellSpacePartition cellSpacePartition;
-        public Vector2 center; 
+        public Vector2 center;
 
-
+        int loadedCell; 
         public SpaceStation(int radius): base()
         {            
             diameter = radius * 2;
@@ -92,15 +92,22 @@ namespace SpaceMauraders
             tileMap = null;
         }
 
+        public void Update()
+        {
+            loadedCell = cellSpacePartition.PositionToIndex(Game1.worldPosition); 
+            
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             for (int i = 0; i < cellSpacePartition.cells.Length; i++)
             {
-                cellSpacePartition.cells[i].Draw(spriteBatch);
+                //cellSpacePartition.cells[i].Draw(spriteBatch);
 
                 
             }
-
+            
+            cellSpacePartition.cells[loadedCell].Draw(spriteBatch);
 
             if (Game1.debug.debug)
             {
@@ -110,12 +117,11 @@ namespace SpaceMauraders
                     if (cellSpacePartition.cells[i].members != null)
                     {
                         GUI.GUI.DrawBox(new Rectangle(
-                            (int)cellSpacePartition.cells[i].members[0].GetEntityPosition().X,
-                            (int)cellSpacePartition.cells[i].members[0].GetEntityPosition().Y,
-                            (int)cellSpacePartition.cells[i].members[cellSpacePartition.cells[i].members.Count() - 1].GetEntityPosition().X + 128,
-                            (int)cellSpacePartition.cells[i].members[cellSpacePartition.cells[i].members.Count() - 1].GetEntityPosition().Y + 128), 80, Color.Red);
-
-                        spriteBatch.DrawString(Utilities.TextureManager.fonts[0], i.ToString(), cellSpacePartition.cells[i].members[0].GetEntityPosition(), Color.White);
+                            (int)(cellSpacePartition.cells[i].members[0].cellX * 2048),
+                            (int)(cellSpacePartition.cells[i].members[0].cellY * 2048),
+                            (int)(cellSpacePartition.cells[i].members[0].cellX * 2048) + 2048,
+                            (int)(cellSpacePartition.cells[i].members[0].cellY * 2048) + 2048), 80, Color.Red);
+                        
                     }
 
                 }
@@ -126,7 +132,8 @@ namespace SpaceMauraders
                     {
                         spriteBatch.DrawString(Utilities.TextureManager.fonts[0],
                             i.ToString(),
-                            cellSpacePartition.cells[i].members[0].GetEntityPosition(), Color.White);
+                            new Vector2((int)(cellSpacePartition.cells[i].members[0].cellX * 2048),
+                            (int)(cellSpacePartition.cells[i].members[0].cellY * 2048)), Color.White);
                     }
 
                 }
