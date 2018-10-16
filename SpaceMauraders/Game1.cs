@@ -48,13 +48,18 @@ namespace SpaceMauraders
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            Utilities.TextureManager.LoadContent(Content);
+
+
             world = new World.World(10, 10);
 
             debug = new Utilities.Debug();
-            Utilities.TextureManager.LoadContent(Content);
+            
 
             GUI.GUI.Init(); 
             camera = new Utilities.Camera(GraphicsDevice.Viewport);
+
+            Console.WriteLine("Number of Entities: " + Entity.Entity.nextAvailibleID); 
         }
         
         protected override void UnloadContent()
@@ -94,7 +99,7 @@ namespace SpaceMauraders
             spriteBatch.Begin(SpriteSortMode.Deferred,null, SamplerState.PointClamp);
             GUI.GUI.Draw(spriteBatch);
             GUI.GUI.DrawString("DEVELOPMENT BUILD", new Vector2(GUI.GUI.screenBounds.X + 20, GUI.GUI.screenBounds.Height - 20),1, 1, Color.Gray);
-            if (debug.debug)
+            if (Utilities.Debug.debug)
             {
 
                 GUI.GUI.DrawString("Mouse Position: " + Game1.worldPosition.ToString(), new Vector2(10, 10),1,1, Color.White);

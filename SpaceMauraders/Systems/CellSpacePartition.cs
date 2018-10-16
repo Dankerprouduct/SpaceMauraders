@@ -75,7 +75,10 @@ namespace SpaceMauraders.Systems
                 {
                     for (int i = 0; i < members.Count; i++)
                     {
-                        members[i].FireEvent(_event);
+                        if (members[i].FireEvent(_event))
+                        {
+                            return true; 
+                        }
                     }
                 }
                 return false; 

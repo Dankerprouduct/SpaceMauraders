@@ -32,7 +32,7 @@ namespace SpaceMauraders.Components
             {
                 Event moveEvent = new Event();
                 moveEvent.id = "move";
-                moveEvent.parameters.Add("Move Up", 5);
+                moveEvent.parameters.Add("Move Up", 2);
                 entity.FireEvent(moveEvent);
             }
 
@@ -40,7 +40,7 @@ namespace SpaceMauraders.Components
             {
                 Event moveEvent = new Event();
                 moveEvent.id = "move";
-                moveEvent.parameters.Add("Move Down", 5);
+                moveEvent.parameters.Add("Move Down", 2);
                 entity.FireEvent(moveEvent);
             }
 
@@ -48,7 +48,7 @@ namespace SpaceMauraders.Components
             {
                 Event moveEvent = new Event();
                 moveEvent.id = "move";
-                moveEvent.parameters.Add("Move Left", 5);
+                moveEvent.parameters.Add("Move Left", 2);
                 entity.FireEvent(moveEvent);
             }
 
@@ -56,7 +56,7 @@ namespace SpaceMauraders.Components
             {
                 Event moveEvent = new Event();
                 moveEvent.id = "move";
-                moveEvent.parameters.Add("Move Right", 5);
+                moveEvent.parameters.Add("Move Right", 2);
                 entity.FireEvent(moveEvent);
             }
 

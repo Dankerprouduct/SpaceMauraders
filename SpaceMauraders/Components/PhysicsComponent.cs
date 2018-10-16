@@ -11,7 +11,7 @@ namespace SpaceMauraders.Components
     {
 
         Vector2 velocity = Vector2.Zero;
-        public int speed = 5; 
+        public int speed = 2; 
 
         public PhysicsComponent(int parentID) : base(parentID)
         {
@@ -20,8 +20,9 @@ namespace SpaceMauraders.Components
 
         public override void Update(GameTime gameTime, Entity.Entity entity)
         {
-            entity.position += velocity;
-            velocity *= .85f;
+            
+
+            CheckCollisionInMovementDirection(entity); 
             
         }
 
@@ -122,7 +123,7 @@ namespace SpaceMauraders.Components
             }
         }
 
-        public bool CheckCollisionInPartitionNumber(Entity.Entity entity, int partitionNumber)
+        public void CheckCollisionInPartitionNumber(Entity.Entity entity, int partitionNumber)
         {
             /// ** FUTURE PLANS AFTER TESTING **
             /// main "univererse" partition
@@ -140,10 +141,28 @@ namespace SpaceMauraders.Components
 
             Event physicsEvent = new Event();
             physicsEvent.id = "Collider";
-            physicsEvent.parameters.Add("rectangle", entity.collisionRectanlge);
+            physicsEvent.parameters.Add("rectangle", (Rectangle)entity.collisionRectanlge);
 
-            return Game1.world.FireGlovalEvent(physicsEvent); 
-                        
+            Console.WriteLine(Game1.world.FireGlobalEvent(physicsEvent));
+
+
+            velocity *= .85f;
+
+            entity.position.X += velocity.X; 
+            if (Game1.world.FireGlobalEvent(physicsEvent))
+            {
+                entity.position.X = entity.oldPosition.X;
+                entity.velocity.X = -entity.velocity.X; 
+            }
+
+            entity.position.Y += velocity.Y;
+            if (Game1.world.FireGlobalEvent(physicsEvent))
+            {
+                entity.position.Y = entity.oldPosition.Y;
+                entity.velocity.Y = -entity.velocity.Y;
+            }
+
+
         }
         
 

@@ -35,10 +35,10 @@ namespace SpaceMauraders.World
             spaceStation.Draw(spriteBatch); 
         }
 
-        public bool FireGlovalEvent(Components.Event _event)
+        public bool FireGlobalEvent(Components.Event _event)
         {
-            spaceStation.FireEvent(_event); 
-            return false; 
+            return spaceStation.FireEvent(_event); 
+            //return false; 
         }
 
     }

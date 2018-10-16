@@ -64,7 +64,7 @@ namespace SpaceMauraders.Utilities
             {
                 camControl = !camControl;
             }
-            Console.WriteLine(camControl);
+
             if (camControl)
             {
                 center = position;

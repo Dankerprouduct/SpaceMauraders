@@ -87,7 +87,7 @@ namespace SpaceMauraders.Entity
                     {
                         //Console.WriteLine(tileMap[x,y]);
 
-                        Tile tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), tileMap[x, y]);
+                        Tile tempTile = new Tile();
 
                         switch (tileMap[x, y])
                         {
@@ -103,16 +103,20 @@ namespace SpaceMauraders.Entity
                                 }
                             case 2:
                                 {
-                                    tempTile.tileType = Tile.TileType.NonSolid;
+                                    tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), tileMap[x, y], Tile.TileType.NonSolid);
                                     break; 
                                 }
                             case 3:
                                 {
-                                    tempTile.tileType = Tile.TileType.Solid; 
+                                    tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), tileMap[x, y], Tile.TileType.Solid);
                                     break; 
                                 }
                         }
-                        cellSpacePartition.AddEntity(tempTile);
+                        if (Utilities.Debug.debug)
+                        {
+                            Console.WriteLine(tempTile.id + " added tile type " + tempTile.tileType.ToString() + " with " + tempTile.components.Count() + " components");
+                        }
+                            cellSpacePartition.AddEntity(tempTile);
                                               
                     }
                 }
@@ -124,47 +128,47 @@ namespace SpaceMauraders.Entity
         {
             if (EntityWithinBounds(Game1.player.GetCenterPartition()))
             {
-                cellSpacePartition.cells[Game1.player.GetCenterPartition()].FireEvent(_event);
+                return cellSpacePartition.cells[Game1.player.GetCenterPartition()].FireEvent(_event);
             }
 
             if (EntityWithinBounds(Game1.player.GetTopLeftPartition()))
             {
-                cellSpacePartition.cells[Game1.player.GetTopLeftPartition()].FireEvent(_event);
+                return cellSpacePartition.cells[Game1.player.GetTopLeftPartition()].FireEvent(_event);
             }
 
             if (EntityWithinBounds(Game1.player.GetTopPartition()))
             {
-                cellSpacePartition.cells[Game1.player.GetTopPartition()].FireEvent(_event);
+                return cellSpacePartition.cells[Game1.player.GetTopPartition()].FireEvent(_event);
             }
 
             if (EntityWithinBounds(Game1.player.GetTopRightPartition()))
             {
-                cellSpacePartition.cells[Game1.player.GetTopRightPartition()].FireEvent(_event);
+                return cellSpacePartition.cells[Game1.player.GetTopRightPartition()].FireEvent(_event);
             }
 
             if (EntityWithinBounds(Game1.player.GetRightPartition()))
             {
-                cellSpacePartition.cells[Game1.player.GetRightPartition()].FireEvent(_event);
+                return cellSpacePartition.cells[Game1.player.GetRightPartition()].FireEvent(_event);
             }
 
             if (EntityWithinBounds(Game1.player.GetLeftPartition()))
             {
-                cellSpacePartition.cells[Game1.player.GetLeftPartition()].FireEvent(_event);
+                return cellSpacePartition.cells[Game1.player.GetLeftPartition()].FireEvent(_event);
             }
 
             if (EntityWithinBounds(Game1.player.GetBottomLeftPartition()))
             {
-                cellSpacePartition.cells[Game1.player.GetBottomLeftPartition()].FireEvent(_event);
+                return cellSpacePartition.cells[Game1.player.GetBottomLeftPartition()].FireEvent(_event);
             }
 
             if (EntityWithinBounds(Game1.player.GetBottomPartition()))
             {
-                cellSpacePartition.cells[Game1.player.GetBottomPartition()].FireEvent(_event);
+                return cellSpacePartition.cells[Game1.player.GetBottomPartition()].FireEvent(_event);
             }
 
             if (EntityWithinBounds(Game1.player.GetBottomRightPartition()))
             {
-                cellSpacePartition.cells[Game1.player.GetBottomRightPartition()].FireEvent(_event);
+                return cellSpacePartition.cells[Game1.player.GetBottomRightPartition()].FireEvent(_event);
             }
 
             return false;
@@ -180,7 +184,7 @@ namespace SpaceMauraders.Entity
         {
             DrawLoadedCells(spriteBatch); 
 
-            if (Game1.debug.debug)
+            if (Utilities.Debug.debug)
             {
 
                 for (int i = 0; i < cellSpacePartition.cells.Length; i++)
