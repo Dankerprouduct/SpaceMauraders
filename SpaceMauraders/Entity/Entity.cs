@@ -15,8 +15,7 @@ namespace SpaceMauraders.Entity
 
         public int id;
         public Vector2 position;
-        public Vector2 oldPosition; 
-        public Vector2 velocity;
+        public Vector2 oldPosition;
         public int cellX;
         public int cellY;
         public int cellIndex; // holds current cell
@@ -138,8 +137,6 @@ namespace SpaceMauraders.Entity
 
                 components[i].Update(gameTime, this);
             }
-
-            oldPosition = position; 
         }
 
         

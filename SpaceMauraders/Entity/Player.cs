@@ -14,10 +14,11 @@ namespace SpaceMauraders.Entity
 
         public Player(Vector2 position):base()
         {
-            this.position = position; 
+            this.position = position;
 
+            components.Add(new Components.PhysicsComponent(this.id));
             components.Add(new Components.InputComponent(this.id));
-            components.Add(new Components.PhysicsComponent(this.id)); 
+            
 
         }
 

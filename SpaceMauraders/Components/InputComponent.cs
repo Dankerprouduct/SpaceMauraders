@@ -30,6 +30,11 @@ namespace SpaceMauraders.Components
 
             if (keyboardState.IsKeyDown(Keys.W))
             {
+                Event enityEvent = new Event();
+                enityEvent.id = "Entity";
+                enityEvent.parameters.Add("entity", entity);
+                entity.FireEvent(enityEvent);
+
                 Event moveEvent = new Event();
                 moveEvent.id = "move";
                 moveEvent.parameters.Add("Move Up", 2);
@@ -38,6 +43,11 @@ namespace SpaceMauraders.Components
 
             if (keyboardState.IsKeyDown(Keys.S))
             {
+                Event enityEvent = new Event();
+                enityEvent.id = "Entity";
+                enityEvent.parameters.Add("entity", entity);
+                entity.FireEvent(enityEvent);
+
                 Event moveEvent = new Event();
                 moveEvent.id = "move";
                 moveEvent.parameters.Add("Move Down", 2);
@@ -46,6 +56,11 @@ namespace SpaceMauraders.Components
 
             if (keyboardState.IsKeyDown(Keys.A))
             {
+                Event enityEvent = new Event();
+                enityEvent.id = "Entity";
+                enityEvent.parameters.Add("entity", entity);
+                entity.FireEvent(enityEvent);
+
                 Event moveEvent = new Event();
                 moveEvent.id = "move";
                 moveEvent.parameters.Add("Move Left", 2);
@@ -54,6 +69,11 @@ namespace SpaceMauraders.Components
 
             if (keyboardState.IsKeyDown(Keys.D))
             {
+                Event enityEvent = new Event();
+                enityEvent.id = "Entity";
+                enityEvent.parameters.Add("entity", entity);
+                entity.FireEvent(enityEvent);
+
                 Event moveEvent = new Event();
                 moveEvent.id = "move";
                 moveEvent.parameters.Add("Move Right", 2);

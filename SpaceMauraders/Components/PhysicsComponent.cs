@@ -20,55 +20,30 @@ namespace SpaceMauraders.Components
 
         public override void Update(GameTime gameTime, Entity.Entity entity)
         {
-            
+            CheckCollisionInMovementDirection(entity);
 
-            CheckCollisionInMovementDirection(entity); 
-            
+
+
+
         }
 
         void CheckCollisionInMovementDirection(Entity.Entity entity)
         {
 
-            // right
-            if (entity.velocity.X >= 0)
-            {
-                CheckCollisionInPartitionNumber(entity, entity.GetRightPartition());
-                CheckCollisionInPartitionNumber(entity, entity.GetTopRightPartition());
-                CheckCollisionInPartitionNumber(entity, entity.GetBottomRightPartition());
-            }
-
-            //left
-            if (entity.velocity.X < 0)
-            {
-                CheckCollisionInPartitionNumber(entity, entity.GetLeftPartition());
-                CheckCollisionInPartitionNumber(entity, entity.GetBottomLeftPartition());
-                CheckCollisionInPartitionNumber(entity, entity.GetTopLeftPartition());
-            }
-
-            // down
-            if (entity.velocity.Y >= 0)
-            {
-                CheckCollisionInPartitionNumber(entity, entity.GetBottomPartition());
-                CheckCollisionInPartitionNumber(entity, entity.GetBottomLeftPartition());
-                CheckCollisionInPartitionNumber(entity, entity.GetBottomRightPartition());
-            }
-
-            // up
-            if (entity.velocity.Y < 0)
-            {
-                CheckCollisionInPartitionNumber(entity, entity.GetTopPartition());
-                CheckCollisionInPartitionNumber(entity, entity.GetTopLeftPartition());
-                CheckCollisionInPartitionNumber(entity, entity.GetTopRightPartition());
-            }
+            CheckCollisionInPartitionNumber(entity);
 
         }
 
         public override bool FireEvent(Event _event)
         {
+            if (_event.id == "Entity")
+            {
+                 //CheckCollisionInMovementDirection((Entity.Entity)_event.parameters["entity"]);
+            }
+
             if (_event.id == "move")
             {
-
-                foreach(KeyValuePair<string, object> parameters in _event.parameters)
+                foreach (KeyValuePair<string, object> parameters in _event.parameters)
                 {
                     if(parameters.Key == "Move Up")
                     {
@@ -99,11 +74,14 @@ namespace SpaceMauraders.Components
                 
             }
 
+            
+
             return true; 
         }
 
         void CheckSpeed(Vector2 velocity)
         {
+            /*
             if(velocity.X > speed)
             {
                 velocity.X = speed;
@@ -121,9 +99,10 @@ namespace SpaceMauraders.Components
             {
                 velocity.Y = -speed;
             }
+            */
         }
 
-        public void CheckCollisionInPartitionNumber(Entity.Entity entity, int partitionNumber)
+        public void CheckCollisionInPartitionNumber(Entity.Entity entity)
         {
             /// ** FUTURE PLANS AFTER TESTING **
             /// main "univererse" partition
@@ -135,34 +114,44 @@ namespace SpaceMauraders.Components
 
 
             // for now were just updating the one space station
-            entity.collisionRectanlge = new Rectangle((int)entity.position.X, (int)entity.position.Y,
-                Utilities.TextureManager.sprites[0].Width,
-                Utilities.TextureManager.sprites[0].Height); 
 
-            Event physicsEvent = new Event();
-            physicsEvent.id = "Collider";
-            physicsEvent.parameters.Add("rectangle", (Rectangle)entity.collisionRectanlge);
 
-            Console.WriteLine(Game1.world.FireGlobalEvent(physicsEvent));
-
+            entity.oldPosition = entity.position;
 
             velocity *= .85f;
 
-            entity.position.X += velocity.X; 
-            if (Game1.world.FireGlobalEvent(physicsEvent))
+            float j = 1.2f; 
+            entity.position.X += (int)velocity.X;
+            if (Game1.world.FireGlobalEvent(FireCollisionEvent(entity)))
             {
                 entity.position.X = entity.oldPosition.X;
-                entity.velocity.X = -entity.velocity.X; 
+                velocity.X = -velocity.X * j; 
             }
 
-            entity.position.Y += velocity.Y;
-            if (Game1.world.FireGlobalEvent(physicsEvent))
+            entity.position.Y += (int)velocity.Y;
+            if (Game1.world.FireGlobalEvent(FireCollisionEvent(entity)))
             {
                 entity.position.Y = entity.oldPosition.Y;
-                entity.velocity.Y = -entity.velocity.Y;
+                velocity.Y = -velocity.Y * j;
             }
 
 
+        }
+
+        public Event FireCollisionEvent(Entity.Entity entity)
+        {
+            entity.collisionRectanlge = new Rectangle((int)entity.position.X, (int)entity.position.Y,
+                Utilities.TextureManager.sprites[0].Width,
+                Utilities.TextureManager.sprites[0].Height);
+
+            Event physicsEvent = new Event
+            {
+                id = "Collider"
+            };
+
+            physicsEvent.parameters.Add("rectangle", (Rectangle)entity.collisionRectanlge);
+
+            return physicsEvent; 
         }
         
 
