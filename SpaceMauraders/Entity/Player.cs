@@ -12,8 +12,10 @@ namespace SpaceMauraders.Entity
     {
         
 
-        public Player():base()
+        public Player(Vector2 position):base()
         {
+            this.position = position; 
+
             components.Add(new Components.InputComponent(this.id));
             components.Add(new Components.PhysicsComponent(this.id)); 
 
@@ -22,11 +24,19 @@ namespace SpaceMauraders.Entity
 
         public override void Update(GameTime gameTime)
         {
-            
+
+            for(int i = 0; i < components.Count(); i++)
+            {
+                
+                components[i].Update(gameTime, this); 
+            }
+            base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+
+            spriteBatch.Draw(Utilities.TextureManager.sprites[0], position, Color.White); 
             base.Draw(spriteBatch);
         }
 

@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input; 
+using Microsoft.Xna.Framework.Input;
+using SpaceMauraders.Entity;
 
 namespace SpaceMauraders.Components
 {
@@ -22,25 +23,41 @@ namespace SpaceMauraders.Components
 
         }
 
-        public void Update(Entity.Entity entity)
+        public override void Update(GameTime gameTime, Entity.Entity entity)        
         {
+            
             keyboardState = Keyboard.GetState();
 
             if (keyboardState.IsKeyDown(Keys.W))
             {
-
+                Event moveEvent = new Event();
+                moveEvent.id = "move";
+                moveEvent.parameters.Add("Move Up", 5);
+                entity.FireEvent(moveEvent);
             }
+
             if (keyboardState.IsKeyDown(Keys.S))
             {
-
+                Event moveEvent = new Event();
+                moveEvent.id = "move";
+                moveEvent.parameters.Add("Move Down", 5);
+                entity.FireEvent(moveEvent);
             }
+
             if (keyboardState.IsKeyDown(Keys.A))
             {
-
+                Event moveEvent = new Event();
+                moveEvent.id = "move";
+                moveEvent.parameters.Add("Move Left", 5);
+                entity.FireEvent(moveEvent);
             }
+
             if (keyboardState.IsKeyDown(Keys.D))
             {
-
+                Event moveEvent = new Event();
+                moveEvent.id = "move";
+                moveEvent.parameters.Add("Move Right", 5);
+                entity.FireEvent(moveEvent);
             }
 
 

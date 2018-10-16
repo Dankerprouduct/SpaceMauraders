@@ -8,7 +8,9 @@ namespace SpaceMauraders.Components
 {
     public class Event
     {
+        
         public string id;
-        public Dictionary<string, object> parameters; 
+        public Dictionary<string, object> parameters = new Dictionary<string, object>();
+        
     }
 }

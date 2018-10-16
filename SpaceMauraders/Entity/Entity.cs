@@ -31,14 +31,18 @@ namespace SpaceMauraders.Entity
             
         }
 
-        public void FireEvent(Components.Event _event)
+        public bool FireEvent(Components.Event _event)
         {
             for (int i = 0; i < components.Count; i++)
             {
                 components[i].FireEvent(_event);
             }
-        }
 
+            return false; 
+        }
+        
+        
+        
         public void AddComponent(Components.Component component)
         {
             components.Add(component);
@@ -124,7 +128,7 @@ namespace SpaceMauraders.Entity
 
         public virtual void Update(GameTime gameTime)
         {
-
+            cellIndex = Game1.world.spaceStation.cellSpacePartition.PositionToIndex(this); 
         }
 
         

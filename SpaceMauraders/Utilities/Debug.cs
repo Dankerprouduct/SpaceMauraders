@@ -29,8 +29,11 @@ namespace SpaceMauraders.Utilities
                 debug = !debug; 
             }
 
+            
+
             oldKeyboardState = keyboardState; 
         }
+
         
     }
 }

@@ -25,7 +25,9 @@ namespace SpaceMauraders
 
         public static Vector2 worldPosition;
 
-        Vector2 mousePosition; 
+        Vector2 mousePosition;
+
+        public static Entity.Player player = new Entity.Player(new Vector2(16594, 37319)); 
 
         public Game1()
         {
@@ -67,7 +69,7 @@ namespace SpaceMauraders
 
             mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
             worldPosition = Vector2.Transform(mousePosition, Matrix.Invert(camera.transform)) ;
-
+            player.Update(gameTime); 
 
             world.Update(gameTime); 
 
@@ -83,13 +85,21 @@ namespace SpaceMauraders
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.transform);
             
             world.Draw(spriteBatch);
+
+            player.Draw(spriteBatch); 
+
             spriteBatch.End();
             
 
             spriteBatch.Begin(SpriteSortMode.Deferred,null, SamplerState.PointClamp);
             GUI.GUI.Draw(spriteBatch);
             GUI.GUI.DrawString("DEVELOPMENT BUILD", new Vector2(GUI.GUI.screenBounds.X + 20, GUI.GUI.screenBounds.Height - 20),1, 1, Color.Gray);
+            if (debug.debug)
+            {
 
+                GUI.GUI.DrawString("Mouse Position: " + Game1.worldPosition.ToString(), new Vector2(10, 10),1,1, Color.White);
+                GUI.GUI.DrawString("Cell Posiiton: " + Game1.world.spaceStation.loadedCell.ToString(), new Vector2(10, 30), 1, 1, Color.White);
+            }
 
             spriteBatch.End();
 

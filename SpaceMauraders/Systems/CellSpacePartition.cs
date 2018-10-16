@@ -68,6 +68,19 @@ namespace SpaceMauraders.Systems
                 }
             }
 
+            public bool FireEvent(Components.Event _event)
+            {
+
+                if (members != null)
+                {
+                    for (int i = 0; i < members.Count; i++)
+                    {
+                        members[i].FireEvent(_event);
+                    }
+                }
+                return false; 
+            }
+
         }
 
 
@@ -146,6 +159,7 @@ namespace SpaceMauraders.Systems
             int cellY = (int)(position.Y / (partitionSize * ((partitionSize * partitionSize) * 8)) / partitionSize);
             return new Point(cellX, cellY);
         }
+        
 
         // updates current cell
         public void Update(GameTime gameTime)

@@ -64,7 +64,7 @@ namespace SpaceMauraders.Utilities
             {
                 camControl = !camControl;
             }
-
+            Console.WriteLine(camControl);
             if (camControl)
             {
                 center = position;
@@ -92,7 +92,7 @@ namespace SpaceMauraders.Utilities
             else
             {
                 //center = Game1.player.GetCenter();
-                position = center;
+                center = Game1.player.GetEntityPosition();
                 lerpedCenter = Vector2.Lerp(lerpedCenter, center, .5f);
             }
 

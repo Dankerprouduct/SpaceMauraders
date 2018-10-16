@@ -22,9 +22,17 @@ namespace SpaceMauraders.Entity
         public Tile(Vector2 position, int tileID): base()
         {
             this.tileID = tileID;
-
+            
             this.position = position;
+
+            this.collisionRectanlge = 
+                new Rectangle((int)position.X,
+                (int)position.Y,
+                Utilities.TextureManager.tiles[tileID].Width, 
+                Utilities.TextureManager.tiles[tileID].Height); 
         }
+
+        
 
         public override void Update(GameTime gameTime)
         {

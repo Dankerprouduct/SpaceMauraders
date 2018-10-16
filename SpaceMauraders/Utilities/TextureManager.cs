@@ -14,6 +14,7 @@ namespace SpaceMauraders.Utilities
         public static List<Texture2D> tiles = new List<Texture2D>();
         public static List<SpriteFont> fonts = new List<SpriteFont>();
         public static List<Texture2D> gui = new List<Texture2D>();
+        public static List<Texture2D> sprites = new List<Texture2D>();
 
         public static void LoadContent(ContentManager content)
         {
@@ -30,6 +31,9 @@ namespace SpaceMauraders.Utilities
 
             // loading gui elements
             AddGUI("Pixel", content);          //0
+
+            // loading sprites
+            AddSprite("TempSprite", content);  //0
             
 
         }
@@ -47,6 +51,11 @@ namespace SpaceMauraders.Utilities
         public static void AddGUI(string name, ContentManager content)
         {
             gui.Add(content.Load<Texture2D>("GUI/" + name));
+        }
+
+        public static void AddSprite(string name, ContentManager content)
+        {
+            sprites.Add(content.Load<Texture2D>("Sprites/" + name));
         }
     }
 }

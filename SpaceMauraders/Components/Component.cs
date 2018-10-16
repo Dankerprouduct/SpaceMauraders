@@ -20,9 +20,10 @@ namespace SpaceMauraders.Components
 
         }
 
-        public virtual void FireEvent(Event _event)
+        public virtual bool FireEvent(Event _event)
         {
-            
+
+            return false; 
         }
     }
 }

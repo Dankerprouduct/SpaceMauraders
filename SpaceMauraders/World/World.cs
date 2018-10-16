@@ -17,10 +17,6 @@ namespace SpaceMauraders.World
 
         public World(int width, int height)
         {
-            //InitializeTileMap(width, height);
-
-            // GenerateSpaceStation(); 
-            // make space station
             spaceStation = new Entity.SpaceStation(301); 
         }
         
@@ -37,6 +33,12 @@ namespace SpaceMauraders.World
         public void Draw(SpriteBatch spriteBatch)
         {
             spaceStation.Draw(spriteBatch); 
+        }
+
+        public bool FireGlovalEvent(Components.Event _event)
+        {
+            spaceStation.FireEvent(_event); 
+            return false; 
         }
 
     }
