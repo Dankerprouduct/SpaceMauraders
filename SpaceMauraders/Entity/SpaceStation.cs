@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics; 
 
-namespace SpaceMauraders
+namespace SpaceMauraders.Entity
 {
-    public class SpaceStation: Entity.Entity
+    public class SpaceStation: Entity
     {
         int diameter;
         int[,] tileMap;
-        Systems.CellSpacePartition cellSpacePartition;
+        public Systems.CellSpacePartition cellSpacePartition;
         public Vector2 center;
 
         int loadedCell; 
@@ -70,6 +70,7 @@ namespace SpaceMauraders
                 tileY = (int)(Math.Sin(d) * mRadius) + middle.Y;
                 
                 tileMap[tileX, tileY] = id;
+                
             }
         }
 
@@ -84,7 +85,33 @@ namespace SpaceMauraders
                     if (tileMap[x, y] != -1)
                     {
                         //Console.WriteLine(tileMap[x,y]);
-                        cellSpacePartition.AddEntity(new Entity.Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), tileMap[x, y]));
+
+                        Tile tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), tileMap[x, y]);
+
+                        switch (tileMap[x, y])
+                        {
+                            case 0:
+                                {
+                                    Console.WriteLine("Using Old Tile, please check ");
+                                    break;
+                                }
+                            case 1:
+                                {
+                                    Console.WriteLine("Using Old Tile, please check ");
+                                    break; 
+                                }
+                            case 2:
+                                {
+                                    tempTile.tileType = Tile.TileType.NonSolid;
+                                    break; 
+                                }
+                            case 3:
+                                {
+                                    tempTile.tileType = Tile.TileType.Solid; 
+                                    break; 
+                                }
+                        }
+                        cellSpacePartition.AddEntity(tempTile);
                                               
                     }
                 }
@@ -133,7 +160,7 @@ namespace SpaceMauraders
                         spriteBatch.DrawString(Utilities.TextureManager.fonts[0],
                             i.ToString(),
                             new Vector2((int)(cellSpacePartition.cells[i].members[0].cellX * 2048),
-                            (int)(cellSpacePartition.cells[i].members[0].cellY * 2048)), Color.White);
+                            (int)(cellSpacePartition.cells[i].members[0].cellY * 2048)), Color.Green);
                     }
 
                 }

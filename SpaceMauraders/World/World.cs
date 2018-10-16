@@ -12,7 +12,7 @@ namespace SpaceMauraders.World
     public class World
     {
         
-        public SpaceStation spaceStation;
+        public Entity.SpaceStation spaceStation;
 
 
         public World(int width, int height)
@@ -21,7 +21,7 @@ namespace SpaceMauraders.World
 
             // GenerateSpaceStation(); 
             // make space station
-            spaceStation = new SpaceStation(301); 
+            spaceStation = new Entity.SpaceStation(301); 
         }
         
         public void Update(GameTime gameTime)

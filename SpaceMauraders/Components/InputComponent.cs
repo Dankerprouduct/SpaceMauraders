@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace SpaceMauraders.Components
 {
-    public class InputComponent
+    public class InputComponent: Component
     {
 
         KeyboardState keyboardState;
@@ -17,7 +17,7 @@ namespace SpaceMauraders.Components
         MouseState mouseState;
         MouseState oldMouseState; 
 
-        public InputComponent()
+        public InputComponent(int parentID) : base(parentID)
         {
 
         }

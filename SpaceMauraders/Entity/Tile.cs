@@ -11,12 +11,19 @@ namespace SpaceMauraders.Entity
     public class Tile: Entity
     {
 
+        public enum TileType
+        {
+            Solid,
+            NonSolid
+        }
         public int tileID;
+        public TileType tileType; 
+
         public Tile(Vector2 position, int tileID): base()
         {
             this.tileID = tileID;
 
-            this.position = position; 
+            this.position = position;
         }
 
         public override void Update(GameTime gameTime)
