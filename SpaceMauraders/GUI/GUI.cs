@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics; 
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SpaceMauraders.GUI
 {
@@ -140,6 +140,8 @@ namespace SpaceMauraders.GUI
             //MakeBox(x, y, w, h, color1);
             spriteBatch.Draw(texture, position, Color.White);
         }
+        
 
+        
     }
 }

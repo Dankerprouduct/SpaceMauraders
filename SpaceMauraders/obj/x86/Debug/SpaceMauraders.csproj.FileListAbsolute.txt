@@ -49,9 +49,12 @@ C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\D
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\SharpDX.XInput.xml
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
-C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMauraders.csprojResolveAssemblyReference.cache
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Tiles\Floor1.xnb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Tiles\Wall1.xnb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Fonts\debug.xnb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\GUI\Pixel.xnb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Fonts\Arial12.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Sprites\TempSprite.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMauraders.csprojAssemblyReference.cache
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMauraders.csproj.CoreCompileInputs.cache
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMauraders.csproj.CopyComplete

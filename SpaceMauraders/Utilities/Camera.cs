@@ -24,7 +24,7 @@ namespace SpaceMauraders.Utilities
         public Vector2 lerpedCenter;
         float scale = .01f;
 
-        bool camControl = true;
+        bool camControl = false;
         float speed = 60;
         public static Vector2 position;
         public Camera(Viewport vPort)
@@ -92,7 +92,7 @@ namespace SpaceMauraders.Utilities
             else
             {
                 //center = Game1.player.GetCenter();
-                position = center;
+                center = Game1.player.GetEntityPosition();
                 lerpedCenter = Vector2.Lerp(lerpedCenter, center, .5f);
             }
 

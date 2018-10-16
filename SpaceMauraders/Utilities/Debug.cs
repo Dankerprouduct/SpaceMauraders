@@ -14,7 +14,7 @@ namespace SpaceMauraders.Utilities
         KeyboardState oldKeyboardState;
 
 
-        public bool debug;
+        public static bool debug;
         public Debug()
         {
 
@@ -29,8 +29,11 @@ namespace SpaceMauraders.Utilities
                 debug = !debug; 
             }
 
+            
+
             oldKeyboardState = keyboardState; 
         }
+
         
     }
 }

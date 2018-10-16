@@ -12,16 +12,12 @@ namespace SpaceMauraders.World
     public class World
     {
         
-        public SpaceStation spaceStation;
+        public Entity.SpaceStation spaceStation;
 
 
         public World(int width, int height)
         {
-            //InitializeTileMap(width, height);
-
-            // GenerateSpaceStation(); 
-            // make space station
-            spaceStation = new SpaceStation(301); 
+            spaceStation = new Entity.SpaceStation(301); 
         }
         
         public void Update(GameTime gameTime)
@@ -37,6 +33,12 @@ namespace SpaceMauraders.World
         public void Draw(SpriteBatch spriteBatch)
         {
             spaceStation.Draw(spriteBatch); 
+        }
+
+        public bool FireGlobalEvent(Components.Event _event)
+        {
+            return spaceStation.FireEvent(_event); 
+            //return false; 
         }
 
     }
