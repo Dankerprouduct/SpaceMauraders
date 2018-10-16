@@ -103,7 +103,7 @@ namespace SpaceMauraders
             {
 
                 GUI.GUI.DrawString("Mouse Position: " + Game1.worldPosition.ToString(), new Vector2(10, 10),1,1, Color.White);
-                GUI.GUI.DrawString("Cell Posiiton: " + Game1.world.spaceStation.loadedCell.ToString(), new Vector2(10, 30), 1, 1, Color.White);
+                GUI.GUI.DrawString("Cell Posiiton: " + player.GetCenterPartition().ToString(), new Vector2(10, 30), 1, 1, Color.White);
             }
 
             spriteBatch.End();

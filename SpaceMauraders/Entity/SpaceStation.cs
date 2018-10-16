@@ -196,7 +196,7 @@ namespace SpaceMauraders.Entity
                             (int)(cellSpacePartition.cells[i].members[0].cellX * 2048),
                             (int)(cellSpacePartition.cells[i].members[0].cellY * 2048),
                             (int)(cellSpacePartition.cells[i].members[0].cellX * 2048) + 2048,
-                            (int)(cellSpacePartition.cells[i].members[0].cellY * 2048) + 2048), 80, Color.Red);
+                            (int)(cellSpacePartition.cells[i].members[0].cellY * 2048) + 2048), 10, Color.Red);
                         
                     }
 
@@ -209,7 +209,7 @@ namespace SpaceMauraders.Entity
                         spriteBatch.DrawString(Utilities.TextureManager.fonts[0],
                             i.ToString(),
                             new Vector2((int)(cellSpacePartition.cells[i].members[0].cellX * 2048),
-                            (int)(cellSpacePartition.cells[i].members[0].cellY * 2048)), Color.Green);
+                            (int)(cellSpacePartition.cells[i].members[0].cellY * 2048)), Color.White);
                     }
 
                 }
