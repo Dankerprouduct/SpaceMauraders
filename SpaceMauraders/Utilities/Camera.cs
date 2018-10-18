@@ -93,6 +93,7 @@ namespace SpaceMauraders.Utilities
             {
                 //center = Game1.player.GetCenter();
                 center = Game1.player.GetEntityPosition();
+                position = center; 
                 lerpedCenter = Vector2.Lerp(lerpedCenter, center, .5f);
             }
 

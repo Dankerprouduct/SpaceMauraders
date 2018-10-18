@@ -21,7 +21,6 @@ namespace SpaceMauraders.Systems
                 if (members != null)
                 {
                     members.Add(entity);
-                   // Console.WriteLine("added entity to cell " + entity.cellIndex + " with id of " + entity.id);
                 }
                 else
                 {
