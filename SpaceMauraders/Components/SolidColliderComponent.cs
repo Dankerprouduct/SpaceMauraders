@@ -11,7 +11,12 @@ namespace SpaceMauraders.Components
     public class SolidColliderComponent: Component
     {
 
-        Rectangle rectangle; 
+        Rectangle rectangle;
+
+        public SolidColliderComponent()
+        {
+        }
+
         public SolidColliderComponent(Entity.Entity entity, int parentID): base(parentID)
         {
             

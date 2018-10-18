@@ -10,8 +10,10 @@ namespace SpaceMauraders.Components
 {
     public class InventoryComponent: Component
     {
+        public InventoryComponent()
+        {
+        }
 
-        
         public InventoryComponent(int parentID, int space): base(parentID)
         {
 

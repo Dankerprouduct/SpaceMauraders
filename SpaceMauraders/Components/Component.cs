@@ -10,6 +10,12 @@ namespace SpaceMauraders.Components
     public class Component
     {
         int parentID; 
+
+        public Component()
+        {
+
+        }
+
         public Component(int parentID)
         {
             this.parentID = parentID; 

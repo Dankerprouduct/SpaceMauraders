@@ -16,7 +16,11 @@ namespace SpaceMauraders.Components
         KeyboardState oldKeyboardState;
 
         MouseState mouseState;
-        MouseState oldMouseState; 
+        MouseState oldMouseState;
+
+        public InputComponent()
+        {
+        }
 
         public InputComponent(int parentID) : base(parentID)
         {
