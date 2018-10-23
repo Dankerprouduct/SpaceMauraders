@@ -20,6 +20,8 @@ namespace SpaceMauraders.Entity
         public int cellY;
         public int cellIndex; // holds current cell
 
+        public string entityName; 
+
         public List<Components.Component> components = new List<Components.Component>(); 
         public Rectangle collisionRectanlge; 
 

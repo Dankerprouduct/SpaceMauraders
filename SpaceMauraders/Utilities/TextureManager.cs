@@ -28,9 +28,11 @@ namespace SpaceMauraders.Utilities
             // loading fonts
             AddFont("debug", content);         //0
             AddFont("Arial12", content);       //1
+            
 
             // loading gui elements
             AddGUI("Pixel", content);          //0
+            AddGUI("Circle1", content);        //1
 
             // loading sprites
             AddSprite("TempSprite", content);  //0

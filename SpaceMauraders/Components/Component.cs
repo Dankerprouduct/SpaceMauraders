@@ -9,7 +9,9 @@ namespace SpaceMauraders.Components
 {
     public class Component
     {
-        int parentID; 
+        int parentID;
+
+        public string componentName;
 
         public Component()
         {

@@ -41,13 +41,18 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Components\HealthComponent.cs" />
     <Compile Include="Components\InventoryComponent.cs" />
     <Compile Include="Components\SolidColliderComponent.cs" />
     <Compile Include="Components\Component.cs" />
     <Compile Include="Components\Event.cs" />
     <Compile Include="Components\InputComponent.cs" />
     <Compile Include="Components\PhysicsComponent.cs" />
+    <Compile Include="Components\TransfromComponent.cs" />
     <Compile Include="Entity\Entity.cs" />
+    <Compile Include="Entity\EntityDictionary.cs" />
+    <Compile Include="Entity\EntityPrototype.cs" />
+    <Compile Include="Entity\NPC.cs" />
     <Compile Include="Entity\Player.cs" />
     <Compile Include="Entity\Tile.cs" />
     <Compile Include="Game1.cs" />
@@ -56,11 +61,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entity\SpaceStation.cs" />
     <Compile Include="Systems\CellSpacePartition.cs" />
-    <Compile Include="Systems\EntityFactory.cs" />
     <Compile Include="Utilities\Camera.cs" />
     <Compile Include="Utilities\Debug.cs" />
     <Compile Include="Utilities\TextureManager.cs" />
-    <Compile Include="World\CellSpacePartition.cs" />
+    <Compile Include="World\Node.cs" />
+    <Compile Include="World\NodeMesh.cs" />
+    <Compile Include="World\Pathfinding.cs" />
     <Compile Include="World\World.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +81,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
+    <None Include="JSON\Entities.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />

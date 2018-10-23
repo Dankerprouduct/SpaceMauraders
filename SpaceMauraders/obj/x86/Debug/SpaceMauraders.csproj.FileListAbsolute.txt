@@ -91,3 +91,7 @@ D:\Projects\Game1\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMauraders.csp
 D:\Projects\Game1\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMauraders.csproj.CopyComplete
 D:\Projects\Game1\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMauraders.exe
 D:\Projects\Game1\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMauraders.pdb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Newtonsoft.Json.dll
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Newtonsoft.Json.xml
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\JSON\Entities.json
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\GUI\Circle1.xnb

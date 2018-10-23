@@ -20,11 +20,12 @@ namespace SpaceMauraders.Components
 
         public InputComponent()
         {
+            componentName = "InputComponent";
         }
 
         public InputComponent(int parentID) : base(parentID)
         {
-
+            componentName = "InputComponent";
         }
 
         public override void Update(GameTime gameTime, Entity.Entity entity)        

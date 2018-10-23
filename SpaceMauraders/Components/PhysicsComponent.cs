@@ -15,11 +15,12 @@ namespace SpaceMauraders.Components
 
         public PhysicsComponent(int parentID) : base(parentID)
         {
-            
+            componentName = "PhysicsComponent"; 
         }
 
         public PhysicsComponent()
         {
+            componentName = "PhysicsComponent";
         }
 
         public override void Update(GameTime gameTime, Entity.Entity entity)
@@ -42,7 +43,18 @@ namespace SpaceMauraders.Components
         {
             if (_event.id == "Entity")
             {
-                 //CheckCollisionInMovementDirection((Entity.Entity)_event.parameters["entity"]);
+                //CheckCollisionInMovementDirection((Entity.Entity)_event.parameters["entity"]);
+            }
+
+            if (_event.id == "AddVelocity")
+            {
+                foreach(KeyValuePair<string, object> parameters in _event.parameters)
+                {
+                    if(parameters.Key == "Velocity")
+                    {
+                        velocity += (Vector2)parameters.Value;
+                    }
+                }
             }
 
             if (_event.id == "move")
@@ -122,7 +134,7 @@ namespace SpaceMauraders.Components
 
             entity.oldPosition = entity.position;
 
-            velocity *= .85f;
+            velocity *= .95f;
 
             float j = 1.2f; 
             entity.position.X += (int)velocity.X;

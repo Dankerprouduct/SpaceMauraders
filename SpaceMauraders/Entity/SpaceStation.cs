@@ -15,7 +15,9 @@ namespace SpaceMauraders.Entity
         public Systems.CellSpacePartition cellSpacePartition;
         public Vector2 center;
 
-        public int loadedCell; 
+        public int loadedCell;
+
+        public World.NodeMesh nodeMesh; 
 
         public SpaceStation(int radius): base()
         {            
@@ -25,11 +27,27 @@ namespace SpaceMauraders.Entity
 
             InitializeMap();
             BuildRings(125, 175);
-            BuildRings(250, 300);
             
+            BuildRings(250, 300);
+
+            BuildBridge(175, 250, 45, 45.2f, 2); 
+            BuildBridge(175, 250, 45.2f, 45.2f, 3);
+            BuildBridge(175, 250, 45, 45, 3);
+
+
+            BuildBridge(175, 250, 45 - 180, 45.2f - 180, 2);
+            BuildBridge(175, 250, 45.2f - 180f, 45.2f - 180, 3);
+            BuildBridge(175, 250, 45 - 180, 45 - 180, 3);
+
+            BuildBridge(175, 250, 45 - 360, 45.2f - 360, 2);
+            BuildBridge(175, 250, 45.2f - 360, 45.2f - 360, 3);
+            BuildBridge(175, 250, 45 - 360, 45 - 360, 3);
 
             position = new Vector2(0, 0);
+
+            nodeMesh = new World.NodeMesh();
             LoadCellSpacePartition();
+           
             
         }
         
@@ -55,13 +73,33 @@ namespace SpaceMauraders.Entity
 
             BuildRing(r1, 3);
             BuildRing(r2, 3);
+            
+        }
+
+        void BuildBridge(int r1, int r2,float a1, float a2, int id)
+        {
+            
+            Point middle = new Point(tileMap.GetLength(0) / 2, tileMap.GetLength(1) / 2);
+            int tileX; //= (int)(r1 + middle.X);
+            int tileY; //= (int)(r1 + middle.Y);
+
+            for (float angle = a1; angle <= a2; angle += .001f)
+            {
+                for (float d = r1; d <= r2; d += .01f)
+                {
+                    tileX = (int)(Math.Cos(angle) * d) + middle.X;
+                    tileY = (int)(Math.Sin(angle) * d) + middle.Y;
+                    tileMap[tileX, tileY] = id;
+
+                }
+            }
         }
 
         void BuildRing(float r, int id)
         {
             Point middle = new Point(tileMap.GetLength(0) / 2, tileMap.GetLength(1) / 2);
 
-            for (float d = 0; d < 360; d += .0005f)
+            for (float d = 0; d < 2 * Math.PI; d += .0005f)
             {
                 int tileX = (int)(r + middle.X);
                 int tileY = (int)(r + middle.Y);
@@ -73,6 +111,8 @@ namespace SpaceMauraders.Entity
                 tileMap[tileX, tileY] = id;
                 
             }
+
+
         }
 
         void LoadCellSpacePartition()
@@ -121,6 +161,9 @@ namespace SpaceMauraders.Entity
                     }
                 }
             }
+
+            nodeMesh.MakeMap(2, 3, tileMap); 
+
             tileMap = null;
         }
 
@@ -186,6 +229,7 @@ namespace SpaceMauraders.Entity
 
             if (Utilities.Debug.debug)
             {
+                nodeMesh.DrawNodes(); 
 
                 for (int i = 0; i < cellSpacePartition.cells.Length; i++)
                 {
