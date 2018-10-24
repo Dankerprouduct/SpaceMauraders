@@ -72,7 +72,7 @@ namespace SpaceMauraders.World
                // Console.WriteLine("node position " + currentNode.arrayPosition); 
                 
                 
-                if (counter > 12000)
+                if (counter > 20)
                 {
                     List<Node> chunkPath = new List<Node>();
                     chunkPath.Add(openSet[1]);

@@ -26,7 +26,9 @@ namespace SpaceMauraders.Components
 
         public override bool FireEvent(Event _event)
         {
-            if(_event.id == "Collider")
+            //Console.WriteLine(_event.id); 
+            
+            if (_event.id == "Collider")
             {
                 
                 foreach (KeyValuePair<string, object> parameter in _event.parameters)
@@ -34,9 +36,10 @@ namespace SpaceMauraders.Components
 
                     if(parameter.Key == "rectangle")
                     {
-
+                        Console.WriteLine("cakked"); 
                         if (((Rectangle)parameter.Value).Intersects(rectangle))
                         {
+                            Console.WriteLine("hit "); 
                             return true; 
                         }
                     }

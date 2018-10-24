@@ -167,51 +167,54 @@ namespace SpaceMauraders.Entity
             tileMap = null;
         }
 
-        public new bool FireEvent(Components.Event _event)
+        public bool FireEvent(Components.Event _event, Entity entity)
         {
-            if (EntityWithinBounds(Game1.player.GetCenterPartition()))
+            
+
+            if (EntityWithinBounds(entity.GetCenterPartition()))
             {
-                return cellSpacePartition.cells[Game1.player.GetCenterPartition()].FireEvent(_event);
+                
+                return cellSpacePartition.cells[entity.GetCenterPartition()].FireEvent(_event);
             }
 
-            if (EntityWithinBounds(Game1.player.GetTopLeftPartition()))
+            if (EntityWithinBounds(entity.GetTopLeftPartition()))
             {
-                return cellSpacePartition.cells[Game1.player.GetTopLeftPartition()].FireEvent(_event);
+                return cellSpacePartition.cells[entity.GetTopLeftPartition()].FireEvent(_event);
             }
 
-            if (EntityWithinBounds(Game1.player.GetTopPartition()))
+            if (EntityWithinBounds(entity.GetTopPartition()))
             {
-                return cellSpacePartition.cells[Game1.player.GetTopPartition()].FireEvent(_event);
+                return cellSpacePartition.cells[entity.GetTopPartition()].FireEvent(_event);
             }
 
-            if (EntityWithinBounds(Game1.player.GetTopRightPartition()))
+            if (EntityWithinBounds(entity.GetTopRightPartition()))
             {
-                return cellSpacePartition.cells[Game1.player.GetTopRightPartition()].FireEvent(_event);
+                return cellSpacePartition.cells[entity.GetTopRightPartition()].FireEvent(_event);
             }
 
-            if (EntityWithinBounds(Game1.player.GetRightPartition()))
+            if (EntityWithinBounds(entity.GetRightPartition()))
             {
-                return cellSpacePartition.cells[Game1.player.GetRightPartition()].FireEvent(_event);
+                return cellSpacePartition.cells[entity.GetRightPartition()].FireEvent(_event);
             }
 
-            if (EntityWithinBounds(Game1.player.GetLeftPartition()))
+            if (EntityWithinBounds(entity.GetLeftPartition()))
             {
-                return cellSpacePartition.cells[Game1.player.GetLeftPartition()].FireEvent(_event);
+                return cellSpacePartition.cells[entity.GetLeftPartition()].FireEvent(_event);
             }
 
-            if (EntityWithinBounds(Game1.player.GetBottomLeftPartition()))
+            if (EntityWithinBounds(entity.GetBottomLeftPartition()))
             {
-                return cellSpacePartition.cells[Game1.player.GetBottomLeftPartition()].FireEvent(_event);
+                return cellSpacePartition.cells[entity.GetBottomLeftPartition()].FireEvent(_event);
             }
 
-            if (EntityWithinBounds(Game1.player.GetBottomPartition()))
+            if (EntityWithinBounds(entity.GetBottomPartition()))
             {
-                return cellSpacePartition.cells[Game1.player.GetBottomPartition()].FireEvent(_event);
+                return cellSpacePartition.cells[entity.GetBottomPartition()].FireEvent(_event);
             }
 
-            if (EntityWithinBounds(Game1.player.GetBottomRightPartition()))
+            if (EntityWithinBounds(entity.GetBottomRightPartition()))
             {
-                return cellSpacePartition.cells[Game1.player.GetBottomRightPartition()].FireEvent(_event);
+                return cellSpacePartition.cells[entity.GetBottomRightPartition()].FireEvent(_event);
             }
 
             return false;
@@ -240,7 +243,7 @@ namespace SpaceMauraders.Entity
                             (int)(cellSpacePartition.cells[i].members[0].cellX * 2048),
                             (int)(cellSpacePartition.cells[i].members[0].cellY * 2048),
                             (int)(cellSpacePartition.cells[i].members[0].cellX * 2048) + 2048,
-                            (int)(cellSpacePartition.cells[i].members[0].cellY * 2048) + 2048), 80, Color.Red);
+                            (int)(cellSpacePartition.cells[i].members[0].cellY * 2048) + 2048), 80, Color.Red *.1f);
                         
                     }
 

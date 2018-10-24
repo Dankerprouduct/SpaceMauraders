@@ -28,7 +28,7 @@ namespace SpaceMauraders.Components
             CheckCollisionInMovementDirection(entity);
 
 
-
+            
 
         }
 
@@ -41,7 +41,7 @@ namespace SpaceMauraders.Components
 
         public override bool FireEvent(Event _event)
         {
-            if (_event.id == "Entity")
+            if (_event.id == "NPC")
             {
                 //CheckCollisionInMovementDirection((Entity.Entity)_event.parameters["entity"]);
             }
@@ -131,21 +131,24 @@ namespace SpaceMauraders.Components
 
             // for now were just updating the one space station
 
-
+            
             entity.oldPosition = entity.position;
 
             velocity *= .95f;
 
             float j = 1.2f; 
             entity.position.X += (int)velocity.X;
-            if (Game1.world.FireGlobalEvent(FireCollisionEvent(entity)))
+            if (Game1.world.FireGlobalEvent(FireCollisionEvent(entity), entity))
             {
+               
+
                 entity.position.X = entity.oldPosition.X;
-                velocity.X = -velocity.X * j; 
+                velocity.X = -velocity.X * j;
+                Console.WriteLine("hit"); 
             }
 
             entity.position.Y += (int)velocity.Y;
-            if (Game1.world.FireGlobalEvent(FireCollisionEvent(entity)))
+            if (Game1.world.FireGlobalEvent(FireCollisionEvent(entity), entity))
             {
                 entity.position.Y = entity.oldPosition.Y;
                 velocity.Y = -velocity.Y * j;
@@ -164,9 +167,13 @@ namespace SpaceMauraders.Components
             {
                 id = "Collider"
             };
-
+            
             physicsEvent.parameters.Add("rectangle", (Rectangle)entity.collisionRectanlge);
-
+            physicsEvent.parameters.Add("entity", (Entity.Entity)entity);
+            if (entity is Entity.NPC)
+            {
+                physicsEvent.parameters.Add("npc", 0);
+            }
             return physicsEvent; 
         }
         

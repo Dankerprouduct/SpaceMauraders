@@ -69,13 +69,15 @@ namespace SpaceMauraders.Systems
 
             public bool FireEvent(Components.Event _event)
             {
-
+                
                 if (members != null)
                 {
                     for (int i = 0; i < members.Count; i++)
                     {
+                        
                         if (members[i].FireEvent(_event))
                         {
+                            
                             return true; 
                         }
                     }

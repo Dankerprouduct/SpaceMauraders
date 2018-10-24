@@ -95,3 +95,7 @@ C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\D
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Newtonsoft.Json.xml
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\JSON\Entities.json
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\GUI\Circle1.xnb
+D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\GUI\Circle1.xnb
+D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\JSON\Entities.json
+D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Newtonsoft.Json.dll
+D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Newtonsoft.Json.xml

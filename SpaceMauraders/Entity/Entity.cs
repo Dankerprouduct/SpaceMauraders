@@ -34,8 +34,11 @@ namespace SpaceMauraders.Entity
 
         public bool FireEvent(Components.Event _event)
         {
+            
             for (int i = 0; i < components.Count; i++)
             {
+                
+                //Console.WriteLine(_event.id); 
                 if (components[i].FireEvent(_event))
                 {
                     return true; 
