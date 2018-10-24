@@ -1,0 +1,207 @@
+ style: cyberpunk/ post apocolyptic 
+
+Be a villian or hero 
+a mercenary, cargo friegther, assasin, human trafficer, galatic police officer, bandit
+
+search derilic space stations 
+take inspiration from the marauders from firefly 
+
+[] randomly generated spaceships (like heat signature)
+[] the same art style as heat signature
+[] central hub
+	shops
+[] randomly generated weapons
+	[] seed generated 
+[] custimization
+[] 3 factions
+[] fuel management/ no ship kind of like starbound
+[] random encounters like FTL/Road to Canada 
+------------------------------------------------------
+ * needed systems * 
+ MonoGame.Extended covers most of this
+ 
+[] tilemap editor
+[] npc dialogue scripting w/ options
+[] proc-gen quest
+[] inventory
+[] level up 
+	there are no specific classes but you can pick and choose attributes that 
+	relate to hacking, guns, or brute force
+[] influence. Each faction has an influence over a sector in the galaxy.
+[] GUI (Empty Keys)
+
+
+
+[] TileEngine <- everything thats in the world interacts with this, it is a single instance
+	[] Tile
+	[] lighting
+	[] spatial partition
+	
+	TileEngine.CreateMap(width, height)
+	TileEngine.SetTile(x,y, id)
+	TileEngine.GetTile(x,y) 
+	TileEngine.DrawMap()
+	TileEngine.UpdateMap() <-- Just updates the tiles, they should be self contained. The sytems will deal with intertile communication.
+	
+	
+	
+	
+[] pathfinding
+
+
+-top down, sidescroller or 3d...
+-top down and super bloody
+ - some type of animation system
+
+ no ships just menus.
+ where would multiplayer fit in?
+ it would have to be open world
+ 
+ -----------------------------------------------------
+ Ships 
+ - cargo amount
+ - speed 
+ - fuel ammount
+ -----------------------------------------------------
+ Contracts 
+ -Assasination
+ -Cargo Transporttion (prisoneers, POIs, cargo)
+ -Gun for hire
+ 
+ -----------------------------------------------------
+ dangers in space stations
+ -bad airlocks
+ -no oxygen
+ -low gravity/some gravity
+ -other factions 
+ -sun radiation
+ -people who have been isolated for too long and have gone insane/ Ravengers
+ -Ravengers have a chance of comming onto a spaceship that a player is already on. 
+ -
+ 
+ 
+ 
+ EntityManager manages all entity objects during run-time
+	-creating
+	-deleting
+	-accessing existing entities
+
+ Entity
+ -components
+  -drawing 
+	-takes postion and size
+	
+  -physics
+	- velocity
+	- postion
+	- rectangle
+	
+	
+  -input
+   
+   -------------------------------------------------------
+ world 
+ 
+ store requirements in lua script
+ store room data in json
+ 
+  --> generate spaceships
+	  ---> require engine (3x3 room)
+	  ---> require contorls (2x 3 room)
+	  ---> require weapons system (2x3 room)
+	  ---> require oxygen (2x 3 room)
+	  ---> generate npcs (on spaceships) 
+	  
+	  
+	1.) add all of the widths with random (1 - 3 offsets)
+		3 + (1) + 2 + (3) + 2 + (1) = 12 = width 
+	2.) add all of the heights with random (1 - 3 offsets)
+		3(4) + 2(4) = 20 = height 
+
+		"12 x 20"
+	3.) force place all rooms in space 
+	
+	4.) place corridors
+		
+	
+		
+	JSON
+	Module properties
+	string name
+	int width; 
+	int height;
+	Type 
+		-engine
+		-controls
+		-weapons
+		-oxygen
+	
+	"name":"Engine Room",
+	"width": 3,
+	"height": 3, 
+	"Type":"Engine"
+	 
+	"name":"Control Room",
+	"width": 2,
+	"height": 3, 
+	"Type":"Control"
+	
+	
+	LUA 
+	AddModule("Engine Room");
+	AddModule("Control Room");
+	AddModule("oxygen");
+	AddModule("weapons")
+		
+	C#
+	List<Module> modules = new List<Module>(); 
+	
+	public void AddModule(string name)
+	{
+		Module[] moduleDictionary = (Module)JsonConvert("modules.txt");
+		
+		for(int i = 0; i < moduleDictionary.length; i++)
+		{
+			if(moduleDictionary[i].name == name)
+			{
+				ShipBuilder.Add(moduleDictionary[i]); 
+			}
+		}
+		
+	}
+	 
+	
+  --> generate space stations
+	  
+	  -- genrate npcs
+	  
+   
+ 
+ -----------------------------------------------------------
+ animation system
+ 
+ frame: 34
+ 
+ 
+ 
+ 
+ 
+----------------------LUA SYNTAX----------------------------
+
+GUI
+
+// draws a red box with no border
+DrawBox(0,0, 20, 20, Red); 
+
+// draws a red box with a black border
+DrawBox(0,0, 20, 20, Red, Black);
+
+// draws a red box with a black border with center text
+DrawBox(0, 0, 20, 20, Red, Black, "Test Box"); 
+
+//Draws a black label
+DrawLabel(0,0, Black, "Test Label");
+
+// Draws a texture
+DrawTexture(0, 0, texture.width, texture.height, texture); 
+

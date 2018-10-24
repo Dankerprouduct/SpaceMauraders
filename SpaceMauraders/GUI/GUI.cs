@@ -77,6 +77,12 @@ namespace SpaceMauraders.GUI
 
         }
 
+        public static void DrawCircle(Vector2 position, int radius, Color color)
+        {
+            spriteBatch.Draw(Utilities.TextureManager.gui[1], new Rectangle((int)position.X, (int)position.Y, radius, radius), null, color, 0f, new Vector2(radius  /2 , radius /2), SpriteEffects.None, 0f); 
+            //spriteBatch.Draw(Utilities.TextureManager.gui[1], position, )
+        }
+
         public static void DrawBox(Rectangle rectangle, int thickness, Color color)
         {
             // top
@@ -137,6 +143,7 @@ namespace SpaceMauraders.GUI
         
         public static void DrawTexture(Texture2D texture, Vector2 position)
         {
+           
             //MakeBox(x, y, w, h, color1);
             spriteBatch.Draw(texture, position, Color.White);
         }

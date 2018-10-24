@@ -145,6 +145,7 @@ namespace SpaceMauraders.Systems
                     cells[PositionToIndex(entity)].AddEntity(entity);
                 }
             }
+            
         }             
 
         // changes vector to to a cell point

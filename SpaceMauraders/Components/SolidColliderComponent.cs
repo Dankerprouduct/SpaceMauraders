@@ -11,12 +11,17 @@ namespace SpaceMauraders.Components
     public class SolidColliderComponent: Component
     {
 
-        Rectangle rectangle; 
+        Rectangle rectangle;
+
+        public SolidColliderComponent()
+        {
+            componentName = "SolidColliderComponent";
+        }
+
         public SolidColliderComponent(Entity.Entity entity, int parentID): base(parentID)
         {
-            
+            componentName = "SolidColliderComponent"; 
             rectangle = entity.collisionRectanlge;
-            Console.WriteLine(rectangle); 
         }
 
         public override bool FireEvent(Event _event)

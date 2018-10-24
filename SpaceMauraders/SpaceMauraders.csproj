@@ -41,13 +41,18 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Components\HealthComponent.cs" />
     <Compile Include="Components\InventoryComponent.cs" />
     <Compile Include="Components\SolidColliderComponent.cs" />
     <Compile Include="Components\Component.cs" />
     <Compile Include="Components\Event.cs" />
     <Compile Include="Components\InputComponent.cs" />
     <Compile Include="Components\PhysicsComponent.cs" />
+    <Compile Include="Components\TransfromComponent.cs" />
     <Compile Include="Entity\Entity.cs" />
+    <Compile Include="Entity\EntityDictionary.cs" />
+    <Compile Include="Entity\EntityPrototype.cs" />
+    <Compile Include="Entity\NPC.cs" />
     <Compile Include="Entity\Player.cs" />
     <Compile Include="Entity\Tile.cs" />
     <Compile Include="Game1.cs" />
@@ -59,22 +64,31 @@
     <Compile Include="Utilities\Camera.cs" />
     <Compile Include="Utilities\Debug.cs" />
     <Compile Include="Utilities\TextureManager.cs" />
-    <Compile Include="World\CellSpacePartition.cs" />
+    <Compile Include="World\Node.cs" />
+    <Compile Include="World\NodeMesh.cs" />
+    <Compile Include="World\Pathfinding.cs" />
     <Compile Include="World\World.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
+    <None Include="JSON\Entities.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
