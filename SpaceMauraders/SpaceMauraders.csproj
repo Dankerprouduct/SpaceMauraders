@@ -41,6 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Components\InventoryComponent.cs" />
     <Compile Include="Components\SolidColliderComponent.cs" />
     <Compile Include="Components\Component.cs" />
     <Compile Include="Components\Event.cs" />
