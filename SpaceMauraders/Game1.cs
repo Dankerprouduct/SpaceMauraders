@@ -27,7 +27,7 @@ namespace SpaceMauraders
 
         Vector2 mousePosition;
 
-        public static Entity.Player player = new Entity.Player(new Vector2(16594, 37319));
+        public static Entity.Player player;
 
         //public static Entity.NPC npc1;
         bool useTestNPS = true; 
@@ -57,23 +57,23 @@ namespace SpaceMauraders
             world = new World.World(10, 10);
 
             debug = new Utilities.Debug();
-            //npc1 = new Entity.NPC(new Vector2(130 * 128, 269 * 128));
-            
+
+            player = new Entity.Player(new Vector2(16594, 37319)); 
 
             npcs[0] = new Entity.NPC(new Vector2(134 * 128, 269 * 128));
-            npcs[0].goal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;  
+            npcs[0].pathingGoal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;  
 
             npcs[1] = new Entity.NPC(new Vector2(136 * 128, 269 * 128));
-            npcs[0].goal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
+            npcs[0].pathingGoal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
 
             npcs[2] = new Entity.NPC(new Vector2(139 * 128, 269 * 128));
-            npcs[0].goal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
+            npcs[0].pathingGoal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
 
             npcs[3] = new Entity.NPC(new Vector2(140 * 128, 269 * 128));
-            npcs[0].goal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
+            npcs[0].pathingGoal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
 
             npcs[4] = new Entity.NPC(new Vector2(142 * 128, 269 * 128));
-            npcs[0].goal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
+            npcs[0].pathingGoal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
             
             GUI.GUI.Init(); 
             camera = new Utilities.Camera(GraphicsDevice.Viewport);
