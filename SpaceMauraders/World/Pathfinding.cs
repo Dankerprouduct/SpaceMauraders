@@ -117,7 +117,7 @@ namespace SpaceMauraders.World
                         {
                             Node newNode = new Node(adjacentNodes[i].arrayPosition, currentNode);
                             newNode.SetNodeStats(startNode, newNode, targetNode.arrayPosition);
-
+                            
                             //Console.WriteLine("adding " + newNode.arrayPosition + " to open list");
 
                             openSet.Add(newNode);

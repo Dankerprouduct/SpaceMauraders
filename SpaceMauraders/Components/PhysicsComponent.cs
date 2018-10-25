@@ -41,10 +41,6 @@ namespace SpaceMauraders.Components
 
         public override bool FireEvent(Event _event)
         {
-            if (_event.id == "NPC")
-            {
-                //CheckCollisionInMovementDirection((Entity.Entity)_event.parameters["entity"]);
-            }
 
             if (_event.id == "AddVelocity")
             {
@@ -134,7 +130,7 @@ namespace SpaceMauraders.Components
             
             entity.oldPosition = entity.position;
 
-            velocity *= .95f;
+            velocity *= .85f;
 
             float j = 1.2f; 
             entity.position.X += (int)velocity.X;

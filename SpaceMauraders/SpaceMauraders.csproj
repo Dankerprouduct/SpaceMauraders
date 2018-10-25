@@ -48,6 +48,7 @@
     <Compile Include="Components\Event.cs" />
     <Compile Include="Components\InputComponent.cs" />
     <Compile Include="Components\PhysicsComponent.cs" />
+    <Compile Include="Components\SpeedModifierComponent.cs" />
     <Compile Include="Components\TransfromComponent.cs" />
     <Compile Include="Entity\Entity.cs" />
     <Compile Include="Entity\EntityDictionary.cs" />

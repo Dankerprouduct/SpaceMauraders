@@ -19,9 +19,11 @@ namespace SpaceMauraders.Entity
         public NPC(Vector2 position) : base()
         {
             this.position = position;
+
             
             components.Add(new Components.PhysicsComponent(this.id));
             components.Add(new Components.InventoryComponent(id, 10));
+
             //pathfinding 
             //goap
             Console.WriteLine("STARTING PATHFINDING GOAL: "+ goal); 
@@ -51,7 +53,7 @@ namespace SpaceMauraders.Entity
                 FireEvent(velocityEvent);
                 
 
-                if (Vector2.Distance(position, new Vector2(nodes[0].arrayPosition.X * 128 , nodes[0].arrayPosition.Y * 128) ) < 50)
+                if (Vector2.Distance(position, new Vector2((nodes[0].arrayPosition.X * 128)  + 64 , (nodes[0].arrayPosition.Y * 128) + 64) ) < 128)
                 {    
                     nodes.RemoveAt(0); 
                 }
