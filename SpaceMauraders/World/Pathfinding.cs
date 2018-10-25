@@ -72,7 +72,7 @@ namespace SpaceMauraders.World
                // Console.WriteLine("node position " + currentNode.arrayPosition); 
                 
                 
-                if (counter > 12000)
+                if (counter > 20)
                 {
                     List<Node> chunkPath = new List<Node>();
                     chunkPath.Add(openSet[1]);
@@ -117,7 +117,7 @@ namespace SpaceMauraders.World
                         {
                             Node newNode = new Node(adjacentNodes[i].arrayPosition, currentNode);
                             newNode.SetNodeStats(startNode, newNode, targetNode.arrayPosition);
-
+                            
                             //Console.WriteLine("adding " + newNode.arrayPosition + " to open list");
 
                             openSet.Add(newNode);
