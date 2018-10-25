@@ -46,8 +46,12 @@ namespace SpaceMauraders.Entity
             // I PROMISE IT WILL SUMMON AN ELDER GOD IF RAN INCORRECTLY
             if (!isPathing)
             {
-                if (!raycast.MakeRay(this, 10 * 128, 30)) 
+                if (!raycast.MakeRay(this, 10 * 128, 20)) 
                 {
+                    if (nodes != null)
+                    {
+                        nodes.Clear();
+                    }
                     Pathfind();
                     isPathing = true;
                 }
