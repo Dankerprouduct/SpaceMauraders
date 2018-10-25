@@ -50,6 +50,7 @@
     <Compile Include="Components\PhysicsComponent.cs" />
     <Compile Include="Components\SpeedModifierComponent.cs" />
     <Compile Include="Components\TransfromComponent.cs" />
+    <Compile Include="Components\TriggerColliderComponent.cs" />
     <Compile Include="Entity\Entity.cs" />
     <Compile Include="Entity\EntityDictionary.cs" />
     <Compile Include="Entity\EntityPrototype.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Systems\CellSpacePartition.cs" />
     <Compile Include="Utilities\Camera.cs" />
     <Compile Include="Utilities\Debug.cs" />
+    <Compile Include="Utilities\Raycast.cs" />
     <Compile Include="Utilities\TextureManager.cs" />
     <Compile Include="World\Node.cs" />
     <Compile Include="World\NodeMesh.cs" />

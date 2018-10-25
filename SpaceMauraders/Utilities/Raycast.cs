@@ -1,0 +1,87 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Xna.Framework; 
+
+namespace SpaceMauraders.Utilities
+{
+    public class Raycast
+    {
+
+        public List<Point> points;
+        Point rayP1;
+        Point hit;
+        // Origin of raycast in world space.
+        Vector2 originPosition;
+        // Target of raycast in world space.
+        Vector2 targetPosition;
+
+        // Angle in radians at which ray is pointed.
+        float angle;
+
+
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public Raycast()
+        {
+
+        }
+
+        public Raycast(Vector2 rayOrigin, Vector2 rayTarget)
+        {
+            originPosition = rayOrigin;
+            targetPosition = rayTarget;
+
+            Vector2 direction = targetPosition - originPosition;
+            direction.Normalize();
+
+            angle = (float)Math.Atan2(direction.Y, direction.X);
+            angle = MathHelper.ToDegrees(angle);
+        }
+
+
+        public bool MakeRay(Entity.Entity entity, int distance, int step = 5)
+        {
+
+            points = new List<Point>(); 
+            float cosX = (float)(Math.Cos(MathHelper.ToRadians(angle)));
+            float cosY = (float)(Math.Sin(MathHelper.ToRadians(angle)));
+
+            for (int i = 0; i < distance; i += step)
+            {
+                int x = (int)(cosX * i) + (int)entity.position.X; 
+                int y = (int)(cosY * i) + (int)entity.position.Y; 
+
+                Point rayPoint = new Point(x, y);
+
+                Components.Event rayEvent = new Components.Event();
+                rayEvent.id = "RayHit";
+                rayEvent.parameters.Add("Ray", rayPoint);
+                rayP1 = rayPoint;
+
+
+                points.Add(rayPoint);
+                //Game1.world.FireGlobal()
+                if (Game1.world.FireGlobalEvent(rayEvent, entity))
+                {
+                    //Console.WriteLine("hit " + rayPoint  + " "+ Game1.world.FireGlobalEvent(rayEvent, entity));
+                    hit = rayPoint;
+                    return true;
+                    
+                }
+
+                
+            }
+            //Console.WriteLine("didnt hit " + false); 
+            return false; 
+        }
+        
+
+
+
+    }
+}

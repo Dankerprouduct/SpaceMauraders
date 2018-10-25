@@ -16,9 +16,12 @@ namespace SpaceMauraders.Entity
         {
             this.position = position;
 
-            components.Add(new Components.PhysicsComponent(this.id));
+
             components.Add(new Components.InputComponent(this.id));
+            components.Add(new Components.SpeedModifierComponent(2)); 
+            components.Add(new Components.PhysicsComponent(this.id));
             
+            components.Add(new Components.TriggerColliderComponent());
 
         }
 
@@ -31,8 +34,12 @@ namespace SpaceMauraders.Entity
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            //Utilities.Raycast ray = new Utilities.Raycast();
+            //ray.MakeRay(4, 10, 3000, this);
+            
 
-            spriteBatch.Draw(Utilities.TextureManager.sprites[0], position, Color.White); 
+            spriteBatch.Draw(Utilities.TextureManager.sprites[0], position, Color.White);
+            //ray.DrawRay();
             base.Draw(spriteBatch);
         }
 

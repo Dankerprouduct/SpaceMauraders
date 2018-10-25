@@ -41,7 +41,8 @@ namespace SpaceMauraders.Entity
                 //Console.WriteLine(_event.id); 
                 if (components[i].FireEvent(_event))
                 {
-                    return true; 
+                    //Console.WriteLine(_event.id);
+                    return components[i].FireEvent(_event);
                 }
             }
 
@@ -144,6 +145,11 @@ namespace SpaceMauraders.Entity
             }
         }
 
+        public Vector2 GetCenter()
+        {
+            return collisionRectanlge.Center.ToVector2(); 
+        }
+        
         
 
         public virtual void Draw(SpriteBatch spriteBatch)

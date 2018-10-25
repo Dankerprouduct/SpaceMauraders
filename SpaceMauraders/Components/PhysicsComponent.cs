@@ -88,7 +88,7 @@ namespace SpaceMauraders.Components
 
             
 
-            return true; 
+            return false; 
         }
 
         void CheckSpeed(Vector2 velocity)
@@ -140,7 +140,7 @@ namespace SpaceMauraders.Components
 
                 entity.position.X = entity.oldPosition.X;
                 velocity.X = -velocity.X * j;
-                Console.WriteLine("hit"); 
+                //Console.WriteLine("hit"); 
             }
 
             entity.position.Y += (int)velocity.Y;
@@ -158,6 +158,8 @@ namespace SpaceMauraders.Components
             entity.collisionRectanlge = new Rectangle((int)entity.position.X, (int)entity.position.Y,
                 Utilities.TextureManager.sprites[0].Width,
                 Utilities.TextureManager.sprites[0].Height);
+
+            Rectangle rectangle; 
 
             Event physicsEvent = new Event
             {
