@@ -41,6 +41,7 @@ namespace SpaceMauraders.Entity
             if (tileType == TileType.Solid)
             {
                 components.Add(new Components.SolidColliderComponent(this, id));
+                //components.Add(new Components.TriggerColliderComponent());
             }
         }
 

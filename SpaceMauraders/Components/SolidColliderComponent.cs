@@ -36,12 +36,9 @@ namespace SpaceMauraders.Components
 
                     if(parameter.Key == "rectangle")
                     {
-                        Console.WriteLine("cakked"); 
-                        if (((Rectangle)parameter.Value).Intersects(rectangle))
-                        {
-                            Console.WriteLine("hit "); 
-                            return true; 
-                        }
+                        return ((Rectangle)parameter.Value).Intersects(rectangle); 
+
+
                     }
 
                 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Projects/Game1/SpaceMauraders/SpaceMauraders/Content/GUI/Circle1.png</SourceFile>
-  <SourceTime>2018-10-24T11:15:03.8850683-04:00</SourceTime>
-  <DestFile>D:/Projects/Game1/SpaceMauraders/SpaceMauraders/Content/bin/Windows/GUI/Circle1.xnb</DestFile>
-  <DestTime>2018-10-24T11:16:53.1552702-04:00</DestTime>
+  <SourceFile>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/GUI/Circle1.png</SourceFile>
+  <SourceTime>2018-10-23T08:08:44.3627498-04:00</SourceTime>
+  <DestFile>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/bin/Windows/GUI/Circle1.xnb</DestFile>
+  <DestTime>2018-10-25T06:58:07.3804251-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T10:05:36-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -20,6 +20,14 @@ namespace SpaceMauraders.Entity
         public int cellY;
         public int cellIndex; // holds current cell
 
+        #region Pathing
+        public List<World.Node> pathingNode;
+        public World.Pathfinding pathFinding;
+        public bool isPathing = false;
+        public Point pathingGoal;
+        public Utilities.Raycast raycast;
+        #endregion
+
         public string entityName; 
 
         public List<Components.Component> components = new List<Components.Component>(); 
@@ -41,25 +49,98 @@ namespace SpaceMauraders.Entity
                 //Console.WriteLine(_event.id); 
                 if (components[i].FireEvent(_event))
                 {
-                    return true; 
+                    //Console.WriteLine(_event.id);
+                    return components[i].FireEvent(_event);
                 }
             }
 
             return false; 
         }
         
-        
-        
         public void AddComponent(Components.Component component)
         {
             components.Add(component);
         }
 
-
-
         public Vector2 GetEntityPosition()
         {
             return position; 
+        }
+
+        public void MoveTo(Vector2 target)
+        {
+            Vector2 direction = target - position;
+            if (direction.Length() != 0)
+            {
+                direction.Normalize();
+            }
+
+            Components.Event velocityEvent = new Components.Event();
+            velocityEvent.id = "AddVelocity";
+            velocityEvent.parameters.Add("Velocity", direction * 2);
+            FireEvent(velocityEvent);
+
+        }
+
+        public void FindPathTo(Vector2 target)
+        {
+            raycast = new Utilities.Raycast(position, target);
+
+            if (!isPathing)
+            {
+                if (!raycast.MakeRay(this, 10 * 128, 20))
+                {
+                    if (pathingNode != null)
+                    {
+                        pathingNode.Clear();
+                    }
+                    Pathfind(target);
+                    isPathing = true;
+                }
+                else
+                {
+                    MoveTo(target);
+                }
+            }
+
+            if (isPathing)
+            {
+                Pathfind(target);
+            }
+        }
+
+        void Pathfind(Vector2 target)
+        {
+            if (pathingNode != null && pathingNode.Count > 0)
+            {
+                Vector2 nodePosition = new Vector2((pathingNode[0].arrayPosition.X * 128) + 64, (pathingNode[0].arrayPosition.Y * 128) + 64);
+                MoveTo(nodePosition);
+
+
+                if (Vector2.Distance(position, new Vector2((pathingNode[0].arrayPosition.X * 128) + 64, (pathingNode[0].arrayPosition.Y * 128) + 64)) < 64)
+                {
+                    pathingNode.RemoveAt(0);
+
+                }
+            }
+            else
+            {
+                isPathing = false;
+                // Start Node
+                World.Node startNode = new World.Node(new Point((int)position.X / 128, (int)position.Y / 128));
+                startNode.arrayPosition = new Point((int)position.X / 128, (int)position.Y / 128);
+
+
+                // Goal Node
+                pathingGoal = new Point((int)target.X / 128, (int)target.Y / 128);
+                World.Node goalNode = new World.Node(new Point((int)pathingGoal.X, (int)pathingGoal.Y));
+                goalNode.arrayPosition = pathingGoal;
+
+
+                pathingNode = pathFinding.FindPath(startNode, goalNode);
+
+
+            }
         }
 
         #region Partition Methods
@@ -144,6 +225,11 @@ namespace SpaceMauraders.Entity
             }
         }
 
+        public Vector2 GetCenter()
+        {
+            return collisionRectanlge.Center.ToVector2(); 
+        }
+        
         
 
         public virtual void Draw(SpriteBatch spriteBatch)

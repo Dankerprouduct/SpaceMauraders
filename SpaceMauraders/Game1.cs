@@ -12,7 +12,7 @@ namespace SpaceMauraders
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        public static Game1 game;
         public static Random random = new Random();
 
         Utilities.Camera camera;
@@ -27,10 +27,10 @@ namespace SpaceMauraders
 
         Vector2 mousePosition;
 
-        public static Entity.Player player = new Entity.Player(new Vector2(16594, 37319));
+        public static Entity.Player player;
 
-        public static Entity.NPC npc1;
-
+        //public static Entity.NPC npc1;
+        bool useTestNPS = true; 
         Entity.NPC[] npcs = new Entity.NPC[5]; 
         public Game1()
         {
@@ -57,22 +57,23 @@ namespace SpaceMauraders
             world = new World.World(10, 10);
 
             debug = new Utilities.Debug();
-            npc1 = new Entity.NPC(new Vector2(130 * 128, 269 * 128));
-            
+
+            player = new Entity.Player(new Vector2(16594, 37319)); 
+
             npcs[0] = new Entity.NPC(new Vector2(134 * 128, 269 * 128));
-            npcs[0].goal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;  
+            npcs[0].pathingGoal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;  
 
             npcs[1] = new Entity.NPC(new Vector2(136 * 128, 269 * 128));
-            npcs[0].goal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
+            npcs[0].pathingGoal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
 
             npcs[2] = new Entity.NPC(new Vector2(139 * 128, 269 * 128));
-            npcs[0].goal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
+            npcs[0].pathingGoal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
 
             npcs[3] = new Entity.NPC(new Vector2(140 * 128, 269 * 128));
-            npcs[0].goal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
+            npcs[0].pathingGoal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
 
             npcs[4] = new Entity.NPC(new Vector2(142 * 128, 269 * 128));
-            npcs[0].goal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
+            npcs[0].pathingGoal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
             
             GUI.GUI.Init(); 
             camera = new Utilities.Camera(GraphicsDevice.Viewport);
@@ -89,29 +90,35 @@ namespace SpaceMauraders
         
         protected override void Update(GameTime gameTime)
         {
+            GUI.GUI.Draw(spriteBatch);
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
             worldPosition = Vector2.Transform(mousePosition, Matrix.Invert(camera.transform)) ;
             
-            npc1.Update(gameTime);
-            
-            for (int i = 0; i < npcs.Length; i++)
+            //`npc1.Update(gameTime);
+
+            if (useTestNPS)
             {
-                npcs[i].Update(gameTime);
+                for (int i = 0; i < npcs.Length; i++)
+                {
+                    npcs[i].Update(gameTime);
+                }
             }
+
             player.Update(gameTime);
             world.Update(gameTime); 
 
             
 
             debug.Update(); 
-            Game1 game = this;
+            game = this;
             camera.Update(ref game); 
             base.Update(gameTime);
         }
-        
+
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(new Color(10,10,10));
@@ -120,13 +127,16 @@ namespace SpaceMauraders
             world.Draw(spriteBatch);
 
             player.Draw(spriteBatch);
-            npc1.Draw(spriteBatch);
-            
-            for (int i = 0; i < npcs.Length; i++)
+            //npc1.Draw(spriteBatch);
+
+
+            if (useTestNPS)
             {
-                npcs[i].Draw(spriteBatch);
+                for (int i = 0; i < npcs.Length; i++)
+                {
+                    npcs[i].Draw(spriteBatch);
+                }
             }
-            
             spriteBatch.End();
             
 

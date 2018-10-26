@@ -169,53 +169,92 @@ namespace SpaceMauraders.Entity
 
         public bool FireEvent(Components.Event _event, Entity entity)
         {
+            if (Game1.player.FireEvent(_event))
+            {
+                //Console.WriteLine(Game1.player.FireEvent(_event)); 
+                return true; 
+                //Console.WriteLine("git this ");
+            }
+            if (_event.id != "RayHit")
+            {
+                if (EntityWithinBounds(entity.GetCenterPartition()))
+                {
+
+                    if (cellSpacePartition.cells[entity.GetCenterPartition()].FireEvent(_event))
+                    {
+                        return true;
+                    }
+                }
+
+                if (EntityWithinBounds(entity.GetTopLeftPartition()))
+                {
+                    if (cellSpacePartition.cells[entity.GetTopLeftPartition()].FireEvent(_event))
+                    {
+                        return true;
+                    }
+                }
+
+                if (EntityWithinBounds(entity.GetTopPartition()))
+                {
+                    if (cellSpacePartition.cells[entity.GetTopPartition()].FireEvent(_event))
+                    {
+                        return true;
+                    }
+                }
+
+                if (EntityWithinBounds(entity.GetTopRightPartition()))
+                {
+                    if (cellSpacePartition.cells[entity.GetTopRightPartition()].FireEvent(_event))
+                    {
+                        return true;
+                    }
+                }
+
+                if (EntityWithinBounds(entity.GetRightPartition()))
+                {
+                    if (cellSpacePartition.cells[entity.GetRightPartition()].FireEvent(_event))
+                    {
+                        return true;
+                    }
+                }
+
+                if (EntityWithinBounds(entity.GetLeftPartition()))
+                {
+                    if (cellSpacePartition.cells[entity.GetLeftPartition()].FireEvent(_event))
+                    {
+                        return true;
+                    }
+                }
+
+                if (EntityWithinBounds(entity.GetBottomLeftPartition()))
+                {
+                    if (cellSpacePartition.cells[entity.GetBottomLeftPartition()].FireEvent(_event))
+                    {
+                        return true;
+                    }
+                }
+
+                if (EntityWithinBounds(entity.GetBottomPartition()))
+                {
+                    if (cellSpacePartition.cells[entity.GetBottomPartition()].FireEvent(_event))
+                    {
+                        return true;
+                    }
+                }
+
+                if (EntityWithinBounds(entity.GetBottomRightPartition()))
+                {
+                    if (cellSpacePartition.cells[entity.GetBottomRightPartition()].FireEvent(_event))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+
+            //TEMPORARY
             
-
-            if (EntityWithinBounds(entity.GetCenterPartition()))
-            {
-                
-                return cellSpacePartition.cells[entity.GetCenterPartition()].FireEvent(_event);
-            }
-
-            if (EntityWithinBounds(entity.GetTopLeftPartition()))
-            {
-                return cellSpacePartition.cells[entity.GetTopLeftPartition()].FireEvent(_event);
-            }
-
-            if (EntityWithinBounds(entity.GetTopPartition()))
-            {
-                return cellSpacePartition.cells[entity.GetTopPartition()].FireEvent(_event);
-            }
-
-            if (EntityWithinBounds(entity.GetTopRightPartition()))
-            {
-                return cellSpacePartition.cells[entity.GetTopRightPartition()].FireEvent(_event);
-            }
-
-            if (EntityWithinBounds(entity.GetRightPartition()))
-            {
-                return cellSpacePartition.cells[entity.GetRightPartition()].FireEvent(_event);
-            }
-
-            if (EntityWithinBounds(entity.GetLeftPartition()))
-            {
-                return cellSpacePartition.cells[entity.GetLeftPartition()].FireEvent(_event);
-            }
-
-            if (EntityWithinBounds(entity.GetBottomLeftPartition()))
-            {
-                return cellSpacePartition.cells[entity.GetBottomLeftPartition()].FireEvent(_event);
-            }
-
-            if (EntityWithinBounds(entity.GetBottomPartition()))
-            {
-                return cellSpacePartition.cells[entity.GetBottomPartition()].FireEvent(_event);
-            }
-
-            if (EntityWithinBounds(entity.GetBottomRightPartition()))
-            {
-                return cellSpacePartition.cells[entity.GetBottomRightPartition()].FireEvent(_event);
-            }
+            
 
             return false;
         }
@@ -311,6 +350,8 @@ namespace SpaceMauraders.Entity
             {
                 cellSpacePartition.cells[Game1.player.GetBottomRightPartition()].Draw(spriteBatch);
             }
+
+            
         }
 
         public bool EntityWithinBounds(int checkedCell)

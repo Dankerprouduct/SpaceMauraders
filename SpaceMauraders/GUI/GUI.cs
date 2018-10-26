@@ -129,6 +129,14 @@ namespace SpaceMauraders.GUI
 
         }
 
+        public static void DrawLine(Point[] points)
+        {
+            foreach (Point point in points)
+            {
+                DrawCircle(new Vector2(point.X, point.Y), 3, Color.Red);
+            }
+        }
+
         public static void DrawString(string text, Vector2 position, Color color)
         {
             //MakeBox(x, y, w, h, color1);
