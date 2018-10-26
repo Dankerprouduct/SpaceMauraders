@@ -26,8 +26,6 @@ namespace SpaceMauraders.Components
         public override void Update(GameTime gameTime, Entity.Entity entity)
         {
             CheckCollisionInMovementDirection(entity);
-
-
             
 
         }
@@ -49,6 +47,7 @@ namespace SpaceMauraders.Components
                     if(parameters.Key == "Velocity")
                     {
                         velocity += (Vector2)parameters.Value;
+                        CheckSpeed(10); 
                     }
                 }
             }
@@ -61,26 +60,26 @@ namespace SpaceMauraders.Components
                     {
                         
                         velocity.Y  -= (int)parameters.Value;
-                        CheckSpeed(velocity);
+                        
                     }
 
                     if (parameters.Key == "Move Down")
                     {
                         velocity.Y += (int)parameters.Value;
-                        CheckSpeed(velocity);
+                        
                     }
 
                     if (parameters.Key == "Move Left")
                     {
                         velocity.X -= (int)parameters.Value;
-                        CheckSpeed(velocity);
+                        
 
                     }
 
                     if (parameters.Key == "Move Right")
                     {
                         velocity.X += (int)parameters.Value;
-                        CheckSpeed(velocity);
+                        
                     }
                 }
                 
@@ -91,27 +90,13 @@ namespace SpaceMauraders.Components
             return false; 
         }
 
-        void CheckSpeed(Vector2 velocity)
+        void CheckSpeed(float max)
         {
-            /*
-            if(velocity.X > speed)
+            if(velocity.Length() > max)
             {
-                velocity.X = speed;
+                //velocity.Normalize();
+                //velocity *= max;
             }
-            if( velocity.X < -speed)
-            {
-                velocity.X = -speed; 
-            }
-
-            if (velocity.Y > speed)
-            {
-                velocity.Y = speed;
-            }
-            if (velocity.Y < -speed)
-            {
-                velocity.Y = -speed;
-            }
-            */
         }
 
         public void CheckCollisionInPartitionNumber(Entity.Entity entity)
@@ -158,9 +143,7 @@ namespace SpaceMauraders.Components
             entity.collisionRectanlge = new Rectangle((int)entity.position.X, (int)entity.position.Y,
                 Utilities.TextureManager.sprites[0].Width,
                 Utilities.TextureManager.sprites[0].Height);
-
-            Rectangle rectangle; 
-
+            
             Event physicsEvent = new Event
             {
                 id = "Collider"

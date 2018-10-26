@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics; 
-
+using Microsoft.Xna.Framework.Graphics;
+using SpaceMauraders.Entity;
 
 
 namespace SpaceMauraders.Systems
 {
     public class CellSpacePartition
     {
-        public struct Cell
+        public struct DynamicCell
         {
             public List<Entity.Entity> members; 
             
@@ -87,6 +87,33 @@ namespace SpaceMauraders.Systems
 
         }
 
+        public struct StaticCell
+        {
+            Entity.Entity[,] members; 
+
+            public void AddEntity(Entity.Entity entity)
+            {
+                if (members != null)
+                {
+                    //members.Add(entity);
+                    int x = entity.cellX / 128;
+                    int y = entity.cellY / 128;
+                    members[x, y] = entity; 
+                }
+                else
+                {
+                    for(int y = 0; y < members.GetLength(1); y++)
+                    {
+                        for(int x = 0; x < members.GetLength(0); x++)
+                        {
+                            members[x, y] = new Entity.Entity(); 
+                        }
+                    }
+                    
+                }
+            }
+
+        }
 
         public int partitionSize;
         public int cellLength;
@@ -94,7 +121,7 @@ namespace SpaceMauraders.Systems
         public int numCellsY;
 
 
-        public Cell[] cells;
+        public DynamicCell[] cells;
 
         public CellSpacePartition(int cellX, int cellY, int partitionSize)
         {
@@ -104,11 +131,11 @@ namespace SpaceMauraders.Systems
 
             int cellIndex = cellX * cellY;
             cellLength = cellIndex;
-            cells = new Cell[cellIndex];
+            cells = new DynamicCell[cellIndex];
 
             for (int i = 0; i < cells.Length; i++)
             {
-                cells[i] = new Cell();
+                cells[i] = new DynamicCell();
             }
 
             numCellsX = cellX;

@@ -18,7 +18,7 @@ namespace SpaceMauraders.Entity
             this.collisionRectanlge = new Rectangle((int)position.X, (int)position.Y, Utilities.TextureManager.sprites[0].Width, Utilities.TextureManager.sprites[0].Height);
 
             components.Add(new Components.InputComponent(this.id));
-            components.Add(new Components.SpeedModifierComponent(2)); 
+            components.Add(new Components.SpeedModifierComponent(5)); 
             components.Add(new Components.PhysicsComponent(this.id));
             
             components.Add(new Components.TriggerColliderComponent());

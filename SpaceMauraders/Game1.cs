@@ -20,7 +20,7 @@ namespace SpaceMauraders
 
         public static World.World world;
 
-        public static int width = 1080;
+        public static int width = 1920;
         public static int height = (width / 16) * 9;
 
         public static Vector2 worldPosition;
@@ -36,7 +36,10 @@ namespace SpaceMauraders
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            
             graphics.PreferredBackBufferWidth = width;
+
+            height = (width / 16) * 9;
             graphics.PreferredBackBufferHeight = height;
         }
         
