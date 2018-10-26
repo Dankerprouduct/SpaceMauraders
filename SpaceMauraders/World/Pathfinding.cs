@@ -15,8 +15,7 @@ namespace SpaceMauraders.World
 
         public void DrawSets()
         {
-            //Console.WriteLine("OSET " + oSet.Count);
-            //Console.WriteLine("CSET " + cSet.Count);
+
             if (oSet != null)
             {
                 for (int i = 0; i < oSet.Count; i++)
