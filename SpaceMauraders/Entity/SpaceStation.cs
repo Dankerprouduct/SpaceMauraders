@@ -26,11 +26,16 @@ namespace SpaceMauraders.Entity
             center = new Vector2((diameter / 2) * 128, (diameter / 2) * 128);
 
             InitializeMap();
+
+
             BuildRings(125, 175);
             
-            BuildRings(250, 300);
 
-            BuildBridge(175, 250, 45, 45.2f, 2); 
+            BuildRings(250, 300);
+            
+
+
+            BuildBridge(175, 250, 45, 45.2f, 2);
             BuildBridge(175, 250, 45.2f, 45.2f, 3);
             BuildBridge(175, 250, 45, 45, 3);
 
@@ -42,6 +47,9 @@ namespace SpaceMauraders.Entity
             BuildBridge(175, 250, 45 - 360, 45.2f - 360, 2);
             BuildBridge(175, 250, 45.2f - 360, 45.2f - 360, 3);
             BuildBridge(175, 250, 45 - 360, 45 - 360, 3);
+
+            BuildRooms(125, 175, 1.85f);
+            BuildRooms(250, 300, 1.95f);
 
             position = new Vector2(0, 0);
 
@@ -99,11 +107,13 @@ namespace SpaceMauraders.Entity
         {
             Point middle = new Point(tileMap.GetLength(0) / 2, tileMap.GetLength(1) / 2);
 
+            int startRoom, endRoom; 
+
             for (float d = 0; d < 2 * Math.PI; d += .0005f)
             {
-                int tileX = (int)(r + middle.X);
-                int tileY = (int)(r + middle.Y);
-                //float mRadius = (float)Math.Pow(tileX - middle.X, 2) + (float)Math.Pow(tileY - middle.Y, 2);
+                int tileX;//= (int)(r + middle.X);
+                int tileY;// (int)(r + middle.Y);
+
                 float mRadius = r; 
                 tileX = (int)(Math.Cos(d) * mRadius) + middle.X;
                 tileY = (int)(Math.Sin(d) * mRadius) + middle.Y;
@@ -113,6 +123,69 @@ namespace SpaceMauraders.Entity
             }
 
 
+        }
+
+        void BuildRooms(int r1, int r2, float roomModifier)
+        {
+            int tileX = 0; 
+            int tileY = 0;
+
+            float startAngle;
+            float endAngle;
+            float roomSize = roomModifier;
+            //float mRadius;
+
+            Point middle = new Point(tileMap.GetLength(0) / 2, tileMap.GetLength(1) / 2);
+
+            for (float d = 0; d < 2 * Math.PI; d += .0001f)
+            {
+                startAngle = d;
+                endAngle = startAngle + MathHelper.ToRadians(Game1.random.Next(5, 10));
+
+                
+                // Close Room                             
+                for (float a = startAngle; a < endAngle; a += .0001f)
+                {
+
+                    tileX = (int)(Math.Cos(a) * ((r1 + r2) / roomSize)) + middle.X;
+                    tileY = (int)(Math.Sin(a) * ((r1 + r2) / roomSize)) + middle.Y;
+
+                    tileMap[tileX, tileY] = 3;
+
+                    tileX = (int)(Math.Cos(a) * r2) + middle.X;
+                    tileY = (int)(Math.Sin(a) * r2) + middle.Y;
+
+                    tileMap[tileX, tileY] = 3;
+                }
+
+                float roomOpening = ((startAngle + endAngle) / 2);
+                for (float r = roomOpening; r <= roomOpening + MathHelper.ToRadians(.5f); r += .001f)
+                {
+                    tileX = (int)(Math.Cos(r) * ((r1 + r2) / roomSize)) + middle.X;
+                    tileY = (int)(Math.Sin(r) * ((r1 + r2) / roomSize)) + middle.Y;
+
+                    tileMap[tileX, tileY] = 2;
+                }
+
+                BuildWall(r1, r2, roomSize, startAngle);
+                BuildWall(r1, r2, roomSize, endAngle);
+
+                d = endAngle + MathHelper.ToRadians(3); 
+            }
+
+            //tileMap[tileX, tileY] = 3;
+        }
+
+        void BuildWall(float r1, float r2, float roomSize, float angle)
+        {
+            Point middle = new Point(tileMap.GetLength(0) / 2, tileMap.GetLength(1) / 2);
+
+            for (float w = r2; w >= ((r1 + r2) / roomSize); w -= .01f)
+            {
+                int tileX = (int)(Math.Cos(angle) * w) + middle.X;
+                int tileY = (int)(Math.Sin(angle) * w) + middle.Y;
+                tileMap[tileX, tileY] = 3;
+            }
         }
 
         void LoadCellSpacePartition()

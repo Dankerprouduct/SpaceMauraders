@@ -21,7 +21,7 @@ namespace SpaceMauraders.Systems
                 if (members != null)
                 {
                     members.Add(entity);
-                    Console.WriteLine("added " + entity);
+                    //Console.WriteLine("added " + entity);
 
                 }
                 else
@@ -30,7 +30,7 @@ namespace SpaceMauraders.Systems
                     {
                         entity
                     };
-                    Console.WriteLine("added " + entity);
+                    //Console.WriteLine("added " + entity);
 
                 }
             }
@@ -41,12 +41,12 @@ namespace SpaceMauraders.Systems
                 {
                     for (int i = 0; i < members.Count; i++)
                     {
-                        Console.WriteLine("trying to remove entity...");
+                        //Console.WriteLine("trying to remove entity...");
                         if (members[i].id == entity.id)
                         {
                             members.RemoveAt(i);
 
-                            Console.WriteLine("removed " + entity);
+                            //Console.WriteLine("removed " + entity);
                         }
                     }
                 }
@@ -250,22 +250,26 @@ namespace SpaceMauraders.Systems
         // Changes cell property from one cell to another 
         public void ChangeCell(Entity.Entity entity)
         {
-            Console.WriteLine("changing cell"); 
-            if (dynamicCells[entity.cellIndex].members != null)
-            {
-                dynamicCells[entity.oldCellIndex].RemoveEntity(entity);
+            //Console.WriteLine("changing cell"); 
 
-                int i = PositionToIndex(entity);
-                if (i >= 0 && i < cellLength)
+            if (EntityWithinBounds(entity.cellIndex))
+            {
+                if (dynamicCells[entity.cellIndex].members != null)
                 {
-                    dynamicCells[PositionToIndex(entity)].AddEntity(entity);
+                    dynamicCells[entity.oldCellIndex].RemoveEntity(entity);
 
+                    int i = PositionToIndex(entity);
+                    if (i >= 0 && i < cellLength)
+                    {
+                        dynamicCells[PositionToIndex(entity)].AddEntity(entity);
+
+                    }
                 }
-            }
-            else
-            {
-                dynamicCells[entity.cellIndex].members = new List<Entity.Entity>();
-                ChangeCell(entity); 
+                else
+                {
+                    dynamicCells[entity.cellIndex].members = new List<Entity.Entity>();
+                    ChangeCell(entity);
+                }
             }
             
         }             
@@ -284,7 +288,15 @@ namespace SpaceMauraders.Systems
             int cellY = (int)(position.Y / (partitionSize * ((partitionSize * partitionSize) * 8)) / partitionSize);
             return new Point(cellX, cellY);
         }
-        
+
+        public bool EntityWithinBounds(int checkedCell)
+        {
+            if (checkedCell >= 0 && checkedCell < cellLength)
+            {
+                return true;
+            }
+            return false;
+        }
 
         // updates current cell
         public void Update(GameTime gameTime)

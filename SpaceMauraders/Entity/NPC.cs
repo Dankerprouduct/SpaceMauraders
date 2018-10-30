@@ -52,12 +52,11 @@ namespace SpaceMauraders.Entity
                 Game1.world.dynamicCellSpacePartition.ChangeCell(this); 
                 cellIndex = GetCenterPartition();
                 SetCellIndex(cellIndex); 
-                Console.WriteLine("Switched to partition " + GetCenterPartition());
+                //Console.WriteLine("Switched to partition " + GetCenterPartition());
             }
-
-            UpdateComponents(gameTime); 
+            
             //Console.WriteLine(cellIndex); 
-            //base.Update(gameTime);
+            base.Update(gameTime);
         }
 
         
@@ -69,15 +68,17 @@ namespace SpaceMauraders.Entity
         public override void Draw(SpriteBatch spriteBatch)
         {
             
-
-            
+                     
 
             if (Utilities.Debug.debug)
             {
-                if (pathingNode.Count > 0 && pathingNode != null)
+                if (pathingNode != null)
                 {
-                    GUI.GUI.DrawLine(position, new Vector2(pathingGoal.X * 128, pathingGoal.Y * 128), 10, Color.Blue);
-                    GUI.GUI.DrawLine(position, new Vector2(pathingNode[0].arrayPosition.X * 128, pathingNode[0].arrayPosition.Y * 128), 10, Color.Yellow);
+                    if (pathingNode.Count > 0 && pathingNode != null)
+                    {
+                        GUI.GUI.DrawLine(position, new Vector2(pathingGoal.X * 128, pathingGoal.Y * 128), 10, Color.Blue);
+                        GUI.GUI.DrawLine(position, new Vector2(pathingNode[0].arrayPosition.X * 128, pathingNode[0].arrayPosition.Y * 128), 10, Color.Yellow);
+                    }
                 }
                 pathFinding.DrawSets();
             }
@@ -85,7 +86,7 @@ namespace SpaceMauraders.Entity
             {
                 GUI.GUI.DrawLine(raycast.points[0].ToVector2(), raycast.points[raycast.points.Count - 1].ToVector2(), 3, Color.Red); 
             }
-                spriteBatch.Draw(Utilities.TextureManager.sprites[0], position, Color.White);
+            spriteBatch.Draw(Utilities.TextureManager.sprites[0], position, Color.White);
             base.Draw(spriteBatch);
         }
 

@@ -51,6 +51,7 @@
     <Compile Include="Components\InputComponent.cs" />
     <Compile Include="Components\PhysicsComponent.cs" />
     <Compile Include="Components\SpeedModifierComponent.cs" />
+    <Compile Include="Components\SteeringBehaviors.cs" />
     <Compile Include="Components\TransfromComponent.cs" />
     <Compile Include="Components\TriggerColliderComponent.cs" />
     <Compile Include="Entity\Entity.cs" />

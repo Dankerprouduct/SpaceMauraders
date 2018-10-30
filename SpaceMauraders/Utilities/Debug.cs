@@ -31,7 +31,7 @@ namespace SpaceMauraders.Utilities
                 
             }
 
-            if (keyboardState.IsKeyDown(Keys.OemTilde) && oldKeyboardState.IsKeyDown(Keys.OemTilde))
+            if (keyboardState.IsKeyDown(Keys.OemTilde) && oldKeyboardState.IsKeyUp(Keys.OemTilde))
             {
                 luaConsole.showDebug = !luaConsole.showDebug; 
             }
@@ -50,9 +50,9 @@ namespace SpaceMauraders.Utilities
         {
             if (luaConsole.showDebug)
             {
-                GUI.GUI.DrawBox(new Rectangle(0, 24, Game1.width, 24), Color.Black * .5f);
+                GUI.GUI.DrawBox(new Rectangle(5, 20, Game1.width, 26), Color.Black * .5f);
                 //  spriteBatch.DrawString(debugFont, luaDebug.text, new Vector2(10, ScreenHeight - 20), Color.White);
-                GUI.GUI.DrawString(luaConsole.text, new Vector2(0, 20),1,1, Color.White); 
+                GUI.GUI.DrawString(luaConsole.text, new Vector2(5, 22),1,1, Color.White); 
 
             }
         }

@@ -64,6 +64,19 @@ namespace SpaceMauraders.Entity
             components.Add(component);
         }
 
+        public Components.Component GetComponent(string name)
+        {
+            for(int i = 0; i < components.Count; i++)
+            {
+                if(components[i].componentName == name)
+                {
+                    return components[i]; 
+                }
+            }
+
+            return new Components.Component(); 
+        }
+
         public Vector2 GetEntityPosition()
         {
             return position;
@@ -90,7 +103,7 @@ namespace SpaceMauraders.Entity
 
             if (!isPathing)
             {
-                if (!raycast.MakeRay(this, 10 * 128, 20))
+                if (!raycast.MakeRay(this, 5 * 128, 20))
                 {
                     if (pathingNode != null)
                     {
@@ -101,7 +114,10 @@ namespace SpaceMauraders.Entity
                 }
                 else
                 {
-                    MoveTo(target);
+                    if (!raycast.MakeRay(this, 128, 20))
+                    {
+                        MoveTo(target);
+                    }
                 }
             }
 

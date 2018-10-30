@@ -62,8 +62,16 @@ namespace SpaceMauraders.World
         }
 
         public Node GetNode(int x, int y)
-        { 
-            return map[x, y]; 
+        {
+            try
+            {
+                return map[x, y];
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return FindNodeOnMesh(); 
+            }
         }
 
         public Node FindNodeOnMesh()
