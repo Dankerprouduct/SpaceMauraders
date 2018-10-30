@@ -21,7 +21,7 @@ namespace SpaceMauraders
         public static World.World world;
 
         public static int width = 1920;
-        public static int height = (width / 16) * 9;
+        public static int height = 0; 
 
         public static Vector2 worldPosition;
 
@@ -38,9 +38,11 @@ namespace SpaceMauraders
             Content.RootDirectory = "Content";
             
             graphics.PreferredBackBufferWidth = width;
-
+            
             height = (width / 16) * 9;
+            
             graphics.PreferredBackBufferHeight = height;
+            graphics.IsFullScreen = false; 
         }
         
         protected override void Initialize()
@@ -61,23 +63,10 @@ namespace SpaceMauraders
 
             debug = new Utilities.Debug();
 
-            player = new Entity.Player(new Vector2(16594, 37319)); 
+            player = new Entity.Player(new Vector2(16594, 37319));
 
-            npcs[0] = new Entity.NPC(new Vector2(134 * 128, 269 * 128));
-            npcs[0].pathingGoal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;  
+            world.AddEntity(new Entity.NPC(new Vector2(16594, 37319 - 128)));
 
-            npcs[1] = new Entity.NPC(new Vector2(136 * 128, 269 * 128));
-            npcs[0].pathingGoal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
-
-            npcs[2] = new Entity.NPC(new Vector2(139 * 128, 269 * 128));
-            npcs[0].pathingGoal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
-
-            npcs[3] = new Entity.NPC(new Vector2(140 * 128, 269 * 128));
-            npcs[0].pathingGoal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
-
-            npcs[4] = new Entity.NPC(new Vector2(142 * 128, 269 * 128));
-            npcs[0].pathingGoal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
-            
             GUI.GUI.Init(); 
             camera = new Utilities.Camera(GraphicsDevice.Viewport);
 
@@ -101,20 +90,20 @@ namespace SpaceMauraders
             mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
             worldPosition = Vector2.Transform(mousePosition, Matrix.Invert(camera.transform)) ;
             
-            //`npc1.Update(gameTime);
 
             if (useTestNPS)
             {
-                for (int i = 0; i < npcs.Length; i++)
+                if (!debug.luaConsole.showDebug)
                 {
-                    npcs[i].Update(gameTime);
+                
+                    player.Update(gameTime);
+                    world.Update(gameTime);
+
+
+
                 }
             }
 
-            player.Update(gameTime);
-            world.Update(gameTime); 
-
-            
 
             debug.Update(); 
             game = this;
@@ -130,16 +119,7 @@ namespace SpaceMauraders
             world.Draw(spriteBatch);
 
             player.Draw(spriteBatch);
-            //npc1.Draw(spriteBatch);
-
-
-            if (useTestNPS)
-            {
-                for (int i = 0; i < npcs.Length; i++)
-                {
-                    npcs[i].Draw(spriteBatch);
-                }
-            }
+            
             spriteBatch.End();
             
 
@@ -153,6 +133,8 @@ namespace SpaceMauraders
                 GUI.GUI.DrawString("Cell Mouse Position: " + (Game1.worldPosition / 128).ToPoint(), new Vector2(10, 30), 1, 1, Color.White);
                 GUI.GUI.DrawString("Cell Posiiton: " + player.GetCenterPartition().ToString(), new Vector2(10, 50), 1, 1, Color.White);
             }
+
+            debug.Draw(); 
 
             spriteBatch.End();
 

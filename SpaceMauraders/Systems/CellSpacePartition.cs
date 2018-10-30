@@ -21,6 +21,8 @@ namespace SpaceMauraders.Systems
                 if (members != null)
                 {
                     members.Add(entity);
+                    Console.WriteLine("added " + entity);
+
                 }
                 else
                 {
@@ -28,6 +30,8 @@ namespace SpaceMauraders.Systems
                     {
                         entity
                     };
+                    Console.WriteLine("added " + entity);
+
                 }
             }
 
@@ -37,9 +41,12 @@ namespace SpaceMauraders.Systems
                 {
                     for (int i = 0; i < members.Count; i++)
                     {
+                        Console.WriteLine("trying to remove entity...");
                         if (members[i].id == entity.id)
                         {
                             members.RemoveAt(i);
+
+                            Console.WriteLine("removed " + entity);
                         }
                     }
                 }
@@ -62,7 +69,8 @@ namespace SpaceMauraders.Systems
                 {
                     for (int i = 0; i < members.Count; i++)
                     {
-                        members[i].Draw(spriteBatch); 
+                        members[i].Draw(spriteBatch);
+                        GUI.GUI.DrawString(i.ToString(), members[i].position, 1, 1f, Color.Green);  
                     }
                 }
             }
@@ -89,19 +97,23 @@ namespace SpaceMauraders.Systems
 
         public struct StaticCell
         {
-            Entity.Entity[,] members; 
+            public int x;
+            public int y; 
+            public Entity.Entity[,] members; 
 
             public void AddEntity(Entity.Entity entity)
             {
                 if (members != null)
                 {
                     //members.Add(entity);
-                    int x = entity.cellX / 128;
-                    int y = entity.cellY / 128;
+                    int x = ((int)entity.position.X % (16 * 128)) / 128;
+                    int y = ((int)entity.position.Y % (16 * 128)) / 128;
+
                     members[x, y] = entity; 
                 }
                 else
                 {
+                    members = new Entity.Entity[16, 16];   
                     for(int y = 0; y < members.GetLength(1); y++)
                     {
                         for(int x = 0; x < members.GetLength(0); x++)
@@ -109,10 +121,67 @@ namespace SpaceMauraders.Systems
                             members[x, y] = new Entity.Entity(); 
                         }
                     }
+                    x = entity.cellX;
+                    y = entity.cellY;
+                    AddEntity(entity);
                     
                 }
             }
 
+            public void Update(GameTime gameTime)
+            {
+                if (members != null)
+                {
+                    for (int y = 0; y < members.GetLength(1); y++)
+                    {
+                        for (int x = 0; x < members.GetLength(0); x++)
+                        {
+                            if (members[x, y] != null)
+                            {
+                                members[x, y].Update(gameTime);
+                            }
+                        }
+                    }
+                }
+            }
+
+            public void Draw(SpriteBatch spriteBatch)
+            {
+                if (members != null)
+                {
+                    for (int y = 0; y < members.GetLength(1); y++)
+                    {
+                        for (int x = 0; x < members.GetLength(0); x++)
+                        {
+                            if (members[x, y] != null)
+                            {
+                                members[x, y].Draw(spriteBatch);
+                            }
+                        }
+                    }
+                }
+            }
+
+            public bool FireEvent(Components.Event _event)
+            {
+                if (members != null)
+                {
+                    for (int y = 0; y < members.GetLength(1); y++)
+                    {
+                        for (int x = 0; x < members.GetLength(0); x++)
+                        {
+                            if (members[x, y] != null)
+                            {
+                                if (members[x, y].FireEvent(_event))
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+                return false; 
+            }
         }
 
         public int partitionSize;
@@ -121,7 +190,8 @@ namespace SpaceMauraders.Systems
         public int numCellsY;
 
 
-        public DynamicCell[] cells;
+        public DynamicCell[] dynamicCells;
+        public StaticCell[] staticCells; 
 
         public CellSpacePartition(int cellX, int cellY, int partitionSize)
         {
@@ -131,23 +201,38 @@ namespace SpaceMauraders.Systems
 
             int cellIndex = cellX * cellY;
             cellLength = cellIndex;
-            cells = new DynamicCell[cellIndex];
+            dynamicCells = new DynamicCell[cellIndex];
+            staticCells = new StaticCell[cellIndex];
 
-            for (int i = 0; i < cells.Length; i++)
+            for (int i = 0; i < cellIndex; i++)
             {
-                cells[i] = new DynamicCell();
+                dynamicCells[i] = new DynamicCell();
+                staticCells[i] = new StaticCell();
+                
             }
 
             numCellsX = cellX;
             numCellsY = cellY;
 
         }
-        
+
+        // adds entity to appropriate static cell
+        public void AddStaticEntity(Entity.Entity entity)
+        {
+            entity.SetPartitionCell(PositionToCell(entity).X, PositionToCell(entity).Y);
+            entity.SetCellIndex(PositionToIndex(entity));
+            staticCells[entity.cellIndex].AddEntity(entity);
+
+        }
+
         // adds entity to appropriate cell
         public void AddEntity(Entity.Entity entity)
         { 
+
             entity.SetPartitionCell(PositionToCell(entity).X, PositionToCell(entity).Y);
-            cells[PositionToIndex(entity)].AddEntity(entity);
+            entity.SetCellIndex(PositionToIndex(entity));
+            dynamicCells[PositionToIndex(entity)].AddEntity(entity);
+            Console.WriteLine("Added entity of type " + entity.GetType()); 
         }    
         
 
@@ -165,14 +250,22 @@ namespace SpaceMauraders.Systems
         // Changes cell property from one cell to another 
         public void ChangeCell(Entity.Entity entity)
         {
-            if (cells[entity.cellIndex].members != null)
+            Console.WriteLine("changing cell"); 
+            if (dynamicCells[entity.cellIndex].members != null)
             {
-                cells[entity.cellIndex].members.Remove(entity);
+                dynamicCells[entity.oldCellIndex].RemoveEntity(entity);
+
                 int i = PositionToIndex(entity);
                 if (i >= 0 && i < cellLength)
                 {
-                    cells[PositionToIndex(entity)].AddEntity(entity);
+                    dynamicCells[PositionToIndex(entity)].AddEntity(entity);
+
                 }
+            }
+            else
+            {
+                dynamicCells[entity.cellIndex].members = new List<Entity.Entity>();
+                ChangeCell(entity); 
             }
             
         }             

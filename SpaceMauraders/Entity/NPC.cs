@@ -47,9 +47,20 @@ namespace SpaceMauraders.Entity
             // I PROMISE IT WILL SUMMON AN ELDER GOD IF RAN INCORRECTLY
             FindPathTo(Game1.player.GetCenter());
 
+            if (cellIndex != oldCellIndex)
+            {
+                Game1.world.dynamicCellSpacePartition.ChangeCell(this); 
+                cellIndex = GetCenterPartition();
+                SetCellIndex(cellIndex); 
+                Console.WriteLine("Switched to partition " + GetCenterPartition());
+            }
 
-            base.Update(gameTime);
+            UpdateComponents(gameTime); 
+            //Console.WriteLine(cellIndex); 
+            //base.Update(gameTime);
         }
+
+        
 
         
             
