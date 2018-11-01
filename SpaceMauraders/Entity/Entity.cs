@@ -37,7 +37,7 @@ namespace SpaceMauraders.Entity
 
         public List<Components.Component> components = new List<Components.Component>();
         public Rectangle collisionRectanlge;
-
+        int physicsIndex; 
         public Entity()
         {
             id = nextAvailibleID;
@@ -48,17 +48,29 @@ namespace SpaceMauraders.Entity
 
         public bool FireEvent(Components.Event _event)
         {
-            for (int i = 0; i < components.Count; i++)
+            if (_event.id == "Collider")
             {
-
-                //Console.WriteLine(_event.id); 
-                if (components[i].FireEvent(_event))
+                if (components.Count > 0)
                 {
-                    //Console.WriteLine(_event.id);
-                    return components[i].FireEvent(_event);
+                    if (components[physicsIndex].FireEvent(_event))
+                    {
+                        return true;
+                    }
                 }
             }
+            else
+            {
+                for (int i = 0; i < components.Count; i++)
+                {
 
+                    //Console.WriteLine(_event.id); 
+                    if (components[i].FireEvent(_event))
+                    {
+                        //Console.WriteLine(_event.id);
+                        return true;//components[i].FireEvent(_event);
+                    }
+                }
+            }
             return false;
         }
 
@@ -66,6 +78,10 @@ namespace SpaceMauraders.Entity
         public void AddComponent(Components.Component component)
         {
             components.Add(component);
+            if(component is Components.PhysicsComponent)
+            {
+                physicsIndex = components.Count; 
+            }
         }
 
         public Components.Component GetComponent(string name)

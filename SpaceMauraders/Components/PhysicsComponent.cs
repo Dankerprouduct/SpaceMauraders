@@ -185,7 +185,7 @@ namespace SpaceMauraders.Components
                             Vector2 toAgent = position - Game1.world.dynamicCellSpacePartition.dynamicCells[cellIndex].members[i].GetCenter();
                             Vector2 origanal = toAgent;
                             toAgent.Normalize();
-                            steeringForce += (toAgent / origanal.Length()) * 5;
+                            steeringForce += (toAgent / origanal.Length()) * 1;
                         }
                     }
                 }

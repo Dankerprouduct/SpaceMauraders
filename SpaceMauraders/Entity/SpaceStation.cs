@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics; 
+using Microsoft.Xna.Framework.Graphics;
+using System.Threading;
 
 namespace SpaceMauraders.Entity
 {
@@ -27,12 +28,29 @@ namespace SpaceMauraders.Entity
 
             InitializeMap();
 
+            
+            Thread stationThread = new Thread(BuildStation);
+            stationThread.Start();
+            stationThread.Join(); 
+            
+
+            position = new Vector2(0, 0);
+
+            nodeMesh = new World.NodeMesh();
+            LoadCellSpacePartition();
+           
+            
+        }
+
+        void BuildStation()
+        {
+
 
             BuildRings(125, 175);
-            
+
 
             BuildRings(250, 300);
-            
+
 
 
             BuildBridge(175, 250, 45, 45.2f, 2);
@@ -51,14 +69,8 @@ namespace SpaceMauraders.Entity
             BuildRooms(125, 175, 1.85f);
             BuildRooms(250, 300, 1.95f);
 
-            position = new Vector2(0, 0);
-
-            nodeMesh = new World.NodeMesh();
-            LoadCellSpacePartition();
-           
-            
         }
-        
+
         void InitializeMap()
         {
             for (int y = 0; y < tileMap.GetLength(1); y++)
@@ -141,7 +153,7 @@ namespace SpaceMauraders.Entity
             {
                 startAngle = d;
                 endAngle = startAngle + MathHelper.ToRadians(Game1.random.Next(3, 7));
-
+                
                 
                 // Close Room                             
                 for (float a = startAngle; a < endAngle; a += .0001f)

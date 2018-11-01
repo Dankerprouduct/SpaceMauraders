@@ -87,11 +87,6 @@ namespace SpaceMauraders.Components
             }
         }
 
-        /// <summary>
-        /// Opens player inventory if "OpenInventory" event is sent
-        /// </summary>
-        
-
         public void RemoveItem(Entity.Entity entity)
         {
 
@@ -107,7 +102,8 @@ namespace SpaceMauraders.Components
         {
             if (showInventory)
             {
-                GUI.GUI.Draw2dArray(100, 100, 32, 32, 5, width,height, Color.Red * .5f); 
+                GUI.GUI.Draw2dArray(100, 100, 32, 32, 5, width,height, Color.Red * .5f);
+                GUI.GUI.Draw2dArray(120 + (width * 32 + 5 ), 100, 32, 32, 1, 3, 5, Color.IndianRed *.5f); 
             }
         }
     }
