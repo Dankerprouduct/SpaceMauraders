@@ -356,11 +356,15 @@ namespace SpaceMauraders.Entity
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            DrawLoadedCells(spriteBatch); 
+            DrawLoadedCells(spriteBatch);
 
+            if (Utilities.Debug.showBoundariesAndMesh)
+            {
+                nodeMesh.DrawNodes();
+            }
             if (Utilities.Debug.debug)
             {
-                nodeMesh.DrawNodes(); 
+                
 
                 for (int i = 0; i < cellSpacePartition.staticCells.Length; i++)
                 {

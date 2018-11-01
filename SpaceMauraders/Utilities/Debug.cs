@@ -17,6 +17,8 @@ namespace SpaceMauraders.Utilities
         Lua debugLua; 
 
         public static bool debug;
+        public static bool showBoundariesAndMesh;
+        public static bool showTextualDebug; 
         public Utilities.LuaConsole luaConsole = new LuaConsole();
         public Debug()
         {
@@ -52,10 +54,22 @@ namespace SpaceMauraders.Utilities
         {
             keyboardState = Keyboard.GetState();
 
-            if(keyboardState.IsKeyDown(Keys.F3) && oldKeyboardState.IsKeyUp(Keys.F3))
+
+            if (keyboardState.IsKeyDown(Keys.F5) && oldKeyboardState.IsKeyUp(Keys.F5))
+            {
+                showTextualDebug = !showTextualDebug;
+            }
+
+            if (keyboardState.IsKeyDown(Keys.F6) && oldKeyboardState.IsKeyUp(Keys.F6))
             {
                 debug = !debug;
                 
+            }
+            
+            if (keyboardState.IsKeyDown(Keys.F7) && oldKeyboardState.IsKeyUp(Keys.F7))
+            {
+                showBoundariesAndMesh = !showBoundariesAndMesh; 
+
             }
 
             if (keyboardState.IsKeyDown(Keys.OemTilde) && oldKeyboardState.IsKeyUp(Keys.OemTilde))

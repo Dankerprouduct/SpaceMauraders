@@ -79,7 +79,7 @@ namespace SpaceMauraders.GUI
 
         public static void DrawCircle(Vector2 position, int radius, Color color)
         {
-            spriteBatch.Draw(Utilities.TextureManager.gui[1], new Rectangle((int)position.X, (int)position.Y, radius, radius), null, color, 0f, new Vector2(radius  /2 , radius /2), SpriteEffects.None, 0f); 
+            spriteBatch.Draw(Utilities.TextureManager.gui[1], new Rectangle((int)position.X, (int)position.Y, radius, radius), null, color, 0f, new Vector2(radius, radius), SpriteEffects.None, 0f); 
             //spriteBatch.Draw(Utilities.TextureManager.gui[1], position, )
         }
 

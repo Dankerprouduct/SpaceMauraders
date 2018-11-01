@@ -44,7 +44,7 @@ namespace SpaceMauraders.World
 
         public void DrawNodes()
         {
-            if (Utilities.Debug.debug)
+            if (Utilities.Debug.showBoundariesAndMesh)
             {
 
                 for (int x = 0; x < map.GetLength(0); x++)
@@ -53,7 +53,7 @@ namespace SpaceMauraders.World
                     {
                         if (map[x, y] != null)
                         {
-                            GUI.GUI.DrawCircle(new Vector2(map[x, y].arrayPosition.X * 128 , map[x, y].arrayPosition.Y * 128), 30, Color.LimeGreen * .5f);
+                            GUI.GUI.DrawCircle(new Vector2(map[x, y].arrayPosition.X * 128 + 64 - 15, map[x, y].arrayPosition.Y * 128 + 64 - 15), 30, Color.LimeGreen * .5f);
                             //GUI.GUI.DrawString(x.ToString() + " " + y.ToString(), new Vector2(map[x, y].nodePosition.X, map[x, y].nodePosition.Y), 1, 1, Color.White); 
                         }
                     }
