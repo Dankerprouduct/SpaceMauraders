@@ -129,6 +129,15 @@ namespace SpaceMauraders
                 GUI.GUI.DrawString("Mouse Position: " + Game1.worldPosition.ToString(), new Vector2(10, 10),1,1, Color.White);
                 GUI.GUI.DrawString("Cell Mouse Position: " + (Game1.worldPosition / 128).ToPoint(), new Vector2(10, 30), 1, 1, Color.White);
                 GUI.GUI.DrawString("Cell Posiiton: " + player.GetCenterPartition().ToString(), new Vector2(10, 50), 1, 1, Color.White);
+                try
+                {
+                    GUI.GUI.DrawString("Tile Posiiton: " + world.spaceStation.cellSpacePartition.staticCells[world.spaceStation.cellSpacePartition.PositionToIndex(worldPosition)].
+                        GetEntityIndex(new Point((int)worldPosition.X, (int)worldPosition.Y)).ToString(), new Vector2(10, 70), 1, 1, Color.White);
+                }
+                catch (Exception ex)
+                {
+                    
+                }
             }
 
             player.DrawInventory(); 
