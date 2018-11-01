@@ -84,7 +84,7 @@ namespace SpaceMauraders.Entity
             }
             if (raycast.points != null)
             {
-                GUI.GUI.DrawLine(raycast.points[0].ToVector2(), raycast.points[raycast.points.Count - 1].ToVector2(), 3, Color.Red); 
+                //GUI.GUI.DrawLine(raycast.points[0].ToVector2(), raycast.points[raycast.points.Count - 1].ToVector2(), 3, Color.Red); 
             }
             spriteBatch.Draw(Utilities.TextureManager.sprites[0], position, Color.White);
             base.Draw(spriteBatch);

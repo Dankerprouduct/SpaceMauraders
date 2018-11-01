@@ -29,8 +29,8 @@ namespace SpaceMauraders.World
                 {
                     if (map[x, y] == walkableTile)
                     {
-                        this.map[x, y] = new Node(new Point((x * 128), (y * 128)));
-                        this.map[x, y].arrayPosition = new Point(x, y); 
+                        this.map[x, y] = new Node(new Point((x), (y)));
+                        //this.map[x, y].arrayPosition = new Point(x, y); 
                         allAvailiableNodes.Add( this.map[x,y] );
                     }
                     else

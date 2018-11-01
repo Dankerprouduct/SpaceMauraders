@@ -128,6 +128,14 @@ namespace SpaceMauraders.Systems
                 }
             }
 
+            public Entity.Entity GetEntity(Point position)
+            {
+                int x = ((int)position.X % (16 * 128)) / 128;
+                int y = ((int)position.Y % (16 * 128)) / 128;
+
+                return members[x, y]; 
+            }
+
             public void Update(GameTime gameTime)
             {
                 if (members != null)

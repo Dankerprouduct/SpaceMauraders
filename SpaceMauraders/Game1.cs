@@ -63,13 +63,18 @@ namespace SpaceMauraders
 
             debug = new Utilities.Debug();
 
-            player = new Entity.Player(new Vector2(18586, 38309));
+            player = new Entity.Player(new Vector2(18586 - 1024, 38309));
 
-            for (int i = 0; i < 500; i++)
+            for (int i = 0; i < 5000; i++)
             {
+                
                 world.AddEntity(new Entity.NPC(new Vector2(world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition.X * 128 + 64,
                     world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition.Y * 128 + 64)));
+                    
+                //world.AddEntity(new Entity.NPC(new Vector2(18586, 38309)));
             }
+
+            //world.AddEntity(new Entity.NPC(new Vector2(18586, 38309)));
             GUI.GUI.Init(); 
             camera = new  Utilities.Camera(GraphicsDevice.Viewport);
 

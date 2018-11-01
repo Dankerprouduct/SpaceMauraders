@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics; 
+using Microsoft.Xna.Framework.Graphics;
+using System.Threading;
 
 namespace SpaceMauraders.Entity
 {
@@ -27,6 +28,7 @@ namespace SpaceMauraders.Entity
         public bool isPathing = false;
         public Point pathingGoal;
         public Utilities.Raycast raycast;
+        Thread pathingThread;
         #endregion
 
         public string entityName;
@@ -109,11 +111,12 @@ namespace SpaceMauraders.Entity
                     {
                         pathingNode.Clear();
                     }
-                    Pathfind(target);
+                    Pathfind(target); 
+                    //tartPathfindingThread(target);
                     isPathing = true;
                 }
                 else
-                {
+                {// dedicate thread =. path 
                     if (!raycast.MakeRay(this, 128, 20))
                     {
                         MoveTo(target);
@@ -124,7 +127,20 @@ namespace SpaceMauraders.Entity
             if (isPathing)
             {
                 Pathfind(target);
+                //StartPathfindingThread(target);
             }
+        }
+        
+        void StartPathfindingThread(Vector2 target)
+        {
+            
+            //pathingThread = new Thread(() => Pathfind(target));
+            //if (!pathingThread.IsAlive)
+            //{
+            //    pathingThread.Start();
+            //}
+            //pathingThread.Join();
+            
         }
 
         void Pathfind(Vector2 target)
@@ -143,22 +159,36 @@ namespace SpaceMauraders.Entity
             }
             else
             {
-                isPathing = false;
-                // Start Node
-                World.Node startNode = new World.Node(new Point((int)position.X / 128, (int)position.Y / 128));
-                startNode.arrayPosition = new Point((int)position.X / 128, (int)position.Y / 128);
-
-
-                // Goal Node
-                pathingGoal = new Point((int)target.X / 128, (int)target.Y / 128);
-                World.Node goalNode = new World.Node(new Point((int)pathingGoal.X, (int)pathingGoal.Y));
-                goalNode.arrayPosition = pathingGoal;
-
-
-                pathingNode = pathFinding.FindPath(startNode, goalNode);
-
-
+                
+                pathingThread = new Thread(() => StartPathThread(target));
+                if (!pathingThread.IsAlive)
+                {
+                    pathingThread.Start();
+                }
+                pathingThread.Join();
+                //StartPathThread(target); 
+                
+                //StartPathfindingThread(target); 
             }
+            
+        }
+
+        void StartPathThread(Vector2 target)
+        {
+            isPathing = false;
+            // Start Node
+            World.Node startNode = new World.Node(new Point((int)position.X / 128, (int)position.Y / 128));
+            startNode.arrayPosition = new Point((int)position.X / 128, (int)position.Y / 128);
+
+
+            // Goal Node
+            pathingGoal = new Point((int)target.X / 128, (int)target.Y / 128);
+            World.Node goalNode = new World.Node(new Point((int)pathingGoal.X, (int)pathingGoal.Y));
+            goalNode.arrayPosition = pathingGoal;
+
+
+            pathingNode = pathFinding.FindPath(startNode, goalNode);
+
         }
 
         #region Partition Methods

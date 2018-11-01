@@ -242,12 +242,16 @@ namespace SpaceMauraders.Entity
 
         public bool FireEvent(Components.Event _event, Entity entity)
         {
+            
             if (Game1.player.FireEvent(_event))
             {
                 //Console.WriteLine(Game1.player.FireEvent(_event)); 
-                return true; 
+                return true;
                 //Console.WriteLine("git this ");
             }
+
+
+
             if (_event.id != "RayHit")
             {
                 if (EntityWithinBounds(entity.GetCenterPartition()))
