@@ -157,6 +157,27 @@ namespace SpaceMauraders.GUI
         }
         
 
+        /// <summary>
+        ///  Draws a 2D array, made for drawing inventory
+        /// </summary>
+        /// <param name="_x">x position on the screen</param>
+        /// <param name="_y">y position on the screen</param>
+        /// <param name="_width">width of the box </param>
+        /// <param name="_height"> height of the box</param>
+        /// <param name="_rows">number of rows</param>
+        /// <param name="_collums">numer of collums</param>
+        /// <param name="color">color of boxes</param>
+        public static void Draw2dArray(int _x, int _y, int _width, int _height, int _rows, int _collums, int spacing, Color color)
+        {
+            for(int x = 0; x < _rows; x++)
+            {
+                for(int y = 0; y < _collums; y++)
+                {
+                    DrawBox(_x + (x * _width) + (x * spacing), _y + (y * _height) + (y * spacing), _width, _height, color);
+                }
+            }
+        }
+
         
     }
 }

@@ -20,7 +20,9 @@ namespace SpaceMauraders.Entity
         public int cellX;
         public int cellY;
         public int cellIndex; // holds current cell
-        public int oldCellIndex; 
+        public int oldCellIndex;
+
+        Thread componentThread; 
 
         #region Pathing
         public List<World.Node> pathingNode;
@@ -46,7 +48,6 @@ namespace SpaceMauraders.Entity
 
         public bool FireEvent(Components.Event _event)
         {
-
             for (int i = 0; i < components.Count; i++)
             {
 
@@ -60,6 +61,7 @@ namespace SpaceMauraders.Entity
 
             return false;
         }
+
 
         public void AddComponent(Components.Component component)
         {
@@ -84,6 +86,9 @@ namespace SpaceMauraders.Entity
             return position;
         }
 
+
+        // DO NOT TOUCH UNLESS YOURE SURE YOU KNOW WHAT YOURE DOING
+        #region Pathfinding
         public void MoveTo(Vector2 target)
         {
             Vector2 direction = target - position;
@@ -105,7 +110,9 @@ namespace SpaceMauraders.Entity
 
             if (!isPathing)
             {
-                if (!raycast.MakeRay(this, 5 * 128, 20))
+                //(Vector2.Distance(target, position) <= 128 * 5)
+                // !raycast.MakeRay(this, 10 * 128, 20)
+                if (!(Vector2.Distance(target, position) <= 128 * 10))
                 {
                     if (pathingNode != null)
                     {
@@ -117,7 +124,8 @@ namespace SpaceMauraders.Entity
                 }
                 else
                 {// dedicate thread =. path 
-                    if (!raycast.MakeRay(this, 128, 20))
+                    if ((Vector2.Distance(target, position) <= 128 * 3) &&
+                        (Vector2.Distance(target, position) >= 128 * 1))
                     {
                         MoveTo(target);
                     }
@@ -190,6 +198,7 @@ namespace SpaceMauraders.Entity
             pathingNode = pathFinding.FindPath(startNode, goalNode);
 
         }
+        #endregion
 
         #region Partition Methods
         public void SetPartitionCell(int cellX, int cellY)

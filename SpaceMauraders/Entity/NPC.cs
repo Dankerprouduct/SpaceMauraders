@@ -23,7 +23,7 @@ namespace SpaceMauraders.Entity
 
             components.Add(new Components.PhysicsComponent(this.id));
             
-            components.Add(new Components.InventoryComponent(id, 10));
+            components.Add(new Components.InventoryComponent(id, 5,5));
 
              
             //goap
@@ -82,9 +82,12 @@ namespace SpaceMauraders.Entity
                 }
                 pathFinding.DrawSets();
             }
-            if (raycast.points != null)
+            if (raycast != null)
             {
-                //GUI.GUI.DrawLine(raycast.points[0].ToVector2(), raycast.points[raycast.points.Count - 1].ToVector2(), 3, Color.Red); 
+                if (raycast.points != null)
+                {
+                    //GUI.GUI.DrawLine(raycast.points[0].ToVector2(), raycast.points[raycast.points.Count - 1].ToVector2(), 3, Color.Red); 
+                }
             }
             spriteBatch.Draw(Utilities.TextureManager.sprites[0], position, Color.White);
             base.Draw(spriteBatch);

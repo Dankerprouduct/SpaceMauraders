@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using System.Threading; 
 
 namespace SpaceMauraders.Components
 {
@@ -14,7 +15,9 @@ namespace SpaceMauraders.Components
         public int speed = 2;
         Vector2 position;
         public int cellIndex;
-        Entity.Entity entity; 
+        Entity.Entity entity;
+        float maxVelocity = 10;
+
 
         public PhysicsComponent(int parentID) : base(parentID)
         {
@@ -36,11 +39,17 @@ namespace SpaceMauraders.Components
             this.entity = entity; 
         }
 
+        Thread physicsThread; 
         void CheckCollisionInMovementDirection(Entity.Entity entity)
         {
 
-            CheckCollisionInPartitionNumber(entity);
+            /*
+            physicsThread = new Thread(() => CheckCollisionInPartitionNumber(entity));
+            physicsThread.Start();
+            physicsThread.Join();
+            */
 
+            CheckCollisionInPartitionNumber(entity); 
         }
 
         public override bool FireEvent(Event _event)
@@ -99,8 +108,9 @@ namespace SpaceMauraders.Components
 
             return false; 
         }
-        float maxVelocity = 5; 
-        #region 
+        
+
+        #region Vehicle Behaviors
         public Vector2 Seek(Vector2 target)
         {
 
@@ -175,12 +185,12 @@ namespace SpaceMauraders.Components
                             Vector2 toAgent = position - Game1.world.dynamicCellSpacePartition.dynamicCells[cellIndex].members[i].GetCenter();
                             Vector2 origanal = toAgent;
                             toAgent.Normalize();
-                            steeringForce += toAgent / origanal.Length() * 5;
+                            steeringForce += (toAgent / origanal.Length()) * 5;
                         }
                     }
                 }
             }
-            if(steeringForce.Length() >= 5)
+            if(steeringForce.Length() >= 20)
             {
                 steeringForce = Vector2.Zero; 
             }
@@ -197,6 +207,10 @@ namespace SpaceMauraders.Components
             }
         }
 
+        /// <summary>
+        /// This is where velocity is added
+        /// </summary>
+        /// <param name="entity"></param>
         public void CheckCollisionInPartitionNumber(Entity.Entity entity)
         {
             /// ** FUTURE PLANS AFTER TESTING **
@@ -213,8 +227,8 @@ namespace SpaceMauraders.Components
             
             entity.oldPosition = entity.position;
 
-            velocity += Separation(); 
             velocity *= .85f;
+            velocity += Separation();
 
 
             float j = 1.2f; 
@@ -235,6 +249,11 @@ namespace SpaceMauraders.Components
                 velocity.Y = -velocity.Y * j;
             }
 
+
+        }
+
+        void DoCollisionStepWithThread(Entity.Entity entity)
+        {
 
         }
 

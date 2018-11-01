@@ -20,7 +20,7 @@ namespace SpaceMauraders
 
         public static World.World world;
 
-        public static int width = 1920;
+        public static int width = 1080;
         public static int height = 0; 
 
         public static Vector2 worldPosition;
@@ -28,10 +28,7 @@ namespace SpaceMauraders
         Vector2 mousePosition;
 
         public static Entity.Player player;
-
-        //public static Entity.NPC npc1;
-        bool useTestNPS = true; 
-        Entity.NPC[] npcs = new Entity.NPC[5]; 
+                
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -49,7 +46,7 @@ namespace SpaceMauraders
         {
             // TODO: Add your initialization logic here
             
-            IsMouseVisible = true; 
+            IsMouseVisible = true;
             base.Initialize();
         }
         
@@ -65,7 +62,7 @@ namespace SpaceMauraders
 
             player = new Entity.Player(new Vector2(18586 - 1024, 38309));
 
-            for (int i = 0; i < 5000; i++)
+            for (int i = 0; i < 0; i++)
             {
                 
                 world.AddEntity(new Entity.NPC(new Vector2(world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition.X * 128 + 64,
@@ -97,22 +94,14 @@ namespace SpaceMauraders
 
             mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
             worldPosition = Vector2.Transform(mousePosition, Matrix.Invert(camera.transform)) ;
-            
 
-            if (useTestNPS)
+            if (!debug.luaConsole.showDebug)
             {
-                if (!debug.luaConsole.showDebug)
-                {
-                
-                    player.Update(gameTime);
-                    world.Update(gameTime);
 
-
-
-                }
+                player.Update(gameTime);
+                world.Update(gameTime);
+                               
             }
-
-
             debug.Update(); 
             game = this;
             camera.Update(ref game); 
@@ -127,7 +116,7 @@ namespace SpaceMauraders
             world.Draw(spriteBatch);
 
             player.Draw(spriteBatch);
-            
+            // Draw2dArray(x, y, width, height, rows, collums)
             spriteBatch.End();
             
 
@@ -141,6 +130,8 @@ namespace SpaceMauraders
                 GUI.GUI.DrawString("Cell Mouse Position: " + (Game1.worldPosition / 128).ToPoint(), new Vector2(10, 30), 1, 1, Color.White);
                 GUI.GUI.DrawString("Cell Posiiton: " + player.GetCenterPartition().ToString(), new Vector2(10, 50), 1, 1, Color.White);
             }
+
+            player.DrawInventory(); 
 
             debug.Draw(); 
 

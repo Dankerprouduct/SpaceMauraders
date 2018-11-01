@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework; 
+using Microsoft.Xna.Framework;
+using NLua; 
 
 namespace SpaceMauraders.Utilities
 {
@@ -13,14 +14,40 @@ namespace SpaceMauraders.Utilities
         KeyboardState keyboardState;
         KeyboardState oldKeyboardState;
 
+        Lua debugLua; 
 
         public static bool debug;
         public Utilities.LuaConsole luaConsole = new LuaConsole();
         public Debug()
         {
-
+            LoadLuaFunctions(); 
         }
-        
+
+        /// <summary>
+        /// loads lua functions that can be used in debug
+        /// </summary>
+        public void LoadLuaFunctions()
+        {
+            debugLua = new Lua();
+            debugLua.RegisterFunction("SpawnEntity", this, GetType().GetMethod("SpawnEntity"));
+        }
+
+        public void SpawnEntity(string name, int ammount = 1)
+        {
+            Console.WriteLine("Spawning Entity " + name); 
+            switch (name)
+            {
+                case "NPC":
+                    {
+                        for (int i = 0; i < ammount; i++)
+                        {
+                            Game1.world.AddEntity(new Entity.NPC(Game1.worldPosition));
+                        }
+                        break;
+                    }
+            }
+        }
+
         public void Update()
         {
             keyboardState = Keyboard.GetState();
@@ -39,6 +66,13 @@ namespace SpaceMauraders.Utilities
             if (luaConsole.showDebug)
             {
                 luaConsole.Update(); 
+
+                if(keyboardState.IsKeyDown(Keys.Enter) && oldKeyboardState.IsKeyUp(Keys.Enter))
+                {
+                    LoadLuaFunctions();
+                    debugLua.DoString(luaConsole.text);
+                    //luaConsole.text = ""; 
+                }
             }
 
             

@@ -23,6 +23,7 @@ namespace SpaceMauraders.Entity
             
             components.Add(new Components.TriggerColliderComponent());
 
+            components.Add(new Components.InventoryComponent(id, 5,5)); 
         }
 
 
@@ -36,11 +37,16 @@ namespace SpaceMauraders.Entity
         {
             //Utilities.Raycast ray = new Utilities.Raycast();
             //ray.MakeRay(4, 10, 3000, this);
-            
 
+            
             spriteBatch.Draw(Utilities.TextureManager.sprites[0], position, Color.White);
             //ray.DrawRay();
             base.Draw(spriteBatch);
+        }
+
+        public void DrawInventory()
+        {
+            ((Components.InventoryComponent)GetComponent("InventoryComponent")).DrawInventory();
         }
 
     }

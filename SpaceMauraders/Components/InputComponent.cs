@@ -65,6 +65,13 @@ namespace SpaceMauraders.Components
                 entity.FireEvent(moveEvent);
             }
 
+            if(keyboardState.IsKeyDown(Keys.Tab) && oldKeyboardState.IsKeyUp(Keys.Tab))
+            {
+                Event openInventoryEvent = new Event();
+                openInventoryEvent.id = "OpenInventory";
+                entity.FireEvent(openInventoryEvent); 
+            }
+
 
             oldKeyboardState = keyboardState; 
         }

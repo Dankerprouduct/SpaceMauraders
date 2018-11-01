@@ -140,7 +140,7 @@ namespace SpaceMauraders.Entity
             for (float d = 0; d < 2 * Math.PI; d += .0001f)
             {
                 startAngle = d;
-                endAngle = startAngle + MathHelper.ToRadians(Game1.random.Next(5, 10));
+                endAngle = startAngle + MathHelper.ToRadians(Game1.random.Next(3, 7));
 
                 
                 // Close Room                             

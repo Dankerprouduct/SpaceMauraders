@@ -423,6 +423,11 @@ namespace SpaceMauraders.Utilities
                         text += ";";
                         break;
                     }
+                case Keys.OemQuotes:
+                    {
+                        text += "\"";
+                        break;
+                    }
                 case Keys.Back:
                     {
                         if (String.Compare(text, " ") < 0)
