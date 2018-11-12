@@ -66,6 +66,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entity\SpaceStation.cs" />
     <Compile Include="Systems\CellSpacePartition.cs" />
+    <Compile Include="Systems\Particle.cs" />
+    <Compile Include="Systems\ParticleSystem.cs" />
     <Compile Include="Utilities\Camera.cs" />
     <Compile Include="Utilities\Debug.cs" />
     <Compile Include="Utilities\LuaConsole.cs" />
