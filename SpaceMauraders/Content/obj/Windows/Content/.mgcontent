@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Tiles/tempFloor.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Tiles/tempWall.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Tiles/Floor1.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Tiles/Wall1.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Fonts/debug.spritefont</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/GUI/Pixel.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Fonts/Arial12.spritefont</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Sprites/TempSprite.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/GUI/Circle1.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>

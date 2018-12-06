@@ -39,7 +39,6 @@ C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\D
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\SharpDX.XInput.dll
-C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\MonoGame.Framework.xml
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\SharpDX.xml
@@ -48,7 +47,6 @@ C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\D
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\SharpDX.XInput.xml
-C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Tiles\Floor1.xnb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Tiles\Wall1.xnb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Fonts\debug.xnb
@@ -99,3 +97,5 @@ D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\GU
 D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\JSON\Entities.json
 D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Newtonsoft.Json.dll
 D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Newtonsoft.Json.xml
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\KeraLua.dll
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\NLua.dll

@@ -12,7 +12,7 @@ namespace SpaceMauraders
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        public static Game1 game;
         public static Random random = new Random();
 
         Utilities.Camera camera;
@@ -20,31 +20,33 @@ namespace SpaceMauraders
 
         public static World.World world;
 
-        public static int width = 1080;
-        public static int height = (width / 16) * 9;
+        public static int width = 1920;
+        public static int height = 0; 
 
         public static Vector2 worldPosition;
 
         Vector2 mousePosition;
 
-        public static Entity.Player player = new Entity.Player(new Vector2(16594, 37319));
-
-        public static Entity.NPC npc1;
-
-        Entity.NPC[] npcs = new Entity.NPC[5]; 
+        public static Entity.Player player;
+                
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            
             graphics.PreferredBackBufferWidth = width;
+            
+            height = (width / 16) * 9;
+            
             graphics.PreferredBackBufferHeight = height;
+            graphics.IsFullScreen = false; 
         }
         
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
             
-            IsMouseVisible = true; 
+            IsMouseVisible = true;
             base.Initialize();
         }
         
@@ -57,25 +59,21 @@ namespace SpaceMauraders
             world = new World.World(10, 10);
 
             debug = new Utilities.Debug();
-            npc1 = new Entity.NPC(new Vector2(130 * 128, 269 * 128));
-            
-            npcs[0] = new Entity.NPC(new Vector2(134 * 128, 269 * 128));
-            npcs[0].goal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;  
 
-            npcs[1] = new Entity.NPC(new Vector2(136 * 128, 269 * 128));
-            npcs[0].goal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
+            player = new Entity.Player(new Vector2(18586 - 1024, 38309));
 
-            npcs[2] = new Entity.NPC(new Vector2(139 * 128, 269 * 128));
-            npcs[0].goal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
+            for (int i = 0; i < 0; i++)
+            {
+                
+                world.AddEntity(new Entity.NPC(new Vector2(world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition.X * 128 + 64,
+                    world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition.Y * 128 + 64)));
+                    
+                //world.AddEntity(new Entity.NPC(new Vector2(18586, 38309)));
+            }
 
-            npcs[3] = new Entity.NPC(new Vector2(140 * 128, 269 * 128));
-            npcs[0].goal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
-
-            npcs[4] = new Entity.NPC(new Vector2(142 * 128, 269 * 128));
-            npcs[0].goal = Game1.world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition;
-            
+            //world.AddEntity(new Entity.NPC(new Vector2(18586, 38309)));
             GUI.GUI.Init(); 
-            camera = new Utilities.Camera(GraphicsDevice.Viewport);
+            camera = new  Utilities.Camera(GraphicsDevice.Viewport);
 
             Console.WriteLine("Number of Entities: " + Entity.Entity.nextAvailibleID);
 
@@ -89,29 +87,27 @@ namespace SpaceMauraders
         
         protected override void Update(GameTime gameTime)
         {
+            GUI.GUI.Draw(spriteBatch);
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
             worldPosition = Vector2.Transform(mousePosition, Matrix.Invert(camera.transform)) ;
-            
-            npc1.Update(gameTime);
-            
-            for (int i = 0; i < npcs.Length; i++)
+
+            if (!debug.luaConsole.showDebug)
             {
-                npcs[i].Update(gameTime);
+
+                player.Update(gameTime);
+                world.Update(gameTime);
+                               
             }
-            player.Update(gameTime);
-            world.Update(gameTime); 
-
-            
-
             debug.Update(); 
-            Game1 game = this;
+            game = this;
             camera.Update(ref game); 
             base.Update(gameTime);
         }
-        
+
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(new Color(10,10,10));
@@ -120,26 +116,33 @@ namespace SpaceMauraders
             world.Draw(spriteBatch);
 
             player.Draw(spriteBatch);
-            npc1.Draw(spriteBatch);
-            
-            for (int i = 0; i < npcs.Length; i++)
-            {
-                npcs[i].Draw(spriteBatch);
-            }
-            
+            // Draw2dArray(x, y, width, height, rows, collums)
             spriteBatch.End();
             
 
             spriteBatch.Begin(SpriteSortMode.Deferred,null, SamplerState.PointClamp);
             GUI.GUI.Draw(spriteBatch);
             GUI.GUI.DrawString("DEVELOPMENT BUILD", new Vector2(GUI.GUI.screenBounds.X + 20, GUI.GUI.screenBounds.Height - 20),1, 1, Color.Gray);
-            if (Utilities.Debug.debug)
+            if (Utilities.Debug.showTextualDebug)
             {
 
                 GUI.GUI.DrawString("Mouse Position: " + Game1.worldPosition.ToString(), new Vector2(10, 10),1,1, Color.White);
                 GUI.GUI.DrawString("Cell Mouse Position: " + (Game1.worldPosition / 128).ToPoint(), new Vector2(10, 30), 1, 1, Color.White);
-                GUI.GUI.DrawString("Cell Posiiton: " + player.GetCenterPartition().ToString(), new Vector2(10, 50), 1, 1, Color.White);
+                GUI.GUI.DrawString("Cell Position: " + player.GetCenterPartition().ToString(), new Vector2(10, 50), 1, 1, Color.White);
+                try
+                {
+                    GUI.GUI.DrawString("Tile Position: " + world.spaceStation.cellSpacePartition.staticCells[world.spaceStation.cellSpacePartition.PositionToIndex(worldPosition)].
+                        GetEntityIndex(new Point((int)worldPosition.X, (int)worldPosition.Y)).ToString(), new Vector2(10, 70), 1, 1, Color.White);
+                }
+                catch (Exception ex)
+                {
+                    
+                }
             }
+
+            player.DrawInventory(); 
+
+            debug.Draw(); 
 
             spriteBatch.End();
 

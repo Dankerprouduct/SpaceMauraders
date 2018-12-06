@@ -4,14 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using System.Threading; 
 
 namespace SpaceMauraders.Components
 {
     public class PhysicsComponent : Component
     {
 
-        Vector2 velocity = Vector2.Zero;
-        public int speed = 2; 
+        public Vector2 velocity = Vector2.Zero;
+        public int speed = 2;
+        Vector2 position;
+        public int cellIndex;
+        Entity.Entity entity;
+        float maxVelocity = 10;
+
 
         public PhysicsComponent(int parentID) : base(parentID)
         {
@@ -26,21 +32,32 @@ namespace SpaceMauraders.Components
         public override void Update(GameTime gameTime, Entity.Entity entity)
         {
             CheckCollisionInMovementDirection(entity);
-
-
+            position = entity.position;
+            cellIndex = entity.cellIndex;
             
-
+            
+            this.entity = entity; 
         }
 
+        Thread physicsThread; 
         void CheckCollisionInMovementDirection(Entity.Entity entity)
         {
 
-            CheckCollisionInPartitionNumber(entity);
+            /*
+            physicsThread = new Thread(() => CheckCollisionInPartitionNumber(entity));
+            physicsThread.Start();
+            physicsThread.Join();
+            */
 
+            CheckCollisionInPartitionNumber(entity); 
         }
 
         public override bool FireEvent(Event _event)
         {
+            if(_event.id == "Flee")
+            {
+                velocity += (Vector2)_event.parameters["SteeringForce"]; 
+            }
 
             if (_event.id == "AddVelocity")
             {
@@ -49,6 +66,7 @@ namespace SpaceMauraders.Components
                     if(parameters.Key == "Velocity")
                     {
                         velocity += (Vector2)parameters.Value;
+                        CheckSpeed(10); 
                     }
                 }
             }
@@ -61,26 +79,26 @@ namespace SpaceMauraders.Components
                     {
                         
                         velocity.Y  -= (int)parameters.Value;
-                        CheckSpeed(velocity);
+                        
                     }
 
                     if (parameters.Key == "Move Down")
                     {
                         velocity.Y += (int)parameters.Value;
-                        CheckSpeed(velocity);
+                        
                     }
 
                     if (parameters.Key == "Move Left")
                     {
                         velocity.X -= (int)parameters.Value;
-                        CheckSpeed(velocity);
+                        
 
                     }
 
                     if (parameters.Key == "Move Right")
                     {
                         velocity.X += (int)parameters.Value;
-                        CheckSpeed(velocity);
+                        
                     }
                 }
                 
@@ -88,32 +106,111 @@ namespace SpaceMauraders.Components
 
             
 
-            return true; 
+            return false; 
         }
+        
 
-        void CheckSpeed(Vector2 velocity)
+        #region Vehicle Behaviors
+        public Vector2 Seek(Vector2 target)
         {
-            /*
-            if(velocity.X > speed)
-            {
-                velocity.X = speed;
-            }
-            if( velocity.X < -speed)
-            {
-                velocity.X = -speed; 
-            }
 
-            if (velocity.Y > speed)
-            {
-                velocity.Y = speed;
-            }
-            if (velocity.Y < -speed)
-            {
-                velocity.Y = -speed;
-            }
-            */
+            Vector2 desiredVelocity = target - position;
+            float distance = desiredVelocity.Length();
+            desiredVelocity.Normalize();
+            desiredVelocity *= maxVelocity;
+            Vector2 steering = desiredVelocity - velocity;
+            return steering;
         }
 
+        public Vector2 Flee(Vector2 target)
+        {
+
+            Vector2 desiredVelocity = position - target;
+            float distance = desiredVelocity.Length();
+            desiredVelocity.Normalize();
+            desiredVelocity *= maxVelocity;
+            Vector2 steering = desiredVelocity - velocity;
+            return steering;
+        }
+
+        public Vector2 Arrive(Entity.Entity target, float slowingDistance)
+        {
+            Vector2 desiredVelocity = target.position - position;
+            float distance = desiredVelocity.Length();
+
+            if (distance < slowingDistance)
+            {
+                desiredVelocity.Normalize();
+                desiredVelocity *= maxVelocity * (distance / slowingDistance);
+            }
+            else
+            {
+                desiredVelocity.Normalize();
+                desiredVelocity *= maxVelocity;
+            }
+            Vector2 steering = desiredVelocity - velocity;
+            return steering;
+        }
+
+        public Vector2 Pursue(Entity.Entity target)
+        {
+            float distance = Vector2.Distance(target.position, position);
+            float ahead = distance / 10;
+            Vector2 futurePosition = target.position + ((PhysicsComponent)target.GetComponent("PhysicsComponent")).velocity * ahead;
+            return Seek(futurePosition);
+        }
+
+        public Vector2 Evade(Entity.Entity target)
+        {
+            float distance = Vector2.Distance(target.position, position);
+            float ahead = distance / 10;
+            Vector2 futurePosition = target.position + ((PhysicsComponent)target.GetComponent("PhysicsComponent")).velocity * ahead;
+            return Flee(futurePosition);
+        }
+
+        public Vector2 Separation()
+        {
+
+            Vector2 steeringForce = Vector2.Zero;
+
+            if (Game1.world.EntityWithinBounds(cellIndex))
+            {
+                if (Game1.world.dynamicCellSpacePartition.dynamicCells[cellIndex].members != null)
+                {
+
+                    for (int i = 0; i < Game1.world.dynamicCellSpacePartition.dynamicCells[cellIndex].members.Count; i++)
+                    {
+                        if (Game1.world.dynamicCellSpacePartition.dynamicCells[cellIndex].members[i] != entity)
+                        {
+                            Vector2 toAgent = position - Game1.world.dynamicCellSpacePartition.dynamicCells[cellIndex].members[i].GetCenter();
+                            Vector2 origanal = toAgent;
+                            toAgent.Normalize();
+                            steeringForce += (toAgent / origanal.Length()) * 1;
+                        }
+                    }
+                }
+            }
+            if(steeringForce.Length() >= 20)
+            {
+                steeringForce = Vector2.Zero; 
+            }
+            return steeringForce;
+        }
+        #endregion
+
+        void CheckSpeed(float max)
+        {
+            if(velocity.Length() > max)
+            {
+                //velocity.Normalize();
+                //velocity *= max;
+            }
+        }
+
+        /// <summary>
+        /// This is where velocity is added
+        /// </summary>
+        /// <param name="entity"></param>
         public void CheckCollisionInPartitionNumber(Entity.Entity entity)
         {
             /// ** FUTURE PLANS AFTER TESTING **
@@ -131,6 +228,8 @@ namespace SpaceMauraders.Components
             entity.oldPosition = entity.position;
 
             velocity *= .85f;
+            velocity += Separation();
+
 
             float j = 1.2f; 
             entity.position.X += (int)velocity.X;
@@ -140,7 +239,7 @@ namespace SpaceMauraders.Components
 
                 entity.position.X = entity.oldPosition.X;
                 velocity.X = -velocity.X * j;
-                Console.WriteLine("hit"); 
+                //Console.WriteLine("hit"); 
             }
 
             entity.position.Y += (int)velocity.Y;
@@ -153,12 +252,17 @@ namespace SpaceMauraders.Components
 
         }
 
+        void DoCollisionStepWithThread(Entity.Entity entity)
+        {
+
+        }
+
         public Event FireCollisionEvent(Entity.Entity entity)
         {
             entity.collisionRectanlge = new Rectangle((int)entity.position.X, (int)entity.position.Y,
                 Utilities.TextureManager.sprites[0].Width,
                 Utilities.TextureManager.sprites[0].Height);
-
+            
             Event physicsEvent = new Event
             {
                 id = "Collider"

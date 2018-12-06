@@ -15,18 +15,22 @@ namespace SpaceMauraders.World
 
         public void DrawSets()
         {
-            //Console.WriteLine("OSET " + oSet.Count);
-            //Console.WriteLine("CSET " + cSet.Count);
-            for (int i = 0; i < oSet.Count; i++)
-            {
-                //Console.WriteLine("drawing: " + new Vector2(oSet[i].arrayPosition.X * 128, oSet[i].arrayPosition.Y * 128)); 
-                GUI.GUI.DrawCircle(new Vector2(oSet[i].arrayPosition.X * 128, oSet[i].arrayPosition.Y * 128), 64, Color.Yellow *.5f);
-            }
 
-            for (int i = 0; i < cSet.Count; i++)
+            if (oSet != null)
             {
-                 GUI.GUI.DrawCircle(new Vector2(cSet[i].arrayPosition.X * 128, cSet[i].arrayPosition.Y * 128), 64, Color.Blue * .5f);
-                //Console.WriteLine(cSet[i].arrayPosition + " " + i); 
+                for (int i = 0; i < oSet.Count; i++)
+                {
+                    //Console.WriteLine("drawing: " + new Vector2(oSet[i].arrayPosition.X * 128, oSet[i].arrayPosition.Y * 128)); 
+                    GUI.GUI.DrawCircle(new Vector2(oSet[i].arrayPosition.X * 128, oSet[i].arrayPosition.Y * 128), 64, Color.Yellow * .5f);
+                }
+            }
+            if (cSet != null)
+            {
+                for (int i = 0; i < cSet.Count; i++)
+                {
+                    GUI.GUI.DrawCircle(new Vector2(cSet[i].arrayPosition.X * 128, cSet[i].arrayPosition.Y * 128), 64, Color.Blue * .5f);
+                    //Console.WriteLine(cSet[i].arrayPosition + " " + i); 
+                }
             }
             
         }
@@ -72,7 +76,7 @@ namespace SpaceMauraders.World
                // Console.WriteLine("node position " + currentNode.arrayPosition); 
                 
                 
-                if (counter > 20)
+                if (counter > 200)
                 {
                     List<Node> chunkPath = new List<Node>();
                     chunkPath.Add(openSet[1]);

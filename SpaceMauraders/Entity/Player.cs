@@ -15,11 +15,15 @@ namespace SpaceMauraders.Entity
         public Player(Vector2 position):base()
         {
             this.position = position;
-
-            components.Add(new Components.PhysicsComponent(this.id));
-            components.Add(new Components.InputComponent(this.id));
+            this.collisionRectanlge = new Rectangle((int)position.X, (int)position.Y, Utilities.TextureManager.sprites[0].Width, Utilities.TextureManager.sprites[0].Height);
             
+            components.Add(new Components.InputComponent(this.id));
+            //components.Add(new Components.SpeedModifierComponent(5)); 
+            components.Add(new Components.PhysicsComponent(this.id));
+            
+            components.Add(new Components.TriggerColliderComponent());
 
+            components.Add(new Components.InventoryComponent(id, 5,5)); 
         }
 
 
@@ -31,9 +35,18 @@ namespace SpaceMauraders.Entity
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            //Utilities.Raycast ray = new Utilities.Raycast();
+            //ray.MakeRay(4, 10, 3000, this);
 
-            spriteBatch.Draw(Utilities.TextureManager.sprites[0], position, Color.White); 
+            
+            spriteBatch.Draw(Utilities.TextureManager.sprites[0], position, Color.White);
+            //ray.DrawRay();
             base.Draw(spriteBatch);
+        }
+
+        public void DrawInventory()
+        {
+            ((Components.InventoryComponent)GetComponent("InventoryComponent")).DrawInventory();
         }
 
     }

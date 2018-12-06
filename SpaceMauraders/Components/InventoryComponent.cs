@@ -5,31 +5,43 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using SpaceMauraders.Entity;
+using SpaceMauraders.GUI;
 
 namespace SpaceMauraders.Components
 {
     public class InventoryComponent: Component
     {
 
-        public Entity.Entity[] inventory; 
+        bool showInventory; 
+        public Entity.Entity[,] inventory;
+        public int width;
+        public int height; 
+
         public InventoryComponent()
         {
         }
 
-        public InventoryComponent(int parentID, int inventoryAmmount) : base(parentID)
+        public InventoryComponent(int parentID, int width, int height) : base(parentID)
         {
-            InitializeInventory(inventoryAmmount); 
+            this.width = width;
+            this.height = height; 
+
+            InitializeInventory(width, height); 
         }
 
-        void InitializeInventory(int inventoryAmmount)
+        void InitializeInventory(int width, int height)
         {
             componentName = "InventoryComponent"; 
-            inventory = new Entity.Entity[inventoryAmmount];
-
-            for(int i = 0; i < inventoryAmmount; i++)
+            inventory = new Entity.Entity[width, height];
+            
+            for(int x = 0; x < width; x++)
             {
-                inventory[i] = new Entity.Entity(); 
+                for(int y = 0; y < height; y++)
+                {
+                    inventory[x, y] = new Entity.Entity(); 
+                }
             }
+
         }
 
         public override bool FireEvent(Event _event)
@@ -52,15 +64,26 @@ namespace SpaceMauraders.Components
                         }
                         break;
                     }
+                
             }
+
+            if(_event.id == "OpenInventory")
+            {
+                showInventory = !showInventory;
+            }
+
             return base.FireEvent(_event);
         }
 
+        /// <summary>
+        /// Adds Item to inventory
+        /// </summary>
+        /// <param name="entity"></param>
         public void AddItem(Entity.Entity entity)
         {
             for(int i = 0; i < inventory.Length; i++)
             {
-
+                
             }
         }
 
@@ -73,6 +96,15 @@ namespace SpaceMauraders.Components
         {
 
             base.Update(gameTime, entity);
+        }
+
+        public void DrawInventory()
+        {
+            if (showInventory)
+            {
+                GUI.GUI.Draw2dArray(100, 100, 32, 32, 5, width,height, Color.Red * .5f);
+                GUI.GUI.Draw2dArray(120 + (width * 32 + 5 ), 100, 32, 32, 1, 3, 5, Color.IndianRed *.5f); 
+            }
         }
     }
 }

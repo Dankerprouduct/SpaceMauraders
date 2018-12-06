@@ -63,8 +63,18 @@ namespace SpaceMauraders.Entity
                         }
                     case "InventoryComponent":
                         {
-                            entity.AddComponent(new Components.InventoryComponent(entity.id, 10)); 
+                            entity.AddComponent(new Components.InventoryComponent(entity.id, 5,5)); 
                             break; 
+                        }
+                    case "TriggerColliderComponent":
+                        {
+                            entity.AddComponent(new Components.TriggerColliderComponent()); 
+                            break;
+                        }
+                    case "SpeedModifierComponent":
+                        {
+                            entity.AddComponent(new Components.SpeedModifierComponent(1));
+                            break;
                         }
 
                 }

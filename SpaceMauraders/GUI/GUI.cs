@@ -79,7 +79,7 @@ namespace SpaceMauraders.GUI
 
         public static void DrawCircle(Vector2 position, int radius, Color color)
         {
-            spriteBatch.Draw(Utilities.TextureManager.gui[1], new Rectangle((int)position.X, (int)position.Y, radius, radius), null, color, 0f, new Vector2(radius  /2 , radius /2), SpriteEffects.None, 0f); 
+            spriteBatch.Draw(Utilities.TextureManager.gui[1], new Rectangle((int)position.X, (int)position.Y, radius, radius), null, color, 0f, new Vector2(radius, radius), SpriteEffects.None, 0f); 
             //spriteBatch.Draw(Utilities.TextureManager.gui[1], position, )
         }
 
@@ -129,6 +129,14 @@ namespace SpaceMauraders.GUI
 
         }
 
+        public static void DrawLine(Point[] points)
+        {
+            foreach (Point point in points)
+            {
+                DrawCircle(new Vector2(point.X, point.Y), 3, Color.Red);
+            }
+        }
+
         public static void DrawString(string text, Vector2 position, Color color)
         {
             //MakeBox(x, y, w, h, color1);
@@ -148,6 +156,27 @@ namespace SpaceMauraders.GUI
             spriteBatch.Draw(texture, position, Color.White);
         }
         
+
+        /// <summary>
+        ///  Draws a 2D array, made for drawing inventory
+        /// </summary>
+        /// <param name="_x">x position on the screen</param>
+        /// <param name="_y">y position on the screen</param>
+        /// <param name="_width">width of the box </param>
+        /// <param name="_height"> height of the box</param>
+        /// <param name="_rows">number of rows</param>
+        /// <param name="_collums">numer of collums</param>
+        /// <param name="color">color of boxes</param>
+        public static void Draw2dArray(int _x, int _y, int _width, int _height, int _rows, int _collums, int spacing, Color color)
+        {
+            for(int x = 0; x < _rows; x++)
+            {
+                for(int y = 0; y < _collums; y++)
+                {
+                    DrawBox(_x + (x * _width) + (x * spacing), _y + (y * _height) + (y * spacing), _width, _height, color);
+                }
+            }
+        }
 
         
     }

@@ -29,8 +29,8 @@ namespace SpaceMauraders.World
                 {
                     if (map[x, y] == walkableTile)
                     {
-                        this.map[x, y] = new Node(new Point((x * 128), (y * 128)));
-                        this.map[x, y].arrayPosition = new Point(x, y); 
+                        this.map[x, y] = new Node(new Point((x), (y)));
+                        //this.map[x, y].arrayPosition = new Point(x, y); 
                         allAvailiableNodes.Add( this.map[x,y] );
                     }
                     else
@@ -44,7 +44,7 @@ namespace SpaceMauraders.World
 
         public void DrawNodes()
         {
-            if (Utilities.Debug.debug)
+            if (Utilities.Debug.showBoundariesAndMesh)
             {
 
                 for (int x = 0; x < map.GetLength(0); x++)
@@ -53,7 +53,7 @@ namespace SpaceMauraders.World
                     {
                         if (map[x, y] != null)
                         {
-                            GUI.GUI.DrawCircle(new Vector2(map[x, y].arrayPosition.X * 128 , map[x, y].arrayPosition.Y * 128), 30, Color.LimeGreen * .5f);
+                            GUI.GUI.DrawCircle(new Vector2(map[x, y].arrayPosition.X * 128 + 64 - 15, map[x, y].arrayPosition.Y * 128 + 64 - 15), 30, Color.LimeGreen * .5f);
                             //GUI.GUI.DrawString(x.ToString() + " " + y.ToString(), new Vector2(map[x, y].nodePosition.X, map[x, y].nodePosition.Y), 1, 1, Color.White); 
                         }
                     }
@@ -62,8 +62,16 @@ namespace SpaceMauraders.World
         }
 
         public Node GetNode(int x, int y)
-        { 
-            return map[x, y]; 
+        {
+            try
+            {
+                return map[x, y];
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return FindNodeOnMesh(); 
+            }
         }
 
         public Node FindNodeOnMesh()

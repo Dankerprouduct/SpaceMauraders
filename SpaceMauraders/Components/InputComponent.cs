@@ -35,54 +35,41 @@ namespace SpaceMauraders.Components
 
             if (keyboardState.IsKeyDown(Keys.W))
             {
-                Event enityEvent = new Event();
-                enityEvent.id = "Entity";
-                enityEvent.parameters.Add("entity", entity);
-                entity.FireEvent(enityEvent);
-
                 Event moveEvent = new Event();
-                moveEvent.id = "move";
-                moveEvent.parameters.Add("Move Up", 2);
+                moveEvent.id = "AddVelocity";
+                moveEvent.parameters.Add("Velocity", new Vector2(0, -2));
                 entity.FireEvent(moveEvent);
             }
 
             if (keyboardState.IsKeyDown(Keys.S))
             {
-                Event enityEvent = new Event();
-                enityEvent.id = "Entity";
-                enityEvent.parameters.Add("entity", entity);
-                entity.FireEvent(enityEvent);
-
                 Event moveEvent = new Event();
-                moveEvent.id = "move";
-                moveEvent.parameters.Add("Move Down", 2);
+                moveEvent.id = "AddVelocity";
+                moveEvent.parameters.Add("Velocity", new Vector2(0, 2));
                 entity.FireEvent(moveEvent);
             }
 
             if (keyboardState.IsKeyDown(Keys.A))
             {
-                Event enityEvent = new Event();
-                enityEvent.id = "Entity";
-                enityEvent.parameters.Add("entity", entity);
-                entity.FireEvent(enityEvent);
-
                 Event moveEvent = new Event();
-                moveEvent.id = "move";
-                moveEvent.parameters.Add("Move Left", 2);
+                moveEvent.id = "AddVelocity";
+                moveEvent.parameters.Add("Velocity", new Vector2(-2, 0));
                 entity.FireEvent(moveEvent);
             }
 
             if (keyboardState.IsKeyDown(Keys.D))
             {
-                Event enityEvent = new Event();
-                enityEvent.id = "Entity";
-                enityEvent.parameters.Add("entity", entity);
-                entity.FireEvent(enityEvent);
-
                 Event moveEvent = new Event();
-                moveEvent.id = "move";
-                moveEvent.parameters.Add("Move Right", 2);
+                moveEvent.id = "AddVelocity";
+                moveEvent.parameters.Add("Velocity", new Vector2(2, 0));
                 entity.FireEvent(moveEvent);
+            }
+
+            if(keyboardState.IsKeyDown(Keys.Tab) && oldKeyboardState.IsKeyUp(Keys.Tab))
+            {
+                Event openInventoryEvent = new Event();
+                openInventoryEvent.id = "OpenInventory";
+                entity.FireEvent(openInventoryEvent); 
             }
 
 
