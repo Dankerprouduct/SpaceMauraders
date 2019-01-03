@@ -10,20 +10,19 @@ namespace SpaceMauraders.Entity
 {
     public class NPC: Entity
     {
+                
+        Body.Body testBody;
 
-        
-        
+        Systems.ParticleEmitter emittter = new Systems.ParticleEmitter(1);
 
-
-        
         public NPC(Vector2 position) : base()
         {
             this.position = position;
-            components.Add(new Components.SpeedModifierComponent(.95f));
+            components.Add(new Components.SpeedModifierComponent(.5f));
 
             components.Add(new Components.PhysicsComponent(this.id));
             
-            components.Add(new Components.InventoryComponent(id, 5,5));
+            //components.Add(new Components.InventoryComponent(id, 5,5));
 
              
             //goap
@@ -31,17 +30,69 @@ namespace SpaceMauraders.Entity
             position.X += 100;
             pathFinding = new World.Pathfinding();
 
-            
+            testBody = new Body.Body();
+            testBody.AddBodyPart(new Body.Torso(0, Vector2.Zero)
+            {
+                lerpSpeed = .2f,
+                turnAngle = 25
+            });
+            testBody.AddBodyPart(new Body.Head(1, new Vector2(-9, 0))
+            {
+                lerpSpeed = .2f,
+                turnAngle = 5,
+                scale = .5f
+            });
+            testBody.AddBodyPart(new Body.Hand(2, new Vector2(15, -22))
+            {
+                scale = .7f,
+                // try 25 for lols
+                lerpSpeed = .1f,
+                turnAngle = 10
+            });
+            testBody.AddBodyPart(new Body.Hand(2, new Vector2(15, 22))
+            {
+                scale = .7f,
+                lerpSpeed = .1f,
+                turnAngle = 10
+            });
 
 
+
+            Random random = new Random();
+            Systems.Particle particle = new Systems.Particle(position, 1, 0, 1, 0, 0, Color.White);
+            particle.turnAngle = 0;
+            particle.maxSize = 1;
+            particle.size = .3f;
+            particle.minSize = .001f;
+            particle.sizeRate = .99f;
+            particle.maxDampening = 98;
+            particle.minDampening = 99;
+            particle.fadeRate = .98f;
+            particle.minAngle = 0;
+            particle.maxAngle = 360;
+            particle.mass = 2.5f; 
+
+            Systems.Particle particle2 = new Systems.Particle(position, 1, 0, 1, 0, 0, Color.GhostWhite);
+            particle2.turnAngle = 0;
+            particle2.maxSize = 1;
+            particle2.size = .3f;
+            particle2.minSize = .001f;
+            particle2.sizeRate = .99f;
+            particle2.maxDampening = 98;
+            particle2.minDampening = 99;
+            particle2.fadeRate = .98f;
+            particle2.minAngle = 0;
+            particle2.maxAngle = 360;
+            particle2.mass = 2.5f; 
+
+            emittter.AddParticle(particle);
+            emittter.AddParticle(particle2);
+            //emittter.Toggle();
         }
 
-         
+
         public override void Update(GameTime gameTime)
         {
-
-
-
 
             // THIS IS MAGICAL CODE. FOR THE LOVE OF GOD DO NOT TOUCH
             // I PROMISE IT WILL SUMMON AN ELDER GOD IF RAN INCORRECTLY
@@ -49,21 +100,22 @@ namespace SpaceMauraders.Entity
 
             if (cellIndex != oldCellIndex)
             {
-                Game1.world.dynamicCellSpacePartition.ChangeCell(this); 
+                Game1.world.dynamicCellSpacePartition.ChangeCell(this);
                 cellIndex = GetCenterPartition();
-                SetCellIndex(cellIndex); 
+                SetCellIndex(cellIndex);
                 //Console.WriteLine("Switched to partition " + GetCenterPartition());
             }
-            
+            /*
+            Vector2 direction = currentPathingTarget - position;
+            direction.Normalize();
+            rotation = (float)Math.Atan2(direction.Y, direction.X);
+            */
+            testBody.Update(position, rotation);
+            emittter.Update();
+            emittter.position = position;
             //Console.WriteLine(cellIndex); 
             base.Update(gameTime);
-        }
-
-        
-
-        
-            
-        
+        }        
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -89,7 +141,9 @@ namespace SpaceMauraders.Entity
                     //GUI.GUI.DrawLine(raycast.points[0].ToVector2(), raycast.points[raycast.points.Count - 1].ToVector2(), 3, Color.Red); 
                 }
             }
-            spriteBatch.Draw(Utilities.TextureManager.sprites[0], position, Color.White);
+
+            testBody.Draw(spriteBatch); 
+            //spriteBatch.Draw(Utilities.TextureManager.sprites[0], position, Color.White);
             base.Draw(spriteBatch);
         }
 

@@ -18,7 +18,7 @@ namespace SpaceMauraders.Utilities
         public LuaConsole()
         {
             lastPressedKeys = new Keys[0];
-            text = "";
+            text = "SpawnEntity(\"NPC\")";
         }
 
         public void Update()

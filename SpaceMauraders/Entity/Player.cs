@@ -4,49 +4,104 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework; 
+using Microsoft.Xna.Framework;
 
 namespace SpaceMauraders.Entity
 {
     public class Player: Entity
     {
-        
 
+        Systems.ParticleEmitter emittter = new Systems.ParticleEmitter(2);
+        Body.Body testBody;
+        
         public Player(Vector2 position):base()
         {
             this.position = position;
             this.collisionRectanlge = new Rectangle((int)position.X, (int)position.Y, Utilities.TextureManager.sprites[0].Width, Utilities.TextureManager.sprites[0].Height);
             
             components.Add(new Components.InputComponent(this.id));
-            //components.Add(new Components.SpeedModifierComponent(5)); 
+            components.Add(new Components.SpeedModifierComponent(1)); 
+             //components.Add(new Components.SpeedModifierComponent(.5f));
             components.Add(new Components.PhysicsComponent(this.id));
             
             components.Add(new Components.TriggerColliderComponent());
 
-            components.Add(new Components.InventoryComponent(id, 5,5)); 
+            components.Add(new Components.InventoryComponent(2,10));
+            components.Add(new Components.PointTowardsMouseComponent());
+            
+
+            Random random = new Random();
+            emittter.AddParticle(new Systems.Particle(position, 1, random.Next(0, 360), 5, 0, 0, Color.White));
+            //emittter.AddParticle(new Systems.Particle(position, 1, random.Next(0, 360), 5, 10, 0, Color.Red));
+            //emittter.AddParticle(new Systems.Particle(position, 1, random.Next(0, 360), 5, 10, 0, Color.Orange));
+            //emittter.AddParticle(new Systems.Particle(position, 1, random.Next(0, 360), 5, 10, 0, Color.Black));
+            //emittter.Toggle(); 
+
+            testBody = new Body.Body();
+            testBody.AddBodyPart(new Body.Torso(0, Vector2.Zero)
+            {
+                lerpSpeed = .2f,
+                turnAngle = 25
+            });
+            testBody.AddBodyPart(new Body.Head(1, new Vector2(-9, 0))
+            {
+                lerpSpeed = .2f,
+                turnAngle = 5,
+                scale = .5f
+            });
+            testBody.AddBodyPart(new Body.Hand(2, new Vector2(15, -22))
+            {
+                scale = .7f,
+                // try 25 for lols
+                lerpSpeed = .1f,
+                turnAngle = 10
+            });
+            testBody.AddBodyPart(new Body.Hand(2, new Vector2(15, 22))
+            {
+                scale = .7f,
+                lerpSpeed = .1f,
+                turnAngle = 10
+            });
+
+
+            Components.Event addItem = new Components.Event();
+            addItem.id = "AddItem";
+            addItem.parameters.Add("itemId", 0);
+
+            for (int i =0; i < 40; i++)
+            {
+                FireEvent(addItem); 
+            }
+
+            Components.Event removeItem = new Components.Event();
+            removeItem.id = "RemoveItem";
+            removeItem.parameters.Add("itemId", 0);
+            //FireEvent(removeItem);
+            FireEvent(removeItem);
+
         }
 
 
         public override void Update(GameTime gameTime)
         {
-                        
+
+            emittter.Update(); 
+            emittter.position = position;
+            
+            testBody.Update(position, rotation); 
+
             base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            //Utilities.Raycast ray = new Utilities.Raycast();
-            //ray.MakeRay(4, 10, 3000, this);
-
-            
-            spriteBatch.Draw(Utilities.TextureManager.sprites[0], position, Color.White);
-            //ray.DrawRay();
+            testBody.Draw(spriteBatch); 
             base.Draw(spriteBatch);
         }
 
         public void DrawInventory()
         {
-            ((Components.InventoryComponent)GetComponent("InventoryComponent")).DrawInventory();
+            ((Components.InventoryComponent)GetComponent("InventoryComponent")).Draw();
         }
 
     }

@@ -84,7 +84,15 @@ namespace SpaceMauraders.Utilities
                 if(keyboardState.IsKeyDown(Keys.Enter) && oldKeyboardState.IsKeyUp(Keys.Enter))
                 {
                     LoadLuaFunctions();
-                    debugLua.DoString(luaConsole.text);
+                    try
+                    {
+                        debugLua.DoString(luaConsole.text);
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine(ex.ToString());
+                    }
+                    
                     //luaConsole.text = ""; 
                 }
             }

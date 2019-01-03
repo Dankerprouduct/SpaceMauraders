@@ -15,7 +15,7 @@ namespace SpaceMauraders.Components
             componentName = "SpeedModifierComponent";
             speedModifier = modifier;
         }
-
+        
         public override bool FireEvent(Event _event)
         {
 

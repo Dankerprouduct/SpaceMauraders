@@ -15,12 +15,12 @@ namespace SpaceMauraders
         public static Game1 game;
         public static Random random = new Random();
 
-        Utilities.Camera camera;
+        public static Utilities.Camera camera;
         public static Utilities.Debug debug; 
 
         public static World.World world;
 
-        public static int width = 1920;
+        public static int width = 1280;
         public static int height = 0; 
 
         public static Vector2 worldPosition;
@@ -54,7 +54,7 @@ namespace SpaceMauraders
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Utilities.TextureManager.LoadContent(Content);
-
+            Systems.ParticleSystem.Init(10000);
 
             world = new World.World(10, 10);
 
@@ -102,6 +102,9 @@ namespace SpaceMauraders
                 world.Update(gameTime);
                                
             }
+            Systems.ParticleSystem.Update(gameTime);
+
+
             debug.Update(); 
             game = this;
             camera.Update(ref game); 
@@ -116,6 +119,8 @@ namespace SpaceMauraders
             world.Draw(spriteBatch);
 
             player.Draw(spriteBatch);
+            Systems.ParticleSystem.Draw(spriteBatch);
+
             // Draw2dArray(x, y, width, height, rows, collums)
             spriteBatch.End();
             

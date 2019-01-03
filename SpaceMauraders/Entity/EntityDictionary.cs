@@ -63,7 +63,7 @@ namespace SpaceMauraders.Entity
                         }
                     case "InventoryComponent":
                         {
-                            entity.AddComponent(new Components.InventoryComponent(entity.id, 5,5)); 
+                            entity.AddComponent(new Components.InventoryComponent(5,5)); 
                             break; 
                         }
                     case "TriggerColliderComponent":

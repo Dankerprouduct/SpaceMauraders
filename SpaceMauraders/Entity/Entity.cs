@@ -21,6 +21,8 @@ namespace SpaceMauraders.Entity
         public int cellY;
         public int cellIndex; // holds current cell
         public int oldCellIndex;
+        public float rotation;
+        public Vector2 currentPathingTarget; 
 
         Thread componentThread; 
 
@@ -84,8 +86,10 @@ namespace SpaceMauraders.Entity
             }
         }
 
+        // TODO replace with LINQ 
         public Components.Component GetComponent(string name)
         {
+
             for(int i = 0; i < components.Count; i++)
             {
                 if(components[i].componentName == name)
@@ -107,11 +111,14 @@ namespace SpaceMauraders.Entity
         #region Pathfinding
         public void MoveTo(Vector2 target)
         {
+            currentPathingTarget = target;
             Vector2 direction = target - position;
             if (direction.Length() != 0)
             {
                 direction.Normalize();
             }
+
+            rotation = Utilities.MathHelper.RotationFromVector2(target, position);
 
             Components.Event velocityEvent = new Components.Event();
             velocityEvent.id = "AddVelocity";
@@ -123,6 +130,7 @@ namespace SpaceMauraders.Entity
         public void FindPathTo(Vector2 target)
         {
             raycast = new Utilities.Raycast(position, target);
+            //rotation = Utilities.MathHelper.RotationFromVector2(position, Game1.player.position);
 
             if (!isPathing)
             {
@@ -137,35 +145,35 @@ namespace SpaceMauraders.Entity
                     Pathfind(target); 
                     //tartPathfindingThread(target);
                     isPathing = true;
+                    //Console.WriteLine("1");
                 }
                 else
                 {// dedicate thread =. path 
+                    
                     if ((Vector2.Distance(target, position) <= 128 * 3) &&
                         (Vector2.Distance(target, position) >= 128 * 1))
                     {
                         MoveTo(target);
+                        //Console.WriteLine("2");
                     }
+
+                    // turn toward target if theyre close enough
+                    if (Vector2.Distance(target, position) <= 128 * 5)
+                    {
+                        rotation = Utilities.MathHelper.RotationFromVector2(target, position);
+                    }
+                    
                 }
             }
 
             if (isPathing)
             {
                 Pathfind(target);
+                //Console.WriteLine("3");
                 //StartPathfindingThread(target);
             }
         }
         
-        void StartPathfindingThread(Vector2 target)
-        {
-            
-            //pathingThread = new Thread(() => Pathfind(target));
-            //if (!pathingThread.IsAlive)
-            //{
-            //    pathingThread.Start();
-            //}
-            //pathingThread.Join();
-            
-        }
 
         void Pathfind(Vector2 target)
         {

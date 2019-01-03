@@ -185,7 +185,7 @@ namespace SpaceMauraders.Components
                             Vector2 toAgent = position - Game1.world.dynamicCellSpacePartition.dynamicCells[cellIndex].members[i].GetCenter();
                             Vector2 origanal = toAgent;
                             toAgent.Normalize();
-                            steeringForce += (toAgent / origanal.Length()) * 1;
+                            steeringForce += (toAgent / origanal.Length()) * 8;
                         }
                     }
                 }
@@ -228,8 +228,10 @@ namespace SpaceMauraders.Components
             entity.oldPosition = entity.position;
 
             velocity *= .85f;
-            velocity += Separation();
-
+            if (!(entity is Entity.Player))
+            {
+                velocity += Separation();
+            }
 
             float j = 1.2f; 
             entity.position.X += (int)velocity.X;

@@ -99,3 +99,12 @@ D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Newtonsoft
 D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Newtonsoft.Json.xml
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\KeraLua.dll
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\NLua.dll
+D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\KeraLua.dll
+D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\NLua.dll
+D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Particles\CircleParticle.xnb
+D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Sprites\FederationSoilder.xnb
+D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Sprites\Heads\FederationSoilderHead.xnb
+D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Sprites\BodyParts\FederationSoilderBody.xnb
+D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Sprites\BodyParts\FederationSoilderHead.xnb
+D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Sprites\BodyParts\FederationSoilderHand.xnb
+D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\GUI\Items\LaserRifle.xnb

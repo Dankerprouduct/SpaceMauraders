@@ -40,7 +40,7 @@ namespace SpaceMauraders.Utilities
             direction.Normalize();
 
             angle = (float)Math.Atan2(direction.Y, direction.X);
-            angle = MathHelper.ToDegrees(angle);
+            angle = Microsoft.Xna.Framework.MathHelper.ToDegrees(angle);
         }
 
 
@@ -48,8 +48,8 @@ namespace SpaceMauraders.Utilities
         {
 
             points = new List<Point>(); 
-            float cosX = (float)(Math.Cos(MathHelper.ToRadians(angle)));
-            float cosY = (float)(Math.Sin(MathHelper.ToRadians(angle)));
+            float cosX = (float)(Math.Cos(Microsoft.Xna.Framework.MathHelper.ToRadians(angle)));
+            float cosY = (float)(Math.Sin(Microsoft.Xna.Framework.MathHelper.ToRadians(angle)));
 
             for (int i = 0; i < distance; i += step)
             {

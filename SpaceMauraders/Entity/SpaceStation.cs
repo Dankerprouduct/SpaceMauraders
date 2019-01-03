@@ -45,7 +45,6 @@ namespace SpaceMauraders.Entity
         void BuildStation()
         {
 
-
             BuildRings(125, 175);
 
 

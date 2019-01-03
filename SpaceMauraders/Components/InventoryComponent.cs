@@ -6,105 +6,191 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using SpaceMauraders.Entity;
 using SpaceMauraders.GUI;
+using Microsoft.Xna.Framework.Graphics; 
 
 namespace SpaceMauraders.Components
 {
     public class InventoryComponent: Component
     {
-
-        bool showInventory; 
-        public Entity.Entity[,] inventory;
         public int width;
-        public int height; 
+        public int height;
 
-        public InventoryComponent()
-        {
-        }
+        // kind of the "backpack" of the entity
+        public int[,] inventory; 
 
-        public InventoryComponent(int parentID, int width, int height) : base(parentID)
-        {
-            this.width = width;
-            this.height = height; 
+        // whats currently in the entity's hand
+        public int primarySlot;
+        public int secondarySlot;
 
-            InitializeInventory(width, height); 
-        }
+        // determines whether or not the inventory is drawn.
+        public bool drawInventory; 
 
-        void InitializeInventory(int width, int height)
+        /// <summary>
+        /// Initializes the inventory. inventory size is determined by width * height
+        /// </summary>
+        /// <param name="inventoryWidth"></param>
+        /// <param name="inventoryHeight"></param>
+        public InventoryComponent(int inventoryWidth, int inventoryHeight): base()
         {
             componentName = "InventoryComponent"; 
-            inventory = new Entity.Entity[width, height];
-            
-            for(int x = 0; x < width; x++)
-            {
-                for(int y = 0; y < height; y++)
-                {
-                    inventory[x, y] = new Entity.Entity(); 
-                }
-            }
+
+            width = inventoryWidth;
+            height = inventoryHeight; 
+            InitializeInventory(inventoryWidth, inventoryHeight);
+
+            /*
+            inventory[1, 1] = 0;
+            inventory[0, 3] = 0;
+            inventory[1, 8] = 0;
+            inventory[0, 5] = 0;
+            */
+
 
         }
 
+        void InitializeInventory(int inventoryWidth, int inventoryHeight)
+        {
+            inventory = new int[inventoryWidth, inventoryHeight];
+
+            for(int y = 0; y < inventoryHeight; y++)
+            {
+                for(int x = 0; x < inventoryWidth; x++)
+                {
+                    // -1 empty Item
+                    inventory[x, y] = -1; 
+                }
+            }
+        }
+
+        /// <summary>
+        /// Takes event from "the world" or from the entity
+        /// </summary>
+        /// <param name="_event"></param>
+        /// <returns></returns>
         public override bool FireEvent(Event _event)
         {
-            switch (_event.id)
+            if(_event.id == "AddItem")
             {
-                case "AddItem":
-                    {
-                        foreach(KeyValuePair<string, object> parameter in _event.parameters)
-                        {
-                            AddItem((Entity.Entity)parameter.Value); 
-                        }
-                        break; 
-                    }
-                case "RemoveItem":
-                    {
-                        foreach (KeyValuePair<string, object> parameter in _event.parameters)
-                        {
-                            RemoveItem((Entity.Entity)parameter.Value);
-                        }
-                        break;
-                    }
-                
+                AddItem((int)_event.parameters["itemId"]);
+                return true;
+            }
+
+            if(_event.id == "RemoveItem")
+            {
+                RemoveItem((int)_event.parameters["itemId"]);
+                return true; 
             }
 
             if(_event.id == "OpenInventory")
             {
-                showInventory = !showInventory;
+                ToggleDraw(); 
             }
 
-            return base.FireEvent(_event);
+            return false; 
+        }
+
+
+        /// <summary>
+        /// finds empty slot and places item in. Item Stacking not currently implemented
+        /// </summary>
+        /// <param name="itemId"></param>
+        private void AddItem(int itemId)
+        {
+            for(int y =  0; y < height; y++)
+            {
+                for(int x = 0; x < width; x++)
+                {
+                    if(inventory[x,y] == -1)
+                    {
+                        inventory[x, y] = itemId;
+                        return; 
+                    }
+                }
+            }
         }
 
         /// <summary>
-        /// Adds Item to inventory
+        /// finds item with the same id and then removes it by setting it to id -1 (Empty)
         /// </summary>
-        /// <param name="entity"></param>
-        public void AddItem(Entity.Entity entity)
+        /// <param name="itemId"></param>
+        private void RemoveItem(int itemId)
         {
-            for(int i = 0; i < inventory.Length; i++)
+            for(int y = 0; y < height; y++)
             {
-                
+                for(int x = 0; x < width; x++)
+                {
+                    if(inventory[x,y] == itemId)
+                    {
+                        inventory[x, y] = -1;
+                        return;
+                    }
+                }
+            }
+        }
+        
+        /// <summary>
+        /// swaps inventory with one of the slots
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z">1 = primary slot, 2 = secondary slot</param>
+        public void Swap(int x, int y, int z)
+        {
+            if (z == 1)
+            {
+                int tempItemID = primarySlot;
+                primarySlot = inventory[x, y];
+                inventory[x, y] = tempItemID;
+            }
+            if(z == 2)
+            {
+                int tempItemID = secondarySlot;
+                secondarySlot = inventory[x, y];
+                inventory[x, y] = tempItemID;
             }
         }
 
-        public void RemoveItem(Entity.Entity entity)
+        public void ToggleDraw()
         {
-
+            drawInventory = !drawInventory; 
         }
 
         public override void Update(GameTime gameTime, Entity.Entity entity)
         {
-
             base.Update(gameTime, entity);
         }
 
-        public void DrawInventory()
+
+        public void Draw()
         {
-            if (showInventory)
+            int _x = 100;
+            int _y = 40;
+            int boxWidth = 130;
+            int boxHeight = 50;
+            int _rows = width;
+            int _collums = height;
+            int spacing = 5; 
+            if (drawInventory)
             {
-                GUI.GUI.Draw2dArray(100, 100, 32, 32, 5, width,height, Color.Red * .5f);
-                GUI.GUI.Draw2dArray(120 + (width * 32 + 5 ), 100, 32, 32, 1, 3, 5, Color.IndianRed *.5f); 
+                GUI.GUI.Draw2dArray(_x, _y, boxWidth, boxHeight, width, height, spacing, Color.Teal);
+                for (int x = 0; x < inventory.GetLength(0); x++)
+                {
+                    for (int y = 0; y < inventory.GetLength(1); y++)
+                    {
+
+                        if (inventory[x, y] != -1)
+                        {
+                            GUI.GUI.DrawTexture(
+                                Utilities.TextureManager.guiItemTextures[inventory[x, y]],
+                                new Vector2(_x + (x * boxWidth) + (x * spacing),
+                                _y + (y * boxHeight) + (y * spacing)));
+                        }
+                    }
+                }
             }
         }
+
+
+
     }
 }
