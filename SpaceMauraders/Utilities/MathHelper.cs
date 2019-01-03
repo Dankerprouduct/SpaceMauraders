@@ -11,7 +11,11 @@ namespace SpaceMauraders.Utilities
     {
         public static float CurveAngle(float from, float to, float step)
         {
-            if (step == 0) return from;
+            if (step == 0)
+            {
+                return from;
+            }
+
             if (from == to || step == 1) return to;
 
             Vector2 fromVector = new Vector2((float)Math.Cos(from), (float)Math.Sin(from));

@@ -12,7 +12,8 @@ namespace SpaceMauraders.Entity.Items.Weapons
         {
             itemID = 1;
             guiItemID = 1;
-            worldItemTextureID = 1;  
+            worldItemTextureID = 1;
+            entityName = "Laser Rifle"; 
         }
 
         public override void Use()

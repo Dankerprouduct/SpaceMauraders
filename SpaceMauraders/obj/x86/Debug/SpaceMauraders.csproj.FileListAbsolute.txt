@@ -108,3 +108,10 @@ D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Sp
 D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Sprites\BodyParts\FederationSoilderHead.xnb
 D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Sprites\BodyParts\FederationSoilderHand.xnb
 D:\Projects\Game1\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\GUI\Items\LaserRifle.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Sprites\Heads\FederationSoilderHead.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Sprites\BodyParts\FederationSoilderBody.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Sprites\BodyParts\FederationSoilderHand.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Sprites\BodyParts\FederationSoilderHead.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\GUI\Items\LaserRifle.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Sprites\FederationSoilder.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Particles\CircleParticle.xnb

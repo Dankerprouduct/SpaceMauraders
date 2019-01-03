@@ -55,6 +55,7 @@ namespace SpaceMauraders
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Utilities.TextureManager.LoadContent(Content);
             Systems.ParticleSystem.Init(10000);
+            Entity.Items.ItemDictionary.LoadItemDatabase();
 
             world = new World.World(10, 10);
 
@@ -77,7 +78,6 @@ namespace SpaceMauraders
 
             Console.WriteLine("Number of Entities: " + Entity.Entity.nextAvailibleID);
 
-            Entity.EntityDictionary.Init(); 
         }
         
         protected override void UnloadContent()
@@ -131,8 +131,8 @@ namespace SpaceMauraders
             if (Utilities.Debug.showTextualDebug)
             {
 
-                GUI.GUI.DrawString("Mouse Position: " + Game1.worldPosition.ToString(), new Vector2(10, 10),1,1, Color.White);
-                GUI.GUI.DrawString("Cell Mouse Position: " + (Game1.worldPosition / 128).ToPoint(), new Vector2(10, 30), 1, 1, Color.White);
+                GUI.GUI.DrawString("Mouse Position: " + worldPosition.ToString(), new Vector2(10, 10),1,1, Color.White);
+                GUI.GUI.DrawString("Cell Mouse Position: " + (worldPosition / 128).ToPoint(), new Vector2(10, 30), 1, 1, Color.White);
                 GUI.GUI.DrawString("Cell Position: " + player.GetCenterPartition().ToString(), new Vector2(10, 50), 1, 1, Color.White);
                 try
                 {

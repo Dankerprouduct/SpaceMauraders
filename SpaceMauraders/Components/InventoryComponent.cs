@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using SpaceMauraders.Entity;
-using SpaceMauraders.GUI;
-using Microsoft.Xna.Framework.Graphics; 
+using Microsoft.Xna.Framework.Input; 
+
 
 namespace SpaceMauraders.Components
 {
@@ -14,16 +13,25 @@ namespace SpaceMauraders.Components
     {
         public int width;
         public int height;
+        private int xOffset = 100;
+        private int yOffset = 40;
+        private int boxWidth = 130;
+        private int boxHeight = 50;
+        private int spacing = 5;
 
         // kind of the "backpack" of the entity
         public int[,] inventory; 
 
         // whats currently in the entity's hand
-        public int primarySlot;
+        public int primarySlot = -1; 
         public int secondarySlot;
 
         // determines whether or not the inventory is drawn.
-        public bool drawInventory; 
+        public bool drawInventory;
+        
+        // inputs
+        private MouseState currentMouseState;
+        private MouseState previousMouseState; 
 
         /// <summary>
         /// Initializes the inventory. inventory size is determined by width * height
@@ -35,7 +43,7 @@ namespace SpaceMauraders.Components
             componentName = "InventoryComponent"; 
 
             width = inventoryWidth;
-            height = inventoryHeight; 
+            height = inventoryHeight;
             InitializeInventory(inventoryWidth, inventoryHeight);
 
             /*
@@ -88,8 +96,7 @@ namespace SpaceMauraders.Components
 
             return false; 
         }
-
-
+        
         /// <summary>
         /// finds empty slot and places item in. Item Stacking not currently implemented
         /// </summary>
@@ -150,6 +157,16 @@ namespace SpaceMauraders.Components
             }
         }
 
+        /// <summary>
+        /// Adds primary slot item back to inventory 
+        /// </summary>
+        public void SwapPrimary()
+        {
+            AddItem(primarySlot);
+            primarySlot = -1;
+        }
+        
+
         public void ToggleDraw()
         {
             drawInventory = !drawInventory; 
@@ -157,22 +174,71 @@ namespace SpaceMauraders.Components
 
         public override void Update(GameTime gameTime, Entity.Entity entity)
         {
-            base.Update(gameTime, entity);
+            if (drawInventory)
+            {
+                Point mousePoint = new Point(Mouse.GetState().X, Mouse.GetState().Y);
+                currentMouseState = Mouse.GetState(); 
+               
+                for (int x = 0; x < inventory.GetLength(0); x++)
+                {
+                    for (int y = 0; y < inventory.GetLength(1); y++)
+                    {
+
+                        if (inventory[x, y] != -1)
+                        {
+                            Rectangle rectangle = new Rectangle(xOffset + (x * boxWidth) + (x * spacing),
+                                yOffset + (y * boxHeight) + (y * spacing), boxWidth, boxHeight);
+
+                            if (rectangle.Contains(mousePoint))
+                            {
+                                if (currentMouseState.LeftButton == ButtonState.Pressed &&
+                                    previousMouseState.LeftButton == ButtonState.Released)
+                                {
+                                    Console.WriteLine("Clicked " + Entity.Items.ItemDictionary.itemDictinary[ inventory[x, y] ].entityName);
+                                    Swap(x,y,1);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (new Rectangle(
+                    xOffset + xOffset + (inventory.GetLength(0) * (boxWidth / 2)) + (inventory.GetLength(0) * spacing) +
+                    50,
+                    yOffset, boxWidth, boxHeight).Contains(mousePoint))
+                {
+                    if(currentMouseState.LeftButton == ButtonState.Pressed &&
+                      previousMouseState.LeftButton == ButtonState.Released)
+                    {
+                        SwapPrimary();
+                    }
+                }
+
+                previousMouseState = currentMouseState; 
+                base.Update(gameTime, entity);
+            }
         }
 
 
         public void Draw()
         {
-            int _x = 100;
-            int _y = 40;
-            int boxWidth = 130;
-            int boxHeight = 50;
-            int _rows = width;
-            int _collums = height;
-            int spacing = 5; 
+            
             if (drawInventory)
             {
-                GUI.GUI.Draw2dArray(_x, _y, boxWidth, boxHeight, width, height, spacing, Color.Teal);
+                GUI.GUI.Draw2dArray(xOffset, yOffset, boxWidth, boxHeight, width, height, spacing, Color.Teal);
+                GUI.GUI.DrawBox(
+                    new Rectangle(xOffset + xOffset + (inventory.GetLength(0) * (boxWidth / 2)) + (inventory.GetLength(0) * spacing) + 50,
+                        yOffset, boxWidth, boxHeight)
+                    ,Color.Teal);
+                if (primarySlot != -1)
+                {
+                    GUI.GUI.DrawTexture(Utilities.TextureManager.guiItemTextures[primarySlot],
+                        new Vector2(
+                            xOffset + xOffset + (inventory.GetLength(0) * (boxWidth / 2)) +
+                            (inventory.GetLength(0) * spacing) + 50,
+                            yOffset));
+                }
+
                 for (int x = 0; x < inventory.GetLength(0); x++)
                 {
                     for (int y = 0; y < inventory.GetLength(1); y++)
@@ -182,8 +248,10 @@ namespace SpaceMauraders.Components
                         {
                             GUI.GUI.DrawTexture(
                                 Utilities.TextureManager.guiItemTextures[inventory[x, y]],
-                                new Vector2(_x + (x * boxWidth) + (x * spacing),
-                                _y + (y * boxHeight) + (y * spacing)));
+                                new Vector2(xOffset + (x * boxWidth) + (x * spacing),
+                                yOffset + (y * boxHeight) + (y * spacing)));
+
+                            
                         }
                     }
                 }

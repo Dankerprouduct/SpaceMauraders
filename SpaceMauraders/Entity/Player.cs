@@ -31,11 +31,22 @@ namespace SpaceMauraders.Entity
             
 
             Random random = new Random();
-            emittter.AddParticle(new Systems.Particle(position, 1, random.Next(0, 360), 5, 0, 0, Color.White));
+            emittter.AddParticle(new Systems.Particle(position, 1, random.Next(0, 360), 5, 0, 0, Color.White)
+            {
+                fadeRate = .95f,
+                maxDampening =98,
+                minDampening =  95,
+                minSpeed = 1,
+                minAngle = -30 - 180,
+                maxAngle = 30 - 180,
+                size = .2f,
+                minSize = .001f
+            });
             //emittter.AddParticle(new Systems.Particle(position, 1, random.Next(0, 360), 5, 10, 0, Color.Red));
             //emittter.AddParticle(new Systems.Particle(position, 1, random.Next(0, 360), 5, 10, 0, Color.Orange));
             //emittter.AddParticle(new Systems.Particle(position, 1, random.Next(0, 360), 5, 10, 0, Color.Black));
-            //emittter.Toggle(); 
+            emittter.Toggle(); 
+
 
             testBody = new Body.Body();
             testBody.AddBodyPart(new Body.Torso(0, Vector2.Zero)
@@ -68,7 +79,7 @@ namespace SpaceMauraders.Entity
             addItem.id = "AddItem";
             addItem.parameters.Add("itemId", 0);
 
-            for (int i =0; i < 40; i++)
+            for (int i =0; i < 2; i++)
             {
                 FireEvent(addItem); 
             }
