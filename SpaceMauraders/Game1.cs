@@ -54,7 +54,7 @@ namespace SpaceMauraders
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Utilities.TextureManager.LoadContent(Content);
-            Systems.ParticleSystem.Init(10000);
+            Systems.ParticleSystem.Init(20000);
             Entity.Items.ItemDictionary.LoadItemDatabase();
 
             world = new World.World(10, 10);
@@ -143,6 +143,7 @@ namespace SpaceMauraders
                 {
                     
                 }
+                GUI.GUI.DrawString("Active Particles: " + Systems.ParticleSystem.currentParticles, new Vector2(10, 90), 1, 1, Color.White);
             }
 
             // draw inventory gui

@@ -261,9 +261,11 @@ namespace SpaceMauraders.Components
 
         public Event FireCollisionEvent(Entity.Entity entity)
         {
-            entity.collisionRectanlge = new Rectangle((int)entity.position.X, (int)entity.position.Y,
-                Utilities.TextureManager.sprites[0].Width,
-                Utilities.TextureManager.sprites[0].Height);
+            entity.collisionRectanlge = new Rectangle(
+                (int)entity.position.X - (int)(Utilities.MathHelper.CenterOfImage(Utilities.TextureManager.bodyParts[0]).X * .5f),
+                (int)entity.position.Y - (int)(Utilities.MathHelper.CenterOfImage(Utilities.TextureManager.bodyParts[0]).Y * .5f),
+                (int)(Utilities.TextureManager.bodyParts[0].Width * .5f),
+                (int)(Utilities.TextureManager.bodyParts[0].Height * .5f));
             
             Event physicsEvent = new Event
             {

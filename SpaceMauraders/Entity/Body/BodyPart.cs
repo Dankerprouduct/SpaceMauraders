@@ -10,13 +10,14 @@ namespace SpaceMauraders.Entity.Body
 {
     public class BodyPart
     {
-        int textureID;
+        public int textureID;
         public float scale = .5f; 
         public float rotation;
         public Vector2 positon;
         public Vector2 center;
         public Vector2 offset;
-        public Vector2 currentOffset; 
+        public Vector2 currentOffset;
+        public Rectangle bounds;
 
         public float turnAngle = 5;
         public float lerpSpeed = .2f;

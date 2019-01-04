@@ -12,6 +12,7 @@ namespace SpaceMauraders.Systems
     {
         public static Particle[] particles; 
         static int poolSize;
+        public static int currentParticles;
 
 
         public static void Init(int _poolSize)
@@ -71,7 +72,6 @@ namespace SpaceMauraders.Systems
             }
         }
 
-        public static int currentParticles; 
         public static void Update(GameTime gameTime)
         {
             currentParticles = 0; 

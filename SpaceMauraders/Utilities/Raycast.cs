@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Xna.Framework; 
+using Microsoft.Xna.Framework;
+
 
 namespace SpaceMauraders.Utilities
 {
@@ -12,7 +13,11 @@ namespace SpaceMauraders.Utilities
 
         public List<Point> points;
         Point rayP1;
-        Point hit;
+
+        /// <summary>
+        /// the point at which the ray hit
+        /// </summary>
+        public Point hit;
         // Origin of raycast in world space.
         Vector2 originPosition;
         // Target of raycast in world space.
@@ -31,6 +36,11 @@ namespace SpaceMauraders.Utilities
 
         }
 
+        /// <summary>
+        /// Initializes Ray
+        /// </summary>
+        /// <param name="rayOrigin">start point </param>
+        /// <param name="rayTarget">end point </param>
         public Raycast(Vector2 rayOrigin, Vector2 rayTarget)
         {
             originPosition = rayOrigin;
@@ -44,6 +54,13 @@ namespace SpaceMauraders.Utilities
         }
 
 
+        /// <summary>
+        /// Creates the ray
+        /// </summary>
+        /// <param name="entity">entity making the ray</param>
+        /// <param name="distance">max distance</param>
+        /// <param name="step">incremental checks</param>
+        /// <returns></returns>
         public bool MakeRay(Entity.Entity entity, int distance, int step = 5)
         {
 
@@ -79,8 +96,95 @@ namespace SpaceMauraders.Utilities
             //Console.WriteLine("didnt hit " + false); 
             return false; 
         }
-        
 
+        /// <summary>
+        /// Creates a Ray
+        /// </summary>
+        /// <param name="entity">>the entity that sends the "Ray" event</param>
+        /// <param name="distance">the distance that the ray travels from</param>
+        /// <param name="angle">the angle of the ray</param>
+        /// <param name="step">the step that the ray takes/param>
+        /// <returns></returns>
+        public bool MakeRay(Entity.Entity entity, int distance, float angle, int step = 5)
+        {
+
+            points = new List<Point>();
+            float cosX = (float)(Math.Cos(angle));
+            float cosY = (float)(Math.Sin(angle));
+
+            for (int i = 0; i < distance; i += step)
+            {
+                int x = (int)(cosX * i) + (int)entity.position.X;
+                int y = (int)(cosY * i) + (int)entity.position.Y;
+
+                Point rayPoint = new Point(x, y);
+                //Console.WriteLine(rayPoint);
+                Components.Event rayEvent = new Components.Event();
+                rayEvent.id = "RayHit";
+                rayEvent.parameters.Add("Ray", rayPoint);
+                rayP1 = rayPoint;
+
+
+                points.Add(rayPoint);
+                //Game1.world.FireGlobal()
+                if (Game1.world.FireGlobalEvent(rayEvent, entity))
+                {
+                    //Console.WriteLine("hit " + rayPoint  + " "+ Game1.world.FireGlobalEvent(rayEvent, entity));
+                    hit = rayPoint;
+                    return true;
+
+                }
+
+
+            }
+            //Console.WriteLine("didnt hit " + false); 
+            return false;
+        }
+
+        /// <summary>
+        /// Creates a ray
+        /// </summary>
+        /// <param name="entity">the entity that sends the "Ray" event</param>
+        /// <param name="position">the position that the ray extends from </param>
+        /// <param name="distance">the distance that the ray travels from</param>
+        /// <param name="angle">the angle of the ray</param>
+        /// <param name="step">the step that the ray takes</param>
+        /// <returns></returns>
+        public bool MakeRay(Entity.Entity entity, Vector2 position, int distance, float angle, int step = 5)
+        {
+
+            points = new List<Point>();
+            float cosX = (float)(Math.Cos(angle));
+            float cosY = (float)(Math.Sin(angle));
+
+            for (int i = 0; i < distance; i += step)
+            {
+                int x = (int)(cosX * i) + (int)position.X;
+                int y = (int)(cosY * i) + (int)position.Y;
+
+                Point rayPoint = new Point(x, y);
+                //Console.WriteLine(rayPoint);
+                Components.Event rayEvent = new Components.Event();
+                rayEvent.id = "RayHit";
+                rayEvent.parameters.Add("Ray", rayPoint);
+                rayP1 = rayPoint;
+
+
+                points.Add(rayPoint);
+                //Game1.world.FireGlobal()
+                if (Game1.world.FireGlobalEvent(rayEvent, entity))
+                {
+                    //Console.WriteLine("hit " + rayPoint  + " "+ Game1.world.FireGlobalEvent(rayEvent, entity));
+                    hit = rayPoint;
+                    return true;
+
+                }
+
+
+            }
+            //Console.WriteLine("didnt hit " + false); 
+            return false;
+        }
 
 
     }

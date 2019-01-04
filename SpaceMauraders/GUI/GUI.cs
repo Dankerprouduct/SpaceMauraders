@@ -129,6 +129,10 @@ namespace SpaceMauraders.GUI
 
         }
 
+        /// <summary>
+        /// Takes an array of points to draw a line of circles (Made for visualising raycasts)
+        /// </summary>
+        /// <param name="points">an array of points</param>
         public static void DrawLine(Point[] points)
         {
             foreach (Point point in points)

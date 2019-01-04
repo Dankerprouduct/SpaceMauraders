@@ -3,18 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Xna.Framework; 
+using Microsoft.Xna.Framework;
+using SpaceMauraders.Systems;
 
-namespace SpaceMauraders.Systems
+namespace SpaceMauraders.Entity
 {
-    public class ParticleEmitter
+    public class ParticleEmitter : Entity
     {
         public bool active; 
         public int intensity;
-        public Vector2 position; 
         private List<Particle> particles = new List<Particle>();
 
-        public ParticleEmitter(int intensity)
+        public ParticleEmitter(int intensity): base()
+        {
+            this.intensity = intensity;
+            //this.active = true; 
+        }
+
+        public ParticleEmitter(Vector2 position, int intensity): base()
         {
             this.intensity = intensity;
             //this.active = true; 
@@ -25,7 +31,7 @@ namespace SpaceMauraders.Systems
             active = !active; 
         }
 
-        public void Update()
+        public override void Update(GameTime gameTime)
         {
             if (active)
             {

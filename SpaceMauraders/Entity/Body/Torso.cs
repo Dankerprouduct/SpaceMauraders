@@ -14,7 +14,7 @@ namespace SpaceMauraders.Entity.Body
         float leftBounds;
         float rightBounds;
         float oldRotation;
-        float newRoation; 
+        float newRoation;
 
 
         public Torso(int textureID, Vector2 offset) : base(textureID, offset)
@@ -24,6 +24,7 @@ namespace SpaceMauraders.Entity.Body
    
         public override void Update(Vector2 center, float rotation)
         {
+            bounds = Utilities.TextureManager.bodyParts[textureID].Bounds;
 
             // if the rotation moves out of predefined boudns then rotate -> reset boudns
             if (rotation <= leftBounds)

@@ -11,8 +11,8 @@ namespace SpaceMauraders.Entity
     public class Player: Entity
     {
 
-        Systems.ParticleEmitter emittter = new Systems.ParticleEmitter(2);
-        public Body.Body body;
+        ParticleEmitter emittter = new ParticleEmitter(2);
+        
         
         public Player(Vector2 position):base()
         {
@@ -120,7 +120,7 @@ namespace SpaceMauraders.Entity
         public override void Update(GameTime gameTime)
         {
 
-            emittter.Update(); 
+            emittter.Update(gameTime); 
             emittter.position = position;
             
             body.Update(position, rotation); 
@@ -132,6 +132,7 @@ namespace SpaceMauraders.Entity
         {
             body.Draw(spriteBatch);
             ((Components.DrawSelectedItemComponent)GetComponent("DrawSelectedItemComponent")).Draw(spriteBatch);
+            ((Components.InventoryComponent)GetComponent("InventoryComponent")).DrawWorld();
             base.Draw(spriteBatch);
         }
 

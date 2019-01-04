@@ -17,6 +17,12 @@ namespace SpaceMauraders.Components
             componentName = "TriggerColliderComponent";
         }
 
+        public TriggerColliderComponent(Rectangle rectangle) : base()
+        {
+            this.rectangle = rectangle; 
+            componentName = "TriggerColliderComponent";
+        }
+
         public override bool FireEvent(Event _event)
         {
             //Console.WriteLine(_event.id); 
@@ -32,7 +38,7 @@ namespace SpaceMauraders.Components
 
         public override void Update(GameTime gameTime, Entity.Entity entity)
         {
-            rectangle = new Rectangle(entity.position.ToPoint(),new Point(64,64)); 
+            rectangle = entity.collisionRectanlge; 
             base.Update(gameTime, entity);
         }
 

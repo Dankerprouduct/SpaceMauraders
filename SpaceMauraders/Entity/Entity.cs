@@ -24,7 +24,10 @@ namespace SpaceMauraders.Entity
         public float rotation;
         public Vector2 currentPathingTarget; 
 
-        Thread componentThread; 
+        Thread componentThread;
+
+        
+        public Body.Body body;
 
         #region Pathing
         public List<World.Node> pathingNode;
@@ -322,6 +325,11 @@ namespace SpaceMauraders.Entity
             UpdateComponents(gameTime); 
         }
 
+        public virtual void Update(GameTime gameTime, Entity entity)
+        {
+
+        }
+
         public void UpdateComponents(GameTime gameTime)
         {
             for (int i = 0; i < components.Count(); i++)
@@ -331,6 +339,10 @@ namespace SpaceMauraders.Entity
             }
         }
 
+        /// <summary>
+        /// gets the center of the collision rectangle 
+        /// </summary>
+        /// <returns></returns>
         public Vector2 GetCenter()
         {
             return collisionRectanlge.Center.ToVector2(); 
@@ -341,6 +353,10 @@ namespace SpaceMauraders.Entity
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             
+        }
+        public virtual void Draw()
+        {
+
         }
 
     }

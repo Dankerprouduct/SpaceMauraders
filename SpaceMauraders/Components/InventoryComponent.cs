@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input; 
+using Microsoft.Xna.Framework.Input;
+using SpaceMauraders.Entity.Items;
+using SpaceMauraders.Entity.Items.Weapons;
 
 
 namespace SpaceMauraders.Components
@@ -20,11 +22,14 @@ namespace SpaceMauraders.Components
         private int spacing = 5;
 
         // kind of the "backpack" of the entity
-        public int[,] inventory; 
+        public Item[,] inventory; 
 
         // whats currently in the entity's hand
-        public int primarySlot = 0; 
-        public int secondarySlot;
+        public Item slot1 = new FusionRifle();
+        public Item slot2 = new EmptyItem();
+        public Item slot3 = new EmptyItem();
+        public Item slot4 = new EmptyItem();
+        public Item slot5 = new EmptyItem();
 
         // determines whether or not the inventory is drawn.
         public bool drawInventory;
@@ -32,7 +37,10 @@ namespace SpaceMauraders.Components
         // inputs
         private MouseState currentMouseState;
         private MouseState previousMouseState;
-        Point mousePoint;
+        private Point mousePoint;
+        private KeyboardState currentKeyboardState;
+        private KeyboardState previousKeyboardState; 
+
 
         /// <summary>
         /// Initializes the inventory. inventory size is determined by width * height
@@ -59,14 +67,14 @@ namespace SpaceMauraders.Components
 
         void InitializeInventory(int inventoryWidth, int inventoryHeight)
         {
-            inventory = new int[inventoryWidth, inventoryHeight];
+            inventory = new Item[inventoryWidth, inventoryHeight];
 
             for(int y = 0; y < inventoryHeight; y++)
             {
                 for(int x = 0; x < inventoryWidth; x++)
                 {
                     // -1 empty Item
-                    inventory[x, y] = -1; 
+                    inventory[x, y] = new EmptyItem();
                 }
             }
         }
@@ -98,6 +106,7 @@ namespace SpaceMauraders.Components
             return false; 
         }
         
+
         /// <summary>
         /// finds empty slot and places item in. Item Stacking not currently implemented
         /// </summary>
@@ -108,9 +117,10 @@ namespace SpaceMauraders.Components
             {
                 for(int x = 0; x < width; x++)
                 {
-                    if(inventory[x,y] == -1)
+                    if(inventory[x,y].itemID == -1)
                     {
-                        inventory[x, y] = itemId;
+                        inventory[x, y] = ItemDictionary.itemDictinary[itemId];
+                        Console.WriteLine("Added " + inventory[x,y].entityName);
                         return; 
                     }
                 }
@@ -127,9 +137,9 @@ namespace SpaceMauraders.Components
             {
                 for(int x = 0; x < width; x++)
                 {
-                    if(inventory[x,y] == itemId)
+                    if(inventory[x,y].itemID == itemId)
                     {
-                        inventory[x, y] = -1;
+                        inventory[x, y] = new EmptyItem();
                         return;
                     }
                 }
@@ -146,15 +156,53 @@ namespace SpaceMauraders.Components
         {
             if (z == 1)
             {
-                int tempItemID = primarySlot;
-                primarySlot = inventory[x, y];
-                inventory[x, y] = tempItemID;
+                Item tempItemId = slot1;
+                if (tempItemId == null)
+                {
+                    tempItemId = new EmptyItem();
+                }
+                slot1 = inventory[x, y];
+                inventory[x, y] = tempItemId;
             }
             if(z == 2)
             {
-                int tempItemID = secondarySlot;
-                secondarySlot = inventory[x, y];
-                inventory[x, y] = tempItemID;
+                Item tempItemId = slot1;
+                if (tempItemId == null)
+                {
+                    tempItemId = new EmptyItem();
+                }
+                slot2 = inventory[x, y];
+                inventory[x, y] = tempItemId;
+            }
+            if (z == 3)
+            {
+                Item tempItemId = slot1;
+                if (tempItemId == null)
+                {
+                    tempItemId = new EmptyItem();
+                }
+                slot3 = inventory[x, y];
+                inventory[x, y] = tempItemId;
+            }
+            if (z == 4)
+            {
+                Item tempItemId = slot1;
+                if (tempItemId == null)
+                {
+                    tempItemId = new EmptyItem();
+                }
+                slot4 = inventory[x, y];
+                inventory[x, y] = tempItemId;
+            }
+            if (z == 5)
+            {
+                Item tempItemId = slot1;
+                if (tempItemId == null)
+                {
+                    tempItemId = new EmptyItem();
+                }
+                slot5 = inventory[x, y];
+                inventory[x, y] = tempItemId;
             }
         }
 
@@ -163,8 +211,8 @@ namespace SpaceMauraders.Components
         /// </summary>
         public void SwapPrimary()
         {
-            AddItem(primarySlot);
-            primarySlot = -1;
+            AddItem(slot1.itemID);
+            slot1 = new EmptyItem();
         }
         
 
@@ -175,17 +223,54 @@ namespace SpaceMauraders.Components
 
         public override void Update(GameTime gameTime, Entity.Entity entity)
         {
+            if (entity is Entity.Player)
+            {
+                currentKeyboardState = Keyboard.GetState();
+                currentMouseState = Mouse.GetState();
+                UpdateInventoryLogic();
+
+                if (slot1.itemID != -1)
+                {
+                    slot1.Update(gameTime, entity);
+
+                    if (currentMouseState.LeftButton == ButtonState.Pressed  && !drawInventory)
+                    {
+                        slot1.Use(entity);
+                        slot1.inUse = true;
+                    }
+                    else
+                    {
+                        slot1.inUse = false;
+                    }
+
+                }
+            }
+            else
+            {
+                //slot1.Use(entity);
+                //slot1.inUse = true;
+            }
+
+            previousMouseState = currentMouseState; 
+            base.Update(gameTime, entity);
+        }
+
+        /// <summary>
+        /// Deals with updating what gets clicked and swapped in the inventory
+        /// </summary>
+        private void UpdateInventoryLogic()
+        {
             if (drawInventory)
             {
                 mousePoint = new Point(Mouse.GetState().X, Mouse.GetState().Y);
-                currentMouseState = Mouse.GetState(); 
-               
+                
+
                 for (int x = 0; x < inventory.GetLength(0); x++)
                 {
                     for (int y = 0; y < inventory.GetLength(1); y++)
                     {
 
-                        if (inventory[x, y] != -1)
+                        if (inventory[x, y].itemID != -1)
                         {
                             Rectangle rectangle = new Rectangle(xOffset + (x * boxWidth) + (x * spacing),
                                 yOffset + (y * boxHeight) + (y * spacing), boxWidth, boxHeight);
@@ -195,8 +280,8 @@ namespace SpaceMauraders.Components
                                 if (currentMouseState.LeftButton == ButtonState.Pressed &&
                                     previousMouseState.LeftButton == ButtonState.Released)
                                 {
-                                    Console.WriteLine("Clicked " + Entity.Items.ItemDictionary.itemDictinary[ inventory[x, y] ].entityName);
-                                    Swap(x,y,1);
+                                    Console.WriteLine("Clicked " + Entity.Items.ItemDictionary.itemDictinary[inventory[x, y].guiItemID].entityName);
+                                    Swap(x, y, 1);
                                 }
                             }
                         }
@@ -208,20 +293,25 @@ namespace SpaceMauraders.Components
                     50,
                     yOffset, boxWidth, boxHeight).Contains(mousePoint))
                 {
-                    if(currentMouseState.LeftButton == ButtonState.Pressed &&
-                      previousMouseState.LeftButton == ButtonState.Released)
+                    if (currentMouseState.LeftButton == ButtonState.Pressed &&
+                        previousMouseState.LeftButton == ButtonState.Released)
                     {
                         SwapPrimary();
                     }
                 }
 
-                previousMouseState = currentMouseState; 
-                base.Update(gameTime, entity);
+
             }
         }
 
+        public void DrawWorld()
+        {
+            if (slot1.itemID != -1)
+            {
+                slot1.Draw();
+            }
+        }
 
-        bool highlight; 
         public void Draw()
         {
             
@@ -233,9 +323,9 @@ namespace SpaceMauraders.Components
                     new Rectangle(xOffset + xOffset + (inventory.GetLength(0) * (boxWidth / 2)) + (inventory.GetLength(0) * spacing) + 50,
                         yOffset, boxWidth, boxHeight)
                     ,Color.Teal);
-                if (primarySlot != -1)
+                if (slot1.itemID != -1)
                 {
-                    GUI.GUI.DrawTexture(Utilities.TextureManager.guiItemTextures[primarySlot],
+                    GUI.GUI.DrawTexture(Utilities.TextureManager.guiItemTextures[slot1.guiItemID],
                         new Vector2(
                             xOffset + xOffset + (inventory.GetLength(0) * (boxWidth / 2)) +
                             (inventory.GetLength(0) * spacing) + 50,
@@ -247,10 +337,10 @@ namespace SpaceMauraders.Components
                     for (int y = 0; y < inventory.GetLength(1); y++)
                     {
 
-                        if (inventory[x, y] != -1)
+                        if (inventory[x, y].itemID != -1 && inventory[x, y] != null)
                         {
                             GUI.GUI.DrawTexture(
-                                Utilities.TextureManager.guiItemTextures[inventory[x, y]],
+                                Utilities.TextureManager.guiItemTextures[inventory[x, y].guiItemID],
                                 new Vector2(xOffset + (x * boxWidth) + (x * spacing),
                                 yOffset + (y * boxHeight) + (y * spacing)));
                                                         

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceMauraders.Components;
 
 namespace SpaceMauraders.Entity
 {
@@ -13,13 +14,13 @@ namespace SpaceMauraders.Entity
                 
         public Body.Body body;
 
-        Systems.ParticleEmitter emittter = new Systems.ParticleEmitter(1);
+        ParticleEmitter emittter = new ParticleEmitter(1);
 
         public NPC(Vector2 position) : base()
         {
             this.position = position;
             components.Add(new Components.SpeedModifierComponent(.5f));
-
+            components.Add(new Components.TriggerColliderComponent());
             components.Add(new Components.PhysicsComponent(this.id));
             components.Add(new Components.InventoryComponent(2, 10));
             components.Add(new Components.DrawSelectedItemComponent());
@@ -106,13 +107,15 @@ namespace SpaceMauraders.Entity
                 SetCellIndex(cellIndex);
                 //Console.WriteLine("Switched to partition " + GetCenterPartition());
             }
+            
             /*
             Vector2 direction = currentPathingTarget - position;
             direction.Normalize();
             rotation = (float)Math.Atan2(direction.Y, direction.X);
             */
+            //((InventoryComponent)GetComponent("InventoryComponent"))
             body.Update(position, rotation);
-            emittter.Update();
+            emittter.Update(gameTime);
             emittter.position = position;
             //Console.WriteLine(cellIndex); 
             base.Update(gameTime);
@@ -145,6 +148,7 @@ namespace SpaceMauraders.Entity
 
             body.Draw(spriteBatch);
             ((Components.DrawSelectedItemComponent)GetComponent("DrawSelectedItemComponent")).Draw(spriteBatch);
+            ((Components.InventoryComponent)GetComponent("InventoryComponent")).DrawWorld();
             //spriteBatch.Draw(Utilities.TextureManager.sprites[0], position, Color.White);
             base.Draw(spriteBatch);
         }

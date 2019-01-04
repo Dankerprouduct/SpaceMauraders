@@ -10,6 +10,7 @@ namespace SpaceMauraders.Entity.Body
 {
     public class Body
     {
+        public Rectangle bounds; 
         public List<BodyPart> bodyParts = new List<BodyPart>();
         List<int> headIndexes = new List<int>(); 
         List<int> handsIndexes = new List<int>();
@@ -22,7 +23,7 @@ namespace SpaceMauraders.Entity.Body
 
         public void AddBodyPart(BodyPart bodyPart)
         {
-
+            
             bodyParts.Add(bodyPart);
 
             if (bodyPart is Hand)
@@ -35,7 +36,8 @@ namespace SpaceMauraders.Entity.Body
             }
             else if(bodyPart is Torso)
             {
-                torsoIndexes.Add(bodyParts.Count); 
+                torsoIndexes.Add(bodyParts.Count);
+                bounds = bodyPart.bounds; 
             }
 
         }
@@ -62,6 +64,10 @@ namespace SpaceMauraders.Entity.Body
                 // all body parts have the center and rotation. 
                 // its just their job to align themselves properly 
                 bodyParts[i].Update(positon, rotation);
+                if (bodyParts[i] is Torso)
+                {
+                    bounds = bodyParts[i].bounds; 
+                }
             }
         }
 
