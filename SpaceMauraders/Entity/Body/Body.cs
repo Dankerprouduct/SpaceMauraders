@@ -10,7 +10,10 @@ namespace SpaceMauraders.Entity.Body
 {
     public class Body
     {
-        List<BodyPart> bodyParts = new List<BodyPart>();
+        public List<BodyPart> bodyParts = new List<BodyPart>();
+        List<int> headIndexes = new List<int>(); 
+        List<int> handsIndexes = new List<int>();
+        List<int> torsoIndexes = new List<int>();
 
         public Body()
         {
@@ -19,7 +22,37 @@ namespace SpaceMauraders.Entity.Body
 
         public void AddBodyPart(BodyPart bodyPart)
         {
-            bodyParts.Add(bodyPart); 
+
+            bodyParts.Add(bodyPart);
+
+            if (bodyPart is Hand)
+            {
+                handsIndexes.Add(bodyParts.Count); 
+            }
+            else if(bodyPart is Head)
+            {
+                headIndexes.Add(bodyParts.Count); 
+            }
+            else if(bodyPart is Torso)
+            {
+                torsoIndexes.Add(bodyParts.Count); 
+            }
+
+        }
+
+        public int[] GetHeadIndexes()
+        {
+            return headIndexes.ToArray<int>();
+        }
+
+        public int[] GetHandIndexes()
+        {
+            return handsIndexes.ToArray<int>();
+        }
+
+        public int[] GetTorsoIndexes()
+        {
+            return torsoIndexes.ToArray<int>();
         }
 
         public void Update(Vector2 positon, float rotation)

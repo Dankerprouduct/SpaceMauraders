@@ -15,7 +15,7 @@ namespace SpaceMauraders.Components
         public int height;
         private int xOffset = 100;
         private int yOffset = 40;
-        private int boxWidth = 130;
+        private int boxWidth = 150;
         private int boxHeight = 50;
         private int spacing = 5;
 
@@ -23,7 +23,7 @@ namespace SpaceMauraders.Components
         public int[,] inventory; 
 
         // whats currently in the entity's hand
-        public int primarySlot = -1; 
+        public int primarySlot = 0; 
         public int secondarySlot;
 
         // determines whether or not the inventory is drawn.
@@ -31,7 +31,8 @@ namespace SpaceMauraders.Components
         
         // inputs
         private MouseState currentMouseState;
-        private MouseState previousMouseState; 
+        private MouseState previousMouseState;
+        Point mousePoint;
 
         /// <summary>
         /// Initializes the inventory. inventory size is determined by width * height
@@ -176,7 +177,7 @@ namespace SpaceMauraders.Components
         {
             if (drawInventory)
             {
-                Point mousePoint = new Point(Mouse.GetState().X, Mouse.GetState().Y);
+                mousePoint = new Point(Mouse.GetState().X, Mouse.GetState().Y);
                 currentMouseState = Mouse.GetState(); 
                
                 for (int x = 0; x < inventory.GetLength(0); x++)
@@ -220,12 +221,14 @@ namespace SpaceMauraders.Components
         }
 
 
+        bool highlight; 
         public void Draw()
         {
             
             if (drawInventory)
             {
                 GUI.GUI.Draw2dArray(xOffset, yOffset, boxWidth, boxHeight, width, height, spacing, Color.Teal);
+
                 GUI.GUI.DrawBox(
                     new Rectangle(xOffset + xOffset + (inventory.GetLength(0) * (boxWidth / 2)) + (inventory.GetLength(0) * spacing) + 50,
                         yOffset, boxWidth, boxHeight)
@@ -236,7 +239,7 @@ namespace SpaceMauraders.Components
                         new Vector2(
                             xOffset + xOffset + (inventory.GetLength(0) * (boxWidth / 2)) +
                             (inventory.GetLength(0) * spacing) + 50,
-                            yOffset));
+                            yOffset));                                        
                 }
 
                 for (int x = 0; x < inventory.GetLength(0); x++)
@@ -250,9 +253,17 @@ namespace SpaceMauraders.Components
                                 Utilities.TextureManager.guiItemTextures[inventory[x, y]],
                                 new Vector2(xOffset + (x * boxWidth) + (x * spacing),
                                 yOffset + (y * boxHeight) + (y * spacing)));
-
-                            
+                                                        
                         }
+
+                        Rectangle rectangle = new Rectangle(xOffset + (x * boxWidth) + (x * spacing),
+                                yOffset + (y * boxHeight) + (y * spacing), boxWidth, boxHeight);
+
+                        if (rectangle.Contains(mousePoint))
+                        {
+                            GUI.GUI.DrawBox(rectangle, Color.Black * .2f); 
+                        }
+
                     }
                 }
             }

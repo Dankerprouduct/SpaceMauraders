@@ -15,8 +15,8 @@ namespace SpaceMauraders.Entity.Items
         public static void LoadItemDatabase()
         {
             // items must be synced with itemDictionary id
-            itemDictinary.Add(new Weapons.TestGun());
-
+            itemDictinary.Add(new Weapons.LaserRifle());
+            itemDictinary.Add(new Weapons.FusionRifle());
 
         }
     }

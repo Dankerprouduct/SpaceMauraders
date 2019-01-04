@@ -155,7 +155,15 @@ namespace SpaceMauraders.GUI
             //MakeBox(x, y, w, h, color1);
             spriteBatch.Draw(texture, position, Color.White);
         }
-        
+
+        public static void DrawTexture(Texture2D texture, Vector2 position , int width, int height)
+        {
+
+            //MakeBox(x, y, w, h, color1);
+            //spriteBatch.Draw(texture, position, Color.White);
+            spriteBatch.Draw(texture, new Rectangle((int)position.X, (int)position.Y, width, height), Color.White);
+        }
+
 
         /// <summary>
         ///  Draws a 2D array, made for drawing inventory

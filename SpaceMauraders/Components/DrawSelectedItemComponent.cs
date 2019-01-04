@@ -4,20 +4,74 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SpaceMauraders.Components
 {
     public class DrawSelectedItemComponent: Component
     {
+        //Entity.Body.Body body;
+        Vector2 itemPosition;
+        int currentEquippedItem;
+        float rotation;
+        Vector2 center; 
 
         public DrawSelectedItemComponent() : base()
         {
-
+            componentName = "DrawSelectedItemComponent";
         }
 
         public override void Update(GameTime gameTime, Entity.Entity entity)
         {
-            //((InventoryComponent)entity.GetComponent("InventoryComponent")).primarySlot
+            if (entity is Entity.Player)
+            {
+                Entity.Player tempPlayer = ((Entity.Player)(entity));
+                rotation = entity.rotation; 
+                int[] handIndex =  tempPlayer.body.GetHandIndexes();
+                currentEquippedItem = ((InventoryComponent)entity.GetComponent("InventoryComponent")).primarySlot;
+
+                itemPosition = Utilities.MathHelper.Vec2ToEntitySpace(
+                    new Vector2(10, 0),
+                    tempPlayer.body.bodyParts[handIndex[0]].positon, entity.rotation);
+
+                if (currentEquippedItem != -1)
+                {
+                    center = Utilities.MathHelper.CenterOfImage(Utilities.TextureManager.guiItemTextures[currentEquippedItem]);
+
+                    tempPlayer.body.bodyParts[3].offset = new Vector2(20, 18);
+                    //tempPlayer.body.bodyParts[2].offset = new Vector2(50, 12);
+                }
+                else
+                {
+                    tempPlayer.body.bodyParts[3].offset = new Vector2(15, 22);
+                    //tempPlayer.body.bodyParts[2].offset = new Vector2(15, -22);
+                }
+
+            }
+            else
+            {
+                Entity.NPC tempPlayer = ((Entity.NPC)(entity));
+                rotation = entity.rotation;
+                int[] handIndex = tempPlayer.body.GetHandIndexes();
+                currentEquippedItem = ((InventoryComponent)entity.GetComponent("InventoryComponent")).primarySlot;
+
+                itemPosition = Utilities.MathHelper.Vec2ToEntitySpace(
+                    new Vector2(10, 0),
+                    tempPlayer.body.bodyParts[handIndex[0]].positon, entity.rotation);
+
+                if (currentEquippedItem != -1)
+                {
+                    center = Utilities.MathHelper.CenterOfImage(Utilities.TextureManager.guiItemTextures[currentEquippedItem]);
+
+                    tempPlayer.body.bodyParts[3].offset = new Vector2(20, 18);
+                    //tempPlayer.body.bodyParts[2].offset = new Vector2(50, 12);
+                }
+                else
+                {
+                    tempPlayer.body.bodyParts[3].offset = new Vector2(15, 22);
+                    //tempPlayer.body.bodyParts[2].offset = new Vector2(15, -22);
+                }
+            }
 
             base.Update(gameTime, entity);
         }
@@ -25,6 +79,24 @@ namespace SpaceMauraders.Components
         public override bool FireEvent(Event _event)
         {
             return base.FireEvent(_event);
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            if(currentEquippedItem != -1)
+            {
+                
+                //spriteBatch.Draw(Utilities.TextureManager.guiItemTextures[currentEquippedItem], itemPosition, Color.White);
+
+                spriteBatch.Draw(Utilities.TextureManager.guiItemTextures[currentEquippedItem],
+                itemPosition, null,
+                Color.White,
+                rotation,
+                center,
+                .5f,
+                SpriteEffects.None,
+                0f);
+            }
         }
     }
 }

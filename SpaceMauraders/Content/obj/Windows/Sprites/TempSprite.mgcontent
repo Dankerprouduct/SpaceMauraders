@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Projects/Game1/SpaceMauraders/SpaceMauraders/Content/Sprites/TempSprite.png</SourceFile>
-  <SourceTime>2018-10-16T20:02:42.9112802-04:00</SourceTime>
-  <DestFile>D:/Projects/Game1/SpaceMauraders/SpaceMauraders/Content/bin/Windows/Sprites/TempSprite.xnb</DestFile>
-  <DestTime>2019-01-02T11:15:16.809811-05:00</DestTime>
+  <SourceFile>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Sprites/TempSprite.png</SourceFile>
+  <SourceTime>2019-01-03T16:00:37.2025238-05:00</SourceTime>
+  <DestFile>D:/Projects/SpaceMauraders/SpaceMauraders/Content/bin/Windows/Sprites/TempSprite.xnb</DestFile>
+  <DestTime>2019-01-03T21:23:29.9050226-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T10:05:36-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

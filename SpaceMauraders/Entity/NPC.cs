@@ -11,7 +11,7 @@ namespace SpaceMauraders.Entity
     public class NPC: Entity
     {
                 
-        Body.Body testBody;
+        public Body.Body body;
 
         Systems.ParticleEmitter emittter = new Systems.ParticleEmitter(1);
 
@@ -21,35 +21,36 @@ namespace SpaceMauraders.Entity
             components.Add(new Components.SpeedModifierComponent(.5f));
 
             components.Add(new Components.PhysicsComponent(this.id));
-            
+            components.Add(new Components.InventoryComponent(2, 10));
+            components.Add(new Components.DrawSelectedItemComponent());
             //components.Add(new Components.InventoryComponent(id, 5,5));
 
-             
+
             //goap
             //Console.WriteLine("STARTING PATHFINDING GOAL: "+ goal); 
             position.X += 100;
             pathFinding = new World.Pathfinding();
 
-            testBody = new Body.Body();
-            testBody.AddBodyPart(new Body.Torso(0, Vector2.Zero)
+            body = new Body.Body();
+            body.AddBodyPart(new Body.Torso(0, Vector2.Zero)
             {
                 lerpSpeed = .2f,
                 turnAngle = 25
             });
-            testBody.AddBodyPart(new Body.Head(1, new Vector2(-9, 0))
+            body.AddBodyPart(new Body.Head(1, new Vector2(-9, 0))
             {
                 lerpSpeed = .2f,
                 turnAngle = 5,
                 scale = .5f
             });
-            testBody.AddBodyPart(new Body.Hand(2, new Vector2(15, -22))
+            body.AddBodyPart(new Body.Hand(2, new Vector2(15, -22))
             {
                 scale = .7f,
                 // try 25 for lols
                 lerpSpeed = .1f,
                 turnAngle = 10
             });
-            testBody.AddBodyPart(new Body.Hand(2, new Vector2(15, 22))
+            body.AddBodyPart(new Body.Hand(2, new Vector2(15, 22))
             {
                 scale = .7f,
                 lerpSpeed = .1f,
@@ -110,7 +111,7 @@ namespace SpaceMauraders.Entity
             direction.Normalize();
             rotation = (float)Math.Atan2(direction.Y, direction.X);
             */
-            testBody.Update(position, rotation);
+            body.Update(position, rotation);
             emittter.Update();
             emittter.position = position;
             //Console.WriteLine(cellIndex); 
@@ -142,7 +143,8 @@ namespace SpaceMauraders.Entity
                 }
             }
 
-            testBody.Draw(spriteBatch); 
+            body.Draw(spriteBatch);
+            ((Components.DrawSelectedItemComponent)GetComponent("DrawSelectedItemComponent")).Draw(spriteBatch);
             //spriteBatch.Draw(Utilities.TextureManager.sprites[0], position, Color.White);
             base.Draw(spriteBatch);
         }

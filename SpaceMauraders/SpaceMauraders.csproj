@@ -70,8 +70,9 @@
     <Compile Include="Entity\EntityPrototype.cs" />
     <Compile Include="Entity\Items\Item.cs" />
     <Compile Include="Entity\Items\ItemDictionary.cs" />
+    <Compile Include="Entity\Items\Weapons\FusionRifle.cs" />
     <Compile Include="Entity\Items\Weapons\ProjectileWeapon.cs" />
-    <Compile Include="Entity\Items\Weapons\TestGun.cs" />
+    <Compile Include="Entity\Items\Weapons\LaserRifle.cs" />
     <Compile Include="Entity\NPC.cs" />
     <Compile Include="Entity\Player.cs" />
     <Compile Include="Entity\Tile.cs" />
@@ -102,8 +103,8 @@
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLua, Version=1.3.2.0, Culture=neutral, PublicKeyToken=8df2ab518030ea95, processorArchitecture=MSIL">
       <HintPath>..\packages\NLua.1.3.2.1\lib\net45\NLua.dll</HintPath>
@@ -136,7 +137,8 @@
   <PropertyGroup>
     <PostBuildEvent>
 xcopy /s /y "D:\Projects\Game1\SpaceMauraders\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"
-xcopy /s /y "C:\Users\Danker\Documents\GitHub\SpaceMauraders\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"</PostBuildEvent>
+xcopy /s /y "C:\Users\Danker\Documents\GitHub\SpaceMauraders\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"
+xcopy /s /y "D:\Projects\SpaceMauraders\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

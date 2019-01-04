@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Sprites/FederationSoilder.png</SourceFile>
-  <SourceTime>2019-01-03T08:38:02.1140747-05:00</SourceTime>
-  <DestFile>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/bin/Windows/Content/Sprites/FederationSoilder.xnb</DestFile>
-  <DestTime>2019-01-03T08:39:03.2784652-05:00</DestTime>
+  <SourceFile>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Sprites/FederationSoilder.png</SourceFile>
+  <SourceTime>2019-01-03T16:00:37.2005217-05:00</SourceTime>
+  <DestFile>D:/Projects/SpaceMauraders/SpaceMauraders/Content/bin/Windows/Content/Sprites/FederationSoilder.xnb</DestFile>
+  <DestTime>2019-01-03T16:01:20.347829-05:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2019-01-03T08:38:03.9236877-05:00</ImporterTime>
+  <ImporterTime>2019-01-03T16:00:38.0843169-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2019-01-03T08:38:03.9236877-05:00</ProcessorTime>
+  <ProcessorTime>2019-01-03T16:00:38.0843169-05:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>

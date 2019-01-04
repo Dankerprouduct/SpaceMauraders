@@ -16,6 +16,7 @@ namespace SpaceMauraders.Entity.Body
         public Vector2 positon;
         public Vector2 center;
         public Vector2 offset;
+        public Vector2 currentOffset; 
 
         public float turnAngle = 5;
         public float lerpSpeed = .2f;
@@ -23,6 +24,7 @@ namespace SpaceMauraders.Entity.Body
         public BodyPart(int textureID, Vector2 _offset)
         {
             offset = _offset;
+            currentOffset = offset; 
             this.textureID = textureID; 
             center = new Vector2(
                             Utilities.TextureManager.bodyParts[textureID].Width / 2,

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Projects/Game1/SpaceMauraders/SpaceMauraders/Content/GUI/Items/LaserRifle.png</SourceFile>
-  <SourceTime>2019-01-02T20:18:32.8706781-05:00</SourceTime>
-  <DestFile>D:/Projects/Game1/SpaceMauraders/SpaceMauraders/Content/bin/Windows/GUI/Items/LaserRifle.xnb</DestFile>
-  <DestTime>2019-01-02T20:18:47.7760822-05:00</DestTime>
+  <SourceFile>D:/Projects/SpaceMauraders/SpaceMauraders/Content/GUI/Items/LaserRifle.png</SourceFile>
+  <SourceTime>2019-01-03T16:00:37.1965182-05:00</SourceTime>
+  <DestFile>D:/Projects/SpaceMauraders/SpaceMauraders/Content/bin/Windows/GUI/Items/LaserRifle.xnb</DestFile>
+  <DestTime>2019-01-03T21:23:30.0111168-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T10:05:36-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

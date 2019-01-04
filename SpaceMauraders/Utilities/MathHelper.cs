@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics; 
+
 
 namespace SpaceMauraders.Utilities
 {
@@ -45,6 +47,24 @@ namespace SpaceMauraders.Utilities
 
             float angle = (float)Math.Atan2(direction.Y, direction.X);
             return angle; 
+        }
+
+        public static Vector2 Vec2ToEntitySpace(Vector2 offSet, Vector2 position, float rotation)
+        {
+
+            Matrix rotationMatrix = Matrix.CreateRotationZ(rotation);
+
+            Vector2 _pos = offSet;
+
+            // REMEMBER THAT THE POSITON = CENTER
+            return _pos = (position) + Vector2.Transform(_pos, rotationMatrix);
+
+
+        }
+
+        public static Vector2 CenterOfImage(Texture2D texture)
+        {
+            return new Vector2(texture.Width / 2, texture.Height / 2); 
         }
     }
 }

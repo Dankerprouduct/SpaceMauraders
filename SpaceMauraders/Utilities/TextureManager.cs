@@ -55,7 +55,8 @@ namespace SpaceMauraders.Utilities
             AddBodyPart("FederationSoilderHand", content); //2
 
             // loading inventory items
-            AddGuiItem("LaserRifle", content); 
+            AddGuiItem("LaserRifle", content);
+            AddGuiItem("FusionRifle", content);
 
         }
 

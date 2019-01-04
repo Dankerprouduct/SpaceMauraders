@@ -40,7 +40,8 @@ namespace SpaceMauraders.Entity.Body
             
             positon = center;
             this.rotation = newRoation;
-            positon = Vec2ToEntitySpace(offset);
+            currentOffset = Vector2.Lerp(currentOffset, offset, .3f); 
+            positon = Vec2ToEntitySpace(currentOffset);
         }
 
 
