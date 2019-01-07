@@ -19,7 +19,8 @@ namespace SpaceMauraders.Entity.Items.Weapons
         ParticleEmitter emitter = new ParticleEmitter(2);
         private Thread rayThread;
         private float charge;
-        private float maxCharge = 50;
+        private float maxCharge = 500;
+        private int distance = 20; 
         
         public FusionRifle() : base()
         {
@@ -27,14 +28,15 @@ namespace SpaceMauraders.Entity.Items.Weapons
             guiItemID = 1;
             worldItemTextureID = 2;
             entityName = "Fusion Rifle";
-            firePoint = new Vector2(38, 4f);
+            firePoint = new Vector2(40, 1f);
 
-            emitter.AddParticle(new Systems.Particle(position, 1, 0, 1f, 0, 0, Color.Orange)
+            raycast.rayEvent.parameters.Add("Destroy", true);
+            emitter.AddParticle(new Systems.Particle(position, 1, 0, 1f, 0, 0, Color.Black)
             {
                 fadeRate = .95f,
                 maxDampening = 99,
                 minDampening = 99,
-                minSpeed = .01f,
+                minSpeed = .1f,
                 minAngle = 0,
                 maxAngle = 360,
                 size = 1f,
@@ -47,7 +49,7 @@ namespace SpaceMauraders.Entity.Items.Weapons
                 fadeRate = .85f,
                 maxDampening = 99,
                 minDampening = 99,
-                minSpeed = .01f,
+                minSpeed = .1f,
                 minAngle = 0,
                 maxAngle = 360,
                 size = 1f,
@@ -65,10 +67,14 @@ namespace SpaceMauraders.Entity.Items.Weapons
             currentKeyboardState = Keyboard.GetState();
             currentMouseState = Mouse.GetState(); 
 
-            emitter.Update(gameTime);
+            
             if (inUse)
             {
-                emitter.active = true; 
+                if (charge > 0)
+                {
+                    emitter.Update(gameTime);
+                    emitter.active = true;
+                }
             }
             else
             {
@@ -92,8 +98,7 @@ namespace SpaceMauraders.Entity.Items.Weapons
                     charge = maxCharge;
                 }
             }
-            Console.WriteLine(charge);
-
+             
             previousKeyboardState = currentKeyboardState;
             previousMouseState = currentMouseState; 
             base.Update(gameTime, entity);
@@ -101,13 +106,15 @@ namespace SpaceMauraders.Entity.Items.Weapons
         
         public override void Use(Entity entity)
         {
-            rayThread = new Thread(RayThread);
-            if (!rayThread.IsAlive)
+            if (charge > 0)
             {
-                rayThread.Start();
+                rayThread = new Thread(RayThread);
+                if (!rayThread.IsAlive)
+                {
+                    rayThread.Start();
+                }
+                rayThread.Join();
             }
-            rayThread.Join();
-
 
             //GUI.GUI.DrawLine(raycast.points[0].ToVector2());
             base.Use(this);
@@ -117,9 +124,10 @@ namespace SpaceMauraders.Entity.Items.Weapons
         {
             //raycast.MakeRay(this, 128 * 20, rotation, 30);
             bool hit = (raycast.MakeRay(this, Utilities.MathHelper.Vec2ToEntitySpace(firePoint, position, rotation),
-                128 * 10,
+                128 * distance,
                 rotation, 26));
-            emitter.active = true;
+            //emitter.active = true;
+
             emitter.position = raycast.points[raycast.points.Count - 1].ToVector2();
             if (hit)
             {
@@ -142,12 +150,12 @@ namespace SpaceMauraders.Entity.Items.Weapons
                     if (i < 1)
                     {
                         ParticleSystem.AddParticle(raycast.points[i].ToVector2(),
-                            new Systems.Particle(position, 1, 0, 1f, 0, 0, Color.Orange)
+                            new Systems.Particle(position, 1, 0, 1f, 0, 0, Color.MediumPurple)
                             {
                                 fadeRate = .95f,
                                 maxDampening = 99,
                                 minDampening = 95,
-                                minSpeed = .01f,
+                                minSpeed = .1f,
                                 minAngle = MathHelper.ToDegrees(rotation) - 3,
                                 maxAngle = MathHelper.ToDegrees(rotation) + 3,
                                 size = .2f,
@@ -164,7 +172,7 @@ namespace SpaceMauraders.Entity.Items.Weapons
                                 fadeRate = .95f,
                                 maxDampening = 99,
                                 minDampening = 99,
-                                minSpeed = .01f,
+                                minSpeed = .1f,
                                 minAngle = MathHelper.ToDegrees(rotation) - 90,
                                 maxAngle = MathHelper.ToDegrees(rotation) + 90,
                                 size = .05f,
@@ -178,7 +186,7 @@ namespace SpaceMauraders.Entity.Items.Weapons
                             fadeRate = .95f,
                             maxDampening = 99,
                             minDampening = 99,
-                            minSpeed = .01f,
+                            minSpeed = .1f,
                             minAngle = MathHelper.ToDegrees(rotation) - 90,
                             maxAngle = MathHelper.ToDegrees(rotation) + 90,
                             size = .09f,
@@ -187,8 +195,10 @@ namespace SpaceMauraders.Entity.Items.Weapons
                             maxSize = 5,
                             mass = 1.2f
                         });
+
+
                     ParticleSystem.AddParticle(raycast.points[i].ToVector2(),
-                        new Systems.Particle(position, 1, 0, 1f, 0, 0, Color.Orange)
+                        new Systems.Particle(position, 1, 0, 1f, 0, 0, Color.Black)
                         {
                             fadeRate = .95f,
                             maxDampening = 95,

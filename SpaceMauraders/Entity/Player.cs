@@ -32,6 +32,7 @@ namespace SpaceMauraders.Entity
             
 
             Random random = new Random();
+
             emittter.AddParticle(new Systems.Particle(position, 1, random.Next(0, 360), .5f, 0, 0, Color.DarkRed)
             {
                 fadeRate = .95f,
@@ -68,7 +69,7 @@ namespace SpaceMauraders.Entity
 
             body = new Body.Body();
             
-            body.AddBodyPart(new Body.Torso(0, Vector2.Zero)
+            body.AddBodyPart(new Body.Torso(3, Vector2.Zero)
             {
                 lerpSpeed = .2f,
                 turnAngle = 25
@@ -133,7 +134,7 @@ namespace SpaceMauraders.Entity
             body.Draw(spriteBatch);
             ((Components.DrawSelectedItemComponent)GetComponent("DrawSelectedItemComponent")).Draw(spriteBatch);
             ((Components.InventoryComponent)GetComponent("InventoryComponent")).DrawWorld();
-            base.Draw(spriteBatch);
+            //base.Draw(spriteBatch);
         }
 
         public void DrawInventory()

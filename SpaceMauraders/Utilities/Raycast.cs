@@ -26,7 +26,7 @@ namespace SpaceMauraders.Utilities
         // Angle in radians at which ray is pointed.
         float angle;
 
-
+        public Components.Event rayEvent = new Components.Event();
 
         /// <summary>
         /// Default constructor.
@@ -34,6 +34,8 @@ namespace SpaceMauraders.Utilities
         public Raycast()
         {
 
+            rayEvent.id = "RayHit";
+            rayEvent.parameters.Add("Ray", new object());
         }
 
         /// <summary>
@@ -74,12 +76,10 @@ namespace SpaceMauraders.Utilities
                 int y = (int)(cosY * i) + (int)entity.position.Y; 
 
                 Point rayPoint = new Point(x, y);
-
-                Components.Event rayEvent = new Components.Event();
-                rayEvent.id = "RayHit";
-                rayEvent.parameters.Add("Ray", rayPoint);
+                                
                 rayP1 = rayPoint;
 
+                rayEvent.parameters["Ray"] = rayPoint; 
 
                 points.Add(rayPoint);
                 //Game1.world.FireGlobal()
@@ -119,11 +119,8 @@ namespace SpaceMauraders.Utilities
 
                 Point rayPoint = new Point(x, y);
                 //Console.WriteLine(rayPoint);
-                Components.Event rayEvent = new Components.Event();
-                rayEvent.id = "RayHit";
-                rayEvent.parameters.Add("Ray", rayPoint);
                 rayP1 = rayPoint;
-
+                rayEvent.parameters["Ray"] = rayPoint;
 
                 points.Add(rayPoint);
                 //Game1.world.FireGlobal()
@@ -164,11 +161,8 @@ namespace SpaceMauraders.Utilities
 
                 Point rayPoint = new Point(x, y);
                 //Console.WriteLine(rayPoint);
-                Components.Event rayEvent = new Components.Event();
-                rayEvent.id = "RayHit";
-                rayEvent.parameters.Add("Ray", rayPoint);
                 rayP1 = rayPoint;
-
+                rayEvent.parameters["Ray"] = rayPoint;
 
                 points.Add(rayPoint);
                 //Game1.world.FireGlobal()

@@ -165,3 +165,4 @@ C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\obj\x86\Debug\Spa
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMauraders.exe
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMauraders.pdb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMauraders.csprojAssemblyReference.cache
+D:\Projects\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Sprites\BodyParts\RebelSoilderBody.xnb

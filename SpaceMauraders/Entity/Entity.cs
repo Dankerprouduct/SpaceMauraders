@@ -22,12 +22,14 @@ namespace SpaceMauraders.Entity
         public int cellIndex; // holds current cell
         public int oldCellIndex;
         public float rotation;
+        public bool active;
         public Vector2 currentPathingTarget; 
 
         Thread componentThread;
 
         
         public Body.Body body;
+        
 
         #region Pathing
         public List<World.Node> pathingNode;
@@ -47,7 +49,7 @@ namespace SpaceMauraders.Entity
         {
             id = nextAvailibleID;
             nextAvailibleID++;
-
+            active = true; 
 
         }
 
@@ -321,7 +323,15 @@ namespace SpaceMauraders.Entity
 
         public virtual void Update(GameTime gameTime)
         {
-            
+
+            if (cellIndex != oldCellIndex)
+            {
+                Game1.world.dynamicCellSpacePartition.ChangeCell(this);
+                cellIndex = GetCenterPartition();
+                SetCellIndex(cellIndex);
+            }
+
+
             UpdateComponents(gameTime); 
         }
 
@@ -352,8 +362,18 @@ namespace SpaceMauraders.Entity
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            
+            if (body != null)
+            {
+                body.Draw(spriteBatch);
+            }
         }
+
+        public virtual void Detroy()
+        {
+            Console.WriteLine("Destroying entity " + id);
+            active = false; 
+        }
+
         public virtual void Draw()
         {
 

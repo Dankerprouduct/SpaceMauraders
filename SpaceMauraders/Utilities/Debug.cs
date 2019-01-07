@@ -43,7 +43,7 @@ namespace SpaceMauraders.Utilities
                     {
                         for (int i = 0; i < ammount; i++)
                         {
-                            Game1.world.AddEntity(new Entity.NPC(Game1.worldPosition));
+                            Game1.world.AddEntity(new Entity.Factions.Federation.General(Game1.worldPosition));
                         }
                         break;
                     }

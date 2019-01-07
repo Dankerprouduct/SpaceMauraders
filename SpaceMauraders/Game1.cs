@@ -20,7 +20,7 @@ namespace SpaceMauraders
 
         public static World.World world;
 
-        public static int width = 1920;
+        public static int width = 1280;
         public static int height = 0; 
 
         public static Vector2 worldPosition;
@@ -35,7 +35,7 @@ namespace SpaceMauraders
             Content.RootDirectory = "Content";
             
             graphics.PreferredBackBufferWidth = width;
-            
+                
             height = (width / 16) * 9;
             
             graphics.PreferredBackBufferHeight = height;

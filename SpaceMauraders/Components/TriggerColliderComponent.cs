@@ -12,6 +12,7 @@ namespace SpaceMauraders.Components
     {
 
         Rectangle rectangle;
+        bool destroy = false; 
         public TriggerColliderComponent(): base()
         {
             componentName = "TriggerColliderComponent";
@@ -30,15 +31,42 @@ namespace SpaceMauraders.Components
             {
                 //Console.WriteLine("Rectangle " + rectangle + " " + (Point)_event.parameters["Ray"]);
                 //Console.WriteLine("ray " + rectangle.Contains((Point)_event.parameters["Ray"]));
-                return rectangle.Contains((Point)_event.parameters["Ray"]); 
+                bool hit = rectangle.Contains((Point)_event.parameters["Ray"]);
+
+                if (hit)
+                {
+                    foreach (KeyValuePair<string, object> parameters in _event.parameters)
+                    {
+
+                        if (parameters.Key == "Destroy")
+                        {
+                            //Console.WriteLine("fsa");
+                            destroy = true;
+                        }
+                    }
+                }
+
+                if (hit)
+                {
+                    //destroy = true;
+                }
+
+                return hit; 
             }
+
 
             return false; 
         }
 
         public override void Update(GameTime gameTime, Entity.Entity entity)
         {
-            rectangle = entity.collisionRectanlge; 
+            rectangle = entity.collisionRectanlge;
+            // = entity; 
+
+            if (destroy)
+            {
+                entity.Detroy(); 
+            }
             base.Update(gameTime, entity);
         }
 

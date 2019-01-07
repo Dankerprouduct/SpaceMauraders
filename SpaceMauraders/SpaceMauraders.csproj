@@ -43,8 +43,11 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AI\FSM\State.cs" />
+    <Compile Include="AI\GOAP\Action.cs" />
     <Compile Include="Components\DrawSelectedItemComponent.cs" />
     <Compile Include="Components\ExplosionComponent.cs" />
+    <Compile Include="Components\FSMComponent.cs" />
     <Compile Include="Components\HealthComponent.cs" />
     <Compile Include="Components\InventoryComponent.cs" />
     <Compile Include="Components\KinematicComponent.cs" />
@@ -68,6 +71,19 @@
     <Compile Include="Entity\Entity.cs" />
     <Compile Include="Entity\EntityDictionary.cs" />
     <Compile Include="Entity\EntityPrototype.cs" />
+    <Compile Include="Entity\Factions\Federation\Captain.cs" />
+    <Compile Include="Entity\Factions\Federation\Colonel.cs" />
+    <Compile Include="Entity\Factions\Federation\General.cs" />
+    <Compile Include="Entity\Factions\Federation\Lietenant.cs" />
+    <Compile Include="Entity\Factions\Federation\Major.cs" />
+    <Compile Include="Entity\Factions\Federation\Soilder.cs" />
+    <Compile Include="Entity\Factions\Rebels\Captain.cs" />
+    <Compile Include="Entity\Factions\Rebels\General.cs" />
+    <Compile Include="Entity\Factions\Rebels\Lacky.cs" />
+    <Compile Include="Entity\Factions\TheNewOrder\Archbishop.cs" />
+    <Compile Include="Entity\Factions\TheNewOrder\Bishop.cs" />
+    <Compile Include="Entity\Factions\TheNewOrder\Cardinal.cs" />
+    <Compile Include="Entity\Factions\TheNewOrder\Priest.cs" />
     <Compile Include="Entity\Items\Item.cs" />
     <Compile Include="Entity\Items\ItemDictionary.cs" />
     <Compile Include="Entity\Items\Weapons\FusionRifle.cs" />
@@ -83,12 +99,24 @@
     <Compile Include="Entity\SpaceStation.cs" />
     <Compile Include="Systems\CellSpacePartition.cs" />
     <Compile Include="Entity\ParticleEmitter.cs" />
+    <Compile Include="Systems\FSM\FSM.cs" />
+    <Compile Include="Systems\FSM\State.cs" />
+    <Compile Include="Systems\GOAP\Action.cs" />
+    <Compile Include="Systems\GOAP\ActionPlanner.cs" />
+    <Compile Include="Systems\GOAP\ActionT.cs" />
+    <Compile Include="Systems\GOAP\Agent.cs" />
+    <Compile Include="Systems\GOAP\AStar.cs" />
+    <Compile Include="Systems\GOAP\AStarStorage.cs" />
+    <Compile Include="Systems\GOAP\WorldState.cs" />
     <Compile Include="Systems\Particle.cs" />
     <Compile Include="Systems\ParticleSystem.cs" />
     <Compile Include="Utilities\Camera.cs" />
     <Compile Include="Utilities\Debug.cs" />
+    <Compile Include="Utilities\ListPool.cs" />
     <Compile Include="Utilities\LuaConsole.cs" />
     <Compile Include="Utilities\MathHelper.cs" />
+    <Compile Include="Utilities\NameGenerator.cs" />
+    <Compile Include="Utilities\Pool.cs" />
     <Compile Include="Utilities\Raycast.cs" />
     <Compile Include="Utilities\TextureManager.cs" />
     <Compile Include="World\Node.cs" />
@@ -124,7 +152,9 @@
     <None Include="app.manifest" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Entity\Factions\Acquisitors\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <Import Project="..\packages\MonoGame.Content.Builder.3.7.0.9\build\MonoGame.Content.Builder.targets" Condition="Exists('..\packages\MonoGame.Content.Builder.3.7.0.9\build\MonoGame.Content.Builder.targets')" />
@@ -137,8 +167,8 @@
   <PropertyGroup>
     <PostBuildEvent>
 xcopy /s /y "D:\Projects\Game1\SpaceMauraders\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"
-xcopy /s /y "D:\Projects\SpaceMauraders\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"
-xcopy /s /y "C:\Users\Danker\Documents\GitHub\SpaceMauraders\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"</PostBuildEvent>
+xcopy /s /y "C:\Users\Danker\Documents\GitHub\SpaceMauraders\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"
+xcopy /s /y "D:\Projects\SpaceMauraders\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

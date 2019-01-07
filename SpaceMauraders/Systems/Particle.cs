@@ -107,7 +107,8 @@ namespace SpaceMauraders.Systems
             timeCounter += (int)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Console.WriteLine(velocity.Length());
-            if (Math.Abs( velocity.Length()) <= minSpeed|| size > maxSize || size < minSize || fade <= 0)
+            //if(fad)
+            if (Math.Abs( velocity.Length()) <= minSpeed|| size > maxSize || size < minSize || fade <= 0.05f)
             {
                 alive = false;
                 //Console.WriteLine("I am dead"); 

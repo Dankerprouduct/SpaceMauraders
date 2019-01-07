@@ -42,6 +42,7 @@ namespace SpaceMauraders.Entity
             {
                 components.Add(new Components.SolidColliderComponent(this, id));
                 components.Add(new Components.TriggerColliderComponent(collisionRectanlge));
+                //this.Detroy(); 
             }
         }
 

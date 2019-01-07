@@ -53,6 +53,7 @@ namespace SpaceMauraders.Utilities
             AddBodyPart("FederationSoilderBody", content); //0
             AddBodyPart("FederationSoilderHead", content); //1
             AddBodyPart("FederationSoilderHand", content); //2
+            AddBodyPart("RebelSoilderBody", content);      //3
 
             // loading inventory items
             AddGuiItem("LaserRifle", content);

@@ -41,12 +41,12 @@ namespace SpaceMauraders.Systems
                 {
                     for (int i = 0; i < members.Count; i++)
                     {
-                        //Console.WriteLine("trying to remove entity...");
+                        Console.WriteLine("trying to remove entity...");
                         if (members[i].id == entity.id)
                         {
                             members.RemoveAt(i);
 
-                            //Console.WriteLine("removed " + entity);
+                            Console.WriteLine("removed " + entity);
                         }
                     }
                 }
@@ -58,7 +58,14 @@ namespace SpaceMauraders.Systems
                 {
                     for (int i = 0; i < members.Count; i++)
                     {
-                        members[i].Update(gameTime);
+                        if (members[i].active)
+                        {
+                            members[i].Update(gameTime);
+                        }
+                        else
+                        {
+                            RemoveEntity(members[i]); 
+                        }
                     }
                 }
             }
@@ -251,7 +258,7 @@ namespace SpaceMauraders.Systems
             entity.SetPartitionCell(PositionToCell(entity).X, PositionToCell(entity).Y);
             entity.SetCellIndex(PositionToIndex(entity));
             dynamicCells[PositionToIndex(entity)].AddEntity(entity);
-            Console.WriteLine("Added entity of type " + entity.GetType()); 
+            Console.WriteLine("Added dynamic entity of type " + entity.GetType()); 
         }    
         
 

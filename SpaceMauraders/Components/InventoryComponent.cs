@@ -113,15 +113,18 @@ namespace SpaceMauraders.Components
         /// <param name="itemId"></param>
         private void AddItem(int itemId)
         {
-            for(int y =  0; y < height; y++)
+            if (itemId != -1)
             {
-                for(int x = 0; x < width; x++)
+                for (int y = 0; y < height; y++)
                 {
-                    if(inventory[x,y].itemID == -1)
+                    for (int x = 0; x < width; x++)
                     {
-                        inventory[x, y] = ItemDictionary.itemDictinary[itemId];
-                        Console.WriteLine("Added " + inventory[x,y].entityName);
-                        return; 
+                        if (inventory[x, y].itemID == -1)
+                        {
+                            inventory[x, y] = ItemDictionary.itemDictinary[itemId];
+                            Console.WriteLine("Added " + inventory[x, y].entityName);
+                            return;
+                        }
                     }
                 }
             }
