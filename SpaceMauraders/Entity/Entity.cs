@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Threading;
+using SpaceMauraders.Utilities;
+using SpaceMauraders.World;
 
 namespace SpaceMauraders.Entity
 {
@@ -22,7 +24,7 @@ namespace SpaceMauraders.Entity
         public int cellIndex; // holds current cell
         public int oldCellIndex;
         public float rotation;
-        public bool active;
+        public bool active = true;
         public Vector2 currentPathingTarget; 
 
         Thread componentThread;
@@ -32,11 +34,10 @@ namespace SpaceMauraders.Entity
         
 
         #region Pathing
-        public List<World.Node> pathingNode;
-        public World.Pathfinding pathFinding;
-        public bool isPathing = false;
-        public Point pathingGoal;
-        public Utilities.Raycast raycast;
+        private List<World.Node> pathingNode;
+        private World.Pathfinding pathFinding = new Pathfinding();
+        private bool isPathing = false;
+        private Point pathingGoal;
         Thread pathingThread;
         #endregion
 
@@ -69,7 +70,6 @@ namespace SpaceMauraders.Entity
             {
                 for (int i = 0; i < components.Count; i++)
                 {
-
                     //Console.WriteLine(_event.id); 
                     if (components[i].FireEvent(_event))
                     {
@@ -80,7 +80,7 @@ namespace SpaceMauraders.Entity
             }
             return false;
         }
-
+        
 
         public void AddComponent(Components.Component component)
         {
@@ -116,33 +116,42 @@ namespace SpaceMauraders.Entity
         #region Pathfinding
         public void MoveTo(Vector2 target)
         {
+            //Console.WriteLine("moving");
             currentPathingTarget = target;
             Vector2 direction = target - position;
+           
             if (direction.Length() != 0)
             {
+                //Console.WriteLine("Direction: " + direction);
                 direction.Normalize();
             }
-
+            //Console.WriteLine();
             rotation = Utilities.MathHelper.RotationFromVector2(target, position);
 
             Components.Event velocityEvent = new Components.Event();
             velocityEvent.id = "AddVelocity";
+            
             velocityEvent.parameters.Add("Velocity", direction * 2);
-            FireEvent(velocityEvent);
-
+            //Console.WriteLine(this.GetComponent("PhysicsComponent") );
+            //Console.WriteLine("velocity parameter : "+ velocityEvent.parameters["Velocity"]);
+            this.FireEvent(velocityEvent);
+            //GetComponent("PhysicsComponent").FireEvent(velocityEvent); 
         }
 
         public void FindPathTo(Vector2 target)
         {
-            raycast = new Utilities.Raycast(position, target);
+            
             //rotation = Utilities.MathHelper.RotationFromVector2(position, Game1.player.position);
-
+            //Console.WriteLine("pathing " + isPathing);
             if (!isPathing)
             {
                 //(Vector2.Distance(target, position) <= 128 * 5)
                 // !raycast.MakeRay(this, 10 * 128, 20)
+                //Console.WriteLine(Vector2.Distance(target, position));
+                
                 if (!(Vector2.Distance(target, position) <= 128 * 10))
                 {
+                    
                     if (pathingNode != null)
                     {
                         pathingNode.Clear();
@@ -182,15 +191,18 @@ namespace SpaceMauraders.Entity
 
         void Pathfind(Vector2 target)
         {
+            //Console.WriteLine(pathingNode + " " + "THIS IS STUPID");
             if (pathingNode != null && pathingNode.Count > 0)
             {
                 Vector2 nodePosition = new Vector2((pathingNode[0].arrayPosition.X * 128) + 64, (pathingNode[0].arrayPosition.Y * 128) + 64);
                 MoveTo(nodePosition);
-
+                //Console.WriteLine(nodePosition);
+                //Console.WriteLine("trying to move");
 
                 if (Vector2.Distance(position, new Vector2((pathingNode[0].arrayPosition.X * 128) + 64, (pathingNode[0].arrayPosition.Y * 128) + 64)) < 64)
                 {
                     pathingNode.RemoveAt(0);
+                    
 
                 }
             }
@@ -212,6 +224,7 @@ namespace SpaceMauraders.Entity
 
         void StartPathThread(Vector2 target)
         {
+            Console.WriteLine("I AM BEING CALLED");
             isPathing = false;
             // Start Node
             World.Node startNode = new World.Node(new Point((int)position.X / 128, (int)position.Y / 128));
@@ -330,14 +343,26 @@ namespace SpaceMauraders.Entity
                 cellIndex = GetCenterPartition();
                 SetCellIndex(cellIndex);
             }
-
-
+            
             UpdateComponents(gameTime); 
         }
 
         public virtual void Update(GameTime gameTime, Entity entity)
         {
 
+        }
+
+        public Utilities.EntitySaveTemplate<Entity> Save()
+        {
+            return new EntitySaveTemplate<Entity>()
+            {
+                name = entityName,
+                position = GetEntityPosition(),
+                rotation = this.rotation,
+                body = this.body,
+                components = this.components,
+                data = this
+            };
         }
 
         public void UpdateComponents(GameTime gameTime)
@@ -357,7 +382,19 @@ namespace SpaceMauraders.Entity
         {
             return collisionRectanlge.Center.ToVector2(); 
         }
-        
+
+        public void DrawPathingNodes()
+        {
+            if (pathingNode != null)
+            {
+                if (pathingNode.Count > 0 && pathingNode != null)
+                {
+                    GUI.GUI.DrawLine(position, new Vector2(pathingGoal.X * 128, pathingGoal.Y * 128), 10, Color.Blue);
+                    GUI.GUI.DrawLine(position, new Vector2(pathingNode[0].arrayPosition.X * 128, pathingNode[0].arrayPosition.Y * 128), 10, Color.Yellow);
+                }
+            }
+            pathFinding.DrawSets();
+        }
         
 
         public virtual void Draw(SpriteBatch spriteBatch)

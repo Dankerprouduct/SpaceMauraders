@@ -9,7 +9,8 @@ using SpaceMauraders.Systems;
 using SpaceMauraders.Utilities;
 using System.Threading;
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
-using  Microsoft.Xna.Framework.Input; 
+using  Microsoft.Xna.Framework.Input;
+using SpaceMauraders.Components;
 
 namespace SpaceMauraders.Entity.Items.Weapons
 {
@@ -28,10 +29,11 @@ namespace SpaceMauraders.Entity.Items.Weapons
             guiItemID = 1;
             worldItemTextureID = 2;
             entityName = "Fusion Rifle";
-            firePoint = new Vector2(40, 1f);
+            firePoint = new Vector2(80, 1f);
 
             raycast.rayEvent.parameters.Add("Destroy", true);
-            emitter.AddParticle(new Systems.Particle(position, 1, 0, 1f, 0, 0, Color.Black)
+            components.Add(new PointTowardsMouseComponent());
+            emitter.AddParticle(new Systems.Particle(position, 1, 0, 1f, 0, 0, Color.White)
             {
                 fadeRate = .95f,
                 maxDampening = 99,
@@ -65,9 +67,9 @@ namespace SpaceMauraders.Entity.Items.Weapons
         public override void Update(GameTime gameTime, Entity entity)
         {
             currentKeyboardState = Keyboard.GetState();
-            currentMouseState = Mouse.GetState(); 
+            currentMouseState = Mouse.GetState();
+            components[0].Update(gameTime, this);
 
-            
             if (inUse)
             {
                 if (charge > 0)
@@ -144,6 +146,11 @@ namespace SpaceMauraders.Entity.Items.Weapons
         {
             if (raycast.points != null && inUse && charge > 0)
             {
+                int r = Game1.random.Next(0, 255);
+                int g = Game1.random.Next(0, 255);
+                int b = Game1.random.Next(0, 255);
+                Color rainbow = new Color(r, g, b);
+
                 for (int i = 0; i < raycast.points.Count; i++)
                 {
 
@@ -195,10 +202,10 @@ namespace SpaceMauraders.Entity.Items.Weapons
                             maxSize = 5,
                             mass = 1.2f
                         });
-
+                    
 
                     ParticleSystem.AddParticle(raycast.points[i].ToVector2(),
-                        new Systems.Particle(position, 1, 0, 1f, 0, 0, Color.Black)
+                        new Systems.Particle(position, 1, 0, 1f, 0, 0, rainbow)
                         {
                             fadeRate = .95f,
                             maxDampening = 95,

@@ -31,7 +31,9 @@ namespace SpaceMauraders.Utilities
             AddTile("tempFloor", content);            //1
             AddTile("Floor1", content);               //2
             AddTile("Wall1", content);                //3
-
+            AddTile("tealMeshTile", content);         //4
+            AddTile("tealMeshTile2", content);        //5
+            AddTile("MeshTile", content);             //6
 
             // loading fonts
             AddFont("debug", content);                //0

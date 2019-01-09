@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using SpaceMauraders.Components;
 
 
 namespace SpaceMauraders.World
@@ -32,7 +32,25 @@ namespace SpaceMauraders.World
        
         public void AddEntity(Entity.Entity entity)
         {
+            Entity.Entity tempEntity = entity;
+            tempEntity.components.Remove(entity.GetComponent("PhysicsComponent"));
+            Console.WriteLine(entity.GetComponent("PhysicsComponent"));
+            tempEntity.AddComponent(new PhysicsComponent());
             dynamicCellSpacePartition.AddEntity(entity); 
+        }
+
+        public void LoadEntity(Entity.Entity entity)
+        {
+            Entity.Entity temp = entity; 
+            // reseting components
+            temp.components = new List<Component>();
+
+            for (int i = 0; i < entity.components.Count; i++)
+            {
+                temp.AddComponent(entity.components[i]);
+            }
+
+            dynamicCellSpacePartition.LoadEntity(temp);
         }
 
         public void UpdateDynamicCellPartition(GameTime gameTime)
@@ -162,6 +180,17 @@ namespace SpaceMauraders.World
 
 
             return false; 
+        }
+
+
+        public static void Savegame()
+        {
+
+        }
+
+        public static void LoadGame()
+        {
+
         }
 
     }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceMauraders.Entity;
+using SpaceMauraders.Utilities;
 
 
 namespace SpaceMauraders.Systems
@@ -20,7 +21,11 @@ namespace SpaceMauraders.Systems
             {
                 if (members != null)
                 {
-                    members.Add(entity);
+
+                    if (entity is Player == false)
+                    {
+                        members.Add(entity);
+                    }
                     //Console.WriteLine("added " + entity);
 
                 }
@@ -41,12 +46,12 @@ namespace SpaceMauraders.Systems
                 {
                     for (int i = 0; i < members.Count; i++)
                     {
-                        Console.WriteLine("trying to remove entity...");
+                        //Console.WriteLine("trying to remove entity...");
                         if (members[i].id == entity.id)
                         {
                             members.RemoveAt(i);
 
-                            Console.WriteLine("removed " + entity);
+                             //Console.WriteLine("removed " + entity);
                         }
                     }
                 }
@@ -80,6 +85,23 @@ namespace SpaceMauraders.Systems
                         GUI.GUI.DrawString(i.ToString(), members[i].position, 1, 1f, Color.Green);  
                     }
                 }
+            }
+
+            public List<Entity.Entity> GetEntities()
+            {
+                return members; 
+            }
+
+            public List<EntitySaveTemplate<Entity.Entity>> SaveEntities()
+            {
+                List<EntitySaveTemplate<Entity.Entity>> temps = new List<EntitySaveTemplate<Entity.Entity>>();
+
+                for (int i = 0; i < members.Count; i++)
+                {
+                    temps.Add(members[i].Save());
+                }
+
+                return temps; 
             }
 
             public bool FireEvent(Components.Event _event)
@@ -137,6 +159,24 @@ namespace SpaceMauraders.Systems
                     
                 }
             }
+
+
+            public List<Entity.Entity> GetEntities()
+            {
+                List<Entity.Entity> tempEmEntities = new List<Entity.Entity>();
+
+                for (int x = 0; x < members.GetLength(0); x++)
+                {
+                    for (int y = 0; y < members.GetLength(1); y++)
+                    {
+                        
+                        tempEmEntities.Add(members[x,y]);
+                    }
+                }
+
+                return tempEmEntities;
+            }
+
 
             public Entity.Entity GetEntity(Point position)
             {
@@ -242,6 +282,39 @@ namespace SpaceMauraders.Systems
 
         }
 
+        /// <summary>
+        /// retrieves dynamic entities in an array
+        /// </summary>
+        /// <returns></returns>
+        public Entity.Entity[] GetDynamicEntities()
+        {
+            List<Entity.Entity> temp = new List<Entity.Entity>();
+            for (int i = 0; i < dynamicCells.Length; i++)
+            {
+                if (dynamicCells[i].members != null)
+                {
+                    temp.AddRange(dynamicCells[i].GetEntities());
+                }
+            }
+
+            return temp.ToArray(); 
+            ///lis
+        }
+
+        public EntitySaveTemplate<Entity.Entity>[] SaveDynamicEntities()
+        {
+            List<EntitySaveTemplate<Entity.Entity>> temp = new List<EntitySaveTemplate<Entity.Entity>>();
+            for (int i = 0; i < dynamicCells.Length; i++)
+            {
+                if (dynamicCells[i].members != null)
+                {
+                    temp.AddRange(dynamicCells[i].SaveEntities());
+                }
+            }
+
+            return temp.ToArray();
+        }
+
         // adds entity to appropriate static cell
         public void AddStaticEntity(Entity.Entity entity)
         {
@@ -259,7 +332,12 @@ namespace SpaceMauraders.Systems
             entity.SetCellIndex(PositionToIndex(entity));
             dynamicCells[PositionToIndex(entity)].AddEntity(entity);
             Console.WriteLine("Added dynamic entity of type " + entity.GetType()); 
-        }    
+        }
+
+        public void LoadEntity(Entity.Entity entity)
+        {
+            dynamicCells[PositionToIndex(entity)].AddEntity(entity);
+        }
         
 
         // changes vector to to a 1D array index

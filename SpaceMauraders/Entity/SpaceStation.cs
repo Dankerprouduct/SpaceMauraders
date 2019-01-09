@@ -42,6 +42,7 @@ namespace SpaceMauraders.Entity
             
         }
 
+        private int floorTile = 6; 
         void BuildStation()
         {
 
@@ -52,16 +53,16 @@ namespace SpaceMauraders.Entity
 
 
 
-            BuildBridge(175, 250, 45, 45.2f, 2);
+            BuildBridge(175, 250, 45, 45.2f, floorTile);
             BuildBridge(175, 250, 45.2f, 45.2f, 3);
             BuildBridge(175, 250, 45, 45, 3);
 
 
-            BuildBridge(175, 250, 45 - 180, 45.2f - 180, 2);
+            BuildBridge(175, 250, 45 - 180, 45.2f - 180, floorTile);
             BuildBridge(175, 250, 45.2f - 180f, 45.2f - 180, 3);
             BuildBridge(175, 250, 45 - 180, 45 - 180, 3);
 
-            BuildBridge(175, 250, 45 - 360, 45.2f - 360, 2);
+            BuildBridge(175, 250, 45 - 360, 45.2f - 360, floorTile);
             BuildBridge(175, 250, 45.2f - 360, 45.2f - 360, 3);
             BuildBridge(175, 250, 45 - 360, 45 - 360, 3);
 
@@ -86,7 +87,7 @@ namespace SpaceMauraders.Entity
 
             for (int i =r1 + 1; i <= r2 - 1; i++)
             {
-                BuildRing(i, 2);
+                BuildRing(i, floorTile);
 
             }
 
@@ -175,7 +176,7 @@ namespace SpaceMauraders.Entity
                     tileX = (int)(Math.Cos(r) * ((r1 + r2) / roomSize)) + middle.X;
                     tileY = (int)(Math.Sin(r) * ((r1 + r2) / roomSize)) + middle.Y;
 
-                    tileMap[tileX, tileY] = 2;
+                    tileMap[tileX, tileY] = floorTile;
                 }
 
                 BuildWall(r1, r2, roomSize, startAngle);
@@ -235,6 +236,21 @@ namespace SpaceMauraders.Entity
                                     tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), tileMap[x, y], Tile.TileType.Solid);
                                     break; 
                                 }
+                            case 4:
+                                {
+                                    tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), tileMap[x, y], Tile.TileType.NonSolid);
+                                    break;
+                                }
+                            case 5:
+                                  {
+                                    tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), tileMap[x, y], Tile.TileType.NonSolid);
+                                    break;
+                                  }
+                            default:
+                                   {
+                                    tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), tileMap[x, y], Tile.TileType.NonSolid);
+                                    break;
+                                   }
                         }
                         if (Utilities.Debug.debug)
                         {
@@ -260,7 +276,7 @@ namespace SpaceMauraders.Entity
                 }
             }
 
-            nodeMesh.MakeMap(2, 3, tileMap); 
+            nodeMesh.MakeMap(floorTile, 3, tileMap); 
 
             tileMap = null;
         }

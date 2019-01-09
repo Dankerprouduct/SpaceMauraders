@@ -20,7 +20,7 @@ namespace SpaceMauraders.Entity
             this.collisionRectanlge = new Rectangle((int)position.X, (int)position.Y, Utilities.TextureManager.sprites[0].Width, Utilities.TextureManager.sprites[0].Height);
             
             components.Add(new Components.InputComponent(this.id));
-            components.Add(new Components.SpeedModifierComponent(1)); 
+            components.Add(new Components.SpeedModifierComponent(0.5f)); 
              //components.Add(new Components.SpeedModifierComponent(.5f));
             components.Add(new Components.PhysicsComponent(this.id));
             
@@ -30,10 +30,7 @@ namespace SpaceMauraders.Entity
             components.Add(new Components.PointTowardsMouseComponent());
             components.Add(new Components.DrawSelectedItemComponent());
             
-
-            Random random = new Random();
-
-            emittter.AddParticle(new Systems.Particle(position, 1, random.Next(0, 360), .5f, 0, 0, Color.DarkRed)
+            emittter.AddParticle(new Systems.Particle(position, 1, Game1.random.Next(0, 360), .5f, 0, 0, Color.DarkRed)
             {
                 fadeRate = .95f,
                 maxDampening =99,
@@ -46,7 +43,7 @@ namespace SpaceMauraders.Entity
                 sizeRate = .95f,
                 maxSize = 5
             });
-            emittter.AddParticle(new Systems.Particle(position, 1, random.Next(0, 360), 1, 0, 0, Color.Red)
+            emittter.AddParticle(new Systems.Particle(position, 1, Game1.random.Next(0, 360), 1, 0, 0, Color.Red)
             {
                 fadeRate = .95f,
                 maxDampening = 99,
@@ -72,25 +69,26 @@ namespace SpaceMauraders.Entity
             body.AddBodyPart(new Body.Torso(3, Vector2.Zero)
             {
                 lerpSpeed = .2f,
-                turnAngle = 25
+                turnAngle = 25,
+                scale = 1
             });
             
-            body.AddBodyPart(new Body.Head(1, new Vector2(-9, 0))
+            body.AddBodyPart(new Body.Head(1, new Vector2(-22, 0))
             {
                 lerpSpeed = .2f,
                 turnAngle = 5,
-                scale = .5f
+                scale = 1f
             });
-            body.AddBodyPart(new Body.Hand(2, new Vector2(15, -22))
+            body.AddBodyPart(new Body.Hand(2, new Vector2(30, -44))
             {
-                scale = .7f,
+                scale = 1.3f,
                 // try 25 for lols
                 lerpSpeed = .1f,
                 turnAngle = 10
             });
-            body.AddBodyPart(new Body.Hand(2, new Vector2(15, 22))
+            body.AddBodyPart(new Body.Hand(2, new Vector2(30, 44))
             {
-                scale = .7f,
+                scale = 1.3f,
                 lerpSpeed = .1f,
                 turnAngle = 10
             });
@@ -121,20 +119,29 @@ namespace SpaceMauraders.Entity
         public override void Update(GameTime gameTime)
         {
 
+            if (!active)
+            {
+               // position = new Vector2(-10000, 10000);
+            }
+
+            
             emittter.Update(gameTime); 
             emittter.position = position;
             
-            body.Update(position, rotation); 
-
+            body.Update(position, rotation);
             base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            body.Draw(spriteBatch);
-            ((Components.DrawSelectedItemComponent)GetComponent("DrawSelectedItemComponent")).Draw(spriteBatch);
+            if (active)
+            {
+                body.Draw(spriteBatch);
+                ((Components.DrawSelectedItemComponent) GetComponent("DrawSelectedItemComponent")).Draw(spriteBatch);
+                
+                //base.Draw(spriteBatch);
+            }
             ((Components.InventoryComponent)GetComponent("InventoryComponent")).DrawWorld();
-            //base.Draw(spriteBatch);
         }
 
         public void DrawInventory()

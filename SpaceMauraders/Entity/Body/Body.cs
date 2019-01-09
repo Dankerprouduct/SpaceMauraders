@@ -12,9 +12,9 @@ namespace SpaceMauraders.Entity.Body
     {
         public Rectangle bounds; 
         public List<BodyPart> bodyParts = new List<BodyPart>();
-        List<int> headIndexes = new List<int>(); 
-        List<int> handsIndexes = new List<int>();
-        List<int> torsoIndexes = new List<int>();
+        public List<int> headIndexes = new List<int>(); 
+        public List<int> handsIndexes = new List<int>();
+        public List<int> torsoIndexes = new List<int>();
 
         public Body()
         {

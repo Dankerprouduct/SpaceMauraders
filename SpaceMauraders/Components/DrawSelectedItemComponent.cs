@@ -45,13 +45,13 @@ namespace SpaceMauraders.Components
                         center = Utilities.MathHelper.CenterOfImage(
                             Utilities.TextureManager.guiItemTextures[currentEquippedItem.guiItemID]);
                         currentEquippedItem.position = itemPosition;
-                        currentEquippedItem.rotation = rotation; 
-                        tempPlayer.body.bodyParts[3].offset = new Vector2(20, 18);
+                        ////.rotation = rotation; 
+                        tempPlayer.body.bodyParts[3].offset = new Vector2(60, 44);
                         //tempPlayer.body.bodyParts[2].offset = new Vector2(50, 12);
                     }
                     else
                     {
-                        tempPlayer.body.bodyParts[3].offset = new Vector2(15, 22);
+                        tempPlayer.body.bodyParts[3].offset = new Vector2(30, 44);
                         //tempPlayer.body.bodyParts[2].offset = new Vector2(15, -22);
                     }
 
@@ -73,13 +73,13 @@ namespace SpaceMauraders.Components
                             Utilities.TextureManager.guiItemTextures[currentEquippedItem.guiItemID]);
                         currentEquippedItem.position = itemPosition;
                         currentEquippedItem.rotation = rotation;
-                        tempPlayer.body.bodyParts[3].offset = new Vector2(20, 18);
+                        tempPlayer.body.bodyParts[3].offset = new Vector2(60, 44);
                         //tempPlayer.body.bodyParts[2].offset = new Vector2(50, 12);
                     }
                     else
                     {
-                        tempPlayer.body.bodyParts[3].offset = new Vector2(15, 22);
-                        //tempPlayer.body.bodyParts[2].offset = new Vector2(15, -22);
+                        tempPlayer.body.bodyParts[3].offset = new Vector2(30, 44);
+                        tempPlayer.body.bodyParts[2].offset = new Vector2(15, -22);
                     }
                 }
             }
@@ -104,9 +104,9 @@ namespace SpaceMauraders.Components
                     spriteBatch.Draw(Utilities.TextureManager.guiItemTextures[currentEquippedItem.guiItemID],
                         itemPosition, null,
                         Color.White,
-                        rotation,
+                        currentEquippedItem.rotation,
                         center,
-                        .5f,
+                        1f,
                         SpriteEffects.None,
                         0f);
                 }

@@ -2,6 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using SpaceMauraders.Components;
+using SpaceMauraders.Entity.Factions.Federation;
+using SpaceMauraders.Utilities;
 
 namespace SpaceMauraders
 {
@@ -13,22 +16,23 @@ namespace SpaceMauraders
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         public static Game1 game;
-        public static Random random = new Random();
+        public static Random random = new Random(92899);
 
         public static Utilities.Camera camera;
         public static Utilities.Debug debug; 
 
         public static World.World world;
 
-        public static int width = 1280;
+        public static int width = 1920;
         public static int height = 0; 
 
         public static Vector2 worldPosition;
 
         Vector2 mousePosition;
+        GameData<EntitySaveTemplate<Entity.Entity>> gameData = new GameData<EntitySaveTemplate<Entity.Entity>>();
+        GameData<Entity.Entity> entityData = new GameData<Entity.Entity>();
 
         public static Entity.Player player;
-                
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -56,6 +60,14 @@ namespace SpaceMauraders
             Utilities.TextureManager.LoadContent(Content);
             Systems.ParticleSystem.Init(20000);
             Entity.Items.ItemDictionary.LoadItemDatabase();
+            GUI.GUI.Init();
+            Reset();
+
+        }
+
+        public void Reset()
+        {
+            
 
             world = new World.World(10, 10);
 
@@ -65,32 +77,83 @@ namespace SpaceMauraders
 
             for (int i = 0; i < 0; i++)
             {
-                
+
                 world.AddEntity(new Entity.NPC(new Vector2(world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition.X * 128 + 64,
                     world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition.Y * 128 + 64)));
-                    
+
                 //world.AddEntity(new Entity.NPC(new Vector2(18586, 38309)));
             }
 
             //world.AddEntity(new Entity.NPC(new Vector2(18586, 38309)));
-            GUI.GUI.Init(); 
-            camera = new  Utilities.Camera(GraphicsDevice.Viewport);
+            
+            camera = new Utilities.Camera(GraphicsDevice.Viewport);
 
             Console.WriteLine("Number of Entities: " + Entity.Entity.nextAvailibleID);
-
         }
-        
+
         protected override void UnloadContent()
         {
 
         }
-        
+
+        public void SaveGame()
+        {
+            //gameData.SaveData(world.dynamicCellSpacePartition.SaveDynamicEntities(), "save1");
+            entityData.SaveData(world.dynamicCellSpacePartition.GetDynamicEntities(), "save2");
+        }
+
+        public void LoadGame()
+        {
+
+            //EntitySaveTemplate<Entity.Entity>[] tempE = gameData.LoadData("save1");
+            Entity.Entity[] ents = entityData.LoadData("save2");
+
+            //foreach (var template in tempE)
+            //{
+            //    Entity.Entity ent = new Entity.Entity()
+            //    {
+                
+            //        position = template.position,
+            //        entityName = template.name,
+            //        rotation = template.rotation,
+            //        body = template.body,
+                  
+            //    };
+            //    ent = (typeof(template)) ent;
+            //    for (int i = 0; i < template.components.Count; i++)
+            //    {
+            //        if (template.components[i].componentName == "PhysicsComponent")
+            //        {
+            //            ent.AddComponent(new PhysicsComponent());
+            //        }
+            //        else
+            //        {
+            //            ent.AddComponent(template.components[i]);
+            //        }
+            //    }
+            //    world.AddEntity(ent);
+            //}
+
+            for (int i = 0; i < ents.Length; i++)
+            {
+                world.AddEntity(ents[i]);
+            }
+        }
+
+
+
         protected override void Update(GameTime gameTime)
         {
             GUI.GUI.Draw(spriteBatch);
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.F12))
+                Reset();
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.P))
+                SaveGame();
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.O))
+                LoadGame();
 
             mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
             worldPosition = Vector2.Transform(mousePosition, Matrix.Invert(camera.transform)) ;

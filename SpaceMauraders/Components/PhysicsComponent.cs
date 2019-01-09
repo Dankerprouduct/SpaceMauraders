@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using System.Threading; 
+using System.Threading;
+using SpaceMauraders.Entity;
 
 namespace SpaceMauraders.Components
 {
@@ -12,10 +13,10 @@ namespace SpaceMauraders.Components
     {
 
         public Vector2 velocity = Vector2.Zero;
-        public int speed = 2;
-        Vector2 position;
+        public int speed = 1;
+        public Vector2 position;
         public int cellIndex;
-        Entity.Entity entity;
+        private Entity.Entity entity;
         float maxVelocity = 10;
 
 
@@ -34,7 +35,6 @@ namespace SpaceMauraders.Components
             CheckCollisionInMovementDirection(entity);
             position = entity.position;
             cellIndex = entity.cellIndex;
-            
             
             this.entity = entity; 
         }
@@ -61,10 +61,12 @@ namespace SpaceMauraders.Components
 
             if (_event.id == "AddVelocity")
             {
+
                 foreach(KeyValuePair<string, object> parameters in _event.parameters)
                 {
                     if(parameters.Key == "Velocity")
                     {
+                        
                         velocity += (Vector2)parameters.Value;
                         CheckSpeed(10); 
                     }
@@ -226,15 +228,17 @@ namespace SpaceMauraders.Components
 
             
             entity.oldPosition = entity.position;
-
+            
             velocity *= .85f;
             if (!(entity is Entity.Player))
             {
                 velocity += Separation();
+                //Console.WriteLine(entity.position.X + " " + velocity.X);
             }
 
             float j = 1.2f; 
             entity.position.X += (int)velocity.X;
+            
             if (Game1.world.FireGlobalEvent(FireCollisionEvent(entity), entity))
             {
                
@@ -264,8 +268,8 @@ namespace SpaceMauraders.Components
             entity.collisionRectanlge = new Rectangle(
                 (int)entity.position.X - (int)(Utilities.MathHelper.CenterOfImage(Utilities.TextureManager.bodyParts[0]).X * .5f),
                 (int)entity.position.Y - (int)(Utilities.MathHelper.CenterOfImage(Utilities.TextureManager.bodyParts[0]).Y * .5f),
-                (int)(Utilities.TextureManager.bodyParts[0].Width * .5f),
-                (int)(Utilities.TextureManager.bodyParts[0].Height * .5f));
+                (int)(Utilities.TextureManager.bodyParts[0].Width * 1f),
+                (int)(Utilities.TextureManager.bodyParts[0].Height * 1f));
             
             Event physicsEvent = new Event
             {

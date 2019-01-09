@@ -16,6 +16,8 @@ namespace SpaceMauraders.Entity.Items.Weapons
         public int clipSize;
         public int currentClip;
 
+
+        public Utilities.Raycast raycast;
         // the point where the ray or projectile fires from
         public Vector2 firePoint; 
 

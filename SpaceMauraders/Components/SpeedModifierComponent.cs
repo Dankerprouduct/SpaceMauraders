@@ -9,7 +9,7 @@ namespace SpaceMauraders.Components
 {
     public class SpeedModifierComponent : Component
     {
-        float speedModifier; 
+        public float speedModifier; 
         public SpeedModifierComponent(float modifier) : base()
         {
             componentName = "SpeedModifierComponent";
@@ -24,6 +24,7 @@ namespace SpaceMauraders.Components
                 
                 if(_event.parameters["Velocity"] != null)
                 {
+                    //Console.WriteLine(componentName + " "+ _event.parameters["Velocity"]);
                     _event.parameters["Velocity"] = ((Vector2)_event.parameters["Velocity"]* speedModifier);
 
                 }

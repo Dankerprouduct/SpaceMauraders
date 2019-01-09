@@ -9,7 +9,8 @@ using SpaceMauraders.Systems;
 using SpaceMauraders.Utilities;
 using System.Threading;
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
-using  Microsoft.Xna.Framework.Input; 
+using  Microsoft.Xna.Framework.Input;
+using SpaceMauraders.Components;
 
 namespace SpaceMauraders.Entity.Items.Weapons
 {
@@ -27,9 +28,10 @@ namespace SpaceMauraders.Entity.Items.Weapons
             guiItemID = 0;
             worldItemTextureID = 1;
             entityName = "Laser Rifle";
-            firePoint = new Vector2(40, -5);
+            firePoint = new Vector2(65, -10);
             raycast = new Raycast();
             raycast.rayEvent.parameters.Add("Destroy", true);
+            components.Add(new PointTowardsMouseComponent());
             emitter.AddParticle(new Systems.Particle(position, 1, 0, 1f, 0, 0, Color.White)
             {
                 fadeRate = .95f,
@@ -57,7 +59,7 @@ namespace SpaceMauraders.Entity.Items.Weapons
                 maxSize = 5,
                 fade = .2f
             });
-
+            
 
         }
 
@@ -66,7 +68,11 @@ namespace SpaceMauraders.Entity.Items.Weapons
             currentKeyboardState = Keyboard.GetState();
             currentMouseState = Mouse.GetState();
 
-
+            //UpdateComponents(gameTime);
+            components[0].Update(gameTime, this);
+            
+            //rotation = (float)Math.Atan2(direction.Y, direction.X);
+            
             if (inUse)
             {
                 if (charge > 0)

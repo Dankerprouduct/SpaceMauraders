@@ -35,8 +35,7 @@ namespace SpaceMauraders.Systems
                 if (!particles[i].alive)
                 {
                     //Console.WriteLine("adding particle " + i); 
-                    Random random = new Random(); 
-                    particles[i].CreateParticle(position, mass, random.Next((int)force, (int)force * 2), 1, id, color);
+                    particles[i].CreateParticle(position, mass, Game1.random.Next((int)force, (int)force * 2), 1, id, color);
                     return; 
                 }
             }
@@ -49,8 +48,6 @@ namespace SpaceMauraders.Systems
             {
                 if (!particles[i].alive)
                 {
-                    //Console.WriteLine("adding particle " + i); 
-                    Random random = new Random(); 
                     
                     particles[i].size = particle.size;
                     particles[i].maxSize = particle.maxSize;
@@ -65,7 +62,7 @@ namespace SpaceMauraders.Systems
                     particles[i].minAngle = particle.minAngle;
                     particles[i].maxAngle = particle.maxAngle;
 
-                    particles[i].CreateParticle(position, particle.mass, random.Next((int)particle.force, (int)particle.force * 5), 1, particle.id, particle.color);
+                    particles[i].CreateParticle(position, particle.mass, Game1.random.Next((int)particle.force, (int)particle.force * 5), 1, particle.id, particle.color);
 
                     return;
                 }
