@@ -34,6 +34,8 @@ namespace SpaceMauraders.Utilities
             AddTile("tealMeshTile", content);         //4
             AddTile("tealMeshTile2", content);        //5
             AddTile("MeshTile", content);             //6
+            AddTile("Wall2", content);                //7
+            AddTile("Wall3", content);                //8
 
             // loading fonts
             AddFont("debug", content);                //0

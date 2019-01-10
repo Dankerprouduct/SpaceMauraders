@@ -164,9 +164,12 @@ C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\obj\x86\Debug\Spa
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMauraders.csproj.CopyComplete
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMauraders.exe
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMauraders.pdb
-C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMauraders.csprojAssemblyReference.cache
 D:\Projects\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Sprites\BodyParts\RebelSoilderBody.xnb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Sprites\BodyParts\RebelSoilderBody.xnb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Tiles\tealMeshTile.xnb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Tiles\tealMeshTile2.xnb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Tiles\MeshTile.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\SpaceMauraders.exe.config
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMauraders.csprojAssemblyReference.cache
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Tiles\Wall2.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Tiles\Wall3.xnb

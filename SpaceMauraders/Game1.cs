@@ -43,6 +43,7 @@ namespace SpaceMauraders
             height = (width / 16) * 9;
             
             graphics.PreferredBackBufferHeight = height;
+            graphics.GraphicsProfile = GraphicsProfile.HiDef; 
             graphics.IsFullScreen = false; 
         }
         

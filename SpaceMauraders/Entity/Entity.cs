@@ -15,7 +15,7 @@ namespace SpaceMauraders.Entity
     {
 
         public static int nextAvailibleID = 0;
-
+        
         public int id;
         public Vector2 position;
         public Vector2 oldPosition;
@@ -54,6 +54,11 @@ namespace SpaceMauraders.Entity
 
         }
 
+        /// <summary>
+        /// fires an event to the entity
+        /// </summary>
+        /// <param name="_event"></param>
+        /// <returns>returns whether or not the event returned true or false</returns>
         public bool FireEvent(Components.Event _event)
         {
             if (_event.id == "Collider")
@@ -81,7 +86,11 @@ namespace SpaceMauraders.Entity
             return false;
         }
         
-
+        /// <summary>to the entity's list of components
+        /// this will automatically be updated
+        /// Adds a component 
+        /// </summary>
+        /// <param name="component"></param>
         public void AddComponent(Components.Component component)
         {
             components.Add(component);
@@ -92,20 +101,20 @@ namespace SpaceMauraders.Entity
         }
 
         // TODO replace with LINQ 
+        /// <summary>
+        /// returns a component given a name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public Components.Component GetComponent(string name)
         {
-
-            for(int i = 0; i < components.Count; i++)
-            {
-                if(components[i].componentName == name)
-                {
-                    return components[i]; 
-                }
-            }
-
-            return new Components.Component(); 
+            return components.Find(c => c.componentName == name);
         }
 
+        /// <summary>
+        /// returns the vector2 position of entity
+        /// </summary>
+        /// <returns></returns>
         public Vector2 GetEntityPosition()
         {
             return position;
@@ -114,6 +123,10 @@ namespace SpaceMauraders.Entity
 
         // DO NOT TOUCH UNLESS YOURE SURE YOU KNOW WHAT YOURE DOING
         #region Pathfinding
+        /// <summary>
+        /// Translates toward a vector 2 point 
+        /// </summary>
+        /// <param name="target">Point that you wish to travel to</param>
         public void MoveTo(Vector2 target)
         {
             //Console.WriteLine("moving");
@@ -132,46 +145,33 @@ namespace SpaceMauraders.Entity
             velocityEvent.id = "AddVelocity";
             
             velocityEvent.parameters.Add("Velocity", direction * 2);
-            //Console.WriteLine(this.GetComponent("PhysicsComponent") );
-            //Console.WriteLine("velocity parameter : "+ velocityEvent.parameters["Velocity"]);
             this.FireEvent(velocityEvent);
-            //GetComponent("PhysicsComponent").FireEvent(velocityEvent); 
         }
 
+        /// <summary>
+        /// What inherrited objects interface with
+        /// if target is close enough it moves straight towards it 
+        /// </summary>
+        /// <param name="target"></param>
         public void FindPathTo(Vector2 target)
         {
             
-            //rotation = Utilities.MathHelper.RotationFromVector2(position, Game1.player.position);
-            //Console.WriteLine("pathing " + isPathing);
             if (!isPathing)
             {
-                //(Vector2.Distance(target, position) <= 128 * 5)
-                // !raycast.MakeRay(this, 10 * 128, 20)
-                //Console.WriteLine(Vector2.Distance(target, position));
-                
                 if (!(Vector2.Distance(target, position) <= 128 * 10))
                 {
-                    
-                    if (pathingNode != null)
-                    {
-                        pathingNode.Clear();
-                    }
+                    pathingNode?.Clear();
                     Pathfind(target); 
-                    //tartPathfindingThread(target);
                     isPathing = true;
-                    //Console.WriteLine("1");
                 }
                 else
-                {// dedicate thread =. path 
-                    
+                {                     
                     if ((Vector2.Distance(target, position) <= 128 * 3) &&
                         (Vector2.Distance(target, position) >= 128 * 1))
                     {
                         MoveTo(target);
-                        //Console.WriteLine("2");
                     }
-
-                    // turn toward target if theyre close enough
+                    
                     if (Vector2.Distance(target, position) <= 128 * 5)
                     {
                         rotation = Utilities.MathHelper.RotationFromVector2(target, position);
@@ -188,7 +188,12 @@ namespace SpaceMauraders.Entity
             }
         }
         
-
+        /// <summary>
+        /// Is a Courotine for the pathfinding algorithm,
+        /// moves to the next node in the array then removes it once its too close
+        /// 
+        /// </summary>
+        /// <param name="target"></param>
         void Pathfind(Vector2 target)
         {
             //Console.WriteLine(pathingNode + " " + "THIS IS STUPID");
@@ -222,9 +227,13 @@ namespace SpaceMauraders.Entity
             
         }
 
+        /// <summary>
+        ///  a new thread for A*
+        /// </summary>
+        /// <param name="target"></param>
         void StartPathThread(Vector2 target)
         {
-            Console.WriteLine("I AM BEING CALLED");
+
             isPathing = false;
             // Start Node
             World.Node startNode = new World.Node(new Point((int)position.X / 128, (int)position.Y / 128));
@@ -243,6 +252,11 @@ namespace SpaceMauraders.Entity
         #endregion
 
         #region Partition Methods
+        /// <summary>
+        /// Sets the partitions indexes for the entity
+        /// </summary>
+        /// <param name="cellX">x partition index</param>
+        /// <param name="cellY">y partition index</param>
         public void SetPartitionCell(int cellX, int cellY)
         {
             this.cellX = cellX;
@@ -250,6 +264,10 @@ namespace SpaceMauraders.Entity
             
         }
 
+        /// <summary>
+        /// Sets the index of the partition 
+        /// </summary>
+        /// <param name="index"></param>
         public void SetCellIndex(int index)
         {
             //Console.WriteLine("set cell index " + index); 
@@ -257,11 +275,19 @@ namespace SpaceMauraders.Entity
             oldCellIndex = cellIndex; 
         }
 
+        /// <summary>
+        /// Returns the current Partition
+        /// </summary>
+        /// <returns></returns>
         public int GetCurrentDynamicPartition()
         {
             return Game1.world.dynamicCellSpacePartition.PositionToIndex(this); 
         }
 
+        /// <summary>
+        /// Returns the center partition
+        /// </summary>
+        /// <returns>Center partition</returns>
         public int GetCenterPartition()
         {
             cellIndex = Game1.world.spaceStation.cellSpacePartition.PositionToIndex(this);
@@ -269,6 +295,10 @@ namespace SpaceMauraders.Entity
             return center; 
         }
 
+        /// <summary>
+        /// Returns the partition right of the entity 
+        /// </summary>
+        /// <returns>partition right of the entity</returns>
         public int GetRightPartition()
         {
             cellIndex = Game1.world.spaceStation.cellSpacePartition.PositionToIndex(this);
@@ -277,6 +307,10 @@ namespace SpaceMauraders.Entity
             return right; 
         }
 
+        /// <summary>
+        /// returns the partition left of the entity
+        /// </summary>
+        /// <returns>partition left of the entity</returns>
         public int GetLeftPartition()
         {
             cellIndex = Game1.world.spaceStation.cellSpacePartition.PositionToIndex(this);
@@ -285,6 +319,10 @@ namespace SpaceMauraders.Entity
             return left; 
         }
 
+        /// <summary>
+        /// returns the partition towards the bottom of the entity
+        /// </summary>
+        /// <returns>partition south of entity</returns>
         public int GetBottomPartition()
         {
             cellIndex = Game1.world.spaceStation.cellSpacePartition.PositionToIndex(this);
@@ -293,6 +331,10 @@ namespace SpaceMauraders.Entity
             return left; 
         }
 
+        /// <summary>
+        /// returns the partition towards the top of the entity
+        /// </summary>
+        /// <returns>partition towards the top of the entity</returns>
         public int GetTopPartition()
         {
             cellIndex = Game1.world.spaceStation.cellSpacePartition.PositionToIndex(this);
@@ -301,6 +343,10 @@ namespace SpaceMauraders.Entity
             return top; 
         }
 
+        /// <summary>
+        /// returns the southeast partition
+        /// </summary>
+        /// <returns>souith east partition</returns>
         public int GetBottomRightPartition()
         {
             cellIndex = Game1.world.spaceStation.cellSpacePartition.PositionToIndex(this);
@@ -309,6 +355,10 @@ namespace SpaceMauraders.Entity
             return bottomRight; 
         }
 
+        /// <summary>
+        /// returns the bottom left partition 
+        /// </summary>
+        /// <returns>bottom left partition</returns>
         public int GetBottomLeftPartition()
         {
             cellIndex = Game1.world.spaceStation.cellSpacePartition.PositionToIndex(this);
@@ -317,6 +367,10 @@ namespace SpaceMauraders.Entity
             return bottomLeft; 
         }
 
+        /// <summary>
+        /// returns the top right partition 
+        /// </summary>
+        /// <returns>top right partition</returns>
         public int GetTopRightPartition()
         {
             cellIndex = Game1.world.spaceStation.cellSpacePartition.PositionToIndex(this);
@@ -325,6 +379,10 @@ namespace SpaceMauraders.Entity
             return topRight; 
         }
 
+        /// <summary>
+        /// returns the top left partition
+        /// </summary>
+        /// <returns>top left partition</returns>
         public int GetTopLeftPartition()
         {
             cellIndex = Game1.world.spaceStation.cellSpacePartition.PositionToIndex(this);
@@ -334,6 +392,10 @@ namespace SpaceMauraders.Entity
         }
         #endregion
 
+        /// <summary>
+        /// Update function that is called by the Cell Space Partitions
+        /// </summary>
+        /// <param name="gameTime"></param>
         public virtual void Update(GameTime gameTime)
         {
 
@@ -347,11 +409,20 @@ namespace SpaceMauraders.Entity
             UpdateComponents(gameTime); 
         }
 
+        /// <summary>
+        /// A helper update funtion. use as needed as long as the entity calling it is being updated
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="entity"></param>
         public virtual void Update(GameTime gameTime, Entity entity)
         {
 
         }
 
+        /// <summary>
+        /// returns a SaveTemplate of the entity 
+        /// </summary>
+        /// <returns>Save Template</returns>
         public Utilities.EntitySaveTemplate<Entity> Save()
         {
             return new EntitySaveTemplate<Entity>()
@@ -365,6 +436,10 @@ namespace SpaceMauraders.Entity
             };
         }
 
+        /// <summary>
+        /// updates all of the components in componetns
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void UpdateComponents(GameTime gameTime)
         {
             for (int i = 0; i < components.Count(); i++)
@@ -383,6 +458,9 @@ namespace SpaceMauraders.Entity
             return collisionRectanlge.Center.ToVector2(); 
         }
 
+        /// <summary>
+        /// a debug utility used to draw the nodes currently being used for pathing
+        /// </summary>
         public void DrawPathingNodes()
         {
             if (pathingNode != null)
@@ -396,7 +474,11 @@ namespace SpaceMauraders.Entity
             pathFinding.DrawSets();
         }
         
-
+        /// <summary>
+        /// Draws the entity
+        /// base draws the body
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (body != null)
@@ -405,12 +487,19 @@ namespace SpaceMauraders.Entity
             }
         }
 
+        /// <summary>
+        /// sets active state of the entity to 0
+        /// marks it to be deleted
+        /// </summary>
         public virtual void Detroy()
         {
             Console.WriteLine("Destroying entity " + id);
             active = false; 
         }
 
+        /// <summary>
+        /// A helper funtion for draw
+        /// </summary>
         public virtual void Draw()
         {
 
