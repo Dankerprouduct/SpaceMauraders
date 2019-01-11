@@ -17,7 +17,7 @@ namespace TileEditor
             InitializeComponent();
             widthTextbox.Text = "10";
             heightTextbox.Text = "10";
-
+            
         }
 
         public void PopulateListView()
@@ -40,7 +40,7 @@ namespace TileEditor
             {
                 ListViewItem lvi = new ListViewItem();
                 lvi.ImageIndex = i;
-                lvi.Text = "test";
+                //
                 listView1.Items.Add(lvi); 
                 Console.WriteLine("added item "+ i );
             }

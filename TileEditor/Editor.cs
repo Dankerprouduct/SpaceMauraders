@@ -28,6 +28,7 @@ namespace TileEditor
         public MouseState previousMouseState;
         private KeyboardState curKeyboardState;
         private KeyboardState prevKeyboardState;
+        private Vector2 mousePosiiton;
 
         public bool mapCreated = false;
         private int[,] tileMap;
@@ -117,8 +118,13 @@ namespace TileEditor
         
         protected override void Update(GameTime gameTime)
         {
+
             currentMouseState = Mouse.GetState();
-            curKeyboardState = Keyboard.GetState(); 
+            curKeyboardState = Keyboard.GetState();
+
+            mousePosiiton = Vector2.Transform(currentMouseState.Position.ToVector2(),
+                Matrix.Invert(camera.Transform));
+
             if (mapCreated)
             {
                 UpdateMapLogic();
@@ -135,24 +141,27 @@ namespace TileEditor
         {
             if (currentMouseState.RightButton == ButtonState.Pressed)
             {
-                if (Mouse.GetState().Position.Y < 50)
+                if (curKeyboardState.IsKeyUp(Keys.Space))
                 {
-                    camera.Move(new Vector2(0, -5));
-                }
+                    if (Mouse.GetState().Position.Y < 50)
+                    {
+                        camera.Move(new Vector2(0, -5));
+                    }
 
-                if (Mouse.GetState().Position.Y > GraphicsDevice.Viewport.Height - 50)
-                {
-                    camera.Move(new Vector2(0, 5));
-                }
+                    if (Mouse.GetState().Position.Y > GraphicsDevice.Viewport.Height - 50)
+                    {
+                        camera.Move(new Vector2(0, 5));
+                    }
 
-                if (Mouse.GetState().Position.X < 50)
-                {
-                    camera.Move(new Vector2(-5, 0));
-                }
+                    if (Mouse.GetState().Position.X < 50)
+                    {
+                        camera.Move(new Vector2(-5, 0));
+                    }
 
-                if (Mouse.GetState().Position.X > GraphicsDevice.Viewport.Width - 50)
-                {
-                    camera.Move(new Vector2(5, 0));
+                    if (Mouse.GetState().Position.X > GraphicsDevice.Viewport.Width - 50)
+                    {
+                        camera.Move(new Vector2(5, 0));
+                    }
                 }
             }
 
@@ -184,12 +193,9 @@ namespace TileEditor
         private Point upPoint; 
         void UpdateMapLogic()
         {
+            
             if (currentMouseState.LeftButton == ButtonState.Pressed)
             {
-                
-
-                Vector2 mousePosiiton = Vector2.Transform(currentMouseState.Position.ToVector2(),
-                    Matrix.Invert(camera.Transform));
                 int x = (int)mousePosiiton.X / 128;
                 int y = (int)mousePosiiton.Y / 128;
 
@@ -244,6 +250,25 @@ namespace TileEditor
 
                 
             }
+
+            if (currentMouseState.RightButton == ButtonState.Pressed)
+            {
+                if (curKeyboardState.IsKeyDown(Keys.Space))
+                {
+                    int x = (int) mousePosiiton.X / 128;
+                    int y = (int) mousePosiiton.Y / 128;
+
+                    try
+                    {
+
+                        tileMap[x, y] = -1;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("OUT OF BOUNDS");
+                    }
+                }
+            }
         }
 
         protected override void Draw()
@@ -279,6 +304,13 @@ namespace TileEditor
                                 Color.White);
                         }
                     }
+                }
+
+                if (currentSelectedItem != -1)
+                {
+                    Editor.spriteBatch.Draw(tileTextures[currentSelectedItem],
+                        new Vector2(((int)(mousePosiiton.X / 128)) * 128, ((int)(mousePosiiton.Y / 128)) * 128),
+                        Color.Red * .5f);
                 }
             }
             
