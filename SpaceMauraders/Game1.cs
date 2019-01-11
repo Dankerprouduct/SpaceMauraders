@@ -69,25 +69,11 @@ namespace SpaceMauraders
         public void Reset()
         {
             
-
             world = new World.World(10, 10);
-
             debug = new Utilities.Debug();
-
-            player = new Entity.Player(new Vector2(18586 - 1024, 38309));
-
-            for (int i = 0; i < 0; i++)
-            {
-
-                world.AddEntity(new Entity.NPC(new Vector2(world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition.X * 128 + 64,
-                    world.spaceStation.nodeMesh.FindNodeOnMesh().arrayPosition.Y * 128 + 64)));
-
-                //world.AddEntity(new Entity.NPC(new Vector2(18586, 38309)));
-            }
-
-            //world.AddEntity(new Entity.NPC(new Vector2(18586, 38309)));
-            
+            player = new Entity.Player(new Vector2(18586 - 1024, 38309));            
             camera = new Utilities.Camera(GraphicsDevice.Viewport);
+
 
             Console.WriteLine("Number of Entities: " + Entity.Entity.nextAvailibleID);
         }
@@ -108,41 +94,13 @@ namespace SpaceMauraders
 
             //EntitySaveTemplate<Entity.Entity>[] tempE = gameData.LoadData("save1");
             Entity.Entity[] ents = entityData.LoadData("save2");
-
-            //foreach (var template in tempE)
-            //{
-            //    Entity.Entity ent = new Entity.Entity()
-            //    {
-                
-            //        position = template.position,
-            //        entityName = template.name,
-            //        rotation = template.rotation,
-            //        body = template.body,
-                  
-            //    };
-            //    ent = (typeof(template)) ent;
-            //    for (int i = 0; i < template.components.Count; i++)
-            //    {
-            //        if (template.components[i].componentName == "PhysicsComponent")
-            //        {
-            //            ent.AddComponent(new PhysicsComponent());
-            //        }
-            //        else
-            //        {
-            //            ent.AddComponent(template.components[i]);
-            //        }
-            //    }
-            //    world.AddEntity(ent);
-            //}
-
+            
             for (int i = 0; i < ents.Length; i++)
             {
                 world.AddEntity(ents[i]);
             }
         }
-
-
-
+        
         protected override void Update(GameTime gameTime)
         {
             GUI.GUI.Draw(spriteBatch);
