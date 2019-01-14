@@ -75,11 +75,9 @@ namespace SpaceMauraders.Entity
             {
                 for (int i = 0; i < components.Count; i++)
                 {
-                    //Console.WriteLine(_event.id); 
                     if (components[i].FireEvent(_event))
                     {
-                        //Console.WriteLine(_event.id);
-                        return true;//components[i].FireEvent(_event);
+                        return true;
                     }
                 }
             }

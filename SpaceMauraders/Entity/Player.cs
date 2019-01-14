@@ -18,17 +18,14 @@ namespace SpaceMauraders.Entity
         {
             this.position = position;
             this.collisionRectanlge = new Rectangle((int)position.X, (int)position.Y, Utilities.TextureManager.sprites[0].Width, Utilities.TextureManager.sprites[0].Height);
-            
-            components.Add(new Components.InputComponent(this.id));
-            components.Add(new Components.SpeedModifierComponent(0.5f)); 
-             //components.Add(new Components.SpeedModifierComponent(.5f));
-            components.Add(new Components.PhysicsComponent(this.id));
-            
-            components.Add(new Components.TriggerColliderComponent());
-
-            components.Add(new Components.InventoryComponent(2,10));
-            components.Add(new Components.PointTowardsMouseComponent());
-            components.Add(new Components.DrawSelectedItemComponent());
+                
+                components.Add(new Components.InputComponent(this.id));
+                components.Add(new Components.SpeedModifierComponent(0.5f)); 
+                components.Add(new Components.PhysicsComponent(this.id));            
+                components.Add(new Components.TriggerColliderComponent());
+                components.Add(new Components.InventoryComponent(2,10));
+                components.Add(new Components.PointTowardsMouseComponent());
+                components.Add(new Components.DrawSelectedItemComponent());
             
             emittter.AddParticle(new Systems.Particle(position, 1, Game1.random.Next(0, 360), .5f, 0, 0, Color.DarkRed)
             {
@@ -58,12 +55,7 @@ namespace SpaceMauraders.Entity
                 mass = 2
                 
             });
-            //emittter.AddParticle(new Systems.Particle(position, 1, random.Next(0, 360), 5, 10, 0, Color.Red));
-            //emittter.AddParticle(new Systems.Particle(position, 1, random.Next(0, 360), 5, 10, 0, Color.Orange));
-            //emittter.AddParticle(new Systems.Particle(position, 1, random.Next(0, 360), 5, 10, 0, Color.Black));
-            //emittter.Toggle(); 
-
-
+            
             body = new Body.Body();
             
             body.AddBodyPart(new Body.Torso(3, Vector2.Zero)
