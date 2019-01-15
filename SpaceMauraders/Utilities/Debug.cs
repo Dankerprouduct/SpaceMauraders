@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
-using NLua; 
+using NLua;
+using SpaceMauraders.Entity.Items;
+using SpaceMauraders.Entity.Items.Weapons;
 
 namespace SpaceMauraders.Utilities
 {
@@ -32,21 +34,34 @@ namespace SpaceMauraders.Utilities
         {
             debugLua = new Lua();
             debugLua.RegisterFunction("SpawnEntity", this, GetType().GetMethod("SpawnEntity"));
+            debugLua.RegisterFunction("SpawnItem", this, GetType().GetMethod("SpawnItem"));
         }
 
-        public void SpawnEntity(string name, int ammount = 1)
+        public void SpawnEntity(string name, int amount = 1)
         {
             Console.WriteLine("Spawning Entity " + name); 
             switch (name)
             {
                 case "NPC":
                     {
-                        for (int i = 0; i < ammount; i++)
+                        for (int i = 0; i < amount; i++)
                         {
                             Game1.world.AddEntity(new Entity.Factions.Federation.General(Game1.worldPosition));
                         }
                         break;
                     }
+                
+            }
+        }
+
+        public void SpawnItem(int id, int amount = 1)
+        {
+            Console.WriteLine("Spawning Item " + id);
+            for (int i = 0; i < amount; i++)
+            {
+                Item item = ItemDictionary.itemDictinary[id];
+                item.position = Game1.worldPosition;
+                Game1.world.AddEntity(ItemDictionary.itemDictinary[id]);
             }
         }
 

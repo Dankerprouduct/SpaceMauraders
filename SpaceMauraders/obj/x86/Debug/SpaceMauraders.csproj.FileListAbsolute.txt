@@ -173,3 +173,9 @@ C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\D
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\obj\x86\Debug\SpaceMauraders.csprojAssemblyReference.cache
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Tiles\Wall2.xnb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Tiles\Wall3.xnb
+D:\Projects\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Tiles\MeshTile.xnb
+D:\Projects\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Tiles\tealMeshTile.xnb
+D:\Projects\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Tiles\tealMeshTile2.xnb
+D:\Projects\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Tiles\Wall2.xnb
+D:\Projects\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\Content\Tiles\Wall3.xnb
+D:\Projects\SpaceMauraders\SpaceMauraders\bin\Windows\x86\Debug\SpaceMauraders.exe.config

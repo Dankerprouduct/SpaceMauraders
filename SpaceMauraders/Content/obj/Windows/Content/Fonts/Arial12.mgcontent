@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Fonts/Arial12.spritefont</SourceFile>
-  <SourceTime>2019-01-03T08:38:02.0984468-05:00</SourceTime>
-  <DestFile>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/bin/Windows/Content/Fonts/Arial12.xnb</DestFile>
-  <DestTime>2019-01-07T05:59:31.8362429-05:00</DestTime>
+  <SourceFile>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Fonts/Arial12.spritefont</SourceFile>
+  <SourceTime>2019-01-03T16:00:37.1945162-05:00</SourceTime>
+  <DestFile>D:/Projects/SpaceMauraders/SpaceMauraders/Content/bin/Windows/Content/Fonts/Arial12.xnb</DestFile>
+  <DestTime>2019-01-14T19:50:59.2091414-05:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
-  <ImporterTime>2019-01-03T08:38:03.9236877-05:00</ImporterTime>
+  <ImporterTime>2019-01-03T16:00:38.0843169-05:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>
-  <ProcessorTime>2019-01-03T08:38:03.9236877-05:00</ProcessorTime>
+  <ProcessorTime>2019-01-03T16:00:38.0843169-05:00</ProcessorTime>
   <Parameters>
     <Key>PremultiplyAlpha</Key>
     <Value>True</Value>

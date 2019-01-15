@@ -146,6 +146,11 @@ namespace SpaceMauraders.Entity.Items.Weapons
 
         }
 
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(TextureManager.guiItemTextures[guiItemID], position, Color.White);
+            base.Draw(spriteBatch);
+        }
 
         public override void Draw()
         {

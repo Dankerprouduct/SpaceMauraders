@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics; 
-using  Microsoft.Xna.Framework.Input; 
+using  Microsoft.Xna.Framework.Input;
+using SpaceMauraders.Utilities;
 
 namespace SpaceMauraders.Entity.Items
 {
@@ -35,7 +36,7 @@ namespace SpaceMauraders.Entity.Items
         {
             itemID = -1; 
         }
-
+        
         public override void Use(Entity entity)
         {
             Console.WriteLine("using Empty Item"); 
