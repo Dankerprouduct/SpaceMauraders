@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             this.listviewPanel = new System.Windows.Forms.Panel();
-            this.monogamePanel = new System.Windows.Forms.Panel();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.monogamePanel = new System.Windows.Forms.Panel();
+            this.editor1 = new TileEditor.Editor();
             this.heightTextbox = new System.Windows.Forms.TextBox();
             this.widthTextbox = new System.Windows.Forms.TextBox();
             this.widthLabel = new System.Windows.Forms.Label();
@@ -38,7 +39,7 @@
             this.createButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.editor1 = new TileEditor.Editor();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.listviewPanel.SuspendLayout();
             this.monogamePanel.SuspendLayout();
             this.SuspendLayout();
@@ -46,11 +47,21 @@
             // listviewPanel
             // 
             this.listviewPanel.Controls.Add(this.listView1);
-            this.listviewPanel.Location = new System.Drawing.Point(0, 129);
+            this.listviewPanel.Location = new System.Drawing.Point(0, 164);
             this.listviewPanel.Name = "listviewPanel";
-            this.listviewPanel.Size = new System.Drawing.Size(437, 1020);
+            this.listviewPanel.Size = new System.Drawing.Size(437, 985);
             this.listviewPanel.TabIndex = 0;
             this.listviewPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.listviewPanel_Paint);
+            // 
+            // listView1
+            // 
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.Location = new System.Drawing.Point(0, 0);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(437, 985);
+            this.listView1.TabIndex = 0;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // monogamePanel
             // 
@@ -61,15 +72,15 @@
             this.monogamePanel.Size = new System.Drawing.Size(1449, 1154);
             this.monogamePanel.TabIndex = 1;
             // 
-            // listView1
+            // editor1
             // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(437, 1020);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.editor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.editor1.Location = new System.Drawing.Point(0, 0);
+            this.editor1.Name = "editor1";
+            this.editor1.Size = new System.Drawing.Size(1449, 1154);
+            this.editor1.TabIndex = 0;
+            this.editor1.Text = "editor1";
+            this.editor1.Click += new System.EventHandler(this.editor1_Click);
             // 
             // heightTextbox
             // 
@@ -121,6 +132,7 @@
             this.saveButton.TabIndex = 7;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // button3
             // 
@@ -131,21 +143,19 @@
             this.button3.Text = "Load";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // editor1
+            // textBox1
             // 
-            this.editor1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.editor1.Location = new System.Drawing.Point(0, 0);
-            this.editor1.Name = "editor1";
-            this.editor1.Size = new System.Drawing.Size(1449, 1154);
-            this.editor1.TabIndex = 0;
-            this.editor1.Text = "editor1";
-            this.editor1.Click += new System.EventHandler(this.editor1_Click);
+            this.textBox1.Location = new System.Drawing.Point(17, 129);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(420, 29);
+            this.textBox1.TabIndex = 1;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1892, 1154);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.createButton);
@@ -157,6 +167,7 @@
             this.Controls.Add(this.listviewPanel);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.listviewPanel.ResumeLayout(false);
             this.monogamePanel.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -177,6 +188,7 @@
         private System.Windows.Forms.Button createButton;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

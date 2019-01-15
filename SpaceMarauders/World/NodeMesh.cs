@@ -42,6 +42,29 @@ namespace SpaceMarauders.World
 
         }
 
+        public void MakeMap( int impassableTile, int[,] map)
+        {
+            this.map = new Node[map.GetLength(0), map.GetLength(1)];
+
+            for (int y = 0; y < this.map.GetLength(1); y++)
+            {
+                for (int x = 0; x < this.map.GetLength(0); x++)
+                {
+                    if (map[x, y] != impassableTile)
+                    {
+                        this.map[x, y] = new Node(new Point((x), (y)));
+                        //this.map[x, y].arrayPosition = new Point(x, y); 
+                        allAvailiableNodes.Add(this.map[x, y]);
+                    }
+                    else
+                    {
+                        this.map[x, y] = null;
+                    }
+                }
+            }
+
+        }
+
         public void DrawNodes()
         {
             if (Utilities.Debug.showBoundariesAndMesh)

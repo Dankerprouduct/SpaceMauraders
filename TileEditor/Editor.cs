@@ -13,10 +13,12 @@ using  MonoGame.Forms.Controls;
 using SpaceMarauders.Utilities;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Forms.Components;
+using SpaceMarauders.Entity;
 using  SpaceMarauders.GUI;
 using Color = Microsoft.Xna.Framework.Color;
 using Matrix = Microsoft.Xna.Framework.Matrix;
 using Point = System.Drawing.Point;
+using Newtonsoft.Json;
 
 namespace TileEditor
 {
@@ -31,7 +33,7 @@ namespace TileEditor
         private Vector2 mousePosiiton;
 
         public bool mapCreated = false;
-        private int[,] tileMap;
+        private Room room; 
         private List<Texture2D> tileTextures;
         Camera2D camera = new Camera2D();
         private float scale = 1; 
@@ -40,6 +42,7 @@ namespace TileEditor
         {
 
             base.Initialize();
+            room = new Room();
             LoadBitmaps();
             
             
@@ -105,12 +108,12 @@ namespace TileEditor
 
         public void CreateMap(int width, int height)
         {
-            tileMap = new int[width, height];
-            for (int y = 0; y < tileMap.GetLength(1); y++)
+            room.tileMap = new int[width, height];
+            for (int y = 0; y < room.tileMap.GetLength(1); y++)
             {
-                for (int x = 0; x < tileMap.GetLength(0); x++)
+                for (int x = 0; x < room.tileMap.GetLength(0); x++)
                 {
-                    tileMap[x, y] = -1; 
+                    room.tileMap[x, y] = -1; 
                 }
             }
             mapCreated = true; 
@@ -135,6 +138,15 @@ namespace TileEditor
             previousMouseState = currentMouseState;
             prevKeyboardState = curKeyboardState;
 
+        }
+
+        public void Save(string name)
+        {
+            GameData<Room> roomSaveData = new GameData<Room>();
+            roomSaveData.folderPath = @"Saves\Rooms\";
+            roomSaveData.SaveData(room, name);
+            Console.WriteLine("saved "+ name);
+            ;
         }
 
         void Camera()
@@ -202,7 +214,7 @@ namespace TileEditor
                 // picker tool
                 if (curKeyboardState.IsKeyDown(Keys.LeftShift))
                 {
-                    currentSelectedItem = tileMap[x, y]; 
+                    currentSelectedItem = room.tileMap[x, y]; 
                 }
                 else if(curKeyboardState.IsKeyDown(Keys.A))
                 {
@@ -223,7 +235,7 @@ namespace TileEditor
                             {
                                 for (int dX = downPoint.X; dX < upPoint.X; dX++)
                                 {
-                                    tileMap[dX, dY] = currentSelectedItem;
+                                    room.tileMap[dX, dY] = currentSelectedItem;
                                 }
                             }
                             Console.WriteLine("up point "+ upPoint);
@@ -239,7 +251,7 @@ namespace TileEditor
                 {
                     try
                     {
-                        tileMap[x, y] = currentSelectedItem;
+                        room.tileMap[x, y] = currentSelectedItem;
                     }
                     catch (Exception ex)
                     {
@@ -261,7 +273,7 @@ namespace TileEditor
                     try
                     {
 
-                        tileMap[x, y] = -1;
+                        room.tileMap[x, y] = -1;
                     }
                     catch (Exception e)
                     {
@@ -281,11 +293,11 @@ namespace TileEditor
 
             ///GUI.Draw2dArray(10, 10, 128, 128, tileMap.GetLength(0), tileMap.GetLength(1), 0, Color.AliceBlue);
 
-            if (tileMap != null)
+            if (room.tileMap != null)
             {
-                for (int y = -1; y < tileMap.GetLength(1); y++)
+                for (int y = -1; y < room.tileMap.GetLength(1); y++)
                 {
-                    for (int x = -1; x < tileMap.GetLength(0); x++)
+                    for (int x = -1; x < room.tileMap.GetLength(0); x++)
                     {
 
                         GUI.DrawBox(
@@ -294,13 +306,13 @@ namespace TileEditor
 
                     }
                 }
-                for (int y = 0; y < tileMap.GetLength(1); y++)
+                for (int y = 0; y < room.tileMap.GetLength(1); y++)
                 {
-                    for (int x = 0; x < tileMap.GetLength(0); x++)
+                    for (int x = 0; x < room.tileMap.GetLength(0); x++)
                     {
-                        if (tileMap[x, y] != -1)
+                        if (room.tileMap[x, y] != -1)
                         {
-                            GUI.spriteBatch.Draw(tileTextures[tileMap[x, y]], new Vector2(x * 128, y * 128),
+                            GUI.spriteBatch.Draw(tileTextures[room.tileMap[x, y]], new Vector2(x * 128, y * 128),
                                 Color.White);
                         }
                     }

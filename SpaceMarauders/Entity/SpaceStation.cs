@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Threading;
 using SpaceMarauders.Systems;
+using Newtonsoft.Json;
+using SpaceMarauders.Utilities;
+using MathHelper = Microsoft.Xna.Framework.MathHelper;
 
 namespace SpaceMarauders.Entity
 {
@@ -17,24 +20,23 @@ namespace SpaceMarauders.Entity
         public CellSpacePartition CellSpacePartition;
         public CellSpacePartition LocalSpacePartition; 
         public Vector2 center;
-
+        
+        private int floorTile = 6;
         public int loadedCell;
+        List<Room> rooms = new List<Room>();
 
         public World.NodeMesh nodeMesh; 
 
         public SpaceStation(int radius): base()
-        {            
-            Diameter = radius * 2;
-            tileMap = new int[Diameter, Diameter];
-            center = new Vector2((Diameter / 2) * 128, (Diameter / 2) * 128);
+        {
+            InitializeMap(radius);
 
-            InitializeMap();
 
-            
+
             Thread stationThread = new Thread(BuildStation);
             stationThread.Start();
-            stationThread.Join(); 
-            
+            stationThread.Join();
+
 
             position = new Vector2(0, 0);
 
@@ -42,10 +44,91 @@ namespace SpaceMarauders.Entity
             InitializeCellSpacePartition();
             InitializeILocalCellPartition();
 
-            
+
         }
 
-        private int floorTile = 6;
+        public SpaceStation(int radius, string name)
+        {
+            InitializeMap(radius);
+            entityName = name;
+
+            GameData<Room> roomData = new GameData<Room>();
+            roomData.folderPath = @"Saves\Rooms\";
+
+            Room tempRoom = roomData.LoadObjectData("Room1");
+            rooms.Add(tempRoom);
+            BuildRoomsOnRing(radius / 4, MathHelper.ToRadians(20));
+            BuildRoomsOnRing(radius / 2, MathHelper.ToRadians(10));
+
+            position = new Vector2();
+            nodeMesh = new World.NodeMesh();
+            InitializeCellSpacePartition();
+            InitializeILocalCellPartition();
+        }
+
+        /// <summary>
+        /// creates the tilemap with diameter (radius * 2)
+        /// tilemap assigned -1 values
+        /// </summary>
+        /// <param name="radius"></param>
+        private void InitializeMap(int radius)
+        {
+            Diameter = radius * 2;
+            tileMap = new int[Diameter, Diameter];
+            center = new Vector2((Diameter / 2) * 128, (Diameter / 2) * 128);
+
+            InitializeMap();
+        }
+
+
+        /// <summary>
+        /// Builds a  predefined room on the SpaceStation tileMap
+        /// </summary>
+        /// <param name="spawnX"></param>
+        /// <param name="spawnY"></param>
+        /// <param name="roomId"></param>
+        public void CreateRoom(int spawnX, int spawnY, int roomId)
+        {
+            Room tempRoom = rooms[roomId];
+
+            for (int x = spawnX; x < spawnX + tempRoom.Width; x++)
+            {
+                for (int y = spawnY; y < spawnY + tempRoom.Height; y++)
+                {
+                    tileMap[x, y] = tempRoom.tileMap[
+                        (spawnX + tempRoom.Width) - x - 1,
+                        (spawnY + tempRoom.Height) - y - 1];
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Builds rooms around radius every angle increment
+        /// Takes angleIncrement in Radians
+        /// </summary>
+        /// <param name="radius"></param>
+        /// <param name="angleIncrement">In Radians</param>
+        private void BuildRoomsOnRing(float radius, float angleIncrement)
+        {
+            Point middle = new Point(tileMap.GetLength(0) / 2, tileMap.GetLength(1) / 2);
+            
+
+            for (float d = 0; d < 2 * Math.PI; d += angleIncrement)
+            {
+                int tileX;//= (int)(r + middle.X);
+                int tileY;// (int)(r + middle.Y);
+
+                float mRadius = radius;
+                tileX = (int)(Math.Cos(d) * mRadius) + middle.X;
+                tileY = (int)(Math.Sin(d) * mRadius) + middle.Y;
+                
+                CreateRoom(tileX, tileY, 0);
+
+            }
+
+
+        }
 
         private void BuildStation()
         {
@@ -69,6 +152,14 @@ namespace SpaceMarauders.Entity
             BuildBridge(175, 250, 45 - 360, 45.2f - 360, floorTile);
             BuildBridge(175, 250, 45.2f - 360, 45.2f - 360, 3);
             BuildBridge(175, 250, 45 - 360, 45 - 360, 3);
+
+
+            GameData<Room> roomData = new GameData<Room>();
+            roomData.folderPath = @"Saves\Rooms\";            
+            Room tempRoom = roomData.LoadObjectData("FloorDecal");
+
+            rooms.Add(tempRoom);
+            BuildRoomsOnRing(150, MathHelper.ToRadians(2.5f));
 
             BuildRooms(125, 175, 1.85f);
             BuildRooms(250, 300, 1.95f);
@@ -280,7 +371,7 @@ namespace SpaceMarauders.Entity
                 }
             }
 
-            nodeMesh.MakeMap(floorTile, 3, tileMap); 
+            nodeMesh.MakeMap(3, tileMap); 
 
             tileMap = null;
         }
@@ -514,7 +605,7 @@ namespace SpaceMarauders.Entity
                             (int)(CellSpacePartition.staticCells[i].x * 2048),
                             (int)(CellSpacePartition.staticCells[i].y * 2048),
                             (int)(CellSpacePartition.staticCells[i].x * 2048) + 2048,
-                            (int)(CellSpacePartition.staticCells[i].y * 2048) + 2048), 20, Color.Red *.1f);
+                            (int)(CellSpacePartition.staticCells[i].y * 2048) + 2048), 80, Color.Teal * 1f);
                         
                     }
 
@@ -696,6 +787,35 @@ namespace SpaceMarauders.Entity
                 return true; 
             }
             return false; 
+        }
+    }
+
+    public class Room
+    {
+        public int[,] tileMap;
+
+        public int Width
+        {
+            get
+            {
+                if (tileMap != null) return tileMap.GetLength(0);
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+
+        public int Height
+        {
+            get
+            {
+                if (tileMap != null) return tileMap.GetLength(1);
+                else
+                {
+                    return 0;
+                }
+            }
         }
     }
 }

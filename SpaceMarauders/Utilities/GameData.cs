@@ -12,7 +12,7 @@ namespace SpaceMarauders.Utilities
     {
 
         private JsonSerializerSettings settings;
-        private const string folderPath = @"Saves\";
+        public string folderPath = @"Saves\";
 
         /// <summary>
         /// give the name of the subfolder inside of "Saves"
@@ -46,6 +46,21 @@ namespace SpaceMarauders.Utilities
         }
 
         /// <summary>
+        /// Serializes Data into an indented json file
+        /// </summary>
+        /// <param name="data">data to serialize</param>
+        /// <param name="fileName">name of file to create or overide</param>
+        public void SaveData(T data, string fileName)
+        {
+
+            string json = JsonConvert.SerializeObject(data, Formatting.Indented, settings);
+            string newPath = folderPath + @"\" + fileName + ".json";
+            (new FileInfo(newPath)).Directory.Create();
+
+            File.WriteAllText(newPath, json);
+        }
+
+        /// <summary>
         /// Deserializes data into an array
         /// </summary>
         /// <param name="fileName">name of file to deserialize</param>
@@ -60,6 +75,21 @@ namespace SpaceMarauders.Utilities
             {
                 //Console.WriteLine(tempEntities[i].GetType().ToString());
             }
+            return tempEntities;
+
+        }
+
+        /// <summary>
+        /// Deserializes data into an object
+        /// </summary>
+        /// <param name="fileName">name of file to deserialize</param>
+        /// <returns></returns>
+        public T LoadObjectData(string fileName)
+        {
+            string newPath = folderPath + @"\" + fileName + ".json";
+
+            string contents = File.ReadAllText(newPath);
+            T tempEntities = JsonConvert.DeserializeObject<T>(contents, settings);
             return tempEntities;
 
         }

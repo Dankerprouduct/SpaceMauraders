@@ -52,3 +52,6 @@ C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\obj\x86\Debug\Spa
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\obj\x86\Debug\SpaceMauraders.exe
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\obj\x86\Debug\SpaceMauraders.pdb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\Content\Graphics\nebula.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\Saves\Rooms\Room1.json
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\Saves\Rooms\FloorDecal.json
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\Saves\Rooms\FloorDecal2.json

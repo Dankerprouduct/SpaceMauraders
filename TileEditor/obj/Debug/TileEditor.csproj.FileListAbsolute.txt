@@ -122,3 +122,6 @@ D:\Projects\SpaceMauraders\TileEditor\obj\Debug\TileEditor.csproj.CopyComplete
 D:\Projects\SpaceMauraders\TileEditor\obj\Debug\TileEditor.exe
 D:\Projects\SpaceMauraders\TileEditor\obj\Debug\TileEditor.pdb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Graphics\nebula.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Saves\Rooms\Room1.json
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Saves\Rooms\FloorDecal.json
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Saves\Rooms\FloorDecal2.json

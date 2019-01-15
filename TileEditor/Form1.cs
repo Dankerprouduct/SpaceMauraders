@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace TileEditor
 {
@@ -82,6 +84,18 @@ namespace TileEditor
             {
 
             }
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+
+             editor1.Save(textBox1.Text);
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
