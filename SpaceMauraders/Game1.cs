@@ -27,10 +27,8 @@ namespace SpaceMauraders
         public static int height = 0; 
 
         public static Vector2 worldPosition;
-
         Vector2 mousePosition;
-        GameData<EntitySaveTemplate<Entity.Entity>> gameData = new GameData<EntitySaveTemplate<Entity.Entity>>();
-        GameData<Entity.Entity> entityData = new GameData<Entity.Entity>();
+        
 
         public static Entity.Player player;
         public Game1()
@@ -61,6 +59,7 @@ namespace SpaceMauraders
             Utilities.TextureManager.LoadContent(Content);
             Systems.ParticleSystem.Init(20000);
             Entity.Items.ItemDictionary.LoadItemDatabase();
+            
             GUI.GUI.Init();
             Reset();
 
@@ -82,24 +81,6 @@ namespace SpaceMauraders
         {
 
         }
-
-        public void SaveGame()
-        {
-            //gameData.SaveData(world.dynamicCellSpacePartition.SaveDynamicEntities(), "save1");
-            entityData.SaveData(world.dynamicCellSpacePartition.GetDynamicEntities(), "save2");
-        }
-
-        public void LoadGame()
-        {
-
-            //EntitySaveTemplate<Entity.Entity>[] tempE = gameData.LoadData("save1");
-            Entity.Entity[] ents = entityData.LoadData("save2");
-            
-            for (int i = 0; i < ents.Length; i++)
-            {
-                world.AddEntity(ents[i]);
-            }
-        }
         
         protected override void Update(GameTime gameTime)
         {
@@ -109,10 +90,15 @@ namespace SpaceMauraders
                 Exit();
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.F12))
                 Reset();
+
+            // Save Game
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.F11))
-                SaveGame();
+                GameManager.SaveGame();
+
+            // Loads Game
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.F10))
-                LoadGame();
+                GameManager.LoadGame();
+            GameManager.Update();
 
             mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
             worldPosition = Vector2.Transform(mousePosition, Matrix.Invert(camera.transform)) ;

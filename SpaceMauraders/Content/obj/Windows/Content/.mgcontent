@@ -4,29 +4,29 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Fonts/Arial12.spritefont</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Fonts/debug.spritefont</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/GUI/Circle1.png</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/GUI/Items/FusionRifle.png</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/GUI/Items/LaserRifle.png</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/GUI/Pixel.png</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Particles/CircleParticle.png</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Sprites/BodyParts/FederationSoilderBody.png</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Sprites/BodyParts/FederationSoilderHand.png</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Sprites/BodyParts/FederationSoilderHead.png</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Sprites/BodyParts/RebelSoilderBody.png</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Sprites/FederationSoilder.png</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Sprites/Heads/FederationSoilderHead.png</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Sprites/TempSprite.png</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Tiles/Floor1.png</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Tiles/MeshTile.png</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Tiles/tealMeshTile.png</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Tiles/tealMeshTile2.png</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Tiles/tempFloor.png</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Tiles/tempWall.png</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Tiles/Wall1.png</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Tiles/Wall2.png</File>
-    <File>D:/Projects/SpaceMauraders/SpaceMauraders/Content/Tiles/Wall3.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Fonts/Arial12.spritefont</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Fonts/debug.spritefont</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/GUI/Circle1.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/GUI/Items/FusionRifle.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/GUI/Items/LaserRifle.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/GUI/Pixel.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Particles/CircleParticle.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Sprites/BodyParts/FederationSoilderBody.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Sprites/BodyParts/FederationSoilderHand.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Sprites/BodyParts/FederationSoilderHead.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Sprites/BodyParts/RebelSoilderBody.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Sprites/FederationSoilder.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Sprites/Heads/FederationSoilderHead.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Sprites/TempSprite.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Tiles/Floor1.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Tiles/MeshTile.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Tiles/tealMeshTile.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Tiles/tealMeshTile2.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Tiles/tempFloor.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Tiles/tempWall.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Tiles/Wall1.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Tiles/Wall2.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Tiles/Wall3.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

@@ -174,8 +174,8 @@
   <PropertyGroup>
     <PostBuildEvent>
 xcopy /s /y "D:\Projects\Game1\SpaceMauraders\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"
-xcopy /s /y "C:\Users\Danker\Documents\GitHub\SpaceMauraders\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"
-xcopy /s /y "D:\Projects\SpaceMauraders\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"</PostBuildEvent>
+xcopy /s /y "D:\Projects\SpaceMauraders\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"
+xcopy /s /y "C:\Users\Danker\Documents\GitHub\SpaceMauraders\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

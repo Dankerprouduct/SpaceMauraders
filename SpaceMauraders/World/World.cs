@@ -15,6 +15,9 @@ namespace SpaceMauraders.World
         
         public Entity.SpaceStation spaceStation;
 
+        /// <summary>
+        /// NPCS, and breakable walls live here
+        /// </summary>
         public Systems.CellSpacePartition dynamicCellSpacePartition;
 
         public World(int width, int height)
@@ -157,12 +160,7 @@ namespace SpaceMauraders.World
             }
             return false;
         }
-
-        public void GenerateSpaceStation(int radius)
-        {
-
-        }
-
+        
         public void Draw(SpriteBatch spriteBatch)
         {
             spaceStation.Draw(spriteBatch);
@@ -181,17 +179,6 @@ namespace SpaceMauraders.World
 
             return false; 
         }
-
-
-        public static void Savegame()
-        {
-
-        }
-
-        public static void LoadGame()
-        {
-
-        }
-
+        
     }
 }
