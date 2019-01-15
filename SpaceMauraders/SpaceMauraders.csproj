@@ -115,6 +115,7 @@
     <Compile Include="Utilities\Debug.cs" />
     <Compile Include="Utilities\EntitySaveTemplate.cs" />
     <Compile Include="Utilities\GameData.cs" />
+    <Compile Include="Utilities\GameManager.cs" />
     <Compile Include="Utilities\ListPool.cs" />
     <Compile Include="Utilities\LoadGame.cs" />
     <Compile Include="Utilities\LuaConsole.cs" />

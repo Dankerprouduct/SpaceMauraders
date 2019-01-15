@@ -268,8 +268,8 @@ namespace SpaceMauraders.Components
             entity.collisionRectanlge = new Rectangle(
                 (int)entity.position.X - (int)(Utilities.MathHelper.CenterOfImage(Utilities.TextureManager.bodyParts[0]).X * .5f),
                 (int)entity.position.Y - (int)(Utilities.MathHelper.CenterOfImage(Utilities.TextureManager.bodyParts[0]).Y * .5f),
-                (int)(Utilities.TextureManager.bodyParts[0].Width * 1f),
-                (int)(Utilities.TextureManager.bodyParts[0].Height * 1f));
+                (int)(Utilities.TextureManager.bodyParts[0].Width * .7f),
+                (int)(Utilities.TextureManager.bodyParts[0].Height * .7f));
             
             Event physicsEvent = new Event
             {
