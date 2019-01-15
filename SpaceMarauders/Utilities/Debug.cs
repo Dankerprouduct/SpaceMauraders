@@ -61,7 +61,7 @@ namespace SpaceMarauders.Utilities
             {
                 Item item = ItemDictionary.itemDictinary[id];
                 item.position = Game1.worldPosition;
-                Game1.world.spaceStation.ItemsCellSpacePartition.AddEntity(ItemDictionary.itemDictinary[id]);
+                Game1.world.spaceStation.LocalSpacePartition.AddEntity(ItemDictionary.itemDictinary[id]);
             }
         }
 

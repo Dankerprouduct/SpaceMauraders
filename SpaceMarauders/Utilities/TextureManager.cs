@@ -20,7 +20,7 @@ namespace SpaceMarauders.Utilities
         public static List<Texture2D> particles = new List<Texture2D>();
         public static List<Texture2D> worldItems = new List<Texture2D>();
         public static List<Texture2D> guiItemTextures = new List<Texture2D>();
-
+        public static List<Texture2D> graphicsTextures = new List<Texture2D>();
 
 
 
@@ -63,6 +63,8 @@ namespace SpaceMarauders.Utilities
             AddGuiItem("LaserRifle", content);
             AddGuiItem("FusionRifle", content);
 
+            //loading background graphics
+            AddGraphicTexture("nebula", content);
         }
 
         #region Loading Methods
@@ -113,6 +115,13 @@ namespace SpaceMarauders.Utilities
         {
             Console.WriteLine("Loading " + name);
             guiItemTextures.Add(content.Load<Texture2D>("GUI/Items/" + name));
+
+        }
+
+        public static void AddGraphicTexture(string name, ContentManager content)
+        {
+            Console.WriteLine("Loading " + name);
+            graphicsTextures.Add(content.Load<Texture2D>("Graphics/" + name));
 
         }
 

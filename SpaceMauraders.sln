@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceMauraders", "SpaceMauraders\SpaceMauraders.csproj", "{6D8C6F01-844B-4047-849E-B6566A65C7E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceMarauders", "SpaceMauraders\SpaceMarauders.csproj", "{6D8C6F01-844B-4047-849E-B6566A65C7E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TileEditor", "TileEditor\TileEditor.csproj", "{49D865D5-E9AE-4309-BFB1-77A9263575D6}"
 EndProject

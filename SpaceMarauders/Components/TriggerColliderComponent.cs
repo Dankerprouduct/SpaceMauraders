@@ -13,11 +13,19 @@ namespace SpaceMarauders.Components
 
         Rectangle rectangle;
         bool destroy = false; 
+
+        /// <summary>
+        /// Listens to events such as raycasting, updates every frame
+        /// </summary>
         public TriggerColliderComponent(): base()
         {
             ComponentName = "TriggerColliderComponent";
         }
 
+        /// <summary>
+        /// Listens to events such as raycasting, updates every frame
+        /// </summary>
+        /// <param name="rectangle"></param>
         public TriggerColliderComponent(Rectangle rectangle) : base()
         {
             this.rectangle = rectangle; 

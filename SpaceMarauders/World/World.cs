@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceMarauders.Components;
+using SpaceMarauders.Utilities;
 
 
 namespace SpaceMarauders.World
@@ -166,6 +167,21 @@ namespace SpaceMarauders.World
             spaceStation.Draw(spriteBatch);
             DrawDynamicCellPartition(spriteBatch); 
 
+        }
+
+        public void DrawBackground(SpriteBatch spriteBatch)
+        {
+            for (int x = 0; x < 3; x++)
+            {
+                for (int y = 0; y < 3; y++)
+                {
+                    spriteBatch.Draw(
+                        TextureManager.graphicsTextures[0],
+                        new Vector2((x * 1024) - (Game1.player.position.X / 100) * 1.5f,
+                        (y * 1024) - (Game1.player.position.Y / 100) * 1.5f),
+                        Color.White);
+                }
+            }
         }
 
         public bool FireGlobalEvent(Components.Event _event, Entity.Entity entity)

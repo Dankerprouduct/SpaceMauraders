@@ -99,9 +99,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SpaceMauraders\SpaceMauraders.csproj">
+    <ProjectReference Include="..\SpaceMarauders\SpaceMarauders.csproj">
       <Project>{6d8c6f01-844b-4047-849e-b6566a65c7e1}</Project>
-      <Name>SpaceMauraders</Name>
+      <Name>SpaceMarauders</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

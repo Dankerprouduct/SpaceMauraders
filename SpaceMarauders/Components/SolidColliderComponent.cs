@@ -8,16 +8,27 @@ using SpaceMarauders.Entity;
 
 namespace SpaceMarauders.Components
 {
+    /// <summary>
+    /// Gives entity a solid collider that makes it impassible 
+    /// </summary>
     public class SolidColliderComponent: Component
     {
 
         Rectangle rectangle;
 
+        /// <summary>
+        /// Gives entity a solid collider that makes it impassible 
+        /// </summary>
         public SolidColliderComponent()
         {
             ComponentName = "SolidColliderComponent";
         }
 
+        /// <summary>
+        /// Gives entity a solid collider that makes it impassible 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="parentID"></param>
         public SolidColliderComponent(Entity.Entity entity, int parentID): base(parentID)
         {
             ComponentName = "SolidColliderComponent"; 

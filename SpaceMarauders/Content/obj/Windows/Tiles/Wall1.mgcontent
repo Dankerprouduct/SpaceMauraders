@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/Tiles/Wall1.png</SourceFile>
+  <SourceFile>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/Wall1.png</SourceFile>
   <SourceTime>2019-01-03T08:38:02.1297063-05:00</SourceTime>
-  <DestFile>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMauraders/Content/bin/Windows/Tiles/Wall1.xnb</DestFile>
-  <DestTime>2019-01-10T11:33:26.1822253-05:00</DestTime>
+  <DestFile>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/bin/Windows/Tiles/Wall1.xnb</DestFile>
+  <DestTime>2019-01-15T10:29:01.5777572-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-09-23T17:55:52-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

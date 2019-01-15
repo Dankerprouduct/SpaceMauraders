@@ -87,7 +87,7 @@ namespace SpaceMarauders
             GUI.GUI.Draw(spriteBatch);
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+               // Exit();
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.F12))
                 Reset();
 
@@ -122,6 +122,12 @@ namespace SpaceMarauders
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(new Color(10,10,10));
+
+            spriteBatch.Begin();
+            world.DrawBackground(spriteBatch);
+            spriteBatch.End();
+
+            // player space
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.transform);
             GUI.GUI.Draw(spriteBatch); 
             world.Draw(spriteBatch);
@@ -154,11 +160,11 @@ namespace SpaceMarauders
                 }
                 GUI.GUI.DrawString("Active Particles: " + Systems.ParticleSystem.currentParticles, new Vector2(10, 90), 1, 1, Color.White);
                 GUI.GUI.DrawString(
-                    "Local Cell Position: " + world.spaceStation.ItemsCellSpacePartition.PositionToCell(player.GetEntityPosition()),
+                    "World Cell Position: " + world.dynamicCellSpacePartition.PositionToCell(player.GetEntityPosition()),
                     new Vector2(10, 110), 1, 1, Color.White);
             }
             
-            // draw inventory gui
+            // draw inventory gui & regular gui
             player.DrawInventory(); 
 
             debug.Draw(); 
