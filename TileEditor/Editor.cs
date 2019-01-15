@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using  MonoGame.Forms.Controls;
-using SpaceMauraders.Utilities;
+using SpaceMarauders.Utilities;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Forms.Components;
-using  SpaceMauraders.GUI;
+using  SpaceMarauders.GUI;
 using Color = Microsoft.Xna.Framework.Color;
 using Matrix = Microsoft.Xna.Framework.Matrix;
 using Point = System.Drawing.Point;
@@ -48,7 +48,7 @@ namespace TileEditor
         public void LoadBitmaps()
         {
             tileBitmaps = new List<Bitmap>();
-            SpaceMauraders.Utilities.TextureManager.LoadContent(Editor.Content);
+            SpaceMarauders.Utilities.TextureManager.LoadContent(Editor.Content);
             tileTextures = TextureManager.tiles;
 
 
