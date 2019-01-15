@@ -22,12 +22,12 @@ namespace SpaceMauraders.Components
 
         public PhysicsComponent(int parentID) : base(parentID)
         {
-            componentName = "PhysicsComponent"; 
+            ComponentName = "PhysicsComponent"; 
         }
 
         public PhysicsComponent()
         {
-            componentName = "PhysicsComponent";
+            ComponentName = "PhysicsComponent";
         }
 
         public override void Update(GameTime gameTime, Entity.Entity entity)

@@ -19,7 +19,7 @@ namespace SpaceMauraders.Components
 
         public DrawSelectedItemComponent() : base()
         {
-            componentName = "DrawSelectedItemComponent";
+            ComponentName = "DrawSelectedItemComponent";
         }
 
         public override void Update(GameTime gameTime, Entity.Entity entity)

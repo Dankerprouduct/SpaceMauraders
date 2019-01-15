@@ -12,7 +12,7 @@ namespace SpaceMauraders.Components
     {
         public SteeringBehaviors()
         {
-            componentName = "SteeringBehaviors";
+            ComponentName = "SteeringBehaviors";
         }
 
         List<Entity.Entity> entities = new List<Entity.Entity>();

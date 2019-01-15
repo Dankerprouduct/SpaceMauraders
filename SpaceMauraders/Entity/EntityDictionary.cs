@@ -34,7 +34,7 @@ namespace SpaceMauraders.Entity
 
             foreach (Components.Component component in entityDictionary[name].components)
             {
-                switch (component.componentName)
+                switch (component.ComponentName)
                 {
                     case "TransformComponent":
                         {

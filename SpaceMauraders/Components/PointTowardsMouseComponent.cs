@@ -14,7 +14,7 @@ namespace SpaceMauraders.Components
 
         public PointTowardsMouseComponent(): base()
         {
-            componentName = "PointTowardsMouseComponent";
+            ComponentName = "PointTowardsMouseComponent";
 
 
         }

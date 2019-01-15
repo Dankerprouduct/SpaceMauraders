@@ -12,7 +12,7 @@ namespace SpaceMauraders.Components
         public float speedModifier; 
         public SpeedModifierComponent(float modifier) : base()
         {
-            componentName = "SpeedModifierComponent";
+            ComponentName = "SpeedModifierComponent";
             speedModifier = modifier;
         }
         

@@ -15,12 +15,12 @@ namespace SpaceMauraders.Components
 
         public SolidColliderComponent()
         {
-            componentName = "SolidColliderComponent";
+            ComponentName = "SolidColliderComponent";
         }
 
         public SolidColliderComponent(Entity.Entity entity, int parentID): base(parentID)
         {
-            componentName = "SolidColliderComponent"; 
+            ComponentName = "SolidColliderComponent"; 
             rectangle = entity.collisionRectanlge;
         }
 

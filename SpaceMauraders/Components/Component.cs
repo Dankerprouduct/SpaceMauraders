@@ -11,7 +11,8 @@ namespace SpaceMauraders.Components
     {
         int parentID;
 
-        public string componentName;
+        public string ComponentName;
+        public bool Active = true; 
 
         public Component()
         {

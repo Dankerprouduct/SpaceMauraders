@@ -15,13 +15,13 @@ namespace SpaceMauraders.Components
         bool destroy = false; 
         public TriggerColliderComponent(): base()
         {
-            componentName = "TriggerColliderComponent";
+            ComponentName = "TriggerColliderComponent";
         }
 
         public TriggerColliderComponent(Rectangle rectangle) : base()
         {
             this.rectangle = rectangle; 
-            componentName = "TriggerColliderComponent";
+            ComponentName = "TriggerColliderComponent";
         }
 
         public override bool FireEvent(Event _event)

@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Threading;
+using SpaceMauraders.Systems;
 
 namespace SpaceMauraders.Entity
 {
     public class SpaceStation: Entity
     {
-        public int diameter;
+        public int Diameter;
         int[,] tileMap;
-        public Systems.CellSpacePartition cellSpacePartition;
+        public CellSpacePartition CellSpacePartition;
+        public CellSpacePartition ItemsCellSpacePartition; 
         public Vector2 center;
 
         public int loadedCell;
@@ -22,9 +24,9 @@ namespace SpaceMauraders.Entity
 
         public SpaceStation(int radius): base()
         {            
-            diameter = radius * 2;
-            tileMap = new int[diameter, diameter];
-            center = new Vector2((diameter / 2) * 128, (diameter / 2) * 128);
+            Diameter = radius * 2;
+            tileMap = new int[Diameter, Diameter];
+            center = new Vector2((Diameter / 2) * 128, (Diameter / 2) * 128);
 
             InitializeMap();
 
@@ -37,13 +39,15 @@ namespace SpaceMauraders.Entity
             position = new Vector2(0, 0);
 
             nodeMesh = new World.NodeMesh();
-            LoadCellSpacePartition();
-           
+            InitializeCellSpacePartition();
+            InitializeItemCellPartition();
+
             
         }
 
-        private int floorTile = 6; 
-        void BuildStation()
+        private int floorTile = 6;
+
+        private void BuildStation()
         {
 
             BuildRings(125, 175);
@@ -71,7 +75,7 @@ namespace SpaceMauraders.Entity
 
         }
 
-        void InitializeMap()
+        private void InitializeMap()
         {
             for (int y = 0; y < tileMap.GetLength(1); y++)
             {
@@ -82,7 +86,7 @@ namespace SpaceMauraders.Entity
             }
         }
                 
-        void BuildRings(int r1, int r2)
+        private void BuildRings(int r1, int r2)
         {
 
             for (int i =r1 + 1; i <= r2 - 1; i++)
@@ -96,7 +100,7 @@ namespace SpaceMauraders.Entity
             
         }
 
-        void BuildBridge(int r1, int r2,float a1, float a2, int id)
+        private void BuildBridge(int r1, int r2,float a1, float a2, int id)
         {
             
             Point middle = new Point(tileMap.GetLength(0) / 2, tileMap.GetLength(1) / 2);
@@ -115,7 +119,7 @@ namespace SpaceMauraders.Entity
             }
         }
 
-        void BuildRing(float r, int id)
+        private void BuildRing(float r, int id)
         {
             Point middle = new Point(tileMap.GetLength(0) / 2, tileMap.GetLength(1) / 2);
 
@@ -137,7 +141,7 @@ namespace SpaceMauraders.Entity
 
         }
 
-        void BuildRooms(int r1, int r2, float roomModifier)
+        private void BuildRooms(int r1, int r2, float roomModifier)
         {
             int tileX = 0; 
             int tileY = 0;
@@ -188,7 +192,7 @@ namespace SpaceMauraders.Entity
             //tileMap[tileX, tileY] = 3;
         }
 
-        void BuildWall(float r1, float r2, float roomSize, float angle)
+        private void BuildWall(float r1, float r2, float roomSize, float angle)
         {
             Point middle = new Point(tileMap.GetLength(0) / 2, tileMap.GetLength(1) / 2);
 
@@ -200,9 +204,9 @@ namespace SpaceMauraders.Entity
             }
         }
 
-        void LoadCellSpacePartition()
+        private void InitializeCellSpacePartition()
         {
-            cellSpacePartition = new Systems.CellSpacePartition(diameter, diameter, 4);
+            CellSpacePartition = new Systems.CellSpacePartition(Diameter, Diameter, 4);
 
             for (int y = 0; y < tileMap.GetLength(1); y++)
             {
@@ -261,12 +265,12 @@ namespace SpaceMauraders.Entity
                         {
                             case Tile.TileType.NonSolid:
                             {
-                                cellSpacePartition.AddStaticEntity(tempTile);
+                                CellSpacePartition.AddStaticEntity(tempTile);
                                     break;
                             }
                             case Tile.TileType.Solid:
                             {
-                                cellSpacePartition.AddEntity(tempTile);
+                                CellSpacePartition.AddEntity(tempTile);
                                 break;
                             }
                         }
@@ -279,6 +283,11 @@ namespace SpaceMauraders.Entity
             nodeMesh.MakeMap(floorTile, 3, tileMap); 
 
             tileMap = null;
+        }
+
+        private void InitializeItemCellPartition()
+        {
+            ItemsCellSpacePartition = new CellSpacePartition(Diameter, Diameter, 2);
         }
 
         public bool FireEvent(Components.Event _event, Entity entity)
@@ -296,7 +305,7 @@ namespace SpaceMauraders.Entity
 
                 if (EntityWithinBounds(entity.GetCenterPartition()))
                 {
-                    if (cellSpacePartition.staticCells[entity.GetCenterPartition()].FireEvent(_event))
+                    if (CellSpacePartition.staticCells[entity.GetCenterPartition()].FireEvent(_event))
                     {
                         return true;
                     }
@@ -304,7 +313,7 @@ namespace SpaceMauraders.Entity
 
                 if (EntityWithinBounds(entity.GetTopLeftPartition()))
                 {
-                    if (cellSpacePartition.staticCells[entity.GetTopLeftPartition()].FireEvent(_event))
+                    if (CellSpacePartition.staticCells[entity.GetTopLeftPartition()].FireEvent(_event))
                     {
                         return true;
                     }
@@ -312,7 +321,7 @@ namespace SpaceMauraders.Entity
 
                 if (EntityWithinBounds(entity.GetTopPartition()))
                 {
-                    if (cellSpacePartition.staticCells[entity.GetTopPartition()].FireEvent(_event))
+                    if (CellSpacePartition.staticCells[entity.GetTopPartition()].FireEvent(_event))
                     {
                         return true;
                     }
@@ -320,7 +329,7 @@ namespace SpaceMauraders.Entity
 
                 if (EntityWithinBounds(entity.GetTopRightPartition()))
                 {
-                    if (cellSpacePartition.staticCells[entity.GetTopRightPartition()].FireEvent(_event))
+                    if (CellSpacePartition.staticCells[entity.GetTopRightPartition()].FireEvent(_event))
                     {
                         return true;
                     }
@@ -328,7 +337,7 @@ namespace SpaceMauraders.Entity
 
                 if (EntityWithinBounds(entity.GetRightPartition()))
                 {
-                    if (cellSpacePartition.staticCells[entity.GetRightPartition()].FireEvent(_event))
+                    if (CellSpacePartition.staticCells[entity.GetRightPartition()].FireEvent(_event))
                     {
                         return true;
                     }
@@ -336,7 +345,7 @@ namespace SpaceMauraders.Entity
 
                 if (EntityWithinBounds(entity.GetLeftPartition()))
                 {
-                    if (cellSpacePartition.staticCells[entity.GetLeftPartition()].FireEvent(_event))
+                    if (CellSpacePartition.staticCells[entity.GetLeftPartition()].FireEvent(_event))
                     {
                         return true;
                     }
@@ -344,7 +353,7 @@ namespace SpaceMauraders.Entity
 
                 if (EntityWithinBounds(entity.GetBottomLeftPartition()))
                 {
-                    if (cellSpacePartition.staticCells[entity.GetBottomLeftPartition()].FireEvent(_event))
+                    if (CellSpacePartition.staticCells[entity.GetBottomLeftPartition()].FireEvent(_event))
                     {
                         return true;
                     }
@@ -352,7 +361,7 @@ namespace SpaceMauraders.Entity
 
                 if (EntityWithinBounds(entity.GetBottomPartition()))
                 {
-                    if (cellSpacePartition.staticCells[entity.GetBottomPartition()].FireEvent(_event))
+                    if (CellSpacePartition.staticCells[entity.GetBottomPartition()].FireEvent(_event))
                     {
                         return true;
                     }
@@ -360,7 +369,7 @@ namespace SpaceMauraders.Entity
 
                 if (EntityWithinBounds(entity.GetBottomRightPartition()))
                 {
-                    if (cellSpacePartition.staticCells[entity.GetBottomRightPartition()].FireEvent(_event))
+                    if (CellSpacePartition.staticCells[entity.GetBottomRightPartition()].FireEvent(_event))
                     {
                         return true;
                     }
@@ -370,7 +379,7 @@ namespace SpaceMauraders.Entity
                 // DYNAMIC CELLS 
                 if (EntityWithinBounds(entity.GetCenterPartition()))
                 {
-                    if (cellSpacePartition.dynamicCells[entity.GetCenterPartition()].FireEvent(_event))
+                    if (CellSpacePartition.dynamicCells[entity.GetCenterPartition()].FireEvent(_event))
                     {
                         return true;
                     }
@@ -378,7 +387,7 @@ namespace SpaceMauraders.Entity
 
                 if (EntityWithinBounds(entity.GetTopLeftPartition()))
                 {
-                    if (cellSpacePartition.dynamicCells[entity.GetTopLeftPartition()].FireEvent(_event))
+                    if (CellSpacePartition.dynamicCells[entity.GetTopLeftPartition()].FireEvent(_event))
                     {
                         return true;
                     }
@@ -386,7 +395,7 @@ namespace SpaceMauraders.Entity
 
                 if (EntityWithinBounds(entity.GetTopPartition()))
                 {
-                    if (cellSpacePartition.dynamicCells[entity.GetTopPartition()].FireEvent(_event))
+                    if (CellSpacePartition.dynamicCells[entity.GetTopPartition()].FireEvent(_event))
                     {
                         return true;
                     }
@@ -394,7 +403,7 @@ namespace SpaceMauraders.Entity
 
                 if (EntityWithinBounds(entity.GetTopRightPartition()))
                 {
-                    if (cellSpacePartition.dynamicCells[entity.GetTopRightPartition()].FireEvent(_event))
+                    if (CellSpacePartition.dynamicCells[entity.GetTopRightPartition()].FireEvent(_event))
                     {
                         return true;
                     }
@@ -402,7 +411,7 @@ namespace SpaceMauraders.Entity
 
                 if (EntityWithinBounds(entity.GetRightPartition()))
                 {
-                    if (cellSpacePartition.dynamicCells[entity.GetRightPartition()].FireEvent(_event))
+                    if (CellSpacePartition.dynamicCells[entity.GetRightPartition()].FireEvent(_event))
                     {
                         return true;
                     }
@@ -410,7 +419,7 @@ namespace SpaceMauraders.Entity
 
                 if (EntityWithinBounds(entity.GetLeftPartition()))
                 {
-                    if (cellSpacePartition.dynamicCells[entity.GetLeftPartition()].FireEvent(_event))
+                    if (CellSpacePartition.dynamicCells[entity.GetLeftPartition()].FireEvent(_event))
                     {
                         return true;
                     }
@@ -418,7 +427,7 @@ namespace SpaceMauraders.Entity
 
                 if (EntityWithinBounds(entity.GetBottomLeftPartition()))
                 {
-                    if (cellSpacePartition.dynamicCells[entity.GetBottomLeftPartition()].FireEvent(_event))
+                    if (CellSpacePartition.dynamicCells[entity.GetBottomLeftPartition()].FireEvent(_event))
                     {
                         return true;
                     }
@@ -426,7 +435,7 @@ namespace SpaceMauraders.Entity
 
                 if (EntityWithinBounds(entity.GetBottomPartition()))
                 {
-                    if (cellSpacePartition.dynamicCells[entity.GetBottomPartition()].FireEvent(_event))
+                    if (CellSpacePartition.dynamicCells[entity.GetBottomPartition()].FireEvent(_event))
                     {
                         return true;
                     }
@@ -434,7 +443,7 @@ namespace SpaceMauraders.Entity
 
                 if (EntityWithinBounds(entity.GetBottomRightPartition()))
                 {
-                    if (cellSpacePartition.dynamicCells[entity.GetBottomRightPartition()].FireEvent(_event))
+                    if (CellSpacePartition.dynamicCells[entity.GetBottomRightPartition()].FireEvent(_event))
                     {
                         return true;
                     }
@@ -444,10 +453,10 @@ namespace SpaceMauraders.Entity
 
             if (_event.id == "RayHit")
             {
-                int partitionIndex = cellSpacePartition.PositionToIndex(((Point) _event.parameters["Ray"]).ToVector2());
+                int partitionIndex = CellSpacePartition.PositionToIndex(((Point) _event.parameters["Ray"]).ToVector2());
                 if (EntityWithinBounds(partitionIndex))
                 {
-                    if (cellSpacePartition.dynamicCells[partitionIndex].FireEvent(_event))
+                    if (CellSpacePartition.dynamicCells[partitionIndex].FireEvent(_event))
                     {
                         return true;
                     }
@@ -480,34 +489,45 @@ namespace SpaceMauraders.Entity
             {
                 nodeMesh.DrawNodes();
             }
+
             if (Utilities.Debug.debug)
             {
-                
-
-                for (int i = 0; i < cellSpacePartition.staticCells.Length; i++)
+                for (int x = 0; x < ItemsCellSpacePartition.numCellsX; x++)
                 {
-
-                    if (cellSpacePartition.staticCells[i].members != null)
+                    for (int y = 0; y < ItemsCellSpacePartition.numCellsY; y++)
                     {
                         GUI.GUI.DrawBox(new Rectangle(
-                            (int)(cellSpacePartition.staticCells[i].x * 2048),
-                            (int)(cellSpacePartition.staticCells[i].y * 2048),
-                            (int)(cellSpacePartition.staticCells[i].x * 2048) + 2048,
-                            (int)(cellSpacePartition.staticCells[i].y * 2048) + 2048), 80, Color.Red *.1f);
+                                (x * 256) - 128,
+                                (y * 256) - 128,
+                                (x * 256) + 256,
+                                (y * 256) + 256), 10, Color.Orange * .1f);
+                    }
+                }
+                
+                for (int i = 0; i < CellSpacePartition.staticCells.Length; i++)
+                {
+
+                    if (CellSpacePartition.staticCells[i].members != null)
+                    {
+                        GUI.GUI.DrawBox(new Rectangle(
+                            (int)(CellSpacePartition.staticCells[i].x * 2048),
+                            (int)(CellSpacePartition.staticCells[i].y * 2048),
+                            (int)(CellSpacePartition.staticCells[i].x * 2048) + 2048,
+                            (int)(CellSpacePartition.staticCells[i].y * 2048) + 2048), 20, Color.Red *.1f);
                         
                     }
 
                 }
 
-                for (int i = 0; i < cellSpacePartition.staticCells.Length; i++)
+                for (int i = 0; i < CellSpacePartition.staticCells.Length; i++)
                 {
 
-                    if (cellSpacePartition.staticCells[i].members != null)
+                    if (CellSpacePartition.staticCells[i].members != null)
                     {
                         spriteBatch.DrawString(Utilities.TextureManager.fonts[0],
                             i.ToString(),
-                            new Vector2((int)(cellSpacePartition.staticCells[i].members[0,0].cellX * 2048),
-                            (int)(cellSpacePartition.staticCells[i].members[0,0].cellY * 2048)), Color.White);
+                            new Vector2((int)(CellSpacePartition.staticCells[i].members[0,0].cellX * 2048),
+                            (int)(CellSpacePartition.staticCells[i].members[0,0].cellY * 2048)), Color.White);
                     }
 
                 }
@@ -520,100 +540,100 @@ namespace SpaceMauraders.Entity
         {
             if (EntityWithinBounds(Game1.player.GetCenterPartition()))
             {
-                cellSpacePartition.staticCells[Game1.player.GetCenterPartition()].Draw(spriteBatch);
+                CellSpacePartition.staticCells[Game1.player.GetCenterPartition()].Draw(spriteBatch);
             }
 
             if (EntityWithinBounds(Game1.player.GetTopLeftPartition()))
             {
-                cellSpacePartition.staticCells[Game1.player.GetTopLeftPartition()].Draw(spriteBatch);
+                CellSpacePartition.staticCells[Game1.player.GetTopLeftPartition()].Draw(spriteBatch);
             }
 
             if (EntityWithinBounds(Game1.player.GetTopPartition()))
             {
-                cellSpacePartition.staticCells[Game1.player.GetTopPartition()].Draw(spriteBatch);
+                CellSpacePartition.staticCells[Game1.player.GetTopPartition()].Draw(spriteBatch);
             }
 
             if (EntityWithinBounds(Game1.player.GetTopRightPartition()))
             {
-                cellSpacePartition.staticCells[Game1.player.GetTopRightPartition()].Draw(spriteBatch);
+                CellSpacePartition.staticCells[Game1.player.GetTopRightPartition()].Draw(spriteBatch);
             }
 
             if (EntityWithinBounds(Game1.player.GetRightPartition()))
             {
-                cellSpacePartition.staticCells[Game1.player.GetRightPartition()].Draw(spriteBatch);
+                CellSpacePartition.staticCells[Game1.player.GetRightPartition()].Draw(spriteBatch);
             }
 
             if (EntityWithinBounds(Game1.player.GetLeftPartition()))
             {
-                cellSpacePartition.staticCells[Game1.player.GetLeftPartition()].Draw(spriteBatch);
+                CellSpacePartition.staticCells[Game1.player.GetLeftPartition()].Draw(spriteBatch);
             }
 
             if (EntityWithinBounds(Game1.player.GetBottomLeftPartition()))
             {
-                cellSpacePartition.staticCells[Game1.player.GetBottomLeftPartition()].Draw(spriteBatch);
+                CellSpacePartition.staticCells[Game1.player.GetBottomLeftPartition()].Draw(spriteBatch);
             }
 
             if (EntityWithinBounds(Game1.player.GetBottomPartition()))
             {
-                cellSpacePartition.staticCells[Game1.player.GetBottomPartition()].Draw(spriteBatch);
+                CellSpacePartition.staticCells[Game1.player.GetBottomPartition()].Draw(spriteBatch);
             }
 
             if (EntityWithinBounds(Game1.player.GetBottomRightPartition()))
             {
-                cellSpacePartition.staticCells[Game1.player.GetBottomRightPartition()].Draw(spriteBatch);
+                CellSpacePartition.staticCells[Game1.player.GetBottomRightPartition()].Draw(spriteBatch);
             }
 
             // DYNAMIC CELLS 
             if (EntityWithinBounds(Game1.player.GetCenterPartition()))
             {
-                cellSpacePartition.dynamicCells[Game1.player.GetCenterPartition()].Draw(spriteBatch);
+                CellSpacePartition.dynamicCells[Game1.player.GetCenterPartition()].Draw(spriteBatch);
             }
 
             if (EntityWithinBounds(Game1.player.GetTopLeftPartition()))
             {
-                cellSpacePartition.dynamicCells[Game1.player.GetTopLeftPartition()].Draw(spriteBatch);
+                CellSpacePartition.dynamicCells[Game1.player.GetTopLeftPartition()].Draw(spriteBatch);
             }
 
             if (EntityWithinBounds(Game1.player.GetTopPartition()))
             {
-                cellSpacePartition.dynamicCells[Game1.player.GetTopPartition()].Draw(spriteBatch);
+                CellSpacePartition.dynamicCells[Game1.player.GetTopPartition()].Draw(spriteBatch);
             }
 
             if (EntityWithinBounds(Game1.player.GetTopRightPartition()))
             {
-                cellSpacePartition.dynamicCells[Game1.player.GetTopRightPartition()].Draw(spriteBatch);
+                CellSpacePartition.dynamicCells[Game1.player.GetTopRightPartition()].Draw(spriteBatch);
             }
 
             if (EntityWithinBounds(Game1.player.GetRightPartition()))
             {
-                cellSpacePartition.dynamicCells[Game1.player.GetRightPartition()].Draw(spriteBatch);
+                CellSpacePartition.dynamicCells[Game1.player.GetRightPartition()].Draw(spriteBatch);
             }
 
             if (EntityWithinBounds(Game1.player.GetLeftPartition()))
             {
-                cellSpacePartition.dynamicCells[Game1.player.GetLeftPartition()].Draw(spriteBatch);
+                CellSpacePartition.dynamicCells[Game1.player.GetLeftPartition()].Draw(spriteBatch);
             }
 
             if (EntityWithinBounds(Game1.player.GetBottomLeftPartition()))
             {
-                cellSpacePartition.dynamicCells[Game1.player.GetBottomLeftPartition()].Draw(spriteBatch);
+                CellSpacePartition.dynamicCells[Game1.player.GetBottomLeftPartition()].Draw(spriteBatch);
             }
 
             if (EntityWithinBounds(Game1.player.GetBottomPartition()))
             {
-                cellSpacePartition.dynamicCells[Game1.player.GetBottomPartition()].Draw(spriteBatch);
+                CellSpacePartition.dynamicCells[Game1.player.GetBottomPartition()].Draw(spriteBatch);
             }
 
             if (EntityWithinBounds(Game1.player.GetBottomRightPartition()))
             {
-                cellSpacePartition.dynamicCells[Game1.player.GetBottomRightPartition()].Draw(spriteBatch);
+                CellSpacePartition.dynamicCells[Game1.player.GetBottomRightPartition()].Draw(spriteBatch);
             }
 
         }
 
         public bool EntityWithinBounds(int checkedCell)
         {
-            if(checkedCell >= 0 && checkedCell < cellSpacePartition.cellLength)
+            if(checkedCell >= 0 && checkedCell < CellSpacePartition.cellLength)
             {
                 return true; 
             }

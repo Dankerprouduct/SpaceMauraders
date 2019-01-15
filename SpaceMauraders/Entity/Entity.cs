@@ -106,7 +106,7 @@ namespace SpaceMauraders.Entity
         /// <returns></returns>
         public Components.Component GetComponent(string name)
         {
-            return components.Find(c => c.componentName == name);
+            return components.Find(c => c.ComponentName == name);
         }
 
         /// <summary>
@@ -288,7 +288,7 @@ namespace SpaceMauraders.Entity
         /// <returns>Center partition</returns>
         public int GetCenterPartition()
         {
-            cellIndex = Game1.world.spaceStation.cellSpacePartition.PositionToIndex(this);
+            cellIndex = Game1.world.spaceStation.CellSpacePartition.PositionToIndex(this);
             int center = cellIndex;
             return center; 
         }
@@ -299,7 +299,7 @@ namespace SpaceMauraders.Entity
         /// <returns>partition right of the entity</returns>
         public int GetRightPartition()
         {
-            cellIndex = Game1.world.spaceStation.cellSpacePartition.PositionToIndex(this);
+            cellIndex = Game1.world.spaceStation.CellSpacePartition.PositionToIndex(this);
             int center = cellIndex;
             int right = center + 150;
             return right; 
@@ -311,7 +311,7 @@ namespace SpaceMauraders.Entity
         /// <returns>partition left of the entity</returns>
         public int GetLeftPartition()
         {
-            cellIndex = Game1.world.spaceStation.cellSpacePartition.PositionToIndex(this);
+            cellIndex = Game1.world.spaceStation.CellSpacePartition.PositionToIndex(this);
             int center = cellIndex;
             int left = center - 150;
             return left; 
@@ -323,7 +323,7 @@ namespace SpaceMauraders.Entity
         /// <returns>partition south of entity</returns>
         public int GetBottomPartition()
         {
-            cellIndex = Game1.world.spaceStation.cellSpacePartition.PositionToIndex(this);
+            cellIndex = Game1.world.spaceStation.CellSpacePartition.PositionToIndex(this);
             int center = cellIndex;
             int left = center - 1;
             return left; 
@@ -335,7 +335,7 @@ namespace SpaceMauraders.Entity
         /// <returns>partition towards the top of the entity</returns>
         public int GetTopPartition()
         {
-            cellIndex = Game1.world.spaceStation.cellSpacePartition.PositionToIndex(this);
+            cellIndex = Game1.world.spaceStation.CellSpacePartition.PositionToIndex(this);
             int center = cellIndex;
             int top = cellIndex + 1;
             return top; 
@@ -347,7 +347,7 @@ namespace SpaceMauraders.Entity
         /// <returns>souith east partition</returns>
         public int GetBottomRightPartition()
         {
-            cellIndex = Game1.world.spaceStation.cellSpacePartition.PositionToIndex(this);
+            cellIndex = Game1.world.spaceStation.CellSpacePartition.PositionToIndex(this);
             int center = cellIndex;
             int bottomRight = center + 1 + 150;
             return bottomRight; 
@@ -359,7 +359,7 @@ namespace SpaceMauraders.Entity
         /// <returns>bottom left partition</returns>
         public int GetBottomLeftPartition()
         {
-            cellIndex = Game1.world.spaceStation.cellSpacePartition.PositionToIndex(this);
+            cellIndex = Game1.world.spaceStation.CellSpacePartition.PositionToIndex(this);
             int center = cellIndex;
             int bottomLeft = center + 1 - 150;
             return bottomLeft; 
@@ -371,7 +371,7 @@ namespace SpaceMauraders.Entity
         /// <returns>top right partition</returns>
         public int GetTopRightPartition()
         {
-            cellIndex = Game1.world.spaceStation.cellSpacePartition.PositionToIndex(this);
+            cellIndex = Game1.world.spaceStation.CellSpacePartition.PositionToIndex(this);
             int center = cellIndex;
             int topRight = center + 150 - 1;
             return topRight; 
@@ -383,7 +383,7 @@ namespace SpaceMauraders.Entity
         /// <returns>top left partition</returns>
         public int GetTopLeftPartition()
         {
-            cellIndex = Game1.world.spaceStation.cellSpacePartition.PositionToIndex(this);
+            cellIndex = Game1.world.spaceStation.CellSpacePartition.PositionToIndex(this);
             int center = cellIndex;
             int topLeft = center - 150 - 1;
             return topLeft; 

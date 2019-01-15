@@ -301,6 +301,10 @@ namespace SpaceMauraders.Systems
             ///lis
         }
 
+        /// <summary>
+        /// returns an array of current dynamic entities
+        /// </summary>
+        /// <returns></returns>
         public EntitySaveTemplate<Entity.Entity>[] SaveDynamicEntities()
         {
             List<EntitySaveTemplate<Entity.Entity>> temp = new List<EntitySaveTemplate<Entity.Entity>>();
@@ -386,7 +390,7 @@ namespace SpaceMauraders.Systems
             return new Point(cellX, cellY); 
         }
 
-        Point PositionToCell(Vector2 position)
+        public Point PositionToCell(Vector2 position)
         {
             int cellX = (int)(position.X / (partitionSize * ((partitionSize * partitionSize) * 8)) / partitionSize);
             int cellY = (int)(position.Y / (partitionSize * ((partitionSize * partitionSize) * 8)) / partitionSize);

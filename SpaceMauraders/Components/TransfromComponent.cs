@@ -14,7 +14,7 @@ namespace SpaceMauraders.Components
         
         public TransfromComponent(): base()
         {
-            componentName = "TransformComponent"; 
+            ComponentName = "TransformComponent"; 
         }
 
         public override bool FireEvent(Event _event)

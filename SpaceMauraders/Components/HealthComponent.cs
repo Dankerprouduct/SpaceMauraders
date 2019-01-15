@@ -17,7 +17,7 @@ namespace SpaceMauraders.Components
         public HealthComponent(int health): base()
         {
             this.health = health;
-            componentName = "HealthComponent"; 
+            ComponentName = "HealthComponent"; 
         }
 
         public override bool FireEvent(Event _event)

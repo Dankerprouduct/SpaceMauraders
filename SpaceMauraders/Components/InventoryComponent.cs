@@ -49,7 +49,7 @@ namespace SpaceMauraders.Components
         /// <param name="inventoryHeight"></param>
         public InventoryComponent(int inventoryWidth, int inventoryHeight): base()
         {
-            componentName = "InventoryComponent"; 
+            ComponentName = "InventoryComponent"; 
 
             width = inventoryWidth;
             height = inventoryHeight;

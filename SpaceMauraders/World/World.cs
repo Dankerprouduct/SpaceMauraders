@@ -23,7 +23,7 @@ namespace SpaceMauraders.World
         public World(int width, int height)
         {
             spaceStation = new Entity.SpaceStation(301);
-            dynamicCellSpacePartition = new Systems.CellSpacePartition(spaceStation.diameter, spaceStation.diameter, 4);
+            dynamicCellSpacePartition = new Systems.CellSpacePartition(spaceStation.Diameter, spaceStation.Diameter, 4);
             
         }
         
