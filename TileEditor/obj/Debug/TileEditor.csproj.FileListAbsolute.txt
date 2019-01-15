@@ -125,3 +125,5 @@ C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Gra
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Saves\Rooms\Room1.json
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Saves\Rooms\FloorDecal.json
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Saves\Rooms\FloorDecal2.json
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Saves\Rooms\FloorDecal3.json
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Tiles\Window1.xnb

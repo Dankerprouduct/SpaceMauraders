@@ -36,6 +36,7 @@ namespace SpaceMarauders.Utilities
             AddTile("MeshTile", content);             //6
             AddTile("Wall2", content);                //7
             AddTile("Wall3", content);                //8
+            AddTile("Window1", content);              //9
 
             // loading fonts
             AddFont("debug", content);                //0

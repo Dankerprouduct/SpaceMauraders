@@ -156,10 +156,10 @@ namespace SpaceMarauders.Entity
 
             GameData<Room> roomData = new GameData<Room>();
             roomData.folderPath = @"Saves\Rooms\";            
-            Room tempRoom = roomData.LoadObjectData("FloorDecal");
+            Room tempRoom = roomData.LoadObjectData("FloorDecal3");
 
             rooms.Add(tempRoom);
-            BuildRoomsOnRing(150, MathHelper.ToRadians(2.5f));
+            BuildRoomsOnRing(150, MathHelper.ToRadians(10f));
 
             BuildRooms(125, 175, 1.85f);
             BuildRooms(250, 300, 1.95f);

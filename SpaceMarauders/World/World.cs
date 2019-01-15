@@ -177,8 +177,8 @@ namespace SpaceMarauders.World
                 {
                     spriteBatch.Draw(
                         TextureManager.graphicsTextures[0],
-                        new Vector2((x * 1024) - (Game1.player.position.X / 100) * 1.5f,
-                        (y * 1024) - (Game1.player.position.Y / 100) * 1.5f),
+                        new Vector2((x * 1024) - (Game1.camera.center.X / 100) * 1.5f,
+                        (y * 1024) - (Game1.camera.center.Y / 100) * 1.5f),
                         Color.White);
                 }
             }

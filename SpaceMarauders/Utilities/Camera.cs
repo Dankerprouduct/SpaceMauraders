@@ -40,11 +40,11 @@ namespace SpaceMarauders.Utilities
 
             if (mouseState.ScrollWheelValue > oldMouseState.ScrollWheelValue)
             {
-                scale += .05f;
+                scale += .025f;
             }
             if (mouseState.ScrollWheelValue < oldMouseState.ScrollWheelValue)
             {
-                scale -= .05f;
+                scale -= .025f;
             }
             // Tree tree = new Tree(Vector2.Zero, 0, 0);
 
