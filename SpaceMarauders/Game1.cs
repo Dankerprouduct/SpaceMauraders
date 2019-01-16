@@ -143,7 +143,19 @@ namespace SpaceMarauders
         protected override void Draw(GameTime gameTime)
         {
 
-            GraphicsDevice.SetRenderTarget(regularRenderTarget);
+            GraphicsDevice.SetRenderTarget(renderTarget1); // bloom shader
+            GraphicsDevice.Clear(Color.TransparentBlack);
+            // particle effects
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.transform);
+            Systems.ParticleSystem.Draw(spriteBatch);
+            spriteBatch.End();
+            bloom.Draw(renderTarget1, renderTarget2);           
+
+            GraphicsDevice.SetRenderTarget(null);
+
+
+
+            // Background
             GraphicsDevice.Clear(Color.Transparent);
             spriteBatch.Begin();
             world.DrawBackground(spriteBatch);
@@ -151,30 +163,17 @@ namespace SpaceMarauders
 
             // player space
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.transform);
-            GUI.GUI.Draw(spriteBatch); 
+            GUI.GUI.Draw(spriteBatch);
             world.Draw(spriteBatch);
             player.Draw(spriteBatch);
-            Systems.ParticleSystem.Draw(spriteBatch);
-            
+
             spriteBatch.End();
 
-            GraphicsDevice.SetRenderTarget(null);
-
-
-            GraphicsDevice.SetRenderTarget(renderTarget1);
-            // particle effects
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.transform);
-            Systems.ParticleSystem.Draw(spriteBatch);
-            spriteBatch.End();
-            bloom.Draw(renderTarget1, renderTarget2);
-
-            GraphicsDevice.SetRenderTarget(null);
 
             // Draw bloomed layer over top: 
-            spriteBatch.Begin(0, BlendState.AlphaBlend);
-            spriteBatch.Draw(renderTarget2, new Rectangle(0, 0, width, height), Color.White); // draw all glowing components            
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+            spriteBatch.Draw(renderTarget2, new Rectangle(0, 0, width, height), Color.White);
             spriteBatch.End();
-            GraphicsDevice.SetRenderTarget(null);
 
             // Dev stuff
             spriteBatch.Begin(SpriteSortMode.Deferred,null, SamplerState.PointClamp);
@@ -213,6 +212,15 @@ namespace SpaceMarauders
 
 
             base.Draw(gameTime);
+        }
+
+        private void DrawRTToTarget(RenderTarget2D map, RenderTarget2D target, SpriteBatch _spriteBatch)
+        {
+
+            GraphicsDevice.SetRenderTarget(target);
+            _spriteBatch.Begin(0, BlendState.Opaque, SamplerState.PointClamp);
+            _spriteBatch.Draw(map, new Rectangle(0, 0, map.Width, map.Height), Color.White);
+            _spriteBatch.End();
         }
     }
 }
