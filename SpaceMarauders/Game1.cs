@@ -32,6 +32,7 @@ namespace SpaceMarauders
         
         public static Entity.Player player;
         RenderTarget2D renderTarget1, renderTarget2;
+        private RenderTarget2D regularRenderTarget; 
         Bloom bloom;
         private PresentationParameters pp;
 
@@ -71,7 +72,10 @@ namespace SpaceMarauders
             renderTarget1 = new RenderTarget2D(GraphicsDevice, width, height, false, pp.BackBufferFormat, pp.DepthStencilFormat, pp.MultiSampleCount, RenderTargetUsage.DiscardContents);
             renderTarget2 = new RenderTarget2D(GraphicsDevice, width, height, false, pp.BackBufferFormat, pp.DepthStencilFormat, pp.MultiSampleCount, RenderTargetUsage.DiscardContents);
 
-            Utilities.TextureManager.LoadContent(Content);
+
+            regularRenderTarget = new RenderTarget2D(GraphicsDevice, width, height, false, pp.BackBufferFormat, pp.DepthStencilFormat, pp.MultiSampleCount, RenderTargetUsage.DiscardContents);
+
+        Utilities.TextureManager.LoadContent(Content);
             Systems.ParticleSystem.Init(20000);
             Entity.Items.ItemDictionary.LoadItemDatabase();
             bloom.LoadContent(Content, pp);
@@ -139,25 +143,29 @@ namespace SpaceMarauders
         protected override void Draw(GameTime gameTime)
         {
 
-            GraphicsDevice.Clear(new Color(10,10,10));
-
+            GraphicsDevice.SetRenderTarget(regularRenderTarget);
+            GraphicsDevice.Clear(Color.Transparent);
             spriteBatch.Begin();
             world.DrawBackground(spriteBatch);
             spriteBatch.End();
 
             // player space
-
-            GraphicsDevice.SetRenderTarget(renderTarget1);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.transform);
-
             GUI.GUI.Draw(spriteBatch); 
             world.Draw(spriteBatch);
-
             player.Draw(spriteBatch);
             Systems.ParticleSystem.Draw(spriteBatch);
             
             spriteBatch.End();
 
+            GraphicsDevice.SetRenderTarget(null);
+
+
+            GraphicsDevice.SetRenderTarget(renderTarget1);
+            // particle effects
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.transform);
+            Systems.ParticleSystem.Draw(spriteBatch);
+            spriteBatch.End();
             bloom.Draw(renderTarget1, renderTarget2);
 
             GraphicsDevice.SetRenderTarget(null);
@@ -168,6 +176,7 @@ namespace SpaceMarauders
             spriteBatch.End();
             GraphicsDevice.SetRenderTarget(null);
 
+            // Dev stuff
             spriteBatch.Begin(SpriteSortMode.Deferred,null, SamplerState.PointClamp);
             GUI.GUI.Draw(spriteBatch);
             GUI.GUI.DrawString("DEVELOPMENT BUILD", new Vector2(GUI.GUI.screenBounds.X + 20, GUI.GUI.screenBounds.Height - 20),1, 1, Color.Gray);
