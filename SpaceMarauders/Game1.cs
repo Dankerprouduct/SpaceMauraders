@@ -23,7 +23,7 @@ namespace SpaceMarauders
 
         public static World.World world;
 
-        public static int width = 1280;
+        public static int width = 1080;
         public static int height = 0; 
 
         public static Vector2 worldPosition;
