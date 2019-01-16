@@ -13,6 +13,24 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin BloomCombine.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:BloomCombine.fx
+
+#begin BloomExtract.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:BloomExtract.fx
+
+#begin File.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:File.fx
+
 #begin Fonts/Arial12.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -26,6 +44,12 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Fonts/debug.spritefont
+
+#begin GaussianBlur.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:GaussianBlur.fx
 
 #begin Graphics/tileable-classic-nebula-3120074-o.png
 /importer:TextureImporter
@@ -98,6 +122,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Particles/CircleParticle.png
+
+#begin prototype.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:prototype.fx;BloomExtract.fx
 
 #begin Sprites/BodyParts/FederationSoilderBody.png
 /importer:TextureImporter

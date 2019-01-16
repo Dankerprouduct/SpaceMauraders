@@ -20,7 +20,7 @@ namespace SpaceMarauders.Entity
             this.collisionRectanlge = new Rectangle((int)position.X, (int)position.Y, Utilities.TextureManager.sprites[0].Width, Utilities.TextureManager.sprites[0].Height);
                 
                 components.Add(new Components.InputComponent(this.id));
-                components.Add(new Components.SpeedModifierComponent(.5f)); 
+                components.Add(new Components.SpeedModifierComponent(1f)); 
                 components.Add(new Components.PhysicsComponent(this.id));            
                 components.Add(new Components.TriggerColliderComponent());
                 components.Add(new Components.InventoryComponent(2,10));

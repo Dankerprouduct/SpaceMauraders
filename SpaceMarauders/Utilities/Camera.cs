@@ -105,6 +105,14 @@ namespace SpaceMarauders.Utilities
             oldMouseState = mouseState;
             oldKeyboardState = keyboardState;
         }
+
+        public Vector2 WindowToCameraSpace(Vector2 windowPosition)
+        {
+            // Scale for camera bounds that vary from window
+            // Also, must adjust for translation if camera isn't at 0, 0 in screen space (such as a mini-map)
+            return (scale * windowPosition) + center;
+        }
+
     }
 }
 

@@ -57,3 +57,7 @@ C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\D
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\Saves\Rooms\FloorDecal2.json
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\Saves\Rooms\FloorDecal3.json
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\Content\Tiles\Window1.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\Content\BloomCombine.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\Content\BloomExtract.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\Content\File.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\Content\GaussianBlur.xnb

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/File.fx</SourceFile>
+  <SourceTime>2019-01-16T09:36:45.3908044-05:00</SourceTime>
+  <DestFile>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/bin/Windows/Content/File.xnb</DestFile>
+  <DestTime>2019-01-16T09:40:53.8589959-05:00</DestTime>
+  <Importer>EffectImporter</Importer>
+  <ImporterTime>2019-01-03T08:38:03.9236877-05:00</ImporterTime>
+  <Processor>EffectProcessor</Processor>
+  <ProcessorTime>2019-01-03T08:38:03.9236877-05:00</ProcessorTime>
+  <Parameters>
+    <Key>DebugMode</Key>
+    <Value>Auto</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

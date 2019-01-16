@@ -127,3 +127,7 @@ C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Saves\Rooms
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Saves\Rooms\FloorDecal2.json
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Saves\Rooms\FloorDecal3.json
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Tiles\Window1.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\BloomCombine.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\BloomExtract.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\File.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\GaussianBlur.xnb

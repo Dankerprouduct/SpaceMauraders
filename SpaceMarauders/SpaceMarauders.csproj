@@ -98,6 +98,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entity\SpaceStation.cs" />
+    <Compile Include="Shaders\Bloom.cs" />
+    <Compile Include="Shaders\BloomComponent.cs" />
+    <Compile Include="Shaders\BloomSettings.cs" />
     <Compile Include="Systems\CellSpacePartition.cs" />
     <Compile Include="Entity\ParticleEmitter.cs" />
     <Compile Include="AI\FSM\FSM.cs" />

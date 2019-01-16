@@ -5,6 +5,7 @@ using System;
 using SpaceMarauders.Utilities;
 using SpaceMarauders.Components;
 using SpaceMarauders.Entity.Factions.Federation;
+using SpaceMarauders.Shaders;
 
 namespace SpaceMarauders
 {
@@ -29,13 +30,17 @@ namespace SpaceMarauders
         public static Vector2 worldPosition;
         Vector2 mousePosition;
         
-
         public static Entity.Player player;
+        RenderTarget2D renderTarget1, renderTarget2;
+        Bloom bloom;
+        private PresentationParameters pp;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            
+
+
             graphics.PreferredBackBufferWidth = width;
                 
             height = (width / 16) * 9;
@@ -43,12 +48,16 @@ namespace SpaceMarauders
             graphics.PreferredBackBufferHeight = height;
             graphics.GraphicsProfile = GraphicsProfile.HiDef; 
             graphics.IsFullScreen = false; 
+            
+            
         }
         
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            pp = GraphicsDevice.PresentationParameters;
             
+
             IsMouseVisible = true;
             base.Initialize();
         }
@@ -56,10 +65,16 @@ namespace SpaceMarauders
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            bloom = new Bloom(GraphicsDevice, spriteBatch);
+            bloom.Settings = BloomSettings.PresetSettings[3];
+            renderTarget1 = new RenderTarget2D(GraphicsDevice, width, height, false, pp.BackBufferFormat, pp.DepthStencilFormat, pp.MultiSampleCount, RenderTargetUsage.DiscardContents);
+            renderTarget2 = new RenderTarget2D(GraphicsDevice, width, height, false, pp.BackBufferFormat, pp.DepthStencilFormat, pp.MultiSampleCount, RenderTargetUsage.DiscardContents);
+
             Utilities.TextureManager.LoadContent(Content);
             Systems.ParticleSystem.Init(20000);
             Entity.Items.ItemDictionary.LoadItemDatabase();
-            
+            bloom.LoadContent(Content, pp);
             GUI.GUI.Init();
             Reset();
 
@@ -79,11 +94,13 @@ namespace SpaceMarauders
 
         protected override void UnloadContent()
         {
-
+            bloom.UnloadContent();
+            renderTarget1.Dispose(); renderTarget2.Dispose();
         }
         
         protected override void Update(GameTime gameTime)
         {
+            //bloom.Update();
             GUI.GUI.Draw(spriteBatch);
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -121,6 +138,7 @@ namespace SpaceMarauders
 
         protected override void Draw(GameTime gameTime)
         {
+
             GraphicsDevice.Clear(new Color(10,10,10));
 
             spriteBatch.Begin();
@@ -128,14 +146,27 @@ namespace SpaceMarauders
             spriteBatch.End();
 
             // player space
+
+            GraphicsDevice.SetRenderTarget(renderTarget1);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.transform);
+
             GUI.GUI.Draw(spriteBatch); 
             world.Draw(spriteBatch);
 
             player.Draw(spriteBatch);
             Systems.ParticleSystem.Draw(spriteBatch);
-            spriteBatch.End();
             
+            spriteBatch.End();
+
+            bloom.Draw(renderTarget1, renderTarget2);
+
+            GraphicsDevice.SetRenderTarget(null);
+
+            // Draw bloomed layer over top: 
+            spriteBatch.Begin(0, BlendState.AlphaBlend);
+            spriteBatch.Draw(renderTarget2, new Rectangle(0, 0, width, height), Color.White); // draw all glowing components            
+            spriteBatch.End();
+            GraphicsDevice.SetRenderTarget(null);
 
             spriteBatch.Begin(SpriteSortMode.Deferred,null, SamplerState.PointClamp);
             GUI.GUI.Draw(spriteBatch);

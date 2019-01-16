@@ -4,14 +4,19 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/BloomCombine.fx</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/BloomExtract.fx</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/File.fx</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Fonts/Arial12.spritefont</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Fonts/debug.spritefont</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/GaussianBlur.fx</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Graphics/tileable-classic-nebula-3120074-o.png</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/GUI/Circle1.png</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/GUI/Items/FusionRifle.png</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/GUI/Items/LaserRifle.png</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/GUI/Pixel.png</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Particles/CircleParticle.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/prototype.fx</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Sprites/BodyParts/FederationSoilderBody.png</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Sprites/BodyParts/FederationSoilderHand.png</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Sprites/BodyParts/FederationSoilderHead.png</File>
@@ -33,12 +38,17 @@
   <DestFiles>
     <File xsi:nil="true" />
     <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File>Graphics/nebula.png</File>
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
+    <File>BloomExtract.fx</File>
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
