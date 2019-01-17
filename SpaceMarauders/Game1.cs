@@ -31,7 +31,7 @@ namespace SpaceMarauders
         Vector2 mousePosition;
         
         public static Entity.Player player;
-        RenderTarget2D renderTarget1, renderTarget2;
+        private RenderTarget2D renderTarget1, renderTarget2, renderTarget3, renderTarget4;
         private RenderTarget2D regularRenderTarget; 
         Bloom bloom;
         private PresentationParameters pp;
@@ -48,9 +48,9 @@ namespace SpaceMarauders
             
             graphics.PreferredBackBufferHeight = height;
             graphics.GraphicsProfile = GraphicsProfile.HiDef; 
-            graphics.IsFullScreen = false; 
-            
-            
+            graphics.IsFullScreen = false;
+            this.graphics.SynchronizeWithVerticalRetrace = true;
+
         }
         
         protected override void Initialize()
@@ -71,11 +71,13 @@ namespace SpaceMarauders
             bloom.Settings = BloomSettings.PresetSettings[3];
             renderTarget1 = new RenderTarget2D(GraphicsDevice, width, height, false, pp.BackBufferFormat, pp.DepthStencilFormat, pp.MultiSampleCount, RenderTargetUsage.DiscardContents);
             renderTarget2 = new RenderTarget2D(GraphicsDevice, width, height, false, pp.BackBufferFormat, pp.DepthStencilFormat, pp.MultiSampleCount, RenderTargetUsage.DiscardContents);
+            renderTarget3 = new RenderTarget2D(GraphicsDevice, width, height, false, pp.BackBufferFormat, pp.DepthStencilFormat, pp.MultiSampleCount, RenderTargetUsage.DiscardContents);
+            renderTarget4 = new RenderTarget2D(GraphicsDevice, width, height, false, pp.BackBufferFormat, pp.DepthStencilFormat, pp.MultiSampleCount, RenderTargetUsage.DiscardContents);
 
 
             regularRenderTarget = new RenderTarget2D(GraphicsDevice, width, height, false, pp.BackBufferFormat, pp.DepthStencilFormat, pp.MultiSampleCount, RenderTargetUsage.DiscardContents);
 
-        Utilities.TextureManager.LoadContent(Content);
+            Utilities.TextureManager.LoadContent(Content);
             Systems.ParticleSystem.Init(20000);
             Entity.Items.ItemDictionary.LoadItemDatabase();
             bloom.LoadContent(Content, pp);
@@ -147,6 +149,7 @@ namespace SpaceMarauders
             GraphicsDevice.Clear(Color.TransparentBlack);
             // particle effects
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.transform);
+
             Systems.ParticleSystem.Draw(spriteBatch);
             spriteBatch.End();
             bloom.Draw(renderTarget1, renderTarget2);           
@@ -166,7 +169,6 @@ namespace SpaceMarauders
             GUI.GUI.Draw(spriteBatch);
             world.Draw(spriteBatch);
             player.Draw(spriteBatch);
-
             spriteBatch.End();
 
 

@@ -16,6 +16,7 @@
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/GUI/Items/LaserRifle.png</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/GUI/Pixel.png</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Particles/CircleParticle.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/PixelShader.fx</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/prototype.fx</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Sprites/BodyParts/FederationSoilderBody.png</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Sprites/BodyParts/FederationSoilderHand.png</File>
@@ -24,8 +25,23 @@
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Sprites/FederationSoilder.png</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Sprites/Heads/FederationSoilderHead.png</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Sprites/TempSprite.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/BlueType1.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/BlueType2.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/BlueType3.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/BlueType4.png</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/Floor1.png</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/MeshTile.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/Preset1.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/Preset10.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/Preset11.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/Preset2.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/Preset3.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/Preset4.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/Preset5.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/Preset6.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/Preset7.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/Preset8.png</File>
+    <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/Preset9.png</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/tealMeshTile.png</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/tealMeshTile2.png</File>
     <File>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/tempFloor.png</File>
@@ -48,7 +64,23 @@
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File>BloomExtract.fx</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

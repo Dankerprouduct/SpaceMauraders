@@ -295,10 +295,180 @@ namespace SpaceMarauders.Entity
             }
         }
 
+        private int[,] GetProperTextures()
+        {
+
+            int[,] newTileMap = new int[tileMap.GetLength(0), tileMap.GetLength(1)];
+            
+            for (int x = 0; x < tileMap.GetLength(0); x++)
+            {
+                for (int y = 0; y < tileMap.GetLength(1); y++)
+                {
+                    newTileMap[x, y] = -1;
+
+                    // checks 2 tiles north - west
+                    if (IsArrayInBounds(newTileMap, x , y - 1) && tileMap[x , y - 1] == 3)
+                    {
+                        if (IsArrayInBounds(newTileMap, x - 1, y) && tileMap[x - 1, y] == 3)
+                        {
+                            newTileMap[x, y] = 11;
+
+                        }
+                    }
+
+                    // checks 2 tiles north - east
+                    if (IsArrayInBounds(newTileMap, x, y - 1) && tileMap[x, y - 1] == 3)
+                    {
+                        if (IsArrayInBounds(newTileMap, x +  1, y) && tileMap[x + 1, y] == 3)
+                        {
+                            newTileMap[x, y] = 10;
+
+                        }
+                    }
+
+                    // checks 2 tiles south - east
+                    if (IsArrayInBounds(newTileMap, x, y + 1) && tileMap[x, y + 1] == 3)
+                    {
+                        if (IsArrayInBounds(newTileMap, x + 1, y) && tileMap[x + 1, y] == 3)
+                        {
+                            newTileMap[x, y] = 9;
+
+                        }
+                    }
+
+                    // checks 2 tiles south - west
+                    if (IsArrayInBounds(newTileMap, x, y + 1) && tileMap[x, y + 1] == 3)
+                    {
+                        if (IsArrayInBounds(newTileMap, x - 1, y) && tileMap[x - 1, y] == 3)
+                        {
+                            newTileMap[x, y] = 8;
+
+                        }
+                    }
+
+
+                    ////////
+
+                    // checks 2 tiles north - south
+                    if (IsArrayInBounds(newTileMap, x + 1, y) && tileMap[x + 1, y] == 3)
+                    {
+                        if (IsArrayInBounds(newTileMap, x - 1, y) && tileMap[x - 1, y] == 3)
+                        {
+                            newTileMap[x, y] = 5;
+
+                        }
+                    }
+
+
+                    // checks 2 tiles west - east
+                    if (IsArrayInBounds(newTileMap, x, y - 1) && tileMap[x, y - 1] == 3)
+                    {
+                        if (IsArrayInBounds(newTileMap, x, y + 1) && tileMap[x, y + 1] == 3)
+                        {
+                            newTileMap[x, y] = 6;
+
+                        }
+                    }
+
+                    // checks 3 tiles west
+                    if (IsArrayInBounds(newTileMap, x - 1, y) && tileMap[x - 1, y] != 3)
+                    {
+                        if (IsArrayInBounds(newTileMap, x, y - 1) && tileMap[x, y - 1] != 3)
+                        {
+                            if (IsArrayInBounds(newTileMap, x, y + 1) && tileMap[x, y + 1] != 3)
+                            {
+                                newTileMap[x, y] = 4;
+
+                            }
+                        }
+                    }
+
+                    // checks 3 tiles south
+                    if (IsArrayInBounds(newTileMap, x - 1, y) && tileMap[x - 1, y] != 3)
+                    {
+                        if (IsArrayInBounds(newTileMap, x + 1, y) && tileMap[x + 1, y] != 3)
+                        {
+                            if (IsArrayInBounds(newTileMap, x, y + 1) && tileMap[x, y + 1] != 3)
+                            {
+                                newTileMap[x, y] = 3; // tile id 3
+
+                            }
+                        }
+                    }
+
+                    // checks 3 tiles east  
+                    if (IsArrayInBounds(newTileMap, x + 1, y) && tileMap[x + 1, y] != 3)
+                    {
+                        if (IsArrayInBounds(newTileMap, x, y - 1) && tileMap[x, y - 1] != 3)
+                        {
+                            if (IsArrayInBounds(newTileMap, x, y + 1) && tileMap[x, y + 1] != 3)
+                            {
+                                newTileMap[x, y] = 2; // tile id 2
+
+                            }
+                        }
+                    }
+
+                    // checks 3 tiles north
+                    if (IsArrayInBounds(newTileMap, x - 1, y) && tileMap[x - 1, y] != 3)
+                    {
+                        if (IsArrayInBounds(newTileMap, x + 1, y) && tileMap[x + 1, y] != 3)
+                        {
+                            if (IsArrayInBounds(newTileMap, x, y - 1) && tileMap[x, y - 1] != 3)
+                            {
+                                newTileMap[x, y] = 1; // tile id 1 
+
+                            }
+                        }
+                    }
+
+                    // check all 4 surrounding tiles
+                    if (IsArrayInBounds(newTileMap, x - 1, y) && tileMap[x - 1, y] == 3) // 3 is wall
+                    {
+                        if (IsArrayInBounds(newTileMap, x + 1, y) && tileMap[x + 1, y] == 3)
+                        {
+                            if (IsArrayInBounds(newTileMap, x, y - 1) && tileMap[x, y - 1] == 3)
+                            {
+                                if (IsArrayInBounds(newTileMap, x, y + 1) && tileMap[x, y + 1] == 3)
+                                {
+
+                                    newTileMap[x, y] = 7; // tileid 7
+                                    
+
+                                }
+                            }
+                        }
+                    }
+
+                    
+
+
+
+
+
+                }
+            }
+
+            return newTileMap; 
+        }
+
+        private bool IsArrayInBounds(int[,] map, int x, int y)
+        {
+            if (x >= 0 && x < map.GetLength(0))
+            {
+                if (y >= 0 && y < map.GetLength(1))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private void InitializeCellSpacePartition()
         {
             CellSpacePartition = new Systems.CellSpacePartition(Diameter, Diameter, 4);
-
+            int[,] newTileMap = GetProperTextures();
             for (int y = 0; y < tileMap.GetLength(1); y++)
             {
                 for(int x = 0; x < tileMap.GetLength(0); x++)
@@ -321,26 +491,74 @@ namespace SpaceMarauders.Entity
                                     Console.WriteLine("Using Old Tile, please check ");
                                     break; 
                                 }
-                            case 2:
-                                {
-                                    tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), tileMap[x, y], Tile.TileType.NonSolid);
-                                    break; 
-                                }
                             case 3:
                                 {
-                                    tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), tileMap[x, y], Tile.TileType.Solid);
+                                    switch (newTileMap[x,y])
+                                    {
+                                        case 1:
+                                        {
+                                            tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), 10, Tile.TileType.Solid);
+                                            break;
+                                        }
+                                        case 2:
+                                        {
+                                            tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), 11, Tile.TileType.Solid);
+                                            break;
+                                        }
+                                        case 3:
+                                        {
+                                            tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), 12, Tile.TileType.Solid);
+                                            break;
+                                        }
+                                        case 4:
+                                        {
+                                            tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), 13, Tile.TileType.Solid);
+                                            break;
+                                        }
+                                        case 5:
+                                        {
+                                            tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), 14, Tile.TileType.Solid);
+                                            break;
+                                        }
+                                        case 6:
+                                        {
+                                            tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), 15, Tile.TileType.Solid);
+                                            break;
+                                        }
+                                        case 7:
+                                        {
+                                            tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), 16, Tile.TileType.Solid);
+                                            break;
+                                        }
+                                        case 8:
+                                        {
+                                            tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), 17, Tile.TileType.Solid);
+                                            break;
+                                        }
+                                        case 9:
+                                        {
+                                            tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), 18, Tile.TileType.Solid);
+                                            break;
+                                        }
+                                        case 10:
+                                        {
+                                            tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), 19, Tile.TileType.Solid);
+                                            break;
+                                        }
+                                        case 11:
+                                        {
+                                            tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), 20, Tile.TileType.Solid);
+                                            break;
+                                        }
+                                        default:
+                                        {
+                                            tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), tileMap[x,y], Tile.TileType.Solid);
+                                            break;
+                                        }
+                                    }
+                                    
                                     break; 
                                 }
-                            case 4:
-                                {
-                                    tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), tileMap[x, y], Tile.TileType.NonSolid);
-                                    break;
-                                }
-                            case 5:
-                                  {
-                                    tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), tileMap[x, y], Tile.TileType.NonSolid);
-                                    break;
-                                  }
                             default:
                                    {
                                     tempTile = new Tile(new Vector2(position.X + (x * 128), position.Y + (y * 128)), tileMap[x, y], Tile.TileType.NonSolid);

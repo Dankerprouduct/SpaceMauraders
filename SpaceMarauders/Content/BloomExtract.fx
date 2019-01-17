@@ -1,6 +1,6 @@
 sampler TextureSampler : register(s0);
 
-float BloomThreshold = .25f;
+float BloomThreshold = 2;
 
 struct VSOutput
 {

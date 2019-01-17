@@ -491,7 +491,7 @@ namespace SpaceMarauders.Entity
         /// </summary>
         public virtual void Detroy()
         {
-            Console.WriteLine("Destroying entity " + id);
+            //Console.WriteLine("Destroying entity " + id);
             active = false; 
         }
 

@@ -22,7 +22,23 @@ namespace SpaceMarauders.Utilities
         public static List<Texture2D> guiItemTextures = new List<Texture2D>();
         public static List<Texture2D> graphicsTextures = new List<Texture2D>();
 
+        public struct TileSet
+        {
+            public string name;
+            public List<Texture2D> type1;
+            public List<Texture2D> type2;
+            public List<Texture2D> type3;
+            public List<Texture2D> type4;
+            public List<Texture2D> type5;
+            public List<Texture2D> type6;
+            public List<Texture2D> type7;
+            public List<Texture2D> type8;
+            public List<Texture2D> type9;
+            public List<Texture2D> type10;
+            public List<Texture2D> elbow;
 
+        }
+        public static Dictionary<string, TileSet> tileSets = new Dictionary<string, TileSet>();
 
         public static void LoadContent(ContentManager content)
         {
@@ -38,6 +54,19 @@ namespace SpaceMarauders.Utilities
             AddTile("Wall3", content);                //8
             AddTile("Window1", content);              //9
 
+            AddTile("BlueType1", content);            //10
+            AddTile("BlueType2", content);            //11
+            AddTile("BlueType3", content);            //12
+            AddTile("BlueType4", content);            //13
+            AddTile("Preset5", content);              //14
+            AddTile("Preset6", content);              //15
+            AddTile("Preset7", content);              //16
+
+            AddTile("Preset8", content);              //17
+            AddTile("Preset9", content);              //18
+            AddTile("Preset10", content);             //19
+            AddTile("Preset11", content);             //20
+            
             // loading fonts
             AddFont("debug", content);                //0
             AddFont("Arial12", content);              //1

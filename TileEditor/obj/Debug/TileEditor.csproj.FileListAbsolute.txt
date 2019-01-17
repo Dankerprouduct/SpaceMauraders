@@ -131,3 +131,15 @@ C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Blo
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\BloomExtract.xnb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\File.xnb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\GaussianBlur.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Tiles\Preset1.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Tiles\Preset10.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Tiles\Preset11.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Tiles\Preset2.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Tiles\Preset3.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Tiles\Preset4.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Tiles\Preset5.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Tiles\Preset6.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Tiles\Preset7.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Tiles\Preset8.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Tiles\Preset9.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\PixelShader.xnb

@@ -19,7 +19,7 @@ namespace SpaceMarauders.Shaders
         RenderTarget2D renderTarget1;
         RenderTarget2D renderTarget2;
         public BloomSettings Settings { get { return settings; } set { settings = value; } }
-        BloomSettings settings = BloomSettings.PresetSettings[0];
+        BloomSettings settings = BloomSettings.PresetSettings[5];
 
         public enum IntermediateBuffer { PreBloom, BlurredHorizontally, BlurredBothWays, FinalResult, }
         public IntermediateBuffer ShowBuffer { get { return showBuffer; } set { showBuffer = value; } }

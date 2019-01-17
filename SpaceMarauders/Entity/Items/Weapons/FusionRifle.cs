@@ -21,8 +21,8 @@ namespace SpaceMarauders.Entity.Items.Weapons
         private Thread rayThread;
         private float charge;
         private float maxCharge = 500;
-        private int distance = 20; 
-        
+        private int distance = 20;
+        private Color rainbow;
         public FusionRifle() : base()
         {
             itemID = 1;
@@ -61,6 +61,11 @@ namespace SpaceMarauders.Entity.Items.Weapons
                 fade = .2f
             });
 
+            int r = Game1.random.Next(0, 255);
+            int g = Game1.random.Next(0, 255);
+            int b = Game1.random.Next(0, 255);
+
+            rainbow = Color.Red; //new Color(r, g, b);
 
         }
 
@@ -94,7 +99,7 @@ namespace SpaceMarauders.Entity.Items.Weapons
             }
             else
             {
-                charge++;
+                charge += 10;
                 if (charge > maxCharge)
                 {
                     charge = maxCharge;
@@ -151,11 +156,7 @@ namespace SpaceMarauders.Entity.Items.Weapons
         {
             if (raycast.points != null && inUse && charge > 0)
             {
-                int r = Game1.random.Next(0, 255);
-                int g = Game1.random.Next(0, 255);
-                int b = Game1.random.Next(0, 255);
-                Color rainbow = new Color(r, g, b);
-
+                
                 for (int i = 0; i < raycast.points.Count; i++)
                 {
 

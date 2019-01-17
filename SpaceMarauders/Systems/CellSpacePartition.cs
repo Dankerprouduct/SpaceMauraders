@@ -338,7 +338,7 @@ namespace SpaceMarauders.Systems
             entity.SetPartitionCell(PositionToCell(entity).X, PositionToCell(entity).Y);
             entity.SetCellIndex(PositionToIndex(entity));
             dynamicCells[PositionToIndex(entity)].AddEntity(entity);
-            Console.WriteLine("Added dynamic entity of type " + entity.GetType()); 
+            //Console.WriteLine("Added dynamic entity of type " + entity.GetType()); 
         }
 
         public void LoadEntity(Entity.Entity entity)
