@@ -205,3 +205,24 @@ DrawLabel(0,0, Black, "Test Label");
 // Draws a texture
 DrawTexture(0, 0, texture.width, texture.height, texture); 
 
+
+-----------------------------------------------------------
+
+ou spawn with little to nothing on a station. You can get money by joining a faction and doing local station contracts, black market crimes, trading, or steal stuff and sell that. Then you can either buy or build a ship
+From there the whole galaxy opens up to you and you can now do higher level contracts like cross station assassinations or cross station trading and everything else that involves
+Maybe from there build more ships and maybe your own station
+Place it along a trade route and hire npcs to do work for you
+Making more profit
+Destroy or make treaties with other stations
+
+Being able to make a huge battleship and just fire a nuke at a station sounds like fun
+Maybe other stations see your wealth and now try to rob from you or say that you’re breaking some galactic treaty by building a very powerful ship
+Now they place higher tariffs on your station
+
+Pay a ship to transport you somewhere
+
+
+
+
+
+
