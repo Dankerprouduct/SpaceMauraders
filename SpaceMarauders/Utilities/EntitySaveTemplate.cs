@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using  Microsoft.Xna.Framework;
 using SpaceMarauders.Entity.Body;
+using SpaceMarauders.Components;
 
 namespace SpaceMarauders.Utilities
 {
@@ -15,7 +16,7 @@ namespace SpaceMarauders.Utilities
         public Vector2 position;
         public float rotation; 
         public Body body;
-        public List<Components.Component> components;
+        public List<Component> components;
         
 
     }
@@ -27,7 +28,7 @@ namespace SpaceMarauders.Utilities
         public Vector2 position;
         public float rotation;
         public Body body;
-        public List<Components.Component> components;
+        public List<Component> components;
 
     }
 

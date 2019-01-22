@@ -8,15 +8,15 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Threading;
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
 using  Microsoft.Xna.Framework.Input;
-using SpaceMarauders.Components;
 using SpaceMarauders.Systems;
 using SpaceMarauders.Utilities;
+using SpaceMarauders.Components;
 
 namespace SpaceMarauders.Entity.Items.Weapons
 {
     public class FusionRifle : ProjectileWeapon
     {
-        Utilities.Raycast raycast = new Raycast();
+        //Utilities.Raycast raycast = new Raycast();
         ParticleEmitter emitter = new ParticleEmitter(2);
         private Thread rayThread;
         private float charge;

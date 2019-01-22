@@ -8,9 +8,9 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Threading;
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
 using  Microsoft.Xna.Framework.Input;
-using SpaceMarauders.Components;
 using SpaceMarauders.Systems;
 using SpaceMarauders.Utilities;
+using SpaceMarauders.Components;
 
 namespace SpaceMarauders.Entity.Items.Weapons
 {

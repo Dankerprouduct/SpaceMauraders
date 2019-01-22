@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using SpaceMarauders.Entity;
 
 namespace SpaceMarauders.Components
 {
@@ -28,7 +22,7 @@ namespace SpaceMarauders.Components
             ComponentName = "InputComponent";
         }
 
-        public override void Update(GameTime gameTime, Entity.Entity entity)        
+        public override void Update(GameTime gameTime, SpaceMarauders.Entity.Entity entity)        
         {
             
             keyboardState = Keyboard.GetState();

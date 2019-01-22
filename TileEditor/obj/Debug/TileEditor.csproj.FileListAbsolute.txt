@@ -49,12 +49,9 @@ C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Par
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Fonts\Arial12.xnb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Fonts\debug.xnb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\JSON\Entities.json
-C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\SpaceMauraders.exe
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\NLua.dll
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\KeraLua.dll
-C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\SpaceMauraders.pdb
-C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\SpaceMauraders.exe.config
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Tiles\Wall2.xnb
@@ -231,3 +228,10 @@ D:\Projects\SpaceMarauders\TileEditor\obj\Debug\TileEditor.csproj.CoreCompileInp
 D:\Projects\SpaceMarauders\TileEditor\obj\Debug\TileEditor.csproj.CopyComplete
 D:\Projects\SpaceMarauders\TileEditor\obj\Debug\TileEditor.exe
 D:\Projects\SpaceMarauders\TileEditor\obj\Debug\TileEditor.pdb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Tiles\BlueType1.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Tiles\BlueType2.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Tiles\BlueType3.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\Content\Tiles\BlueType4.xnb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\SpaceMarauders.exe
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\SpaceMarauders.pdb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\TileEditor\bin\Debug\SpaceMarauders.exe.config

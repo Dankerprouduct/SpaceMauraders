@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceMarauders.Entity.Items;
 
@@ -22,27 +17,27 @@ namespace SpaceMarauders.Components
             ComponentName = "DrawSelectedItemComponent";
         }
 
-        public override void Update(GameTime gameTime, Entity.Entity entity)
+        public override void Update(GameTime gameTime, SpaceMarauders.Entity.Entity entity)
         {
             currentEquippedItem = ((InventoryComponent)entity.GetComponent("InventoryComponent")).slot1;
 
             if (currentEquippedItem != null)
             {
-                if (entity is Entity.Player)
+                if (entity is SpaceMarauders.Entity.Player)
                 {
-                    Entity.Player tempPlayer = ((Entity.Player) (entity));
+                    SpaceMarauders.Entity.Player tempPlayer = ((SpaceMarauders.Entity.Player) (entity));
                     rotation = entity.rotation;
                     int[] handIndex = tempPlayer.body.GetHandIndexes();
 
 
-                    itemPosition = Utilities.MathHelper.Vec2ToEntitySpace(
+                    itemPosition = SpaceMarauders.Utilities.MathHelper.Vec2ToEntitySpace(
                         new Vector2(10, 0),
                         tempPlayer.body.bodyParts[handIndex[0]].positon, entity.rotation);
 
                     if (currentEquippedItem.itemID != -1)
                     {
-                        center = Utilities.MathHelper.CenterOfImage(
-                            Utilities.TextureManager.guiItemTextures[currentEquippedItem.guiItemID]);
+                        center = SpaceMarauders.Utilities.MathHelper.CenterOfImage(
+                            SpaceMarauders.Utilities.TextureManager.guiItemTextures[currentEquippedItem.guiItemID]);
                         currentEquippedItem.position = itemPosition;
                         ////.rotation = rotation; 
                         tempPlayer.body.bodyParts[3].offset = new Vector2(60, 44);
@@ -57,19 +52,19 @@ namespace SpaceMarauders.Components
                 }
                 else
                 {
-                    Entity.NPC tempPlayer = ((Entity.NPC) (entity));
+                    SpaceMarauders.Entity.NPC tempPlayer = ((SpaceMarauders.Entity.NPC) (entity));
                     rotation = entity.rotation;
                     int[] handIndex = tempPlayer.body.GetHandIndexes();
                     currentEquippedItem = ((InventoryComponent) entity.GetComponent("InventoryComponent")).slot1;
 
-                    itemPosition = Utilities.MathHelper.Vec2ToEntitySpace(
+                    itemPosition = SpaceMarauders.Utilities.MathHelper.Vec2ToEntitySpace(
                         new Vector2(10, 0),
                         tempPlayer.body.bodyParts[handIndex[0]].positon, entity.rotation);
 
                     if (currentEquippedItem.itemID != -1)
                     {
-                        center = Utilities.MathHelper.CenterOfImage(
-                            Utilities.TextureManager.guiItemTextures[currentEquippedItem.guiItemID]);
+                        center = SpaceMarauders.Utilities.MathHelper.CenterOfImage(
+                            SpaceMarauders.Utilities.TextureManager.guiItemTextures[currentEquippedItem.guiItemID]);
                         currentEquippedItem.position = itemPosition;
                         currentEquippedItem.rotation = rotation;
                         tempPlayer.body.bodyParts[3].offset = new Vector2(60, 44);
@@ -100,7 +95,7 @@ namespace SpaceMarauders.Components
 
                     //spriteBatch.Draw(Utilities.TextureManager.guiItemTextures[currentEquippedItem], itemPosition, Color.White);
 
-                    spriteBatch.Draw(Utilities.TextureManager.guiItemTextures[currentEquippedItem.guiItemID],
+                    spriteBatch.Draw(SpaceMarauders.Utilities.TextureManager.guiItemTextures[currentEquippedItem.guiItemID],
                         itemPosition, null,
                         Color.White,
                         currentEquippedItem.rotation,

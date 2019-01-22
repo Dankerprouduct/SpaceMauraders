@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework; 
+﻿using Microsoft.Xna.Framework;
 
 namespace SpaceMarauders.Components
 {
@@ -24,7 +19,7 @@ namespace SpaceMarauders.Components
             this.parentID = parentID; 
         }
 
-        public virtual void Update(GameTime gameTime, Entity.Entity entity)
+        public virtual void Update(GameTime gameTime, SpaceMarauders.Entity.Entity entity)
         {
 
         }

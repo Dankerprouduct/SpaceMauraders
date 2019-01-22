@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using SpaceMarauders.Components;
 
 namespace SpaceMarauders.Entity
 {
@@ -19,13 +20,13 @@ namespace SpaceMarauders.Entity
             this.position = position;
             this.collisionRectanlge = new Rectangle((int)position.X, (int)position.Y, Utilities.TextureManager.sprites[0].Width, Utilities.TextureManager.sprites[0].Height);
                 
-                components.Add(new Components.InputComponent(this.id));
-                components.Add(new Components.SpeedModifierComponent(1f)); 
-                components.Add(new Components.PhysicsComponent(this.id));            
-                components.Add(new Components.TriggerColliderComponent());
-                components.Add(new Components.InventoryComponent(2,10));
-                components.Add(new Components.PointTowardsMouseComponent());
-                components.Add(new Components.DrawSelectedItemComponent());
+                components.Add(new InputComponent(this.id));
+                components.Add(new SpeedModifierComponent(1f)); 
+                components.Add(new PhysicsComponent(this.id));            
+                components.Add(new TriggerColliderComponent());
+                components.Add(new InventoryComponent(2,10));
+                components.Add(new PointTowardsMouseComponent());
+                components.Add(new DrawSelectedItemComponent());
             
             emittter.AddParticle(new Systems.Particle(position, 1, Game1.random.Next(0, 360), .5f, 0, 0, Color.DarkRed)
             {
@@ -86,7 +87,7 @@ namespace SpaceMarauders.Entity
             });
 
 
-            Components.Event addItem = new Components.Event();
+            Event addItem = new Event();
             addItem.id = "AddItem";
             addItem.parameters.Add("itemId", 0);
 
@@ -94,17 +95,17 @@ namespace SpaceMarauders.Entity
             {
                 FireEvent(addItem); 
             }
-            addItem = new Components.Event();
+            addItem = new Event();
             addItem.id = "AddItem";
             addItem.parameters.Add("itemId", 1);
             FireEvent(addItem);
 
-            addItem = new Components.Event();
+            addItem = new Event();
             addItem.id = "AddItem";
             addItem.parameters.Add("itemId", 2);
             FireEvent(addItem);
 
-            Components.Event removeItem = new Components.Event();
+            Event removeItem = new Event();
             removeItem.id = "RemoveItem";
             removeItem.parameters.Add("itemId", 0);
             //FireEvent(removeItem);
@@ -134,16 +135,16 @@ namespace SpaceMarauders.Entity
             if (active)
             {
                 body.Draw(spriteBatch);
-                ((Components.DrawSelectedItemComponent) GetComponent("DrawSelectedItemComponent")).Draw(spriteBatch);
+                ((DrawSelectedItemComponent) GetComponent("DrawSelectedItemComponent")).Draw(spriteBatch);
                 
                 //base.Draw(spriteBatch);
             }
-            ((Components.InventoryComponent)GetComponent("InventoryComponent")).DrawWorld();
+            ((InventoryComponent)GetComponent("InventoryComponent")).DrawWorld();
         }
 
         public void DrawInventory()
         {
-            ((Components.InventoryComponent)GetComponent("InventoryComponent")).Draw();
+            ((InventoryComponent)GetComponent("InventoryComponent")).Draw();
         }
 
     }

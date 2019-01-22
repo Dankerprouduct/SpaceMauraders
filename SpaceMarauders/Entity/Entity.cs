@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Threading;
 using SpaceMarauders.Utilities;
 using SpaceMarauders.World;
+using SpaceMarauders.Components;
 
 namespace SpaceMarauders.Entity
 {
@@ -48,7 +49,7 @@ namespace SpaceMarauders.Entity
 
         public string entityName;
 
-        public List<Components.Component> components = new List<Components.Component>();
+        public List<Component> components = new List<Component>();
         public Rectangle collisionRectanlge;
         int physicsIndex; 
         public Entity()
@@ -64,7 +65,7 @@ namespace SpaceMarauders.Entity
         /// </summary>
         /// <param name="_event"></param>
         /// <returns>returns whether or not the event returned true or false</returns>
-        public bool FireEvent(Components.Event _event)
+        public bool FireEvent(Event _event)
         {
             if (_event.id == "Collider")
             {
@@ -94,10 +95,10 @@ namespace SpaceMarauders.Entity
         /// Adds a component 
         /// </summary>
         /// <param name="component"></param>
-        public void AddComponent(Components.Component component)
+        public void AddComponent(Component component)
         {
             components.Add(component);
-            if(component is Components.PhysicsComponent)
+            if(component is PhysicsComponent)
             {
                 physicsIndex = components.Count; 
             }
@@ -109,7 +110,7 @@ namespace SpaceMarauders.Entity
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public Components.Component GetComponent(string name)
+        public Component GetComponent(string name)
         {
             return components.Find(c => c.ComponentName == name);
         }
@@ -144,7 +145,7 @@ namespace SpaceMarauders.Entity
             //Console.WriteLine();
             rotation = Utilities.MathHelper.RotationFromVector2(target, position);
 
-            Components.Event velocityEvent = new Components.Event();
+            Event velocityEvent = new Event();
             velocityEvent.id = "AddVelocity";
             
             velocityEvent.parameters.Add("Velocity", direction * 2);

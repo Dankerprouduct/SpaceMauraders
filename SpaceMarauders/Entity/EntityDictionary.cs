@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using System.IO; 
+using System.IO;
+using SpaceMarauders.Components;
 
 namespace SpaceMarauders.Entity
 {
@@ -32,48 +33,48 @@ namespace SpaceMarauders.Entity
             Entity entity = new Entity();
             entity.entityName = entityDictionary[name].entityName;
 
-            foreach (Components.Component component in entityDictionary[name].components)
+            foreach (Component component in entityDictionary[name].components)
             {
                 switch (component.ComponentName)
                 {
                     case "TransformComponent":
                         {
-                            entity.AddComponent(new Components.TransfromComponent());
+                            entity.AddComponent(new TransfromComponent());
                             break;
                         }
                     case "SolidColliderComponent":
                         {
-                            entity.AddComponent(new Components.SolidColliderComponent(entity, entity.id));
+                            entity.AddComponent(new SolidColliderComponent(entity, entity.id));
                             break;
                         }
                     case "InputComponent":
                         {
-                            entity.AddComponent(new Components.InputComponent(entity.id));
+                            entity.AddComponent(new InputComponent(entity.id));
                             break; 
                         }
                     case "HealthComponent":
                         {
-                            entity.AddComponent(new Components.HealthComponent(((Components.HealthComponent)component).health));
+                            entity.AddComponent(new HealthComponent(((HealthComponent)component).health));
                             break; 
                         }
                     case "PhysicsComponent":
                         {
-                            entity.AddComponent(new Components.PhysicsComponent(entity.id));
+                            entity.AddComponent(new PhysicsComponent(entity.id));
                             break; 
                         }
                     case "InventoryComponent":
                         {
-                            entity.AddComponent(new Components.InventoryComponent(5,5)); 
+                            entity.AddComponent(new InventoryComponent(5,5)); 
                             break; 
                         }
                     case "TriggerColliderComponent":
                         {
-                            entity.AddComponent(new Components.TriggerColliderComponent()); 
+                            entity.AddComponent(new TriggerColliderComponent()); 
                             break;
                         }
                     case "SpeedModifierComponent":
                         {
-                            entity.AddComponent(new Components.SpeedModifierComponent(1));
+                            entity.AddComponent(new SpeedModifierComponent(1));
                             break;
                         }
 

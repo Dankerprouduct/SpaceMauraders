@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
 using System.Threading;
-using SpaceMarauders.Entity;
+using Microsoft.Xna.Framework;
+using SpaceMarauders;
 
 namespace SpaceMarauders.Components
 {
@@ -16,7 +12,7 @@ namespace SpaceMarauders.Components
         public int speed = 1;
         public Vector2 position;
         public int cellIndex;
-        private Entity.Entity entity;
+        private SpaceMarauders.Entity.Entity entity;
         float maxVelocity = 10;
 
 
@@ -30,7 +26,7 @@ namespace SpaceMarauders.Components
             ComponentName = "PhysicsComponent";
         }
 
-        public override void Update(GameTime gameTime, Entity.Entity entity)
+        public override void Update(GameTime gameTime, SpaceMarauders.Entity.Entity entity)
         {
             CheckCollisionInMovementDirection(entity);
             position = entity.position;
@@ -40,7 +36,7 @@ namespace SpaceMarauders.Components
         }
 
         Thread physicsThread; 
-        void CheckCollisionInMovementDirection(Entity.Entity entity)
+        void CheckCollisionInMovementDirection(SpaceMarauders.Entity.Entity entity)
         {
 
             /*
@@ -140,7 +136,7 @@ namespace SpaceMarauders.Components
             return steering;
         }
 
-        public Vector2 Arrive(Entity.Entity target, float slowingDistance)
+        public Vector2 Arrive(SpaceMarauders.Entity.Entity target, float slowingDistance)
         {
             Vector2 desiredVelocity = target.position - position;
             float distance = desiredVelocity.Length();
@@ -159,7 +155,7 @@ namespace SpaceMarauders.Components
             return steering;
         }
 
-        public Vector2 Pursue(Entity.Entity target)
+        public Vector2 Pursue(SpaceMarauders.Entity.Entity target)
         {
             float distance = Vector2.Distance(target.position, position);
             float ahead = distance / 10;
@@ -167,7 +163,7 @@ namespace SpaceMarauders.Components
             return Seek(futurePosition);
         }
 
-        public Vector2 Evade(Entity.Entity target)
+        public Vector2 Evade(SpaceMarauders.Entity.Entity target)
         {
             float distance = Vector2.Distance(target.position, position);
             float ahead = distance / 10;
@@ -218,7 +214,7 @@ namespace SpaceMarauders.Components
         /// This is where velocity is added
         /// </summary>
         /// <param name="entity"></param>
-        public void CheckCollisionInPartitionNumber(Entity.Entity entity)
+        public void CheckCollisionInPartitionNumber(SpaceMarauders.Entity.Entity entity)
         {
             /// ** FUTURE PLANS AFTER TESTING **
             /// main "univererse" partition
@@ -235,7 +231,7 @@ namespace SpaceMarauders.Components
             entity.oldPosition = entity.position;
             
             velocity *= .85f;
-            if (!(entity is Entity.Player))
+            if (!(entity is SpaceMarauders.Entity.Player))
             {
                 velocity += Separation();
                 //Console.WriteLine(entity.position.X + " " + velocity.X);
@@ -263,18 +259,18 @@ namespace SpaceMarauders.Components
 
         }
 
-        void DoCollisionStepWithThread(Entity.Entity entity)
+        void DoCollisionStepWithThread(SpaceMarauders.Entity.Entity entity)
         {
 
         }
 
-        public Event FireCollisionEvent(Entity.Entity entity)
+        public Event FireCollisionEvent(SpaceMarauders.Entity.Entity entity)
         {
             entity.collisionRectanlge = new Rectangle(
-                (int)entity.position.X - (int)(Utilities.MathHelper.CenterOfImage(Utilities.TextureManager.bodyParts[0]).X * .5f),
-                (int)entity.position.Y - (int)(Utilities.MathHelper.CenterOfImage(Utilities.TextureManager.bodyParts[0]).Y * .5f),
-                (int)(Utilities.TextureManager.bodyParts[0].Width * .7f),
-                (int)(Utilities.TextureManager.bodyParts[0].Height * .7f));
+                (int)entity.position.X - (int)(SpaceMarauders.Utilities.MathHelper.CenterOfImage(SpaceMarauders.Utilities.TextureManager.bodyParts[0]).X * .5f),
+                (int)entity.position.Y - (int)(SpaceMarauders.Utilities.MathHelper.CenterOfImage(SpaceMarauders.Utilities.TextureManager.bodyParts[0]).Y * .5f),
+                (int)(SpaceMarauders.Utilities.TextureManager.bodyParts[0].Width * .7f),
+                (int)(SpaceMarauders.Utilities.TextureManager.bodyParts[0].Height * .7f));
             
             Event physicsEvent = new Event
             {
@@ -282,8 +278,8 @@ namespace SpaceMarauders.Components
             };
             
             physicsEvent.parameters.Add("rectangle", (Rectangle)entity.collisionRectanlge);
-            physicsEvent.parameters.Add("entity", (Entity.Entity)entity);
-            if (entity is Entity.NPC)
+            physicsEvent.parameters.Add("entity", (SpaceMarauders.Entity.Entity)entity);
+            if (entity is SpaceMarauders.Entity.NPC)
             {
                 physicsEvent.parameters.Add("npc", 0);
             }

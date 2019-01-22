@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using SpaceMarauders.Entity;
 
 namespace SpaceMarauders.Components
 {
@@ -15,10 +10,10 @@ namespace SpaceMarauders.Components
             ComponentName = "SteeringBehaviors";
         }
 
-        List<Entity.Entity> entities = new List<Entity.Entity>();
+        List<SpaceMarauders.Entity.Entity> entities = new List<SpaceMarauders.Entity.Entity>();
         Vector2 position; 
 
-        public override void Update(GameTime gameTime, Entity.Entity entity)
+        public override void Update(GameTime gameTime, SpaceMarauders.Entity.Entity entity)
         {
 
         }

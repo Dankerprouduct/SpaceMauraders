@@ -22,9 +22,6 @@ C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\D
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\Content\Fonts\Arial12.xnb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\Content\Fonts\debug.xnb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\JSON\Entities.json
-C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\SpaceMauraders.exe.config
-C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\SpaceMauraders.exe
-C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\SpaceMauraders.pdb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\KeraLua.dll
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\MonoGame.Framework.dll
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\Newtonsoft.Json.dll
@@ -49,8 +46,6 @@ C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\D
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\obj\x86\Debug\SpaceMarauders.csprojAssemblyReference.cache
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\obj\x86\Debug\SpaceMarauders.csproj.CoreCompileInputs.cache
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\obj\x86\Debug\SpaceMarauders.csproj.CopyComplete
-C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\obj\x86\Debug\SpaceMauraders.exe
-C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\obj\x86\Debug\SpaceMauraders.pdb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\Content\Graphics\nebula.xnb
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\Saves\Rooms\Room1.json
 C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\Saves\Rooms\FloorDecal.json
@@ -158,3 +153,8 @@ D:\Projects\SpaceMarauders\SpaceMarauders\obj\x86\Debug\SpaceMarauders.csproj.Co
 D:\Projects\SpaceMarauders\SpaceMarauders\obj\x86\Debug\SpaceMarauders.csproj.CopyComplete
 D:\Projects\SpaceMarauders\SpaceMarauders\obj\x86\Debug\SpaceMauraders.exe
 D:\Projects\SpaceMarauders\SpaceMarauders\obj\x86\Debug\SpaceMauraders.pdb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\SpaceMarauders.exe.config
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\SpaceMarauders.exe
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\bin\Windows\x86\Debug\SpaceMarauders.pdb
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\obj\x86\Debug\SpaceMarauders.exe
+C:\Users\Danker\Documents\GitHub\SpaceMauraders\SpaceMarauders\obj\x86\Debug\SpaceMarauders.pdb

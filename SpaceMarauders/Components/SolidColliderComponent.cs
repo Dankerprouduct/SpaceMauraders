@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using SpaceMarauders.Entity;
 
 namespace SpaceMarauders.Components
 {
@@ -29,7 +24,7 @@ namespace SpaceMarauders.Components
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="parentID"></param>
-        public SolidColliderComponent(Entity.Entity entity, int parentID): base(parentID)
+        public SolidColliderComponent(SpaceMarauders.Entity.Entity entity, int parentID): base(parentID)
         {
             ComponentName = "SolidColliderComponent"; 
             rectangle = entity.collisionRectanlge;
@@ -57,7 +52,7 @@ namespace SpaceMarauders.Components
             return false;
         }
 
-        public override void Update(GameTime gameTime, Entity.Entity entity)
+        public override void Update(GameTime gameTime, SpaceMarauders.Entity.Entity entity)
         {
             
             base.Update(gameTime, entity);

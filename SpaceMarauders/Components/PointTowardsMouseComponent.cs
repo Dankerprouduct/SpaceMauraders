@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using SpaceMarauders.Entity;
-using Microsoft.Xna.Framework;
+using SpaceMarauders;
 
 namespace SpaceMarauders.Components
 {
@@ -25,7 +20,7 @@ namespace SpaceMarauders.Components
             //return base.FireEvent(_event);
         }
 
-        public override void Update(GameTime gameTime, Entity.Entity entity)
+        public override void Update(GameTime gameTime, SpaceMarauders.Entity.Entity entity)
         {
             Vector2 direction = Game1.worldPosition - entity.position;
             direction.Normalize();

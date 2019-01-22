@@ -26,11 +26,11 @@ namespace SpaceMarauders.Entity
         public NPC(Vector2 position) : base()
         {
             this.position = position;
-            components.Add(new Components.SpeedModifierComponent(0.5f));
-            components.Add(new Components.TriggerColliderComponent());
-            components.Add(new Components.PhysicsComponent());
-            components.Add(new Components.InventoryComponent(2, 10));
-            components.Add(new Components.DrawSelectedItemComponent());
+            components.Add(new SpeedModifierComponent(0.5f));
+            components.Add(new TriggerColliderComponent());
+            components.Add(new PhysicsComponent());
+            components.Add(new InventoryComponent(2, 10));
+            components.Add(new DrawSelectedItemComponent());
             //components.Add(new Components.InventoryComponent(id, 5,5));
             
         }
@@ -74,8 +74,8 @@ namespace SpaceMarauders.Entity
             }
             base.Draw(spriteBatch);
 
-            ((Components.DrawSelectedItemComponent)GetComponent("DrawSelectedItemComponent")).Draw(spriteBatch);
-            ((Components.InventoryComponent)GetComponent("InventoryComponent")).DrawWorld();
+            ((DrawSelectedItemComponent)GetComponent("DrawSelectedItemComponent")).Draw(spriteBatch);
+            ((InventoryComponent)GetComponent("InventoryComponent")).DrawWorld();
             //spriteBatch.Draw(Utilities.TextureManager.sprites[0], position, Color.White);
             
         }

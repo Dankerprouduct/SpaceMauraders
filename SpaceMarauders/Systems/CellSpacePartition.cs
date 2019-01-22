@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceMarauders.Entity;
 using SpaceMarauders.Utilities;
+using SpaceMarauders.Components;
 
 
 namespace SpaceMarauders.Systems
@@ -104,7 +105,7 @@ namespace SpaceMarauders.Systems
                 return temps; 
             }
 
-            public bool FireEvent(Components.Event _event)
+            public bool FireEvent(Event _event)
             {
 
                 if (members != null && members.Count > 0)
@@ -228,7 +229,7 @@ namespace SpaceMarauders.Systems
                 }
             }
 
-            public bool FireEvent(Components.Event _event)
+            public bool FireEvent(Event _event)
             {
                 if (members != null)
                 {

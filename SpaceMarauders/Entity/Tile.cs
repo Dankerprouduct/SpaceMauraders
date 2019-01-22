@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics; 
+using Microsoft.Xna.Framework.Graphics;
+using SpaceMarauders.Components;
 
 namespace SpaceMarauders.Entity
 {
@@ -40,8 +41,8 @@ namespace SpaceMarauders.Entity
 
             if (tileType == TileType.Solid)
             {
-                components.Add(new Components.SolidColliderComponent(this, id));
-                components.Add(new Components.TriggerColliderComponent(collisionRectanlge));
+                components.Add(new SolidColliderComponent(this, id));
+                components.Add(new TriggerColliderComponent(collisionRectanlge));
                 //this.Detroy(); 
             }
         }

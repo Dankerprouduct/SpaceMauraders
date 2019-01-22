@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using SpaceMarauders.Utilities;
-using SpaceMarauders.Components;
 using SpaceMarauders.Entity.Factions.Federation;
 using SpaceMarauders.Shaders;
 
@@ -24,7 +23,7 @@ namespace SpaceMarauders
 
         public static World.World world;
 
-        public static int width = 1080;
+        public static int width = 1920;
         public static int height = 0; 
 
         public static Vector2 worldPosition;

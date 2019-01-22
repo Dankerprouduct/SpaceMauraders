@@ -9,6 +9,7 @@ using System.Threading;
 using SpaceMarauders.Systems;
 using Newtonsoft.Json;
 using SpaceMarauders.Utilities;
+using SpaceMarauders.Components;
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
 
 namespace SpaceMarauders.Entity
@@ -213,9 +214,7 @@ namespace SpaceMarauders.Entity
         private void BuildRing(float r, int id)
         {
             Point middle = new Point(tileMap.GetLength(0) / 2, tileMap.GetLength(1) / 2);
-
-            int startRoom, endRoom; 
-
+            
             for (float d = 0; d < 2 * Math.PI; d += .0005f)
             {
                 int tileX;//= (int)(r + middle.X);
@@ -599,7 +598,7 @@ namespace SpaceMarauders.Entity
             LocalSpacePartition = new CellSpacePartition(Diameter, Diameter, 2);
         }
 
-        public bool FireEvent(Components.Event _event, Entity entity)
+        public bool FireEvent(Event _event, Entity entity)
         {
             
             if (Game1.player.FireEvent(_event))
@@ -782,7 +781,7 @@ namespace SpaceMarauders.Entity
             return false;
         }
 
-        public bool FireLocalEvent(Components.Event _event, Entity entity)
+        public bool FireLocalEvent(Event _event, Entity entity)
         {
 
             if (EntityWithinBounds(entity.GetCenterPartition(), LocalSpacePartition))

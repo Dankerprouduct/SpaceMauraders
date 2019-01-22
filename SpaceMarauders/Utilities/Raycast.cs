@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using SpaceMarauders.Components;
 
 
 namespace SpaceMarauders.Utilities
@@ -26,7 +27,7 @@ namespace SpaceMarauders.Utilities
         // Angle in radians at which ray is pointed.
         float angle;
 
-        public Components.Event rayEvent = new Components.Event();
+        public Event rayEvent = new Event();
 
         /// <summary>
         /// Default constructor.

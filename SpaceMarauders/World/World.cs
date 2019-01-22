@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SpaceMarauders.Components;
 using SpaceMarauders.Utilities;
+using SpaceMarauders.Components;
 
 
 namespace SpaceMarauders.World
@@ -184,7 +184,7 @@ namespace SpaceMarauders.World
             }
         }
 
-        public bool FireGlobalEvent(Components.Event _event, Entity.Entity entity)
+        public bool FireGlobalEvent(Event _event, Entity.Entity entity)
         {
             
             if(spaceStation.FireEvent(_event, entity))

@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using SpaceMarauders.Components;
 using SpaceMarauders.Entity.Items.Projectiles;
 using SpaceMarauders.Systems;
+using SpaceMarauders.Components;
 using MathHelper = SpaceMarauders.Utilities.MathHelper;
 
 namespace SpaceMarauders.Entity.Items.Weapons

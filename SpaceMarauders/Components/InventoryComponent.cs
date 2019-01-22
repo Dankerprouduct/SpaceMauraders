@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using SpaceMarauders.Entity.Items;
 using SpaceMarauders.Entity.Items.Weapons;
-
 
 namespace SpaceMarauders.Components
 {
@@ -224,9 +219,9 @@ namespace SpaceMarauders.Components
             drawInventory = !drawInventory; 
         }
 
-        public override void Update(GameTime gameTime, Entity.Entity entity)
+        public override void Update(GameTime gameTime, SpaceMarauders.Entity.Entity entity)
         {
-            if (entity is Entity.Player)
+            if (entity is SpaceMarauders.Entity.Player)
             {
                 currentKeyboardState = Keyboard.GetState();
                 currentMouseState = Mouse.GetState();
@@ -283,7 +278,7 @@ namespace SpaceMarauders.Components
                                 if (currentMouseState.LeftButton == ButtonState.Pressed &&
                                     previousMouseState.LeftButton == ButtonState.Released)
                                 {
-                                    Console.WriteLine("Clicked " + Entity.Items.ItemDictionary.itemDictinary[inventory[x, y].guiItemID].entityName);
+                                    Console.WriteLine("Clicked " + SpaceMarauders.Entity.Items.ItemDictionary.itemDictinary[inventory[x, y].guiItemID].entityName);
                                     Swap(x, y, 1);
                                 }
                             }
@@ -320,15 +315,15 @@ namespace SpaceMarauders.Components
             
             if (drawInventory)
             {
-                GUI.GUI.Draw2dArray(xOffset, yOffset, boxWidth, boxHeight, width, height, spacing, Color.Teal);
+                SpaceMarauders.GUI.GUI.Draw2dArray(xOffset, yOffset, boxWidth, boxHeight, width, height, spacing, Color.Teal);
 
-                GUI.GUI.DrawBox(
+                SpaceMarauders.GUI.GUI.DrawBox(
                     new Rectangle(xOffset + xOffset + (inventory.GetLength(0) * (boxWidth / 2)) + (inventory.GetLength(0) * spacing) + 50,
                         yOffset, boxWidth, boxHeight)
                     ,Color.Teal);
                 if (slot1.itemID != -1)
                 {
-                    GUI.GUI.DrawTexture(Utilities.TextureManager.guiItemTextures[slot1.guiItemID],
+                    SpaceMarauders.GUI.GUI.DrawTexture(SpaceMarauders.Utilities.TextureManager.guiItemTextures[slot1.guiItemID],
                         new Vector2(
                             xOffset + xOffset + (inventory.GetLength(0) * (boxWidth / 2)) +
                             (inventory.GetLength(0) * spacing) + 50,
@@ -342,8 +337,8 @@ namespace SpaceMarauders.Components
 
                         if (inventory[x, y].itemID != -1 && inventory[x, y] != null)
                         {
-                            GUI.GUI.DrawTexture(
-                                Utilities.TextureManager.guiItemTextures[inventory[x, y].guiItemID],
+                            SpaceMarauders.GUI.GUI.DrawTexture(
+                                SpaceMarauders.Utilities.TextureManager.guiItemTextures[inventory[x, y].guiItemID],
                                 new Vector2(xOffset + (x * boxWidth) + (x * spacing),
                                 yOffset + (y * boxHeight) + (y * spacing)));
                                                         
@@ -354,7 +349,7 @@ namespace SpaceMarauders.Components
 
                         if (rectangle.Contains(mousePoint))
                         {
-                            GUI.GUI.DrawBox(rectangle, Color.Black * .2f); 
+                            SpaceMarauders.GUI.GUI.DrawBox(rectangle, Color.Black * .2f); 
                         }
 
                     }
