@@ -17,7 +17,7 @@ namespace SpaceMarauders.Entity.Items
             // items must be synced with itemDictionary id
             itemDictinary.Add(new Weapons.LaserRifle());
             itemDictinary.Add(new Weapons.FusionRifle());
-
+            itemDictinary.Add(new Weapons.GrenadeLauncher());
         }
     }
 }

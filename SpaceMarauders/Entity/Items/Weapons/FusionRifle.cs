@@ -73,7 +73,8 @@ namespace SpaceMarauders.Entity.Items.Weapons
         {
             currentKeyboardState = Keyboard.GetState();
             currentMouseState = Mouse.GetState();
-            components[0].Update(gameTime, this);
+            UpdateComponents(gameTime);
+            //components[0].Update(gameTime, this);
 
             if (inUse)
             {

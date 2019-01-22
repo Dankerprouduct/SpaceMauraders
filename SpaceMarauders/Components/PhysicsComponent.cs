@@ -73,6 +73,11 @@ namespace SpaceMarauders.Components
                 }
             }
 
+            if (_event.id == "AddForce")
+            {
+                
+            }
+
             if (_event.id == "move")
             {
                 foreach (KeyValuePair<string, object> parameters in _event.parameters)
@@ -284,7 +289,11 @@ namespace SpaceMarauders.Components
             }
             return physicsEvent; 
         }
-        
+
+        public Vector2 GetVelocity()
+        {
+            return velocity;
+        }
 
 
         

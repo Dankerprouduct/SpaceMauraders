@@ -99,6 +99,11 @@ namespace SpaceMarauders.Entity
             addItem.parameters.Add("itemId", 1);
             FireEvent(addItem);
 
+            addItem = new Components.Event();
+            addItem.id = "AddItem";
+            addItem.parameters.Add("itemId", 2);
+            FireEvent(addItem);
+
             Components.Event removeItem = new Components.Event();
             removeItem.id = "RemoveItem";
             removeItem.parameters.Add("itemId", 0);

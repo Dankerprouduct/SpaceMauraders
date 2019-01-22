@@ -24,6 +24,11 @@ namespace SpaceMarauders.Entity
         public int cellIndex; // holds current cell
         public int oldCellIndex;
         public float rotation;
+
+        /// <summary>
+        /// whether or not this entity is "in play"
+        /// set to false to destroy
+        /// </summary>
         public bool active = true;
         public Vector2 currentPathingTarget; 
 

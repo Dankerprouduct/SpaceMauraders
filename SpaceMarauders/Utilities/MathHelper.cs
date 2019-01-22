@@ -66,5 +66,15 @@ namespace SpaceMarauders.Utilities
         {
             return new Vector2(texture.Width / 2, texture.Height / 2); 
         }
+
+        /// <summary>
+        /// returns the vector2 of a rotation
+        /// </summary>
+        /// <param name="rotation">roation in radians</param>
+        /// <returns></returns>
+        public static Vector2 RotationToVector2(float rotation)
+        {
+            return  new Vector2((float)Math.Cos(rotation),(float)Math.Sin(rotation));
+        }
     }
 }

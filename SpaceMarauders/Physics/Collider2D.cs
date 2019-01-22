@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceMauraders.Physics
+namespace SpaceMarauders.Physics
 {
     public class Collider2D
     {
-
         
     }
 }

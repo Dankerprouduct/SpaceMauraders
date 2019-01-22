@@ -133,6 +133,7 @@ namespace SpaceMarauders
                 world.Update(gameTime);
                                
             }
+            Systems.ProjectileManager.Update(gameTime);
             Systems.ParticleSystem.Update(gameTime);
 
 
@@ -169,6 +170,8 @@ namespace SpaceMarauders
             GUI.GUI.Draw(spriteBatch);
             world.Draw(spriteBatch);
             player.Draw(spriteBatch);
+
+            Systems.ProjectileManager.Draw(spriteBatch);
             spriteBatch.End();
 
 

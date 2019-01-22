@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/Tiles/BlueType2.png</SourceFile>
-  <SourceTime>2019-01-17T13:25:31.0465529-05:00</SourceTime>
-  <DestFile>C:/Users/Danker/Documents/GitHub/SpaceMauraders/SpaceMarauders/Content/bin/Windows/Content/Tiles/BlueType2.xnb</DestFile>
-  <DestTime>2019-01-17T13:26:22.9605985-05:00</DestTime>
+  <SourceFile>D:/Projects/SpaceMarauders/SpaceMarauders/Content/Tiles/BlueType2.png</SourceFile>
+  <SourceTime>2019-01-19T15:57:28.751381-05:00</SourceTime>
+  <DestFile>D:/Projects/SpaceMarauders/SpaceMarauders/Content/bin/Windows/Content/Tiles/BlueType2.xnb</DestFile>
+  <DestTime>2019-01-19T17:02:30.4829437-05:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2019-01-03T08:38:03.9236877-05:00</ImporterTime>
+  <ImporterTime>2019-01-19T15:57:30.4879685-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2019-01-03T08:38:03.9236877-05:00</ProcessorTime>
+  <ProcessorTime>2019-01-19T15:57:30.4879685-05:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>
